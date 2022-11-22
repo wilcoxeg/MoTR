@@ -1,0 +1,60 @@
+{
+  "screens": {
+    "AwaitIteratedResultScreen": {
+      "description": "This screen waits for the results of the previous iteration of this experiment."
+    },
+    "ConnectInteractiveScreen": {
+      "description": "This screen sets up the socket connection for the interactive experiment and waits for other participants to join so that the number of required participants to start an interactive experiment is met."
+    },
+    "EyetrackingCalibrationScreen": {
+      "start": "Please wait while eye tracking is set up.",
+      "instruction": "Please follow and click on the red dot.",
+      "error": "Something went wrong. Please reload the page."
+    },
+    "EyetrackingValidationScreen": {
+      "instruction": "Please stare at the blue dot in the center.",
+      "error": "Something went wrong. Please reload the page."
+    },
+    "PostTestScreen": {
+      "instruction": "Answering the following questions is optional, but your answers will help us analyze our results.",
+      "age": "Age",
+      "gender": "Gender",
+      "male": "male",
+      "female": "female",
+      "otherGender": "other",
+      "education": "Level of Education",
+      "educationBelowHighschool": "Did not graduate High-school",
+      "educationHighschool": "Graduated High-school",
+      "educationCollege": "Graduated College",
+      "educationHigher": "Higher degree",
+      "nativeLanguages": "Native languages",
+      "nativeLanguagesExplanation": "the language(s) spoken at home when you were a child",
+      "comments": "Further comments",
+      "belowHighschool": "screens.PostTestScreen.belowHighschool"
+    },
+    "SubmitResultsScreen": {
+      "waiting": "Hold on, while we submit your data.",
+      "done": "All done. Thank you!",
+      "error": "Oh, no. There was a problem submitting your results.",
+      "contact": "Please contact the author of this experiment via email:"
+    }
+  },
+  "general": {
+    "nextButton": "Next",
+    "start": "Start",
+    "go": "Go",
+    "send": "Send"
+  },
+  "interactive": {
+    "Chat": {
+      "messageLabel": "Type your message to the other participant here.",
+      "statusYouJoined": "You joined",
+      "statusYouLeft": "You left",
+      "statusParticipantJoined": "{user} joined",
+      "statusParticipantLeft": "{user} left"
+    },
+    "general": {
+      "aborted": "The experiment cannot be continued, because a collaborator has left the session. Please proceed to result submission."
+    }
+  }
+}

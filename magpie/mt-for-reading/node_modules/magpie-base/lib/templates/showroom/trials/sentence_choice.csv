@@ -1,0 +1,5 @@
+QUD,picture,question,option1,option2
+"sentence selection - loop: 1, trial: 1","images/question_mark_02.png","What's on the bread?","ham","jam"
+"sentence selection - loop: 1, trial: 2","","What's the weather like?","rainbow","shiny"
+"sentence selection - loop: 2, trial: 1","images/question_mark_01.png","How are you today?","fine","great"
+"sentence selection - loop: 2, trial: 2","","Jam or Ham?","ham","jam"

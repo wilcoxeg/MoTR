@@ -1,0 +1,111 @@
+{
+  "name": "magpie-base",
+  "version": "3.4.0",
+  "description": "Provides base components for magpie frontend projects",
+  "author": "magpie project",
+  "scripts": {
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "eslint --ext .js,.vue src",
+    "docs": "jsdoc2md src/Magpie.js src/Socket.js src/Mousetracking.js src/Eyetracking.js > src/API.md; vue-cli-service styleguidist",
+    "docs:build": "jsdoc2md src/Magpie.js src/Socket.js src/Mousetracking.js src/Eyetracking.js > src/API.md; vue-cli-service styleguidist:build",
+    "jsdoc": "jsdoc2md src/Magpie.js src/Socket.js src/Mousetracking.js > src/API.md",
+    "lint:fix": "eslint --ext .js,.vue src --fix",
+    "stylelint": "stylelint src",
+    "stylelint:fix": "stylelint src --fix"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "commander": "^9.0.0",
+    "csv-stringify": "^5.6.2",
+    "cute-animals": "^0.2.3",
+    "fs-extra": "^10.0.0",
+    "k-progress": "^1.5.0",
+    "lodash": "^4.17.20",
+    "phoenix": "^1.5.9",
+    "slash": "^3.0.0",
+    "validate-npm-package-name": "^3.0.0",
+    "vue": "^2.6.11",
+    "vue-i18n": "^8.27.0",
+    "vue-slider-component": "^3.2.14",
+    "vuedraggable": "^2.24.3",
+    "vuelidate": "^0.7.6"
+  },
+  "peerDependencies": {
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "csv-loader": "^3.0.3",
+    "konva": "^7.2.5",
+    "lodash": "^4.17.20",
+    "tone": "^14.7.77",
+    "vue": "^2.6.11",
+    "vue-konva": "^2.1.7",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.12",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "^4.5.13",
+    "@vue/test-utils": "^1.2.2",
+    "babel-eslint": "^10.1.0",
+    "css-loader": "^5",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^8.4.1",
+    "form-data": "^4.0.0",
+    "get-random-values": "^1.2.2",
+    "jsdoc-to-markdown": "^7.0.1",
+    "konva": "^7.2.5",
+    "node-fetch": "^2.6.7",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "stylelint": "^14.3.0",
+    "stylelint-config-recommended-vue": "^1.1.0",
+    "tone": "^14.7.77",
+    "vue-cli-plugin-styleguidist": "~4.44.15",
+    "vue-konva": "^2.1.7",
+    "vue-styleguidist": "^4.40.0",
+    "vue-template-compiler": "^2.6.14",
+    "websocket": "^1.0.34"
+  },
+  "bin": {
+    "magpie": "bin/magpie.js"
+  },
+  "bugs": {
+    "url": "https://github.com/magpie-ea/magpie-base/issues"
+  },
+  "contributors": [
+    {
+      "name": "Xiang Ji",
+      "email": "hi@xiangji.me",
+      "url": "https://xiangji.me"
+    },
+    {
+      "name": "Marcel Klehr",
+      "email": "mklehr@gmx.net",
+      "url": "http://marcelklehr.de/"
+    },
+    {
+      "name": "Michael Franke",
+      "email": "mchfranke@gmail.com",
+      "url": "http://www.home.uni-osnabrueck.de/michfranke/index.html"
+    }
+  ],
+  "homepage": "https://github.com/magpie-ea/magpie-base#readme",
+  "keywords": [
+    "magpie",
+    "vue",
+    "web-based experiment"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magpie-ea/magpie-base.git"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  }
+}
