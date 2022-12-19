@@ -1,5 +1,4 @@
-<!-- This version records the data whenever the cursor moves with a flexible time interval. -->
-<!-- So it records data when mouse moves -->
+<!-- This version record the data with a fixed time interval specified by "timeInterval", here 100ms.-->
 <!-- No split of text beforehand -->
 
 <template>
@@ -11,7 +10,7 @@
       </p>
       <!-- v-blur="isBlurred" -->
       <p >This experiment can sometimes be difficult. Please be patient</p>
-      <p style = "color: green">This version records the data whenever the cursor moves with a flexible time interval.</p>
+      <p style = "color: green">This version record the data with a fixed time interval specified by "timeInterval".</p>
     </InstructionScreen>
 
     <template v-for="(trial, i) of testTrials">
@@ -21,7 +20,7 @@
           <p class="readingText" @mouseover="changeFont" @mouseleave="changeBack" @mousemove="moveCursor">
             {{trial.item_content}}
           </p>
-          <div class="out-cursor" style="opacity: 0.3; filter: blur(3px); transition: all 0.3s linear 0s;"> 
+          <div class="out-cursor" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
             {{trial.item_content}}
           </div>
           <!-- <button class="next" @click=" saveMouseMoveData(); $magpie.nextScreen()"> -->
@@ -51,35 +50,48 @@ export default {
     return {
       testTrials,
       isBlurred: true,
-      startTime: 0,
+      // startTime: 0,
+      timeInterval: 100, // Time interval (milliseconds)
+      x: null,
+      y: null,
+      word: "",
+      intervalId: null,
   }},
   mounted() {
-    this.startTime = Date.now()
+    // this.startTime = Date.now()
+    this.startRecording();
   },
+
   methods: {
+    startRecording() {
+      this.intervalId = setInterval(() => {
+        // let elapsedTime = Date.now() - this.startTime; // calculate elapsed time
+        if(this.x){
+        $magpie.addTrialData({
+          // Time: elapsedTime,
+          cursorX: this.x,
+          cursorY: this.y,
+          word: this.word,
+        });} // add elapsed time to trial data
+      }, this.timeInterval);
+
+    },
     changeFont() {
       // console.log('good');
-      this.$el.querySelector(".rect-cursor").classList.add('grow')
-      
+      this.$el.querySelector(".rect-cursor").classList.add('grow');
     },
     changeBack() {
       // console.log('back');
       this.$el.querySelector(".rect-cursor").classList.remove('grow');
     },
     moveCursor(e) {
-      let x = e.clientX;
-      let y = e.clientY;
-      let elapsedTime = Date.now() - this.startTime;
-      this.$el.querySelector(".rect-cursor").style.left = `${x+20}px`;
-      this.$el.querySelector(".rect-cursor").style.top = `${y}px`;
-      let wordUnderCursor = this.getWordAtPosition(x,y);
-      console.log(wordUnderCursor);
-      $magpie.addTrialData({
-        time: elapsedTime,
-        cursorX: x,
-        cursorY: y,
-        word: wordUnderCursor,
-      })
+      this.x = e.clientX;
+      this.y = e.clientY;
+      // let elapsedTime = Date.now() - this.startTime;
+      this.$el.querySelector(".rect-cursor").style.left = `${this.x+20}px`;
+      this.$el.querySelector(".rect-cursor").style.top = `${this.y-5}px`;
+      this.word = this.getWordAtPosition(this.x,this.y-5);
+      console.log(this.word);
     },
     getWordAtPosition(x, y) {
       let element = document.elementFromPoint(x, y);

@@ -1,42 +1,40 @@
+<!-- This version record the data with a fixed time interval. here 100ms. You can change 100 to other numbers in setInterval()-->
+<!-- This version split the texts into words, put into a <span> tag at the first place.-->
+
 <template>
   <Experiment title="Test blur text with mouse tracking ">
     <InstructionScreen :title="'Welcome'">
-      <p>This is a sample introduction screen.</p>
+      <p>This is a sample introduction screen. </p>
       <p>Please use the "Fullscreen Mode" for the duration of the experiment:
         <a href="javascript:void(0)" @click="turnOnFullScreen">Fullscreen Mode</a>
       </p>
-      <!-- v-blur="isBlurred" -->
-      <p >This experiment can sometimes be difficult. Please be patient</p>
+      <p>This experiment can sometimes be difficult. Please be patient</p>
     </InstructionScreen>
 
     Make two test screens to see how to blur text, tracking mouse, unblur text and recode data.
     <template v-for="(trial, i) of testTrials">
-      <Screen :key="i" MousetrackingStart>
+      <Screen :key="i" >
         <Slide>
 
           <div class="rect-cursor"></div>
             <!-- @mousemove="moveCursor" -->
 
-          <p class="readingText" @mouseover="changeFont" @mouseleave="changeBack" @mousemove="moveCursor">
-          <!-- <p class="readingText" v-blur="blurConfig" >       -->
-            {{trial.item_content}}
-          </p>
+
+          <p class="readingText" @mousemove="moveCursor">
+          <template v-for="(word, index) of trial.item_content.split(' ')">
+            <span class="word" :key="index" @mouseover="changeFont(index)" @mouseleave="changeBack" :data-index="index">
+              {{ word }}
+            </span>
+          </template>
+        </p>
 
           <div class="out-cursor" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
             {{trial.item_content}}
           </div>
 
-          <!-- <button class="next" @click=" saveMouseMoveData(); $magpie.saveAndNextScreen()"> -->
-          <button class="next" @click=" saveMouseMoveData(); $magpie.nextScreen()">
+          <button class="next" @click=" $magpie.saveAndNextScreen()">
             Next
           </button>
-
-          <!-- <Record
-            :data="{
-            itemId: trial.item_id,
-            tem: trial.item_content,
-            }"
-          /> -->
 
         </Slide>
       </Screen>
@@ -60,19 +58,26 @@ export default {
   data() {
     return {
       testTrials,
-      isBlurred: true,
+      currentIndex: null,
+      mousePosition: {
+          x: 0,
+          y: 0,
+        },
   }},
 
   computed: {
 
   },
 
+  mounted() {
+      setInterval(this.saveData, 100);
+    },
+
   methods: {
-    changeFont() {
+    changeFont(index) {
       console.log('good');
-      // $magpie.mousetracking.start();
+      this.currentIndex= index;
       this.$el.querySelector(".rect-cursor").classList.add('grow')
-      
     },
 
     changeBack() {
@@ -80,28 +85,33 @@ export default {
       this.$el.querySelector(".rect-cursor").classList.remove('grow');
     },
 
+    saveData() {
+        if (this.currentIndex !== null) {
+          const currentElement = this.$el.querySelector(`.word[data-index="${this.currentIndex}"]`);
+          if (currentElement) {
+            $magpie.addTrialData({
+              Index: this.currentIndex,
+              Word: currentElement.innerHTML,
+              mousePositionX: this.mousePosition.x,
+              mousePositionY: this.mousePosition.y,
+              wordPositionTop: currentElement.offsetTop,
+              wordPositionLeft: currentElement.offsetLeft,
+              wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
+              wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
+          });
+        }
+      }},
+
     moveCursor(e) {
       // console.log('great');
       let x = e.clientX;
       let y = e.clientY;
-      // console.log(x);
-      // console.log(y);
       
-      this.$el.querySelector(".rect-cursor").style.left = `${x}px`;
+      this.$el.querySelector(".rect-cursor").style.left = `${x+20}px`;
       this.$el.querySelector(".rect-cursor").style.top = `${y}px`;
-      // this.$el.querySelector(".out-cursor").style.left = `${x}px`;
-      // this.$el.querySelector(".out-cursor").style.top = `${y}px`;
-    },
 
-    saveMouseMoveData() {
-      $magpie.addTrialData(
-        {
-        time: $magpie.mousetracking.getMouseTrack()['mt_time'], 
-        x: $magpie.mousetracking.getMouseTrack()['mt_x'], 
-        y: $magpie.mousetracking.getMouseTrack()['mt_y'],
-        startTime: $magpie.mousetracking.getMouseTrack()['mt_start_time']}
-        );
-      console.log('added!')
+      this.mousePosition.x = x;
+      this.mousePosition.y = y;
     },
 
     async turnOnFullScreen() {
@@ -126,13 +136,6 @@ export default {
     }
   },
 
-  // mounted() {
-  //   this.$el.addEventListener('mousemove', this.moveCursor); 
-  // },
-  // destroyed() {
-  //   this.$el.removeEventListener('mousemove', this.moveCursor);},
-  
-
 };
 
 </script>
@@ -156,7 +159,7 @@ export default {
     position: absolute;
     color: white;
     text-align: left;
-    cursor: none;
+    cursor: pointer;
   }
 
   button {
@@ -169,20 +172,21 @@ export default {
     position: fixed;
     /* left: 10px; */
     z-index: 2;
-    width: 2px;
-    height: 2px;
+    width: 1px;
+    height: 1px;
     transform: translate(-50%, -50%);
     background-color: white;
     mix-blend-mode: difference;
-    /* border-radius: 50%; */
+    border-radius: 50%;
     pointer-events: none;
     transition: width 0.5s, height 0.5s;
      
   } 
 
   .rect-cursor.grow {
-    width: 120px;
-    height: 30px;
+    width: 130px;
+    height: 35px;
+    box-shadow: 0 0 6px 3px rgb(223, 223, 223);
     transition: width 0.5s, height 0.5s;
   }
 
