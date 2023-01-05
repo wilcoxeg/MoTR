@@ -16,11 +16,11 @@
     <template v-for="(trial, i) of testTrials">
       <Screen :key="i">
         <Slide>
-          <div class="rect-cursor"></div>
-          <p class="readingText" @mouseover="changeFont" @mouseleave="changeBack" @mousemove="moveCursor">
+          <div class="oval-cursor"></div>
+          <p class="readingText" @mouseover="changeCursor" @mouseleave="changeBack" @mousemove="moveCursor">
             {{trial.item_content}}
           </p>
-          <div class="out-cursor" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
+          <div class="clear-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
             {{trial.item_content}}
           </div>
           <!-- <button class="next" @click=" saveMouseMoveData(); $magpie.nextScreen()"> -->
@@ -76,20 +76,20 @@ export default {
       }, this.timeInterval);
 
     },
-    changeFont() {
+    changeCursor() {
       // console.log('good');
-      this.$el.querySelector(".rect-cursor").classList.add('grow');
+      this.$el.querySelector(".oval-cursor").classList.add('grow');
     },
     changeBack() {
       // console.log('back');
-      this.$el.querySelector(".rect-cursor").classList.remove('grow');
+      this.$el.querySelector(".oval-cursor").classList.remove('grow');
     },
     moveCursor(e) {
       this.x = e.clientX;
       this.y = e.clientY;
       // let elapsedTime = Date.now() - this.startTime;
-      this.$el.querySelector(".rect-cursor").style.left = `${this.x+20}px`;
-      this.$el.querySelector(".rect-cursor").style.top = `${this.y-5}px`;
+      this.$el.querySelector(".oval-cursor").style.left = `${this.x+20}px`;
+      this.$el.querySelector(".oval-cursor").style.top = `${this.y-5}px`;
       this.word = this.getWordAtPosition(this.x,this.y-5);
       console.log(this.word);
     },
@@ -176,7 +176,7 @@ export default {
     bottom: 0;
     left: 50%;
   }
-  .rect-cursor {
+  .oval-cursor {
     position: fixed;
     /* left: 10px; */
     z-index: 2;
@@ -189,13 +189,13 @@ export default {
     pointer-events: none;
     transition: width 0.5s, height 0.5s;
   } 
-  .rect-cursor.grow {
+  .oval-cursor.grow {
     width: 130px;
     height: 35px;
     box-shadow: 0 0 5px #ccc;
     transition: width 0.5s, height 0.5s;
   }
-  .out-cursor {
+  .clear-layer {
     margin: 17px 0;
     position: absolute;
     pointer-events: none;

@@ -19,7 +19,7 @@
 
 
           <div class="readingText">
-            <span v-for = "(w, i) in trial.item_content.split(' ')" :key="i" ref="wordSpan" :class="{ blur: wordIndex !== i }"  @mouseover="changeFont(i)" @mouseleave="changeBack(i)">
+            <span v-for = "(w, i) in trial.item_content.split(' ')" :key="i" ref="wordSpan" :class="{ blur: wordIndex !== i }"  @mouseover="changeCursor(i)" @mouseleave="changeBack(i)">
               {{w + ' '}}
             </span>
 
@@ -70,7 +70,7 @@ export default {
   },
 
   methods: {
-    changeFont(i) {
+    changeCursor(i) {
       this.wordIndex = i;
       this.startTime = Date.now();
     },
@@ -172,7 +172,7 @@ export default {
     left: 50%;
   }
 
-  .rect-cursor {
+  .oval-cursor {
     position: fixed;
     /* left: 10px; */
     z-index: 2;
@@ -188,7 +188,7 @@ export default {
      
   } 
 
-  .rect-cursor.grow {
+  .oval-cursor.grow {
     width: 120px;
     height: 30px;
     transition: width 0.5s, height 0.5s;
