@@ -14,7 +14,7 @@
       <p style = "color: green">This version records the data whenever the cursor moves with a flexible time interval.</p>
     </InstructionScreen>
 
-    <template v-for="(trial, i) of testTrials">
+    <template v-for="(trial, i) of localCoherences">
       <Screen :key="i">
         <Slide>
           <div class="oval-cursor"></div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import testTrials from '../trials/testTrials.csv';
+import localCoherences from '../trials/localCoherences.csv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -49,7 +49,7 @@ export default {
   name: 'App',
   data() {
     return {
-      testTrials,
+      localCoherences,
       isBlurred: true,
       startTime: 0,
   }},

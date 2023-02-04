@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # file_divider.divide_raw_file()
 
     # Step 2: preprocess the trial data file by splitting sentences into words and extract useful info from these files
-    # trial_Preprocessor = TrialDataPreprocessor("./testTrials.csv", "./preprocessed_trialData")
+    # trial_Preprocessor = TrialDataPreprocessor("./localCoherences.csv", "./preprocessed_trialData")
     # trial_Preprocessor.split_sentence_into_words()
     # trial_Preprocessor.filtered_new_df()
 

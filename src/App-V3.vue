@@ -13,7 +13,7 @@
     </InstructionScreen>
 
     Make two test screens to see how to blur text, tracking mouse, unblur text and recode data.
-    <template v-for="(trial, k) of testTrials">
+    <template v-for="(trial, k) of localCoherences">
       <Screen :key="k">
         <Slide>
 
@@ -47,7 +47,7 @@
 <script>
 // Load data from csv files as javascript arrays with objects
 import Magpie from 'magpie-base';
-import testTrials from '../trials/testTrials.csv';
+import localCoherences from '../trials/localCoherences.csv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -58,7 +58,7 @@ export default {
   name: 'App',
   data() {
   return {
-    testTrials,
+    localCoherences,
     isBlurred: true,
     wordIndex: null,
     startTime: null,

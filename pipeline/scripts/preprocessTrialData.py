@@ -28,7 +28,7 @@ class TrialDataPreprocessor:
         df_new.to_csv(self.new_data_path / 'filtered_preprocessed_trial_data.csv', index=False)
 
 
-# objPreprocessor = TrialDataPreprocessor("../testTrials.csv", "../preprocessed_trialData")
+# objPreprocessor = TrialDataPreprocessor("../localCoherences.csv", "../preprocessed_trialData")
 # objPreprocessor.split_sentence_into_words()
 # objPreprocessor.filtered_new_df()
 

@@ -3,7 +3,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.csv$/,
+          test: /\.(csv|tsv)$/,
           loader: 'csv-loader',
           options: {
             dynamicTyping: true,

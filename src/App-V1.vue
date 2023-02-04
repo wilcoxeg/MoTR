@@ -13,7 +13,7 @@
       <p style = "color: green">This version record the data with a fixed time interval specified by "timeInterval".</p>
     </InstructionScreen>
 
-    <template v-for="(trial, i) of testTrials">
+    <template v-for="(trial, i) of localCoherences">
       <Screen :key="i">
         <Slide>
           <div class="oval-cursor"></div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import testTrials from '../trials/testTrials.csv';
+import localCoherences from '../trials/localCoherences.csv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -48,7 +48,7 @@ export default {
   name: 'App',
   data() {
     return {
-      testTrials,
+      localCoherences,
       isBlurred: true,
       // startTime: 0,
       timeInterval: 100, // Time interval (milliseconds)
