@@ -6,6 +6,6 @@ export default {
   completionUrl: 'https://...',
   contactEmail: 'cui.ding@uzh.ch',
   // Either 'debug', 'directLink' or 'prolific'
-  mode: 'directLink',
+  mode: 'debug',
   language: 'en'
 };
