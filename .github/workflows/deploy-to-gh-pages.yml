@@ -5,8 +5,17 @@ on:
     branches:
       - main
       - master
+
 jobs:
   build-and-deploy:
+
+    strategy:
+      matrix:
+        folder:
+          - experiments/motr-pilot
+          - experiments/experiment-two
+          - experiments/experiment-three
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -16,6 +25,7 @@ jobs:
         uses: skjnldsv/read-package-engines-version-actions@v1.1
         id: versions
         with:
+          path: ${{matrix.folder}}
           fallbackNode: '^12'
           fallbackNpm: '^6'
 
@@ -43,6 +53,7 @@ jobs:
         env:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
+          cd ${{matrix.folder}}
           npm install
           npm run build
 
@@ -57,5 +68,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          folder: dist
+          folder: ${{ matrix.folder }}/dist
+          target-folder: ${{ matrix.folder }}
           token: ${{ secrets.GITHUB_TOKEN }}
