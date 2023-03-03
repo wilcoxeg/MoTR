@@ -133,7 +133,7 @@
         </Screen>
       </template>
       <SubmitResultsScreen />
-      <Screen :title="'Thanks'"> The study is now complete. Thank you for participating!</Screen>
+      <Screen :title="'Thanks'"> The study is now complete. Thank you for participating! Your completion code is: C1143PXS</Screen>
     </Experiment>
   </template>
   
