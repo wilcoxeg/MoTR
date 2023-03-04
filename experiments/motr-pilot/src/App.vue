@@ -205,7 +205,7 @@ export default {
           // console.log('saving!')
           const currentElement = this.$el.querySelector(`.bold[data-index="${this.currentIndex}"]`);
           if (currentElement) {
-            console.log(currentElement.innerHTML)
+//             console.log(currentElement.innerHTML)
             $magpie.addTrialData({
               Experiment: this.$el.querySelector(".experiment_id").value,
               Condition: this.$el.querySelector(".condition_id").value,
@@ -220,7 +220,7 @@ export default {
               wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
           });
         } else {
-          console.log('-1')
+//           console.log('-1')
           $magpie.addTrialData({
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
