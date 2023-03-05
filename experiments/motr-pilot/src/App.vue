@@ -113,7 +113,7 @@
           Done
           </button>
 
-          <div v-else style = "position:absolute; bottom:15%; text-align: center; min-width: -webkit-fill-available;" >
+          <div v-else style = "position:absolute; bottom:15%; text-align: center; width: 100%; min-width: -webkit-fill-available;" >
             <template>
               <form>
                 <!-- comprehension questions and the response options -->
