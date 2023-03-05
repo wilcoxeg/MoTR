@@ -284,6 +284,7 @@ export default {
   }
 
   .main_screen {
+    isolation: isolate;
     position: relative;
     width: 100%;
     height: auto;
