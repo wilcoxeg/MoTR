@@ -63,7 +63,6 @@
           <td>Please enter your Worker ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
           </tr>
           <!-- <tr>
-
           </tr> -->
           </div>
           <div v-if="
@@ -100,7 +99,7 @@
           <template>
             <div v-if="showFirstDiv" class="readingText" @mousemove="moveCursor" @mouseleave="changeBack">
               <template v-for="(word, index) of trial.text.split(' ')">
-                <span :class="{ bold: currentIndex === index }" :key="index" @mouseover="recordWord(index)" :data-index="index" @mouseleave="recordBlank">
+                <span :key="index" :data-index="index" >
                   {{ word }}
                 </span>
               </template>
@@ -144,14 +143,10 @@ import provo_items from '../trials/provo_items.tsv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
-
 Vue.use(vBlur)
-
-
 export default {
   name: 'App',
   data() {
-
     const shuffledLocalCohr = _.shuffle(localCoherence_items);
     const shuffledProvo = _.shuffle(provo_items);
     const trials = _.concat(shuffledProvo, shuffledLocalCohr);
@@ -163,7 +158,6 @@ export default {
         response_options: _.shuffle(`${trial.response_true}|${trial.response_distractors}`.replace(/ ?["]+/g, "").split("|")),
       }
     });
-
     return {
       trials: updatedTrials,
       currentIndex: null,
@@ -174,38 +168,23 @@ export default {
           y: 0,
         },
   }},
-
   computed: {
   },
-
   mounted() { 
     setInterval(this.saveData, 25);
     },
-
   methods: {
-
-    recordWord(index) {
-      // console.log('record!')
-      this.currentIndex= index;
-    },
-
     changeBack() {
       // console.log('back!')
       this.$el.querySelector(".oval-cursor").classList.remove('grow');
+      this.$el.querySelector(".oval-cursor").classList.remove('blank');
       this.currentIndex = null;
     },
-
-    recordBlank() {
-      // console.log('blank!');
-      this.currentIndex = -1;
-    },
-
     saveData() {
         if (this.currentIndex !== null) {
           // console.log('saving!')
-          const currentElement = this.$el.querySelector(`.bold[data-index="${this.currentIndex}"]`);
+          const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
           if (currentElement) {
-//             console.log(currentElement.innerHTML)
             $magpie.addTrialData({
               Experiment: this.$el.querySelector(".experiment_id").value,
               Condition: this.$el.querySelector(".condition_id").value,
@@ -220,7 +199,7 @@ export default {
               wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
           });
         } else {
-//           console.log('-1')
+          // console.log('-1')
           $magpie.addTrialData({
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
@@ -229,26 +208,35 @@ export default {
           
         }
       }},
-
     moveCursor(e) {
       // console.log('move!')
-      this.$el.querySelector(".oval-cursor").classList.add('grow')
-
+      this.$el.querySelector(".oval-cursor").classList.add('grow');
       let x = e.clientX;
       let y = e.clientY;
-      
-      this.$el.querySelector(".oval-cursor").style.left = `${x+15}px`;
-      this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
 
+      const elementAtCursor= document.elementFromPoint(x, y).closest('span');
+      if (elementAtCursor){
+        this.$el.querySelector(".oval-cursor").classList.remove('blank');
+        this.currentIndex = elementAtCursor.getAttribute('data-index');
+      } else {
+        this.$el.querySelector(".oval-cursor").classList.add('blank');
+        const elementAboveCursor = document.elementFromPoint(x, y-5).closest('span');
+        if (elementAboveCursor){
+          this.currentIndex = elementAboveCursor.getAttribute('data-index');
+        } else {
+          this.currentIndex = -1;
+        }
+      }
+      console.log(this.currentIndex);
+      
+      this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
+      this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
       this.mousePosition.x = e.offsetX;
       this.mousePosition.y = e.offsetY;
-
     },
-
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;
     },
-
     async turnOnFullScreen() {
       if (!document.fullscreenElement) {
         try {
@@ -270,9 +258,7 @@ export default {
       };
     }
   },
-
 };
-
 </script>
 
 
@@ -282,7 +268,6 @@ export default {
     align-items: center;
     justify-content: center;
   }
-
   .main_screen {
     isolation: isolate;
     position: relative;
@@ -291,29 +276,26 @@ export default {
     font-size: 18px;
     line-height: 40px;
   }
-
   .debugResults{
     width: 100%;
   }
-
   .readingText {
     /* z-index: 1; */
     position: absolute;
     color: white;
     text-align: left;
+    font-weight: 450;
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 10%;
+    padding-left: 9%;
     padding-right: 9%;
   }
-
   button {
     position: absolute;
     bottom: 0;
     left: 50%;
   }
-
   .oval-cursor {
     position: fixed;
     /* left: 10px; */
@@ -328,20 +310,24 @@ export default {
     transition: width 0.5s, height 0.5s;
   } 
 
+  .oval-cursor.grow.blank {
+    width: 80px;
+    height: 13px;
+  }
+
   .oval-cursor.grow {
     width: 102px;
-    height: 35px;
+    height: 38px;
     border-radius: 50%;
-    /* border: solid;
-    border-color: red; */
-    box-shadow: 45px 0 8px -4px rgba(255, 255, 255, 0.1), -45px 0 8px -4px rgba(255, 255, 255, 0.1);
+    /* border: solid; */
+    /* border-color: red; */
+    box-shadow: 30px 0 8px -4px rgba(255, 255, 255, 0.1), -30px 0 8px -4px rgba(255, 255, 255, 0.1);
     background-color: rgba(255, 255, 255, 0.3);
     background-blend-mode: screen;
     pointer-events: none;
     transition: width 0.5s, height 0.5s;
     filter:blur(3px);
   }
-
   .oval-cursor.grow::before {
     content: "";
     position: absolute;
@@ -354,20 +340,15 @@ export default {
     mix-blend-mode: normal;
     border-radius: 50%;
 }
-
   .clear-layer {
     position: absolute;
     pointer-events: none;
     color: black;
     text-align: left;
+    font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 10%;
+    padding-left: 9%;
     padding-right: 9%;
   }
-
-  .bold {
-    font-weight: 450;
-  }
-
 </style>
