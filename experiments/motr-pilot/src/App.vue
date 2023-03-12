@@ -201,6 +201,9 @@ export default {
         } else {
           // console.log('-1')
           $magpie.addTrialData({
+              Experiment: this.$el.querySelector(".experiment_id").value,
+              Condition: this.$el.querySelector(".condition_id").value,
+              ItemId: this.$el.querySelector(".item_id").value,
               Index: this.currentIndex,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
