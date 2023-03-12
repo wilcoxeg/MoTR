@@ -5,6 +5,7 @@ Call: python3 computeReadingMeasures.py
 Working directory has to be top repository folder
 """
 from pathlib import Path
+import pandas as pd
 
 from scripts.divideCsv import FileDivider
 from scripts.mergeFixations import FixationMerger
@@ -28,11 +29,12 @@ if __name__ == '__main__':
     print('Welcome!')
 
     # Step 1: divide the raw data file to separate files for different participants by calling FileDivider
-    # file_divider = FileDivider("./mouse_tracking_test.csv", "./raw_data_divided/")
+    # file_divider = FileDivider("./pilot_data_1.csv", "./raw_data_divided/")
     # file_divider.divide_raw_file()
 
     # Step 2: preprocess the trial data file by splitting sentences into words and extract useful info from these files
-    # trial_Preprocessor = TrialDataPreprocessor("./localCoherences.csv", "./preprocessed_trialData")
+    # # trial_Preprocessor = TrialDataPreprocessor("./trials/localCoherence_items.tsv", "./preprocessed_trialData")
+    # trial_Preprocessor = TrialDataPreprocessor("./trials/provo_items.tsv", "./preprocessed_trialData")
     # trial_Preprocessor.split_sentence_into_words()
     # trial_Preprocessor.filtered_new_df()
 
@@ -40,20 +42,33 @@ if __name__ == '__main__':
     # input_paths_f = Path('./raw_data_divided').glob('*.csv')
     # output_path_f = Path('./fixations_merged')
     # for input_path in input_paths_f:
-    #     objMerger = FixationMerger(input_path, output_path_f, 100)
+    #     # print('I am working on :', input_path)
+    #     # 70 -> threshold for fixation; 40 for filtering space between line.
+    #     objMerger = FixationMerger(input_path, output_path_f, 70, 40)
     #     objMerger.sort_fixations_by_itemid()
     #     # objMerger.write_out_all_merged_fixations()
     #     objMerger.write_out_denoise_merged_fixations()
 
     # Step 4: for each merged fixation file, combine fixations to get linguistic features.
-    input_paths_trial = Path('./preprocessed_trialData/filtered_preprocessed_trial_data.csv')
-    input_paths_l = Path('./fixations_merged').glob('*_denoise.csv')
+
+    # If deal with multiple experiment trial data together
+    # input_paths_trial_1 = Path('./preprocessed_trialData/filtered_preprocessed_localCoherence_items.csv')
+    # input_paths_trial_2 = Path('./preprocessed_trialData/filtered_preprocessed_provo_items.csv')
+    # df1 = pd.read_csv(input_paths_trial_1)
+    # df2 = pd.read_csv(input_paths_trial_2)
+    # combined_df = pd.concat([df1, df2])
+    # combined_df.to_csv('./preprocessed_trialData/localCoherence_provo_combined.csv', index=False)
+
+    input_paths_trial = Path('./preprocessed_trialData/localCoherence_provo_combined.csv')
+
+    input_paths_l = Path('./fixations_merged').glob('*_denoised.csv')
     output_path_l = Path('./reading_measures')
     for input_path in input_paths_l:
         print("I am working on: ", input_path)
+        # 70 is still the threshold for fixation --> the same as above but for different structure of experiment.
         objFeatureExtractor = FeatureExtractor(input_paths_trial,
                                                input_path,
-                                               output_path_l, 150)
+                                               output_path_l, 70)
         objFeatureExtractor.check_comprehension_answer()
         objFeatureExtractor.get_first_duration()
         objFeatureExtractor.get_total_duration()

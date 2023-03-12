@@ -12,6 +12,7 @@ class FileDivider:
         self.raw_data_path = Path(f"{raw_data_path}")
         self.new_data_path = Path(f"{new_data_path}")
         self.raw_data_df = pd.read_csv(self.raw_data_path, dtype={"Index": str, "ItemId": str,
+                                                                  "Condition": str, "Experiment": str,
                                                                   "mousePositionX": str, "mousePositionY": str})
 
     # Check if the directory for the divided files exists, if not, make one
@@ -29,9 +30,12 @@ class FileDivider:
     def _fill_nan_response_column(self) -> None:
         self.raw_data_df['response'].fillna(method='bfill', inplace=True)
         self.raw_data_df['ItemId'].fillna(method='ffill', inplace=True)
-        self.raw_data_df['Index'].fillna(value=-1, inplace=True)
-        self.raw_data_df['mousePositionX'].fillna(value=700, inplace=True)
-        self.raw_data_df['mousePositionY'].fillna(value=500, inplace=True)
+        # self.raw_data_df['Experiment'].fillna(method='ffill', inplace=True)
+        # self.raw_data_df['Condition'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Index'].fillna(value=-100, inplace=True)
+        # self.raw_data_df['Word'].fillna(value="NULL", inplace=True)
+        self.raw_data_df['mousePositionX'].fillna(value=425, inplace=True)
+        self.raw_data_df['mousePositionY'].fillna(value=285, inplace=True)
 
 
 

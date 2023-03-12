@@ -1,0 +1,404 @@
+experiment,experiment_id,condition,condition_id,item_id,text,question,response_true,response_distractors,word_nr
+provo_reading,2,free_reading,1,1,There,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,0
+provo_reading,2,free_reading,1,1,are,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,1
+provo_reading,2,free_reading,1,1,now,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,2
+provo_reading,2,free_reading,1,1,rumblings,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,3
+provo_reading,2,free_reading,1,1,that,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,4
+provo_reading,2,free_reading,1,1,Apple,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,5
+provo_reading,2,free_reading,1,1,might,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,6
+provo_reading,2,free_reading,1,1,soon,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,7
+provo_reading,2,free_reading,1,1,invade,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,8
+provo_reading,2,free_reading,1,1,the,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,9
+provo_reading,2,free_reading,1,1,smart,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,10
+provo_reading,2,free_reading,1,1,watch,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,11
+provo_reading,2,free_reading,1,1,"space,",How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,12
+provo_reading,2,free_reading,1,1,though,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,13
+provo_reading,2,free_reading,1,1,the,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,14
+provo_reading,2,free_reading,1,1,company,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,15
+provo_reading,2,free_reading,1,1,is,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,16
+provo_reading,2,free_reading,1,1,maintaining,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,17
+provo_reading,2,free_reading,1,1,its,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,18
+provo_reading,2,free_reading,1,1,customary,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,19
+provo_reading,2,free_reading,1,1,silence.,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,20
+provo_reading,2,free_reading,1,1,The,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,21
+provo_reading,2,free_reading,1,1,watch,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,22
+provo_reading,2,free_reading,1,1,doesn't,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,23
+provo_reading,2,free_reading,1,1,have,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,24
+provo_reading,2,free_reading,1,1,a,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,25
+provo_reading,2,free_reading,1,1,microphone,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,26
+provo_reading,2,free_reading,1,1,or,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,27
+provo_reading,2,free_reading,1,1,"speaker,",How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,28
+provo_reading,2,free_reading,1,1,but,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,29
+provo_reading,2,free_reading,1,1,you,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,30
+provo_reading,2,free_reading,1,1,can,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,31
+provo_reading,2,free_reading,1,1,use,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,32
+provo_reading,2,free_reading,1,1,it,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,33
+provo_reading,2,free_reading,1,1,to,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,34
+provo_reading,2,free_reading,1,1,control,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,35
+provo_reading,2,free_reading,1,1,the,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,36
+provo_reading,2,free_reading,1,1,music,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,37
+provo_reading,2,free_reading,1,1,on,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,38
+provo_reading,2,free_reading,1,1,your,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,39
+provo_reading,2,free_reading,1,1,phone.,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,40
+provo_reading,2,free_reading,1,1,You,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,41
+provo_reading,2,free_reading,1,1,can,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,42
+provo_reading,2,free_reading,1,1,glance,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,43
+provo_reading,2,free_reading,1,1,at,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,44
+provo_reading,2,free_reading,1,1,the,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,45
+provo_reading,2,free_reading,1,1,watch,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,46
+provo_reading,2,free_reading,1,1,face,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,47
+provo_reading,2,free_reading,1,1,to,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,48
+provo_reading,2,free_reading,1,1,view,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,49
+provo_reading,2,free_reading,1,1,the,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,50
+provo_reading,2,free_reading,1,1,artist,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,51
+provo_reading,2,free_reading,1,1,and,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,52
+provo_reading,2,free_reading,1,1,title,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,53
+provo_reading,2,free_reading,1,1,of,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,54
+provo_reading,2,free_reading,1,1,a,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,55
+provo_reading,2,free_reading,1,1,song.,How do people know Apple might make a watch soon?,Because of rumors.,Because Apple made an announcement.,56
+provo_reading,2,free_reading,1,2,Two,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,0
+provo_reading,2,free_reading,1,2,days,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,1
+provo_reading,2,free_reading,1,2,"later,",What was Richard Carrington observing?,Spots on the sun.,A far away planet.,2
+provo_reading,2,free_reading,1,2,the,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,3
+provo_reading,2,free_reading,1,2,British,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,4
+provo_reading,2,free_reading,1,2,astronomer,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,5
+provo_reading,2,free_reading,1,2,Richard,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,6
+provo_reading,2,free_reading,1,2,Carrington,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,7
+provo_reading,2,free_reading,1,2,was,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,8
+provo_reading,2,free_reading,1,2,observing,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,9
+provo_reading,2,free_reading,1,2,the,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,10
+provo_reading,2,free_reading,1,2,interesting,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,11
+provo_reading,2,free_reading,1,2,sunspot,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,12
+provo_reading,2,free_reading,1,2,group,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,13
+provo_reading,2,free_reading,1,2,through,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,14
+provo_reading,2,free_reading,1,2,his,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,15
+provo_reading,2,free_reading,1,2,telescope,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,16
+provo_reading,2,free_reading,1,2,when,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,17
+provo_reading,2,free_reading,1,2,he,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,18
+provo_reading,2,free_reading,1,2,saw,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,19
+provo_reading,2,free_reading,1,2,what,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,20
+provo_reading,2,free_reading,1,2,he,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,21
+provo_reading,2,free_reading,1,2,described,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,22
+provo_reading,2,free_reading,1,2,as,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,23
+provo_reading,2,free_reading,1,2,"""two",What was Richard Carrington observing?,Spots on the sun.,A far away planet.,24
+provo_reading,2,free_reading,1,2,patches,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,25
+provo_reading,2,free_reading,1,2,of,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,26
+provo_reading,2,free_reading,1,2,intensely,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,27
+provo_reading,2,free_reading,1,2,bright,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,28
+provo_reading,2,free_reading,1,2,and,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,29
+provo_reading,2,free_reading,1,2,white,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,30
+provo_reading,2,free_reading,1,2,"light""",What was Richard Carrington observing?,Spots on the sun.,A far away planet.,31
+provo_reading,2,free_reading,1,2,over,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,32
+provo_reading,2,free_reading,1,2,the,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,33
+provo_reading,2,free_reading,1,2,sunspots.,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,34
+provo_reading,2,free_reading,1,2,He,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,35
+provo_reading,2,free_reading,1,2,jotted,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,36
+provo_reading,2,free_reading,1,2,a,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,37
+provo_reading,2,free_reading,1,2,note,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,38
+provo_reading,2,free_reading,1,2,in,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,39
+provo_reading,2,free_reading,1,2,his,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,40
+provo_reading,2,free_reading,1,2,painstaking,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,41
+provo_reading,2,free_reading,1,2,record.,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,42
+provo_reading,2,free_reading,1,2,That,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,43
+provo_reading,2,free_reading,1,2,night,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,44
+provo_reading,2,free_reading,1,2,there,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,45
+provo_reading,2,free_reading,1,2,was,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,46
+provo_reading,2,free_reading,1,2,scarcely,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,47
+provo_reading,2,free_reading,1,2,a,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,48
+provo_reading,2,free_reading,1,2,square,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,49
+provo_reading,2,free_reading,1,2,inch,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,50
+provo_reading,2,free_reading,1,2,of,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,51
+provo_reading,2,free_reading,1,2,earth,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,52
+provo_reading,2,free_reading,1,2,that,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,53
+provo_reading,2,free_reading,1,2,was,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,54
+provo_reading,2,free_reading,1,2,not,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,55
+provo_reading,2,free_reading,1,2,illuminated,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,56
+provo_reading,2,free_reading,1,2,by,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,57
+provo_reading,2,free_reading,1,2,aurora.,What was Richard Carrington observing?,Spots on the sun.,A far away planet.,58
+provo_reading,2,free_reading,1,3,I,Where did crime drop last year?,Everywhere in the United States.,Only in California.,0
+provo_reading,2,free_reading,1,3,agree,Where did crime drop last year?,Everywhere in the United States.,Only in California.,1
+provo_reading,2,free_reading,1,3,that,Where did crime drop last year?,Everywhere in the United States.,Only in California.,2
+provo_reading,2,free_reading,1,3,California's,Where did crime drop last year?,Everywhere in the United States.,Only in California.,3
+provo_reading,2,free_reading,1,3,"""three",Where did crime drop last year?,Everywhere in the United States.,Only in California.,4
+provo_reading,2,free_reading,1,3,strikes,Where did crime drop last year?,Everywhere in the United States.,Only in California.,5
+provo_reading,2,free_reading,1,3,and,Where did crime drop last year?,Everywhere in the United States.,Only in California.,6
+provo_reading,2,free_reading,1,3,you're,Where did crime drop last year?,Everywhere in the United States.,Only in California.,7
+provo_reading,2,free_reading,1,3,"out""",Where did crime drop last year?,Everywhere in the United States.,Only in California.,8
+provo_reading,2,free_reading,1,3,law,Where did crime drop last year?,Everywhere in the United States.,Only in California.,9
+provo_reading,2,free_reading,1,3,will,Where did crime drop last year?,Everywhere in the United States.,Only in California.,10
+provo_reading,2,free_reading,1,3,be,Where did crime drop last year?,Everywhere in the United States.,Only in California.,11
+provo_reading,2,free_reading,1,3,a,Where did crime drop last year?,Everywhere in the United States.,Only in California.,12
+provo_reading,2,free_reading,1,3,financial,Where did crime drop last year?,Everywhere in the United States.,Only in California.,13
+provo_reading,2,free_reading,1,3,disaster,Where did crime drop last year?,Everywhere in the United States.,Only in California.,14
+provo_reading,2,free_reading,1,3,for,Where did crime drop last year?,Everywhere in the United States.,Only in California.,15
+provo_reading,2,free_reading,1,3,taxpayers,Where did crime drop last year?,Everywhere in the United States.,Only in California.,16
+provo_reading,2,free_reading,1,3,who,Where did crime drop last year?,Everywhere in the United States.,Only in California.,17
+provo_reading,2,free_reading,1,3,care,Where did crime drop last year?,Everywhere in the United States.,Only in California.,18
+provo_reading,2,free_reading,1,3,about,Where did crime drop last year?,Everywhere in the United States.,Only in California.,19
+provo_reading,2,free_reading,1,3,education,Where did crime drop last year?,Everywhere in the United States.,Only in California.,20
+provo_reading,2,free_reading,1,3,and,Where did crime drop last year?,Everywhere in the United States.,Only in California.,21
+provo_reading,2,free_reading,1,3,other,Where did crime drop last year?,Everywhere in the United States.,Only in California.,22
+provo_reading,2,free_reading,1,3,vital,Where did crime drop last year?,Everywhere in the United States.,Only in California.,23
+provo_reading,2,free_reading,1,3,services.,Where did crime drop last year?,Everywhere in the United States.,Only in California.,24
+provo_reading,2,free_reading,1,3,But,Where did crime drop last year?,Everywhere in the United States.,Only in California.,25
+provo_reading,2,free_reading,1,3,it's,Where did crime drop last year?,Everywhere in the United States.,Only in California.,26
+provo_reading,2,free_reading,1,3,far,Where did crime drop last year?,Everywhere in the United States.,Only in California.,27
+provo_reading,2,free_reading,1,3,from,Where did crime drop last year?,Everywhere in the United States.,Only in California.,28
+provo_reading,2,free_reading,1,3,clear,Where did crime drop last year?,Everywhere in the United States.,Only in California.,29
+provo_reading,2,free_reading,1,3,that,Where did crime drop last year?,Everywhere in the United States.,Only in California.,30
+provo_reading,2,free_reading,1,3,the,Where did crime drop last year?,Everywhere in the United States.,Only in California.,31
+provo_reading,2,free_reading,1,3,law,Where did crime drop last year?,Everywhere in the United States.,Only in California.,32
+provo_reading,2,free_reading,1,3,can,Where did crime drop last year?,Everywhere in the United States.,Only in California.,33
+provo_reading,2,free_reading,1,3,even,Where did crime drop last year?,Everywhere in the United States.,Only in California.,34
+provo_reading,2,free_reading,1,3,be,Where did crime drop last year?,Everywhere in the United States.,Only in California.,35
+provo_reading,2,free_reading,1,3,credited,Where did crime drop last year?,Everywhere in the United States.,Only in California.,36
+provo_reading,2,free_reading,1,3,with,Where did crime drop last year?,Everywhere in the United States.,Only in California.,37
+provo_reading,2,free_reading,1,3,a,Where did crime drop last year?,Everywhere in the United States.,Only in California.,38
+provo_reading,2,free_reading,1,3,reduction,Where did crime drop last year?,Everywhere in the United States.,Only in California.,39
+provo_reading,2,free_reading,1,3,in,Where did crime drop last year?,Everywhere in the United States.,Only in California.,40
+provo_reading,2,free_reading,1,3,crime,Where did crime drop last year?,Everywhere in the United States.,Only in California.,41
+provo_reading,2,free_reading,1,3,in,Where did crime drop last year?,Everywhere in the United States.,Only in California.,42
+provo_reading,2,free_reading,1,3,California.,Where did crime drop last year?,Everywhere in the United States.,Only in California.,43
+provo_reading,2,free_reading,1,3,While,Where did crime drop last year?,Everywhere in the United States.,Only in California.,44
+provo_reading,2,free_reading,1,3,it's,Where did crime drop last year?,Everywhere in the United States.,Only in California.,45
+provo_reading,2,free_reading,1,3,true,Where did crime drop last year?,Everywhere in the United States.,Only in California.,46
+provo_reading,2,free_reading,1,3,that,Where did crime drop last year?,Everywhere in the United States.,Only in California.,47
+provo_reading,2,free_reading,1,3,crime,Where did crime drop last year?,Everywhere in the United States.,Only in California.,48
+provo_reading,2,free_reading,1,3,declined,Where did crime drop last year?,Everywhere in the United States.,Only in California.,49
+provo_reading,2,free_reading,1,3,in,Where did crime drop last year?,Everywhere in the United States.,Only in California.,50
+provo_reading,2,free_reading,1,3,California,Where did crime drop last year?,Everywhere in the United States.,Only in California.,51
+provo_reading,2,free_reading,1,3,last,Where did crime drop last year?,Everywhere in the United States.,Only in California.,52
+provo_reading,2,free_reading,1,3,"year,",Where did crime drop last year?,Everywhere in the United States.,Only in California.,53
+provo_reading,2,free_reading,1,3,crime,Where did crime drop last year?,Everywhere in the United States.,Only in California.,54
+provo_reading,2,free_reading,1,3,also,Where did crime drop last year?,Everywhere in the United States.,Only in California.,55
+provo_reading,2,free_reading,1,3,dropped,Where did crime drop last year?,Everywhere in the United States.,Only in California.,56
+provo_reading,2,free_reading,1,3,nationwide.,Where did crime drop last year?,Everywhere in the United States.,Only in California.,57
+provo_reading,2,free_reading,1,4,Liza,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,0
+provo_reading,2,free_reading,1,4,was,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,1
+provo_reading,2,free_reading,1,4,in,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,2
+provo_reading,2,free_reading,1,4,a,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,3
+provo_reading,2,free_reading,1,4,bad,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,4
+provo_reading,2,free_reading,1,4,"temper,",Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,5
+provo_reading,2,free_reading,1,4,for,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,6
+provo_reading,2,free_reading,1,4,she,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,7
+provo_reading,2,free_reading,1,4,was,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,8
+provo_reading,2,free_reading,1,4,mixing,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,9
+provo_reading,2,free_reading,1,4,the,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,10
+provo_reading,2,free_reading,1,4,Christmas,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,11
+provo_reading,2,free_reading,1,4,puddings,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,12
+provo_reading,2,free_reading,1,4,in,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,13
+provo_reading,2,free_reading,1,4,the,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,14
+provo_reading,2,free_reading,1,4,"kitchen,",Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,15
+provo_reading,2,free_reading,1,4,and,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,16
+provo_reading,2,free_reading,1,4,had,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,17
+provo_reading,2,free_reading,1,4,been,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,18
+provo_reading,2,free_reading,1,4,drawn,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,19
+provo_reading,2,free_reading,1,4,from,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,20
+provo_reading,2,free_reading,1,4,"them,",Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,21
+provo_reading,2,free_reading,1,4,with,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,22
+provo_reading,2,free_reading,1,4,a,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,23
+provo_reading,2,free_reading,1,4,raisin,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,24
+provo_reading,2,free_reading,1,4,still,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,25
+provo_reading,2,free_reading,1,4,on,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,26
+provo_reading,2,free_reading,1,4,her,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,27
+provo_reading,2,free_reading,1,4,"cheek,",Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,28
+provo_reading,2,free_reading,1,4,by,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,29
+provo_reading,2,free_reading,1,4,Nana's,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,30
+provo_reading,2,free_reading,1,4,absurd,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,31
+provo_reading,2,free_reading,1,4,suspicions.,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,32
+provo_reading,2,free_reading,1,4,She,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,33
+provo_reading,2,free_reading,1,4,thought,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,34
+provo_reading,2,free_reading,1,4,the,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,35
+provo_reading,2,free_reading,1,4,best,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,36
+provo_reading,2,free_reading,1,4,way,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,37
+provo_reading,2,free_reading,1,4,of,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,38
+provo_reading,2,free_reading,1,4,getting,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,39
+provo_reading,2,free_reading,1,4,a,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,40
+provo_reading,2,free_reading,1,4,little,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,41
+provo_reading,2,free_reading,1,4,quiet,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,42
+provo_reading,2,free_reading,1,4,was,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,43
+provo_reading,2,free_reading,1,4,to,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,44
+provo_reading,2,free_reading,1,4,take,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,45
+provo_reading,2,free_reading,1,4,Nana,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,46
+provo_reading,2,free_reading,1,4,to,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,47
+provo_reading,2,free_reading,1,4,the,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,48
+provo_reading,2,free_reading,1,4,nursery,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,49
+provo_reading,2,free_reading,1,4,for,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,50
+provo_reading,2,free_reading,1,4,a,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,51
+provo_reading,2,free_reading,1,4,"moment,",Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,52
+provo_reading,2,free_reading,1,4,but,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,53
+provo_reading,2,free_reading,1,4,in,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,54
+provo_reading,2,free_reading,1,4,custody,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,55
+provo_reading,2,free_reading,1,4,of,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,56
+provo_reading,2,free_reading,1,4,course.,Why is Liza in a bad temper?,Because her work is interrupted needlessly.,Because the puddings are not tasty.,57
+provo_reading,2,free_reading,1,5,Mrs.,Was the window open?,No,Yes,0
+provo_reading,2,free_reading,1,5,Darling,Was the window open?,No,Yes,1
+provo_reading,2,free_reading,1,5,quivered,Was the window open?,No,Yes,2
+provo_reading,2,free_reading,1,5,and,Was the window open?,No,Yes,3
+provo_reading,2,free_reading,1,5,went,Was the window open?,No,Yes,4
+provo_reading,2,free_reading,1,5,to,Was the window open?,No,Yes,5
+provo_reading,2,free_reading,1,5,the,Was the window open?,No,Yes,6
+provo_reading,2,free_reading,1,5,window.,Was the window open?,No,Yes,7
+provo_reading,2,free_reading,1,5,It,Was the window open?,No,Yes,8
+provo_reading,2,free_reading,1,5,was,Was the window open?,No,Yes,9
+provo_reading,2,free_reading,1,5,securely,Was the window open?,No,Yes,10
+provo_reading,2,free_reading,1,5,fastened.,Was the window open?,No,Yes,11
+provo_reading,2,free_reading,1,5,She,Was the window open?,No,Yes,12
+provo_reading,2,free_reading,1,5,looked,Was the window open?,No,Yes,13
+provo_reading,2,free_reading,1,5,"out,",Was the window open?,No,Yes,14
+provo_reading,2,free_reading,1,5,and,Was the window open?,No,Yes,15
+provo_reading,2,free_reading,1,5,the,Was the window open?,No,Yes,16
+provo_reading,2,free_reading,1,5,night,Was the window open?,No,Yes,17
+provo_reading,2,free_reading,1,5,was,Was the window open?,No,Yes,18
+provo_reading,2,free_reading,1,5,peppered,Was the window open?,No,Yes,19
+provo_reading,2,free_reading,1,5,with,Was the window open?,No,Yes,20
+provo_reading,2,free_reading,1,5,stars.,Was the window open?,No,Yes,21
+provo_reading,2,free_reading,1,5,They,Was the window open?,No,Yes,22
+provo_reading,2,free_reading,1,5,were,Was the window open?,No,Yes,23
+provo_reading,2,free_reading,1,5,crowding,Was the window open?,No,Yes,24
+provo_reading,2,free_reading,1,5,round,Was the window open?,No,Yes,25
+provo_reading,2,free_reading,1,5,the,Was the window open?,No,Yes,26
+provo_reading,2,free_reading,1,5,"house,",Was the window open?,No,Yes,27
+provo_reading,2,free_reading,1,5,as,Was the window open?,No,Yes,28
+provo_reading,2,free_reading,1,5,if,Was the window open?,No,Yes,29
+provo_reading,2,free_reading,1,5,curious,Was the window open?,No,Yes,30
+provo_reading,2,free_reading,1,5,to,Was the window open?,No,Yes,31
+provo_reading,2,free_reading,1,5,see,Was the window open?,No,Yes,32
+provo_reading,2,free_reading,1,5,what,Was the window open?,No,Yes,33
+provo_reading,2,free_reading,1,5,was,Was the window open?,No,Yes,34
+provo_reading,2,free_reading,1,5,to,Was the window open?,No,Yes,35
+provo_reading,2,free_reading,1,5,take,Was the window open?,No,Yes,36
+provo_reading,2,free_reading,1,5,place,Was the window open?,No,Yes,37
+provo_reading,2,free_reading,1,5,"there,",Was the window open?,No,Yes,38
+provo_reading,2,free_reading,1,5,but,Was the window open?,No,Yes,39
+provo_reading,2,free_reading,1,5,she,Was the window open?,No,Yes,40
+provo_reading,2,free_reading,1,5,did,Was the window open?,No,Yes,41
+provo_reading,2,free_reading,1,5,not,Was the window open?,No,Yes,42
+provo_reading,2,free_reading,1,5,notice,Was the window open?,No,Yes,43
+provo_reading,2,free_reading,1,5,"this,",Was the window open?,No,Yes,44
+provo_reading,2,free_reading,1,5,nor,Was the window open?,No,Yes,45
+provo_reading,2,free_reading,1,5,that,Was the window open?,No,Yes,46
+provo_reading,2,free_reading,1,5,one,Was the window open?,No,Yes,47
+provo_reading,2,free_reading,1,5,or,Was the window open?,No,Yes,48
+provo_reading,2,free_reading,1,5,two,Was the window open?,No,Yes,49
+provo_reading,2,free_reading,1,5,of,Was the window open?,No,Yes,50
+provo_reading,2,free_reading,1,5,the,Was the window open?,No,Yes,51
+provo_reading,2,free_reading,1,5,smaller,Was the window open?,No,Yes,52
+provo_reading,2,free_reading,1,5,ones,Was the window open?,No,Yes,53
+provo_reading,2,free_reading,1,5,winked,Was the window open?,No,Yes,54
+provo_reading,2,free_reading,1,5,at,Was the window open?,No,Yes,55
+provo_reading,2,free_reading,1,5,her.,Was the window open?,No,Yes,56
+provo_reading,2,free_reading,1,6,Seeing,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,0
+provo_reading,2,free_reading,1,6,Peter,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,1
+provo_reading,2,free_reading,1,6,slowly,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,2
+provo_reading,2,free_reading,1,6,advancing,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,3
+provo_reading,2,free_reading,1,6,upon,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,4
+provo_reading,2,free_reading,1,6,him,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,5
+provo_reading,2,free_reading,1,6,through,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,6
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,7
+provo_reading,2,free_reading,1,6,air,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,8
+provo_reading,2,free_reading,1,6,with,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,9
+provo_reading,2,free_reading,1,6,dagger,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,10
+provo_reading,2,free_reading,1,6,"poised,",Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,11
+provo_reading,2,free_reading,1,6,he,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,12
+provo_reading,2,free_reading,1,6,sprang,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,13
+provo_reading,2,free_reading,1,6,upon,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,14
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,15
+provo_reading,2,free_reading,1,6,bulwarks,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,16
+provo_reading,2,free_reading,1,6,to,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,17
+provo_reading,2,free_reading,1,6,cast,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,18
+provo_reading,2,free_reading,1,6,himself,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,19
+provo_reading,2,free_reading,1,6,into,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,20
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,21
+provo_reading,2,free_reading,1,6,sea.,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,22
+provo_reading,2,free_reading,1,6,He,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,23
+provo_reading,2,free_reading,1,6,did,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,24
+provo_reading,2,free_reading,1,6,not,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,25
+provo_reading,2,free_reading,1,6,know,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,26
+provo_reading,2,free_reading,1,6,that,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,27
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,28
+provo_reading,2,free_reading,1,6,crocodile,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,29
+provo_reading,2,free_reading,1,6,was,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,30
+provo_reading,2,free_reading,1,6,waiting,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,31
+provo_reading,2,free_reading,1,6,for,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,32
+provo_reading,2,free_reading,1,6,him;,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,33
+provo_reading,2,free_reading,1,6,for,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,34
+provo_reading,2,free_reading,1,6,we,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,35
+provo_reading,2,free_reading,1,6,purposely,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,36
+provo_reading,2,free_reading,1,6,stopped,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,37
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,38
+provo_reading,2,free_reading,1,6,clock,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,39
+provo_reading,2,free_reading,1,6,that,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,40
+provo_reading,2,free_reading,1,6,this,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,41
+provo_reading,2,free_reading,1,6,knowledge,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,42
+provo_reading,2,free_reading,1,6,might,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,43
+provo_reading,2,free_reading,1,6,be,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,44
+provo_reading,2,free_reading,1,6,spared,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,45
+provo_reading,2,free_reading,1,6,him:,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,46
+provo_reading,2,free_reading,1,6,a,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,47
+provo_reading,2,free_reading,1,6,little,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,48
+provo_reading,2,free_reading,1,6,mark,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,49
+provo_reading,2,free_reading,1,6,of,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,50
+provo_reading,2,free_reading,1,6,respect,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,51
+provo_reading,2,free_reading,1,6,from,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,52
+provo_reading,2,free_reading,1,6,us,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,53
+provo_reading,2,free_reading,1,6,at,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,54
+provo_reading,2,free_reading,1,6,the,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,55
+provo_reading,2,free_reading,1,6,end.,Why did the villain jump into the sea?,He was afraid of Peter and his dagger.,He couldn’t get over the bulwarks.,56
+provo_reading,2,free_reading,1,7,Dorothy,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,0
+provo_reading,2,free_reading,1,7,didn't,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,1
+provo_reading,2,free_reading,1,7,know.,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,2
+provo_reading,2,free_reading,1,7,She,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,3
+provo_reading,2,free_reading,1,7,looked,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,4
+provo_reading,2,free_reading,1,7,around,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,5
+provo_reading,2,free_reading,1,7,her,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,6
+provo_reading,2,free_reading,1,7,anxiously,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,7
+provo_reading,2,free_reading,1,7,for,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,8
+provo_reading,2,free_reading,1,7,some,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,9
+provo_reading,2,free_reading,1,7,familiar,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,10
+provo_reading,2,free_reading,1,7,landmark;,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,11
+provo_reading,2,free_reading,1,7,but,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,12
+provo_reading,2,free_reading,1,7,everything,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,13
+provo_reading,2,free_reading,1,7,was,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,14
+provo_reading,2,free_reading,1,7,strange.,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,15
+provo_reading,2,free_reading,1,7,Between,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,16
+provo_reading,2,free_reading,1,7,the,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,17
+provo_reading,2,free_reading,1,7,branches,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,18
+provo_reading,2,free_reading,1,7,of,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,19
+provo_reading,2,free_reading,1,7,the,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,20
+provo_reading,2,free_reading,1,7,many,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,21
+provo_reading,2,free_reading,1,7,roads,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,22
+provo_reading,2,free_reading,1,7,were,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,23
+provo_reading,2,free_reading,1,7,green,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,24
+provo_reading,2,free_reading,1,7,meadows,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,25
+provo_reading,2,free_reading,1,7,and,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,26
+provo_reading,2,free_reading,1,7,a,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,27
+provo_reading,2,free_reading,1,7,few,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,28
+provo_reading,2,free_reading,1,7,shrubs,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,29
+provo_reading,2,free_reading,1,7,and,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,30
+provo_reading,2,free_reading,1,7,"trees,",Where is Dorothy standing?,At a crossroads.,Near a farm-house.,31
+provo_reading,2,free_reading,1,7,but,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,32
+provo_reading,2,free_reading,1,7,she,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,33
+provo_reading,2,free_reading,1,7,couldn't,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,34
+provo_reading,2,free_reading,1,7,see,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,35
+provo_reading,2,free_reading,1,7,the,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,36
+provo_reading,2,free_reading,1,7,farm-house,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,37
+provo_reading,2,free_reading,1,7,from,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,38
+provo_reading,2,free_reading,1,7,which,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,39
+provo_reading,2,free_reading,1,7,she,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,40
+provo_reading,2,free_reading,1,7,had,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,41
+provo_reading,2,free_reading,1,7,just,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,42
+provo_reading,2,free_reading,1,7,"come,",Where is Dorothy standing?,At a crossroads.,Near a farm-house.,43
+provo_reading,2,free_reading,1,7,or,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,44
+provo_reading,2,free_reading,1,7,anything,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,45
+provo_reading,2,free_reading,1,7,she,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,46
+provo_reading,2,free_reading,1,7,had,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,47
+provo_reading,2,free_reading,1,7,ever,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,48
+provo_reading,2,free_reading,1,7,seen,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,49
+provo_reading,2,free_reading,1,7,"before,",Where is Dorothy standing?,At a crossroads.,Near a farm-house.,50
+provo_reading,2,free_reading,1,7,except,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,51
+provo_reading,2,free_reading,1,7,the,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,52
+provo_reading,2,free_reading,1,7,shaggy,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,53
+provo_reading,2,free_reading,1,7,man,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,54
+provo_reading,2,free_reading,1,7,and,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,55
+provo_reading,2,free_reading,1,7,Toto.,Where is Dorothy standing?,At a crossroads.,Near a farm-house.,56

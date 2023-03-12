@@ -5,15 +5,17 @@ from statistics import mean
 
 
 class FixationMerger:
-    def __init__(self, raw_data_divided_path, merged_fixation_path, denoise_threshold: int):
+    def __init__(self, raw_data_divided_path, merged_fixation_path, denoise_threshold: int, btw_line_threshold: int):
         self.in_data_path = raw_data_divided_path
         self.out_data_path = merged_fixation_path
         self.out_data_merged_name = raw_data_divided_path.stem+'_merged.csv'
-        self.out_data_merged_denoise_name = raw_data_divided_path.stem + '_merged_denoise.csv'
-        self.threshold = denoise_threshold
-        self.start_sent = ('0', '1', '2', '3')
+        self.out_data_merged_denoise_name = raw_data_divided_path.stem + '_merged_denoised.csv'
+        self.threshold_fixation = denoise_threshold
+        self.threshold_btw_line = btw_line_threshold
+        self.start_sent = (0, 1, 2, 3)
         self.mouse_data = self.__read_file()
         self.fixations = self.merge_fixations()
+        # self.fixations_clean = self._clear_noises_bwt_lines()
 
     # Check if the directory for the files of merged fixations exists, if not, make one
     def __make_directory_for_merged_fixations(self) -> None:
@@ -29,8 +31,10 @@ class FixationMerger:
         """
         with open(self.in_data_path, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
-            mouse_data = [{'sbm_id': str(row['submission_id']), 'para_nr': str(row['ItemId']),
-                           'word_nr': str(row['Index']), 'word': str(row['Word']), 't': int(row['responseTime']),
+            mouse_data = [{'sbm_id': str(row['submission_id']),
+                           'expr_id': int(row['Experiment']), 'cond_id': int(row['Condition']),
+                           'para_nr': int(row['ItemId']),
+                           'word_nr': int(row['Index']), 'word': str(row['Word']), 't': int(row['responseTime']),
                            'x': int(row['mousePositionX']), 'y': int(row['mousePositionY']),
                            'response': str(row['response'])} for row in csvreader]
         # print(mouse_data)
@@ -54,7 +58,9 @@ class FixationMerger:
                     x_coordinates.append(self.mouse_data[i]['x'])
                     y_coordinates.append(self.mouse_data[i]['y'])
                     merged_fixation_on_word = {
-                        'sbm_id': self.mouse_data[i]['sbm_id'], 'para_nr': self.mouse_data[i]['para_nr'],
+                        'sbm_id': self.mouse_data[i]['sbm_id'],
+                        'expr_id': self.mouse_data[i]['expr_id'], 'cond_id': self.mouse_data[i]['cond_id'],
+                        'para_nr': self.mouse_data[i]['para_nr'],
                         'word_nr': self.mouse_data[i]['word_nr'], 'word': self.mouse_data[i]['word'],
                         'duration': fixed_time, 'start_t': self.mouse_data[i]['t'], 'end_t': self.mouse_data[i+1]['t'],
                         'x_mean': round(mean(x_coordinates), 2), 'y_mean': round(mean(y_coordinates), 2),
@@ -82,27 +88,46 @@ class FixationMerger:
                         writer.writerow(fixation_on_word)
 
     def sort_fixations_by_itemid(self) -> None:
-        self.fixations = sorted(self.fixations, key=lambda x: x[0]['para_nr'])
+        self.fixations = sorted(self.fixations, key=lambda x: (x[0]['expr_id'], x[0]['cond_id'], x[0]['para_nr']))
         # print(self.fixations)
 
-    def _clear_noises(self):
+    def _clear_noises_before_reading(self):
         for i in range(len(self.fixations)):
-            while self.fixations[i] and self.fixations[i][0]['word_nr'] not in self.start_sent:
+            while self.fixations[i] and (self.fixations[i][0]['word_nr'] not in self.start_sent):
                 self.fixations[i].pop(0)
         # for item in self.fixations:
         #     print(item)
         #     print(len(item))
 
+    def _clear_noises_bwt_lines(self):
+        for i in range(len(self.fixations)):
+            # print("------------------------------i th item: ", i,  '--------------------')
+            if self.fixations[i]:
+                j = 1
+                while j < len(self.fixations[i]):
+                    # print('j th elem: ', j, self.fixations[i][j]['word_nr'], self.fixations[i][j]['word'])
+                    if ((self.fixations[i][j]['word_nr'] == -1) or
+                            ((self.fixations[i][j]['word_nr']-self.fixations[i][j-1]['word_nr']) > 5 and
+                             (self.fixations[i][j]['y_mean']-self.fixations[i][j-1]['y_mean']) > self.threshold_btw_line)):
+                        # print("delete:", i, '--->', j, '----->', self.fixations[i][j]['word_nr'], self.fixations[i][j-1]['word'])
+                        self.fixations[i].pop(j)
+                        if j < len(self.fixations[i]) and ((self.fixations[i][j]['word_nr'] == -1 or
+                            ((self.fixations[i][j]['word_nr']-self.fixations[i][j-1]['word_nr']) > 5 and
+                             (self.fixations[i][j]['y_mean']-self.fixations[i][j-1]['y_mean']) > self.threshold_btw_line))):
+                            continue
+                    j += 1
+
     def write_out_denoise_merged_fixations(self) -> None:
         self.__make_directory_for_merged_fixations()
-        self._clear_noises()
+        self._clear_noises_before_reading()
+        self._clear_noises_bwt_lines()
         with open(f'{self.out_data_path}/{self.out_data_merged_denoise_name}', 'w', newline='') as out_csvfile:
             # to avoid errors given by mess data, we can manually type fieldnames here later.
             writer = csv.DictWriter(out_csvfile, fieldnames=self.fixations[0][0].keys())
             writer.writeheader()
             for item in self.fixations:
                 for fixation_on_word in item:
-                    if fixation_on_word['duration'] > self.threshold:
+                    if fixation_on_word['duration'] > self.threshold_fixation:
                         writer.writerow(fixation_on_word)
 
 

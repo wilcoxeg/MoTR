@@ -24,19 +24,23 @@ class FeatureExtractor:
             os.mkdir(self.output_path)
 
     def get_first_duration(self):
-        input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        # input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        input_df_f_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
         first_fixation_values = input_df_f_grouped['duration'].first()
         first_fixation_df = pd.DataFrame(first_fixation_values).reset_index()
         first_fixation_df = first_fixation_df.rename(columns={'duration': 'first_duration'})
-        self.output_df = self.output_df.merge(first_fixation_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(first_fixation_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(first_fixation_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['first_duration'] = self.output_df['first_duration'].fillna(0)
 
     def get_total_duration(self):
-        input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        # input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        input_df_f_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
         total_duration_values = input_df_f_grouped['duration'].sum()
         total_duration_df = pd.DataFrame(total_duration_values).reset_index()
         total_duration_df = total_duration_df.rename(columns={'duration': 'total_duration'})
-        self.output_df = self.output_df.merge(total_duration_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(total_duration_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(total_duration_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['total_duration'] = self.output_df['total_duration'].fillna(0)
 
     # gaze duration equals to first-pass reading time: sum of the durations of all first-pass fixations on a word
@@ -45,44 +49,56 @@ class FeatureExtractor:
     # using restrict definition of first-pass
     def get_gaze_duration(self):
         gaze_duration_dict = defaultdict(int)
-        input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr'])
         gaze_duration_df = pd.DataFrame()
         for name, group in input_df_ff_grouped:
             for i in group.index:
                 if (group.loc[:i-1, 'word_nr'] < group.loc[i, 'word_nr']).all():
                     gaze_duration_dict[group.loc[i, 'word_nr']] += group.loc[i, 'duration']
             gaze_duration = pd.DataFrame(
-                {'para_nr': name,
+                {
+                 # 'para_nr': name,
+                 'expr_id': name[0],
+                 'para_nr': name[1],
                  'word_nr': gaze_duration_dict.keys(),
                  'gaze_duration': gaze_duration_dict.values()}).sort_values(by='word_nr')
             gaze_duration_df = pd.concat([gaze_duration_df, gaze_duration], ignore_index=True)
             gaze_duration_dict.clear()
-        self.output_df = self.output_df.merge(gaze_duration_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(gaze_duration_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(gaze_duration_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['gaze_duration'] = self.output_df['gaze_duration'].fillna(0)
 
     def get_right_bounded_rt(self):
         rrt_dict = defaultdict(int)
-        input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr'])
         rrt_df = pd.DataFrame()
         for name, group in input_df_ff_grouped:
             for i in group.index:
                 if (group.loc[:i, 'word_nr'] <= group.loc[i, 'word_nr']).all():
                     rrt_dict[group.loc[i, 'word_nr']] += group.loc[i, 'duration']
             rrt = pd.DataFrame(
-                {'para_nr': name,
+                {
+                 # 'para_nr': name,
+                 'expr_id': name[0],
+                 'para_nr': name[1],
                  'word_nr': rrt_dict.keys(),
                  'right_bounded_rt': rrt_dict.values()}).sort_values(by='word_nr')
             rrt_df = pd.concat([rrt_df, rrt], ignore_index=True)
             rrt_dict.clear()
-        self.output_df = self.output_df.merge(rrt_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(rrt_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(rrt_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['right_bounded_rt'] = self.output_df['right_bounded_rt'].fillna(0)
 
     # manually compute rrt, for sanity checking.
     # restrict the definition of first pass: pass the word, no matter there is fixations on the right or not.
     def get_right_bounded_rt_manual(self):
         previous_indices = set()
-        input_df_f_grouped = self.input_df_f.groupby(['para_nr', 'word_nr'])
-        rb_rt_df = pd.DataFrame(columns=['para_nr', 'word_nr', 'right_bounded_rt2'])
+        # input_df_f_grouped = self.input_df_f.groupby(['para_nr', 'word_nr'])
+        input_df_f_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
+        # rb_rt_df = pd.DataFrame(columns=['para_nr', 'word_nr', 'right_bounded_rt2'])
+        rb_rt_df = pd.DataFrame(columns=['expr_id', 'para_nr', 'word_nr', 'right_bounded_rt2'])
         for name, group in input_df_f_grouped:
             indices = group['index']
             duration = group['duration']
@@ -109,13 +125,16 @@ class FeatureExtractor:
                 if not flag:
                     break
             previous_indices.update(indices)
-            rb_rt_df.loc[len(rb_rt_df)] = [name[0], name[1], sum_duration]
-        self.output_df = self.output_df.merge(rb_rt_df, on=['para_nr', 'word_nr'], how='left')
+            # rb_rt_df.loc[len(rb_rt_df)] = [name[0], name[1], sum_duration]
+            rb_rt_df.loc[len(rb_rt_df)] = [name[0], name[1], name[2], sum_duration]
+        # self.output_df = self.output_df.merge(rb_rt_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(rb_rt_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['right_bounded_rt2'] = self.output_df['right_bounded_rt2'].fillna(0)
 
     def get_go_pass_time(self):
         gpt_dict = defaultdict(int)
-        input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr'])
         gpt_df = pd.DataFrame()
         for name, group in input_df_ff_grouped:
             for i in group.index:
@@ -127,23 +146,33 @@ class FeatureExtractor:
                         else:
                             break
             gpt = pd.DataFrame(
-                {'para_nr': name,
+                {
+                 # 'para_nr': name,
+                 'expr_id': name[0],
+                 'para_nr': name[1],
                  'word_nr': gpt_dict.keys(),
                  'go_pass_time': gpt_dict.values()}).sort_values(by='word_nr')
             gpt_df = pd.concat([gpt_df, gpt], ignore_index=True)
             gpt_dict.clear()
-        self.output_df = self.output_df.merge(gpt_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(gpt_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(gpt_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['go_pass_time'] = self.output_df['go_pass_time'].fillna(0)
 
     def check_comprehension_answer(self):
-        input_df_ff_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
+        input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
         solution_to_check = input_df_ff_grouped['response'].first()
         solution_df = pd.DataFrame(solution_to_check).reset_index()
         solution_df = solution_df.rename(columns={'response': 'response_chosen'})
-        self.output_df = self.output_df.merge(solution_df, on=['para_nr', 'word_nr'], how='left')
-        solution_to_fill = self.output_df.groupby(['para_nr'])['response_chosen'].first()
+        # self.output_df = self.output_df.merge(solution_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(solution_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
+        # solution_to_fill = self.output_df.groupby(['para_nr'])['response_chosen'].first()
+        solution_to_fill = self.output_df.groupby(['expr_id', 'para_nr'])['response_chosen'].first()
         solution_to_fill_df = pd.DataFrame(solution_to_fill).reset_index()
-        self.output_df = self.output_df.drop(columns='response_chosen').merge(solution_to_fill_df, on=['para_nr'], how='left')
+        # self.output_df = self.output_df.drop(columns='response_chosen').merge(solution_to_fill_df,
+        #                                                                       on=['para_nr'], how='left')
+        self.output_df = self.output_df.drop(columns='response_chosen').merge(solution_to_fill_df,
+                                                                              on=['expr_id', 'para_nr'], how='left')
         self.output_df['response_chosen'] = self.output_df['response_chosen'].fillna('--')
         self.output_df['correctness'] = self.output_df.apply(
             lambda x: 1 if x['response_chosen'] in x['response_true'] else 0, axis=1)
@@ -151,7 +180,8 @@ class FeatureExtractor:
     def get_binary(self):
         FPFix_dict = defaultdict(int)
         FPReg_dict = defaultdict(int)
-        input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
+        input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr'])
         binary_df = pd.DataFrame()
         for name, group in input_df_ff_grouped:
             for i in group.index:
@@ -163,19 +193,27 @@ class FeatureExtractor:
                         else:
                             break
             FPFix = pd.DataFrame(
-                {'para_nr': name,
+                {
+                 # 'para_nr': name,
+                 'expr_id': name[0],
+                 'para_nr': name[1],
                  'word_nr': FPFix_dict.keys(),
                  'FPFix': FPFix_dict.values()}).sort_values(by='word_nr')
             FPReg = pd.DataFrame(
-                {'para_nr': name,
+                {
+                 # 'para_nr': name,
+                 'expr_id': name[0],
+                 'para_nr': name[1],
                  'word_nr': FPReg_dict.keys(),
                  'FPReg': FPReg_dict.values()}).sort_values(by='word_nr')
-            FPFix = FPFix.merge(FPReg, on=['para_nr', 'word_nr'], how='left')
+            # FPFix = FPFix.merge(FPReg, on=['para_nr', 'word_nr'], how='left')
+            FPFix = FPFix.merge(FPReg, on=['expr_id', 'para_nr', 'word_nr'], how='left')
             binary_df = pd.concat([binary_df, FPFix], ignore_index=True)
             # binary_df = pd.concat([binary_df, FPReg], ignore_index=True)
             FPFix_dict.clear()
             FPReg_dict.clear()
-        self.output_df = self.output_df.merge(binary_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(binary_df, on=['para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(binary_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['FPFix'] = self.output_df['FPFix'].fillna(0)
         self.output_df['FPReg'] = self.output_df['FPReg'].fillna(0)
 
