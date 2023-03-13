@@ -1,0 +1,134 @@
+---
+title: "Exploratory Analysis for MoTR Reading Data"
+output: html_notebook
+---
+
+```{r}
+shhh <- suppressPackageStartupMessages # It's a library, so shhh!
+
+shhh(library( mgcv ))
+shhh(library(dplyr))
+shhh(library(ggplot2))
+shhh(library(lme4))
+shhh(library(tidymv))
+shhh(library(gamlss))
+shhh(library(gsubfn))
+shhh(library(lmerTest))
+shhh(library(tidyverse))
+shhh(library(boot))
+shhh(library(rsample))
+shhh(library(plotrix))
+shhh(library(ggrepel))
+shhh(library(mgcv))
+
+theme_set(theme_bw())
+options(digits=4)
+set.seed(444)
+pipe_message = function(.data, status) {message(status); .data}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+file_prefix = "../reading_measures"
+fnames = list.files(path=file_prefix)
+
+# Read in the data
+df = data.frame()
+for (f in fnames) {
+  temp = read.csv(paste0(file_prefix, "/", f)) %>%
+    mutate(subj = str_remove(f, "_reading_measures.csv"))
+  df = rbind(df, temp)
+}
+
+# Average across subjects
+df_agg = df %>%
+  group_by(expr_id, cond_id, para_nr, word, word_nr) %>%
+    summarise(first_duration = mean(first_duration),
+              total_duration = mean(total_duration),
+              gaze_duration = mean(gaze_duration),
+              go_pass_time = mean(go_pass_time)) %>%
+  ungroup() %>%
+  mutate(expr_id = if_else(expr_id == 1, "Attachment", "Provo"))
+
+```
+
+
+```{r}
+
+df_agg %>%
+  gather(metric, value, 6:9) %>%
+  ggplot(aes(x = value, color = metric)) +
+    geom_density() +
+    facet_wrap(.~expr_id) +
+    coord_cartesian(xlim = c(0, 1500)) +
+  xlab("Reading Time (ms)")
+
+```
+
+```{r}
+
+df_agg %>%
+  gather(metric, value, 6:9) %>%
+  mutate(word_len = nchar(word)) %>%
+  ggplot(aes(x = value, y = word_len, color = metric)) +
+    geom_point(alpha=0.2) +
+    geom_smooth() +
+    facet_grid(metric~expr_id) +
+    coord_cartesian(xlim = c(0, 1000)) +
+  xlab("Reading Time (ms)")
+
+```
+
+```{r}
+
+df_agg %>%
+  gather(metric, value, 6:9) %>%
+  filter(metric == "gaze_duration") %>%
+  filter(expr_id == "Attachment") %>%
+  mutate(para_nr = as.integer(para_nr)) %>%
+  mutate(para_nr = if_else(para_nr > 8, as.integer(para_nr - 8), as.integer(para_nr))) %>%
+  mutate(cond_id = as.factor(cond_id)) %>%
+  mutate(cond_id = if_else(cond_id == 1, "No Comma", "Comma")) %>%
+  arrange(expr_id, cond_id, para_nr, word_nr) %>%
+  
+  filter(para_nr != 4) %>% # just because of allignment issues for now
+  
+  mutate(crit = word == "and",
+         crit1 = lag(crit),
+         crit2 = lag(crit1),
+         crit3 = lag(crit2),
+         crit4 = lag(crit3)) %>%
+  filter(crit3 == T | crit4 == T) %>%
+  group_by(cond_id) %>%
+    summarise( m = mean(value),
+               sd = std.error(value),
+               upper = m + 1.96 * sd,
+               lower = m - 1.98 * sd) %>%
+  ungroup() %>%
+  ggplot(aes(x = cond_id, y = m, color = cond_id)) +
+    geom_point(position = position_dodge(width=0.9)) +
+    geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3, position = position_dodge(width=0.9)) +
+    #geom_text(aes(label = word, y = if_else(cond_id == "Comma", 3000, 3500)), size = 2) +
+    #facet_grid(para_nr~cond_id) +
+  ggtitle("Reading Times in critical region (verb + 1 word)") +
+  ylab("Reading Time") +
+  xlab("Condition") +
+  theme(
+    legend.position = "bottom"
+  )
+
+#ggsave("../visualization/conditions.pdf", device="pdf", width = 8, height = 11)
+
+```
+
+
+
+
+
+
+
