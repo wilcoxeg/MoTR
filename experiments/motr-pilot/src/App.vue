@@ -223,14 +223,14 @@ export default {
         this.currentIndex = elementAtCursor.getAttribute('data-index');
       } else {
         this.$el.querySelector(".oval-cursor").classList.add('blank');
-        const elementAboveCursor = document.elementFromPoint(x, y-5).closest('span');
+        const elementAboveCursor = document.elementFromPoint(x, y-3).closest('span');
         if (elementAboveCursor){
           this.currentIndex = elementAboveCursor.getAttribute('data-index');
         } else {
           this.currentIndex = -1;
         }
       }
-      console.log(this.currentIndex);
+//       console.log(this.currentIndex);
       
       this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
       this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
