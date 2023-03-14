@@ -32,102 +32,321 @@ pipe_message = function(.data, status) {message(status); .data}
 
 ```
 
+# Read in MoTR Data
+
 ```{r}
 
-file_prefix = "../reading_measures"
+file_prefix = "../reading_measures/cleaned"
 fnames = list.files(path=file_prefix)
 
 # Read in the data
 df = data.frame()
 for (f in fnames) {
   temp = read.csv(paste0(file_prefix, "/", f)) %>%
-    mutate(subj = str_remove(f, "_reading_measures.csv"))
+    mutate(subj = str_remove(f, "_reading_measures.csv")) %>%
+    dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration,
+                  gaze_duration, go_pass_time, subj)
   df = rbind(df, temp)
 }
 
+motr_df = df %>%
+  mutate(expr_id = if_else(expr_id == 1, "Attachment", "Provo")) %>%
+  gather(metric, value, 6:9)
+
+motr_df
+
+```
+
+```{r}
 # Average across subjects
-df_agg = df %>%
-  group_by(expr_id, cond_id, para_nr, word, word_nr) %>%
-    summarise(first_duration = mean(first_duration),
-              total_duration = mean(total_duration),
-              gaze_duration = mean(gaze_duration),
-              go_pass_time = mean(go_pass_time)) %>%
+motr_agg_df = motr_df %>%
+  group_by(expr_id, cond_id, para_nr, word, word_nr, metric) %>%
+    summarise(value = mean(value)) %>%
   ungroup() %>%
-  mutate(expr_id = if_else(expr_id == 1, "Attachment", "Provo"))
+  arrange(expr_id, cond_id, para_nr, word_nr)
 
-```
+motr_agg_df
 
-
-```{r}
-
-df_agg %>%
-  gather(metric, value, 6:9) %>%
-  ggplot(aes(x = value, color = metric)) +
-    geom_density() +
-    facet_wrap(.~expr_id) +
-    coord_cartesian(xlim = c(0, 1500)) +
-  xlab("Reading Time (ms)")
+table(motr_df$subj)
 
 ```
 
 ```{r}
 
-df_agg %>%
-  gather(metric, value, 6:9) %>%
+motr_provo_df = motr_agg_df %>%
+  filter(expr_id == "Provo") %>%
+  rename(text_id = para_nr,
+         word_text_idx = word_nr,
+         motr_value = value) %>%
+  dplyr::select(-expr_id, -cond_id)
+
+```
+
+
+
+# Comparison to Provo
+
+```{r}
+# Read in Provo surprisal, frequency and length data
+provo_modeling_df = read.csv("../ancillary_data/provo_df.csv") %>%
+  dplyr::select(text_id, sent_id, trigger_idx, word, freq, surp, len) %>%
+  rename(word_idx = trigger_idx)
+
+provo_modeling_df
+
+```
+
+```{r}
+# Read in Provo eyetracking data
+
+provo_raw_df = read.csv("../ancillary_data/provo_eyetracking.csv")
+
+provo_eyetracking_df = provo_raw_df %>%
+  dplyr::select(Participant_ID, Text_ID, Word_Number, Sentence_Number, Word_In_Sentence_Number, Word, IA_FIRST_FIXATION_DURATION,IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION) %>%
+  rename( first_duration = IA_FIRST_FIXATION_DURATION,
+          gaze_duration = IA_FIRST_RUN_DWELL_TIME,
+          total_duration = IA_DWELL_TIME,
+          go_pass_time = IA_REGRESSION_PATH_DURATION,
+          subj = Participant_ID,
+          text_id = Text_ID,
+          sent_id = Sentence_Number,
+          word_idx = Word_In_Sentence_Number,
+          word_text_idx = Word_Number,
+          word = Word) %>%
+  gather(metric, value, 7:10) %>%
+  drop_na() %>%
+  group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
+    summarise(value = mean(value)) %>%
+  ungroup()
+
+provo_eyetracking_df
+
+```
+
+
+```{r}
+provo_df = merge(provo_eyetracking_df, provo_modeling_df, by=c("text_id", "sent_id", "word_idx")) %>%
+  mutate(word_text_idx = as.integer(word_text_idx - 1)) %>%
+  arrange(text_id, sent_id, word_idx)
+
+provo_df = merge(provo_df, motr_provo_df, by=c("text_id", "word_text_idx", "metric")) %>%
+  rename(eyetr_value = value) %>%
+  arrange(text_id, sent_id, word_idx) %>%
+  filter(word.y == word.x,
+         word.x == word) %>%
+  dplyr::select(-word.x, -word.y) %>%
+  mutate(motr_outlier = if_else(motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
+  filter(motr_outlier == F)
+
+
+```
+
+```{r}
+provo_df %>%
   mutate(word_len = nchar(word)) %>%
-  ggplot(aes(x = value, y = word_len, color = metric)) +
-    geom_point(alpha=0.2) +
-    geom_smooth() +
-    facet_grid(metric~expr_id) +
-    coord_cartesian(xlim = c(0, 1000)) +
-  xlab("Reading Time (ms)")
-
+  ggplot(aes(x = motr_value, y=eyetr_value, color=metric)) +
+    geom_point(alpha = 0.2) +
+    facet_wrap(~metric, scales="free") +
+    geom_smooth()
+```
+```{r}
+provo_df %>%
+  mutate(word_len = nchar(word)) %>%
+  ggplot(aes(x = motr_value, y=word_len, color=metric)) +
+    geom_point(alpha = 0.2) +
+    facet_wrap(~metric, scales="free") +
+    geom_smooth()
 ```
 
 ```{r}
+provo_df %>%
+  ggplot(aes(x = motr_value, y=freq, color=metric)) +
+    geom_point(alpha = 0.2) +
+    facet_wrap(~metric, scales="free") +
+    geom_smooth()
+```
 
-df_agg %>%
-  gather(metric, value, 6:9) %>%
-  filter(metric == "gaze_duration") %>%
+```{r}
+provo_df %>%
+  ggplot(aes(x = motr_value, y=surp, color=metric)) +
+    geom_point(alpha = 0.2) +
+    facet_wrap(~metric, scales="free") +
+    geom_smooth()
+```
+
+
+## Shape of surprisal / RT relationship
+
+```{r}
+
+fit_gam_inner = function(bootstrap_sample, mean_predictors) {
+  
+  df = bootstrap_sample$data
+  weights = tabulate(as.integer(bootstrap_sample), nrow(df))
+  
+  m = gam(psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + te(freq, len, bs = 'cr') + te(prev_freq, prev_len, bs = 'cr'), data = df, weights = weights)
+  terms_to_predict = c("s(surp)", "s(prev_surp)")
+  
+  newdata = data.frame(surp=seq(0,20,by=0.1), prev_surp=mean_predictors$surp,
+                       freq=mean_predictors$freq, prev_freq=mean_predictors$freq,
+                       len=mean_predictors$freq, prev_len=mean_predictors$freq)
+
+  # Returns a matrix N_samples * N_terms.
+  per_term_predictions = predict(m, newdata=newdata, terms=terms_to_predict, type="terms")
+
+  # Additive model -- sum across predictor response contributions (matrix columns).
+  predictions = rowSums(per_term_predictions)
+
+  return(newdata %>% mutate(y=predictions))
+}
+
+fit_gam = function(df, mean_predictors, alpha=0.05) {
+  # Bootstrap-resample data
+  boot_models = df %>% bootstraps(times=5) %>% 
+   # Fit a GAM and get predictions for each sample
+    mutate(smoothed=map(splits, fit_gam_inner, mean_predictors=mean_predictors))
+  
+  # Extract mean and 5% and 95% percentile y-values for each surprisal value
+  result = boot_models %>% 
+    unnest(smoothed) %>% 
+    dplyr::select(surp, y) %>% 
+    group_by(surp) %>% 
+      summarise(y_lower=quantile(y, alpha / 2), 
+                y_upper=quantile(y, 1 - alpha / 2),
+                y=mean(y)) %>% 
+    ungroup()
+  
+  return (result)
+}
+
+```
+
+
+```{r}
+
+gam_modeling_df = provo_df %>%
+  mutate(len = nchar(word)) %>%
+  group_by(metric, text_id) %>%
+    arrange(word_text_idx) %>%
+    mutate(prev_surp = lag(surp),
+           prev_freq = lag(freq),
+           prev_len = lag(len),
+           prev_eyetr_value = lag(eyetr_value)) %>%
+  ungroup() %>%
+  drop_na() %>%
+  rename(psychometric = motr_value)
+
+
+smooths_df = data.frame()
+
+metrics = c("gaze_duration", "total_duration", "first_duration", "go_pass_time")
+for (m in metrics) {
+  print(paste0("Fitting model for ", m))
+  dummy_df = gam_modeling_df %>% filter(metric == m)
+  mean_predictors = dummy_df %>% summarise(surp = mean(surp), len = mean(len), freq = mean(freq))
+  smooths = dummy_df %>% fit_gam(., mean_predictors)
+  #Fix 0 surprisal = 0 ms
+  gam_smooths = smooths %>% mutate(delta = 0 - y[1], y=y + delta, y_lower= y_lower + delta, y_upper=y_upper + delta)
+  smooths_df = rbind(smooths_df, gam_smooths %>% mutate(psychometric = m))
+}
+
+```
+
+
+```{r}
+
+# Surprisal curves
+  ggplot() +
+      geom_line(data = smooths_df, aes(x=surp, y=y, color = psychometric), size=0.7) +
+      geom_ribbon(data = smooths_df, aes(x=surp, ymin=y_lower, ymax=y_upper, fill = psychometric), alpha=0.3, size=0.5) +
+      scale_x_continuous(labels=c(0, 10, 20), breaks=c(0, 10, 20), minor_breaks = NULL) +
+      facet_wrap(psychometric~.) +
+      ylab("Slowdown due to Surprisal (ms)") +
+      xlab("Surprisal of Word") +
+      ggtitle("Relationship between MoTR Times and Surprisal")
+  theme(
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+
+
+
+
+```
+
+# Targeted Evaluation Data
+
+
+
+```{r}
+
+motr_attach_df = motr_df %>%
   filter(expr_id == "Attachment") %>%
-  mutate(para_nr = as.integer(para_nr)) %>%
-  mutate(para_nr = if_else(para_nr > 8, as.integer(para_nr - 8), as.integer(para_nr))) %>%
+  rename( item_id = para_nr) %>%
+  mutate(item_id = as.integer(item_id)) %>%
   mutate(cond_id = as.factor(cond_id)) %>%
   mutate(cond_id = if_else(cond_id == 1, "No Comma", "Comma")) %>%
-  arrange(expr_id, cond_id, para_nr, word_nr) %>%
+
+  filter(! (item_id == 4 & cond_id == "No Comma") ) %>% # just because of alignment issues for now
   
-  filter(para_nr != 4) %>% # just because of allignment issues for now
-  
-  mutate(crit = word == "and",
-         crit1 = lag(crit),
-         crit2 = lag(crit1),
-         crit3 = lag(crit2),
-         crit4 = lag(crit3)) %>%
-  filter(crit3 == T | crit4 == T) %>%
-  group_by(cond_id) %>%
+  mutate(crit = if_else(word == "and", word_nr, as.integer(0) )) %>%
+  group_by(cond_id, item_id) %>%
+    mutate(crit = unique(crit)[2]) %>%
+  ungroup() %>%
+  mutate(word_nr = word_nr - crit)
+
+
+agg_motr_attach_df = motr_attach_df %>%
+  filter(word_nr >= -2, word_nr < 6) %>%
+  group_by(cond_id, word_nr, metric) %>%
     summarise( m = mean(value),
                sd = std.error(value),
                upper = m + 1.96 * sd,
-               lower = m - 1.98 * sd) %>%
-  ungroup() %>%
-  ggplot(aes(x = cond_id, y = m, color = cond_id)) +
-    geom_point(position = position_dodge(width=0.9)) +
-    geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3, position = position_dodge(width=0.9)) +
+               lower = m - 1.98 * sd,
+               n = n()) %>%
+  ungroup()
+
+agg_motr_attach_df %>%
+  ggplot(aes(x = word_nr, y = m, color = cond_id)) +
+    geom_rect(aes(xmin = 2.5, xmax = 5.5, ymin = 100, ymax = 800), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
+    geom_point() +
+    geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3) +
+    geom_line() +
     #geom_text(aes(label = word, y = if_else(cond_id == "Comma", 3000, 3500)), size = 2) +
     #facet_grid(para_nr~cond_id) +
-  ggtitle("Reading Times in critical region (verb + 1 word)") +
+  ggtitle("Reading Times (critical region = took a bow)") +
   ylab("Reading Time") +
   xlab("Condition") +
+  scale_x_continuous(breaks=-2:5, labels=c("the", "director", "and", "the", "designer", "took", "a", "bow")) +
+  facet_grid(~metric) +
   theme(
-    legend.position = "bottom"
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
 #ggsave("../visualization/conditions.pdf", device="pdf", width = 8, height = 11)
 
 ```
 
+```{r}
+
+options(JULIA_HOME = "/Applications/Julia-1.8.app/Contents/Resources/julia/bin/")
+library(jglmm)
+jglmm_setup()
+
+attach_lm_df = motr_attach_df %>%
+  filter(metric == "gaze_duration") %>%
+  filter(word_nr == 3) %>%
+  mutate(item_id = as.factor(item_id),
+         subj = as.factor(subj))
+
+m = attach_lm_df %>%
+  jglmm(value ~ cond_id + (cond_id | item_id) + (cond_id | subj), data=.)
+
+summary(m)
 
 
+```
 
 
 
