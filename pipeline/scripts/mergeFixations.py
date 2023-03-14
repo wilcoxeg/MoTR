@@ -15,7 +15,6 @@ class FixationMerger:
         self.start_sent = (0, 1, 2, 3)
         self.mouse_data = self.__read_file()
         self.fixations = self.merge_fixations()
-        # self.fixations_clean = self._clear_noises_bwt_lines()
 
     # Check if the directory for the files of merged fixations exists, if not, make one
     def __make_directory_for_merged_fixations(self) -> None:
@@ -88,32 +87,30 @@ class FixationMerger:
                         writer.writerow(fixation_on_word)
 
     def sort_fixations_by_itemid(self) -> None:
-        self.fixations = sorted(self.fixations, key=lambda x: (x[0]['expr_id'], x[0]['cond_id'], x[0]['para_nr']))
-        # print(self.fixations)
+        self.fixations = sorted(self.fixations, key=lambda x: (x[0]['expr_id'], x[0]['para_nr']))
 
     def _clear_noises_before_reading(self):
         for i in range(len(self.fixations)):
             while self.fixations[i] and (self.fixations[i][0]['word_nr'] not in self.start_sent):
                 self.fixations[i].pop(0)
-        # for item in self.fixations:
-        #     print(item)
-        #     print(len(item))
 
     def _clear_noises_bwt_lines(self):
         for i in range(len(self.fixations)):
-            # print("------------------------------i th item: ", i,  '--------------------')
             if self.fixations[i]:
                 j = 1
                 while j < len(self.fixations[i]):
-                    # print('j th elem: ', j, self.fixations[i][j]['word_nr'], self.fixations[i][j]['word'])
+                    # here is a threshold for denoise:
+                    # 550 (x-pos)-> whether the word is at the end of a line and the reader will jump to the next line.
+                    # change from 450 to 550 has no big influence in filtering.
                     if ((self.fixations[i][j]['word_nr'] == -1) or
-                            ((self.fixations[i][j]['word_nr']-self.fixations[i][j-1]['word_nr']) > 5 and
-                             (self.fixations[i][j]['y_mean']-self.fixations[i][j-1]['y_mean']) > self.threshold_btw_line)):
-                        # print("delete:", i, '--->', j, '----->', self.fixations[i][j]['word_nr'], self.fixations[i][j-1]['word'])
+                            (self.fixations[i][j - 1]['x_mean'] > 550 and
+                             (self.fixations[i][j]['y_mean'] - self.fixations[i][j - 1][
+                                 'y_mean']) > self.threshold_btw_line)):
                         self.fixations[i].pop(j)
                         if j < len(self.fixations[i]) and ((self.fixations[i][j]['word_nr'] == -1 or
-                            ((self.fixations[i][j]['word_nr']-self.fixations[i][j-1]['word_nr']) > 5 and
-                             (self.fixations[i][j]['y_mean']-self.fixations[i][j-1]['y_mean']) > self.threshold_btw_line))):
+                                                            (self.fixations[i][j - 1]['x_mean'] > 550 and
+                                                             (self.fixations[i][j]['y_mean'] - self.fixations[i][j - 1][
+                                                                 'y_mean']) > self.threshold_btw_line))):
                             continue
                     j += 1
 
@@ -121,9 +118,20 @@ class FixationMerger:
         self.__make_directory_for_merged_fixations()
         self._clear_noises_before_reading()
         self._clear_noises_bwt_lines()
+
         with open(f'{self.out_data_path}/{self.out_data_merged_denoise_name}', 'w', newline='') as out_csvfile:
+            # for checking whether the length of fixations make sense.
+
+            # print('----------------------------------------------------------')
+            # print(self.fixations[16])
+            # print(self.fixations[17])
+            # print('length of fixations ----> ', len(self.fixations[16]))
+            # print('length of fixations ----> ', len(self.fixations[17]))
+
             # to avoid errors given by mess data, we can manually type fieldnames here later.
-            writer = csv.DictWriter(out_csvfile, fieldnames=self.fixations[0][0].keys())
+            fieldnames = ['sbm_id', 'expr_id', 'cond_id', 'para_nr', 'word_nr', 'word', 'duration', 'start_t', 'end_t',
+                          'x_mean', 'y_mean', 'response']
+            writer = csv.DictWriter(out_csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for item in self.fixations:
                 for fixation_on_word in item:

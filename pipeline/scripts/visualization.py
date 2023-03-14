@@ -2,11 +2,12 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-input_path_v = Path('../reading_measures/reader_8_reading_measures.csv')
+input_path_v = Path('../reading_measures/reader_55_reading_measures.csv')
 
 input_file = pd.read_csv(input_path_v)
 
-grouped_data = input_file.groupby("para_nr")
+# grouped_data = input_file.groupby("para_nr")
+grouped_data = input_file.groupby(['expr_id', "para_nr"])
 
 # fig_fd = plt.figure()
 # fig_fd.suptitle('First Duration')
@@ -31,8 +32,8 @@ grouped_data = input_file.groupby("para_nr")
 #     break
 # plt.show()
 
-for para_nr, group in grouped_data:
-    print(f'-----------------item: {para_nr}--------------------------------------------')
+for name, group in grouped_data:
+    print(f'------------------------experiment: {name[0]}, text: {name[1]}---------------------------------------')
     word_nr = group['word_nr']
     first_duration = group['first_duration']
     gaze_duration = group['gaze_duration']
@@ -53,6 +54,7 @@ for para_nr, group in grouped_data:
     ax.set_xticks([i + bar_width for i in x])
     ax.set_xticklabels(word_nr)
 
+    plt.title(f"experiment: {name[0]}, text: {name[1]}")
     ax.legend((bar1[0], bar2[0], bar3[0]), ('first_duration', 'gaze_duration', 'total_duration'))
 
     plt.show()

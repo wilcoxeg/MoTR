@@ -7,6 +7,8 @@ from collections import defaultdict
 class FeatureExtractor:
     def __init__(self, input_data_path_trial, input_data_path_fixations,
                  output_data_path, fixation_threshold: int):
+        # It is not necessary to set attribute 'fixation_threshold' because we have set it in `mergeFixations`
+        # But I'd like to keep it here for the convenience of testing.
         self.input_path_trial = input_data_path_trial
         self.input_path_fixations = input_data_path_fixations
         self.input_df_f = pd.read_csv(self.input_path_fixations, na_values=['NA'])
@@ -46,7 +48,6 @@ class FeatureExtractor:
     # gaze duration equals to first-pass reading time: sum of the durations of all first-pass fixations on a word
     # (0 if the word was skipped in the first-pass)
     # here our IA is a word, gaze duration also equals to first fixation
-    # using restrict definition of first-pass
     def get_gaze_duration(self):
         gaze_duration_dict = defaultdict(int)
         # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
@@ -54,6 +55,7 @@ class FeatureExtractor:
         gaze_duration_df = pd.DataFrame()
         for name, group in input_df_ff_grouped:
             for i in group.index:
+                # if a word behind it has been focused, its gaze duration is 0
                 if (group.loc[:i-1, 'word_nr'] < group.loc[i, 'word_nr']).all():
                     gaze_duration_dict[group.loc[i, 'word_nr']] += group.loc[i, 'duration']
             gaze_duration = pd.DataFrame(
@@ -86,11 +88,13 @@ class FeatureExtractor:
                  'word_nr': rrt_dict.keys(),
                  'right_bounded_rt': rrt_dict.values()}).sort_values(by='word_nr')
             rrt_df = pd.concat([rrt_df, rrt], ignore_index=True)
+
             rrt_dict.clear()
         # self.output_df = self.output_df.merge(rrt_df, on=['para_nr', 'word_nr'], how='left')
         self.output_df = self.output_df.merge(rrt_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['right_bounded_rt'] = self.output_df['right_bounded_rt'].fillna(0)
 
+    # sum of all fixation durations on a word until a word to the right of this word is fixated
     # manually compute rrt, for sanity checking.
     # restrict the definition of first pass: pass the word, no matter there is fixations on the right or not.
     def get_right_bounded_rt_manual(self):
@@ -131,6 +135,9 @@ class FeatureExtractor:
         self.output_df = self.output_df.merge(rb_rt_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['right_bounded_rt2'] = self.output_df['right_bounded_rt2'].fillna(0)
 
+    #  sum of all fixation durations starting from the first first-pass fixation on a word until fixation a word to the
+    #  right of this word (including all regressive fixations on previous words),
+    #  0 if the word was not fixated in the first-pass
     def get_go_pass_time(self):
         gpt_dict = defaultdict(int)
         # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
@@ -214,8 +221,8 @@ class FeatureExtractor:
             FPReg_dict.clear()
         # self.output_df = self.output_df.merge(binary_df, on=['para_nr', 'word_nr'], how='left')
         self.output_df = self.output_df.merge(binary_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
-        self.output_df['FPFix'] = self.output_df['FPFix'].fillna(0)
-        self.output_df['FPReg'] = self.output_df['FPReg'].fillna(0)
+        self.output_df['FPFix'] = self.output_df['FPFix'].fillna(0).astype(int)
+        self.output_df['FPReg'] = self.output_df['FPReg'].fillna(0).astype(int)
 
     def write_out(self):
         self._make_directory()

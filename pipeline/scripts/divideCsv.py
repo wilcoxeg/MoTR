@@ -30,8 +30,8 @@ class FileDivider:
     def _fill_nan_response_column(self) -> None:
         self.raw_data_df['response'].fillna(method='bfill', inplace=True)
         self.raw_data_df['ItemId'].fillna(method='ffill', inplace=True)
-        # self.raw_data_df['Experiment'].fillna(method='ffill', inplace=True)
-        # self.raw_data_df['Condition'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Experiment'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Condition'].fillna(method='ffill', inplace=True)
         self.raw_data_df['Index'].fillna(value=-100, inplace=True)
         # self.raw_data_df['Word'].fillna(value="NULL", inplace=True)
         self.raw_data_df['mousePositionX'].fillna(value=425, inplace=True)

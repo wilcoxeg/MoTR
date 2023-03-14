@@ -1,0 +1,621 @@
+expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,first_duration,total_duration,gaze_duration,J-I,K-I,K-J,right_bounded_rt,right_bounded_rt2,P-O,O-K,go_pass_time,FPFix,FPReg
+1,1,1,The,0,No,No,1,505,505,505,0,0,0,505,505,0,0,505,1,0
+1,1,1,witness,1,No,No,1,492,492,492,0,0,0,492,492,0,0,492,1,0
+1,1,1,identified,2,No,No,1,646,646,646,0,0,0,646,646,0,0,646,1,0
+1,1,1,the,3,No,No,1,100,100,100,0,0,0,100,100,0,0,100,1,0
+1,1,1,man,4,No,No,1,251,251,251,0,0,0,251,251,0,0,251,1,0
+1,1,1,and,5,No,No,1,77,77,77,0,0,0,77,77,0,0,77,1,0
+1,1,1,his,6,No,No,1,429,783,429,354,0,-354,429,429,0,0,429,1,0
+1,1,1,wife,7,No,No,1,250,799,250,549,0,-549,250,250,0,0,250,1,0
+1,1,1,ran,8,No,No,1,117,542,117,425,0,-425,117,117,0,0,117,1,0
+1,1,1,away,9,No,No,1,626,1440,626,814,0,-814,626,626,0,0,626,1,0
+1,1,1,from,10,No,No,1,150,450,150,300,0,-300,150,150,0,0,150,1,0
+1,1,1,the,11,No,No,1,404,529,404,125,0,-125,404,404,0,0,404,1,0
+1,1,1,police,12,No,No,1,250,6271,250,6021,0,-6021,250,250,0,0,250,1,0
+1,1,1,station.,13,No,No,1,297,297,297,0,0,0,297,297,0,0,8885,1,1
+1,1,2,Jenny,0,No,No,1,956,956,956,0,0,0,956,956,0,0,956,1,0
+1,1,2,talked,1,No,No,1,331,331,331,0,0,0,331,331,0,0,331,1,0
+1,1,2,to,2,No,No,1,83,83,83,0,0,0,83,83,0,0,83,1,0
+1,1,2,the,3,No,No,1,141,267,141,126,0,-126,141,141,0,0,141,1,0
+1,1,2,reporter,4,No,No,1,1123,1572,1123,449,0,-449,1123,1123,0,0,1123,1,0
+1,1,2,and,5,No,No,1,250,250,250,0,0,0,250,250,0,0,250,1,0
+1,1,2,the,6,No,No,1,424,424,424,0,0,0,424,424,0,0,424,1,0
+1,1,2,photographer,7,No,No,1,800,1122,800,322,0,-322,800,800,0,0,800,1,0
+1,1,2,took,8,No,No,1,76,1397,76,1321,0,-1321,76,76,0,0,76,1,0
+1,1,2,pictures,9,No,No,1,501,1450,501,949,0,-949,501,501,0,0,501,1,0
+1,1,2,of,10,No,No,1,482,482,482,0,0,0,482,482,0,0,2603,1,1
+1,1,2,the,11,No,No,1,72,72,0,0,-72,-72,0,0,0,0,0,0,0
+1,1,2,scene.,12,No,No,1,529,8130,529,7601,0,-7601,8130,8130,0,7601,9248,1,1
+1,1,3,The,0,Yes,Yes,1,293,293,293,0,0,0,293,293,0,0,293,1,0
+1,1,3,robber,1,Yes,Yes,1,475,475,475,0,0,0,475,475,0,0,475,1,0
+1,1,3,shot,2,Yes,Yes,1,603,603,603,0,0,0,603,603,0,0,603,1,0
+1,1,3,the,3,Yes,Yes,1,81,81,81,0,0,0,81,81,0,0,81,1,0
+1,1,3,jeweler,4,Yes,Yes,1,841,841,841,0,0,0,841,841,0,0,841,1,0
+1,1,3,and,5,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,3,the,6,Yes,Yes,1,74,74,74,0,0,0,74,74,0,0,74,1,0
+1,1,3,salesman,7,Yes,Yes,1,401,401,401,0,0,0,401,401,0,0,401,1,0
+1,1,3,reported,8,Yes,Yes,1,379,379,379,0,0,0,379,379,0,0,379,1,0
+1,1,3,the,9,Yes,Yes,1,448,448,448,0,0,0,448,448,0,0,448,1,0
+1,1,3,crime,10,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,3,to,11,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,3,the,12,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,3,police.,13,Yes,Yes,1,352,352,352,0,0,0,352,352,0,0,352,1,0
+1,1,4,The,0,Yes,Yes,1,550,899,550,349,0,-349,550,550,0,0,550,1,0
+1,1,4,journalist,1,Yes,Yes,1,400,650,400,250,0,-250,400,400,0,0,400,1,0
+1,1,4,criticized,2,Yes,Yes,1,972,1171,972,199,0,-199,972,972,0,0,972,1,0
+1,1,4,Nick,3,Yes,Yes,1,406,607,406,201,0,-201,406,406,0,0,406,1,0
+1,1,4,and,4,Yes,Yes,1,431,431,0,0,-431,-431,0,0,0,0,0,0,0
+1,1,4,Sam,5,Yes,Yes,1,629,749,629,120,0,-120,629,629,0,0,629,1,0
+1,1,4,called,6,Yes,Yes,1,500,780,500,280,0,-280,500,500,0,0,500,1,0
+1,1,4,the,7,Yes,Yes,1,249,419,249,170,0,-170,249,249,0,0,249,1,0
+1,1,4,newspaper,8,Yes,Yes,1,198,694,198,496,0,-496,198,198,0,0,198,1,0
+1,1,4,to,9,Yes,Yes,1,73,73,73,0,0,0,73,73,0,0,73,1,0
+1,1,4,complain.,10,Yes,Yes,1,563,979,563,416,0,-416,979,979,0,416,3475,1,1
+1,1,5,Sam,0,Yes,Yes,1,772,772,772,0,0,0,772,772,0,0,772,1,0
+1,1,5,hired,1,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,5,the,2,Yes,Yes,1,83,83,83,0,0,0,83,83,0,0,83,1,0
+1,1,5,plumber,3,Yes,Yes,1,592,592,592,0,0,0,592,592,0,0,592,1,0
+1,1,5,and,4,Yes,Yes,1,75,75,75,0,0,0,75,75,0,0,75,1,0
+1,1,5,the,5,Yes,Yes,1,427,427,427,0,0,0,427,427,0,0,427,1,0
+1,1,5,carpenter,6,Yes,Yes,1,556,556,556,0,0,0,556,556,0,0,556,1,0
+1,1,5,ordered,7,Yes,Yes,1,143,143,143,0,0,0,143,143,0,0,143,1,0
+1,1,5,the,8,Yes,Yes,1,408,408,408,0,0,0,408,408,0,0,408,1,0
+1,1,5,materials,9,Yes,Yes,1,542,542,542,0,0,0,542,542,0,0,542,1,0
+1,1,5,for,10,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,5,the,11,Yes,Yes,1,308,308,308,0,0,0,308,308,0,0,308,1,0
+1,1,5,house.,12,Yes,Yes,1,4599,4599,4599,0,0,0,4599,4599,0,0,4599,1,0
+1,1,6,The,0,Yes,Yes,1,451,451,0,0,-451,-451,0,0,0,0,0,0,0
+1,1,6,police,1,Yes,Yes,1,150,379,150,229,0,-229,379,379,0,229,830,1,1
+1,1,6,arrested,2,Yes,Yes,1,370,370,370,0,0,0,370,370,0,0,370,1,0
+1,1,6,the,3,Yes,Yes,1,100,100,100,0,0,0,100,100,0,0,100,1,0
+1,1,6,burglar,4,Yes,Yes,1,730,730,730,0,0,0,730,730,0,0,730,1,0
+1,1,6,and,5,Yes,Yes,1,95,95,95,0,0,0,95,95,0,0,95,1,0
+1,1,6,his,6,Yes,Yes,1,251,251,251,0,0,0,251,251,0,0,251,1,0
+1,1,6,brother,7,Yes,Yes,1,174,174,174,0,0,0,174,174,0,0,174,1,0
+1,1,6,phoned,8,Yes,Yes,1,551,551,551,0,0,0,551,551,0,0,551,1,0
+1,1,6,a,9,Yes,Yes,1,774,774,774,0,0,0,774,774,0,0,774,1,0
+1,1,6,lawyer,10,Yes,Yes,1,425,425,425,0,0,0,425,425,0,0,425,1,0
+1,1,6,for,11,Yes,Yes,1,452,452,452,0,0,0,452,452,0,0,452,1,0
+1,1,6,help.,12,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,7,The,0,No,No,1,1178,1602,1178,424,0,-424,1178,1178,0,0,1178,1,0
+1,1,7,knight,1,No,No,1,150,1078,150,928,0,-928,150,150,0,0,150,1,0
+1,1,7,greeted,2,No,No,1,773,1470,773,697,0,-697,1470,1470,0,697,2822,1,1
+1,1,7,the,3,No,No,1,101,101,101,0,0,0,101,101,0,0,101,1,0
+1,1,7,king,4,No,No,1,299,299,299,0,0,0,299,299,0,0,299,1,0
+1,1,7,and,5,No,No,1,300,300,300,0,0,0,300,300,0,0,300,1,0
+1,1,7,the,6,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,7,queen,7,No,No,1,500,500,500,0,0,0,500,500,0,0,500,1,0
+1,1,7,waved,8,No,No,1,528,528,528,0,0,0,528,528,0,0,528,1,0
+1,1,7,to,9,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,7,her,10,No,No,1,130,130,130,0,0,0,130,130,0,0,130,1,0
+1,1,7,people,11,No,No,1,572,572,572,0,0,0,572,572,0,0,572,1,0
+1,1,7,at,12,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,7,the,13,No,No,1,4619,4619,4619,0,0,0,4619,4619,0,0,4619,1,0
+1,1,7,feast.,14,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,The,0,Yes,Yes,1,776,776,0,0,-776,-776,0,0,0,0,0,0,0
+1,1,8,customer,1,Yes,Yes,1,266,399,266,133,0,-133,399,399,0,133,1175,1,1
+1,1,8,complained,2,Yes,Yes,1,850,850,850,0,0,0,850,850,0,0,850,1,0
+1,1,8,about,3,Yes,Yes,1,467,467,467,0,0,0,467,467,0,0,467,1,0
+1,1,8,the,4,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,waiter,5,Yes,Yes,1,975,975,975,0,0,0,975,975,0,0,975,1,0
+1,1,8,and,6,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,the,7,Yes,Yes,1,376,376,376,0,0,0,376,376,0,0,376,1,0
+1,1,8,chef,8,Yes,Yes,1,133,133,133,0,0,0,133,133,0,0,133,1,0
+1,1,8,gave,9,Yes,Yes,1,500,500,500,0,0,0,500,500,0,0,500,1,0
+1,1,8,him,10,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,a,11,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,free,12,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,8,dessert.,13,Yes,Yes,1,873,873,873,0,0,0,873,873,0,0,873,1,0
+1,2,9,The,0,Yes,Yes,1,501,501,501,0,0,0,501,501,0,0,501,1,0
+1,2,9,crowd,1,Yes,Yes,1,303,303,303,0,0,0,303,303,0,0,303,1,0
+1,2,9,cheered,2,Yes,Yes,1,166,166,166,0,0,0,166,166,0,0,166,1,0
+1,2,9,for,3,Yes,Yes,1,531,531,531,0,0,0,531,531,0,0,531,1,0
+1,2,9,the,4,Yes,Yes,1,71,71,71,0,0,0,71,71,0,0,71,1,0
+1,2,9,"model,",5,Yes,Yes,1,930,930,930,0,0,0,930,930,0,0,930,1,0
+1,2,9,and,6,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,9,the,7,Yes,Yes,1,229,229,229,0,0,0,229,229,0,0,229,1,0
+1,2,9,designer,8,Yes,Yes,1,453,453,453,0,0,0,453,453,0,0,453,1,0
+1,2,9,took,9,Yes,Yes,1,618,618,618,0,0,0,618,618,0,0,618,1,0
+1,2,9,a,10,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,9,bow,11,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,9,after,12,Yes,Yes,1,79,79,79,0,0,0,79,79,0,0,79,1,0
+1,2,9,the,13,Yes,Yes,1,522,522,522,0,0,0,522,522,0,0,522,1,0
+1,2,9,show.,14,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,10,The,0,No,No,1,557,557,0,0,-557,-557,0,0,0,0,0,0,0
+1,2,10,juggler,1,No,No,1,719,719,0,0,-719,-719,0,0,0,0,0,0,0
+1,2,10,entertained,2,No,No,1,322,1303,322,981,0,-981,1303,1303,0,981,2579,1,1
+1,2,10,the,3,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,10,"children,",4,No,No,1,351,351,351,0,0,0,351,351,0,0,351,1,0
+1,2,10,and,5,No,No,1,131,331,131,200,0,-200,331,331,0,200,331,1,0
+1,2,10,their,6,No,No,1,74,74,74,0,0,0,74,74,0,0,74,1,0
+1,2,10,parents,7,No,No,1,226,226,226,0,0,0,226,226,0,0,226,1,0
+1,2,10,drank,8,No,No,1,378,378,378,0,0,0,378,378,0,0,378,1,0
+1,2,10,wine,9,No,No,1,323,323,323,0,0,0,323,323,0,0,323,1,0
+1,2,10,at,10,No,No,1,128,128,128,0,0,0,128,128,0,0,128,1,0
+1,2,10,the,11,No,No,1,493,493,493,0,0,0,493,493,0,0,493,1,0
+1,2,10,party.,12,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,11,The,0,No,No,1,401,401,0,0,-401,-401,0,0,0,0,0,0,0
+1,2,11,woman,1,No,No,1,100,300,0,200,-100,-300,0,0,0,0,0,0,0
+1,2,11,dressed,2,No,No,1,249,594,249,345,0,-345,522,522,0,273,1223,1,1
+1,2,11,her,3,No,No,1,357,357,357,0,0,0,357,357,0,0,429,1,1
+1,2,11,"baby,",4,No,No,1,549,549,549,0,0,0,549,549,0,0,549,1,0
+1,2,11,and,5,No,No,1,474,474,474,0,0,0,474,474,0,0,474,1,0
+1,2,11,her,6,No,No,1,107,107,107,0,0,0,107,107,0,0,107,1,0
+1,2,11,son,7,No,No,1,153,153,153,0,0,0,153,153,0,0,153,1,0
+1,2,11,got,8,No,No,1,440,440,440,0,0,0,440,440,0,0,440,1,0
+1,2,11,his,9,No,No,1,126,126,126,0,0,0,126,126,0,0,126,1,0
+1,2,11,clothes,10,No,No,1,280,280,280,0,0,0,280,280,0,0,280,1,0
+1,2,11,from,11,No,No,1,170,170,170,0,0,0,170,170,0,0,170,1,0
+1,2,11,the,12,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,11,dresser.,13,No,No,1,4212,4212,4212,0,0,0,4212,4212,0,0,4212,1,0
+1,2,12,Diane,0,Yes,Yes,1,483,483,483,0,0,0,483,483,0,0,483,1,0
+1,2,12,hugged,1,Yes,Yes,1,667,667,667,0,0,0,667,667,0,0,667,1,0
+1,2,12,her,2,Yes,Yes,1,100,100,100,0,0,0,100,100,0,0,100,1,0
+1,2,12,"boyfriend,",3,Yes,Yes,1,579,579,579,0,0,0,579,579,0,0,579,1,0
+1,2,12,and,4,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,12,her,5,Yes,Yes,1,150,150,150,0,0,0,150,150,0,0,150,1,0
+1,2,12,friend,6,Yes,Yes,1,451,451,451,0,0,0,451,451,0,0,451,1,0
+1,2,12,felt,7,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,12,uncomfortable,8,Yes,Yes,1,520,520,520,0,0,0,520,520,0,0,520,1,0
+1,2,12,watching,9,Yes,Yes,1,399,399,399,0,0,0,399,399,0,0,399,1,0
+1,2,12,them.,10,Yes,Yes,1,5173,5173,5173,0,0,0,5173,5173,0,0,5173,1,0
+1,2,13,The,0,Yes,Yes,1,1318,1318,0,0,-1318,-1318,0,0,0,0,0,0,0
+1,2,13,producer,1,Yes,Yes,1,10980,13030,10980,2050,0,-2050,13030,13030,0,2050,14348,1,1
+1,2,13,replaced,2,Yes,Yes,1,400,400,400,0,0,0,400,400,0,0,400,1,0
+1,2,13,the,3,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,13,"actor,",4,Yes,Yes,1,83,1634,83,1551,0,-1551,83,83,0,0,83,1,0
+1,2,13,and,5,Yes,Yes,1,497,568,497,71,0,-71,497,497,0,0,593,1,1
+1,2,13,the,6,Yes,Yes,1,400,400,0,0,-400,-400,0,0,0,0,0,0,0
+1,2,13,actress,7,Yes,Yes,1,450,450,450,0,0,0,450,450,0,0,450,1,0
+1,2,13,quit,8,Yes,Yes,1,101,627,101,526,0,-526,101,101,0,0,101,1,0
+1,2,13,the,9,Yes,Yes,1,179,179,179,0,0,0,179,179,0,0,179,1,0
+1,2,13,movie,10,Yes,Yes,1,200,753,200,553,0,-553,200,200,0,0,200,1,0
+1,2,13,after,11,Yes,Yes,1,250,575,250,325,0,-325,250,250,0,0,250,1,0
+1,2,13,the,12,Yes,Yes,1,301,701,301,400,0,-400,701,701,0,400,4031,1,1
+1,2,13,fight.,13,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,The,0,Yes,Yes,1,493,493,493,0,0,0,493,493,0,0,493,1,0
+1,2,14,audience,1,Yes,Yes,1,550,550,550,0,0,0,550,550,0,0,550,1,0
+1,2,14,applauded,2,Yes,Yes,1,904,904,904,0,0,0,904,904,0,0,904,1,0
+1,2,14,the,3,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,"guitarist,",4,Yes,Yes,1,621,621,621,0,0,0,621,621,0,0,621,1,0
+1,2,14,and,5,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,the,6,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,band,7,Yes,Yes,1,506,506,506,0,0,0,506,506,0,0,506,1,0
+1,2,14,cheered,8,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,for,9,Yes,Yes,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,14,him,10,Yes,Yes,1,178,178,178,0,0,0,178,178,0,0,178,1,0
+1,2,14,very,11,Yes,Yes,1,578,1010,578,432,0,-432,578,578,0,0,578,1,0
+1,2,14,loudly.,12,Yes,Yes,1,495,495,495,0,0,0,495,495,0,0,927,1,1
+1,2,15,Jim,0,No,No,1,748,1003,0,255,-748,-1003,0,0,0,0,0,0,0
+1,2,15,listened,1,No,No,1,248,455,248,207,0,-207,377,377,0,129,1125,1,1
+1,2,15,to,2,No,No,1,178,178,178,0,0,0,178,178,0,0,178,1,0
+1,2,15,the,3,No,No,1,117,611,117,494,0,-494,117,117,0,0,117,1,0
+1,2,15,"pianist,",4,No,No,1,832,1205,832,373,0,-373,832,832,0,0,832,1,0
+1,2,15,and,5,No,No,1,797,1219,797,422,0,-422,797,797,0,0,797,1,0
+1,2,15,the,6,No,No,1,596,596,596,0,0,0,596,596,0,0,596,1,0
+1,2,15,singer,7,No,No,1,702,1047,702,345,0,-345,702,702,0,0,702,1,0
+1,2,15,watched,8,No,No,1,1349,1871,1349,522,0,-522,1349,1349,0,0,1349,1,0
+1,2,15,the,9,No,No,1,75,928,75,853,0,-853,75,75,0,0,75,1,0
+1,2,15,organist,10,No,No,1,427,724,427,297,0,-297,427,427,0,0,427,1,0
+1,2,15,at,11,No,No,1,428,428,0,0,-428,-428,0,0,0,0,0,0,0
+1,2,15,the,12,No,No,1,501,501,501,0,0,0,501,501,0,0,501,1,0
+1,2,15,concert.,13,No,No,1,357,357,357,0,0,0,357,357,0,0,4424,1,1
+1,2,16,The,0,No,Yes,0,500,15381,500,14881,0,-14881,500,500,0,0,500,1,0
+1,2,16,ranger,1,No,Yes,0,1099,3446,1099,2347,0,-2347,1099,1099,0,0,1099,1,0
+1,2,16,gave,2,No,Yes,0,9099,9995,9099,896,0,-896,9247,9247,0,148,10573,1,1
+1,2,16,matches,3,No,Yes,0,826,6926,826,6100,0,-6100,826,826,0,0,826,1,0
+1,2,16,to,4,No,Yes,0,634,634,634,0,0,0,634,634,0,0,23384,1,1
+1,2,16,the,5,No,Yes,0,200,200,200,0,0,0,200,200,0,0,200,1,0
+1,2,16,"camper,",6,No,Yes,0,501,501,501,0,0,0,501,501,0,0,501,1,0
+1,2,16,and,7,No,Yes,0,80,80,80,0,0,0,80,80,0,0,80,1,0
+1,2,16,his,8,No,Yes,0,146,146,146,0,0,0,146,146,0,0,146,1,0
+1,2,16,friend,9,No,Yes,0,474,474,474,0,0,0,474,474,0,0,474,1,0
+1,2,16,made,10,No,Yes,0,200,200,200,0,0,0,200,200,0,0,200,1,0
+1,2,16,a,11,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,16,fire,12,No,Yes,0,101,101,101,0,0,0,101,101,0,0,101,1,0
+1,2,16,by,13,No,Yes,0,451,451,451,0,0,0,451,451,0,0,451,1,0
+1,2,16,the,14,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,16,tent.,15,No,Yes,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,There,0,Because of rumors.,Because of rumors.,1,300,1122,300,822,0,-822,1122,1122,0,822,1122,1,0
+2,1,1,are,1,Because of rumors.,Because of rumors.,1,401,401,401,0,0,0,401,401,0,0,401,1,0
+2,1,1,now,2,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,rumblings,3,Because of rumors.,Because of rumors.,1,626,626,626,0,0,0,626,626,0,0,626,1,0
+2,1,1,that,4,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,Apple,5,Because of rumors.,Because of rumors.,1,479,949,479,470,0,-470,479,479,0,0,479,1,0
+2,1,1,might,6,Because of rumors.,Because of rumors.,1,420,650,420,230,0,-230,420,420,0,0,420,1,0
+2,1,1,soon,7,Because of rumors.,Because of rumors.,1,401,401,401,0,0,0,401,401,0,0,401,1,0
+2,1,1,invade,8,Because of rumors.,Because of rumors.,1,801,801,801,0,0,0,801,801,0,0,1501,1,1
+2,1,1,the,9,Because of rumors.,Because of rumors.,1,330,330,0,0,-330,-330,0,0,0,0,0,0,0
+2,1,1,smart,10,Because of rumors.,Because of rumors.,1,99,220,0,121,-99,-220,0,0,0,0,0,0,0
+2,1,1,watch,11,Because of rumors.,Because of rumors.,1,300,723,300,423,0,-423,723,723,0,423,1273,1,1
+2,1,1,"space,",12,Because of rumors.,Because of rumors.,1,526,526,526,0,0,0,526,526,0,0,526,1,0
+2,1,1,though,13,Because of rumors.,Because of rumors.,1,601,601,601,0,0,0,601,601,0,0,601,1,0
+2,1,1,the,14,Because of rumors.,Because of rumors.,1,442,442,0,0,-442,-442,0,0,0,0,0,0,0
+2,1,1,company,15,Because of rumors.,Because of rumors.,1,476,476,0,0,-476,-476,0,0,0,0,0,0,0
+2,1,1,is,16,Because of rumors.,Because of rumors.,1,299,299,0,0,-299,-299,0,0,0,0,0,0,0
+2,1,1,maintaining,17,Because of rumors.,Because of rumors.,1,501,501,0,0,-501,-501,0,0,0,0,0,0,0
+2,1,1,its,18,Because of rumors.,Because of rumors.,1,98,98,0,0,-98,-98,0,0,0,0,0,0,0
+2,1,1,customary,19,Because of rumors.,Because of rumors.,1,429,429,0,0,-429,-429,0,0,0,0,0,0,0
+2,1,1,silence.,20,Because of rumors.,Because of rumors.,1,720,720,0,0,-720,-720,0,0,0,0,0,0,0
+2,1,1,The,21,Because of rumors.,Because of rumors.,1,450,450,0,0,-450,-450,0,0,0,0,0,0,0
+2,1,1,watch,22,Because of rumors.,Because of rumors.,1,100,100,0,0,-100,-100,0,0,0,0,0,0,0
+2,1,1,doesn't,23,Because of rumors.,Because of rumors.,1,484,484,0,0,-484,-484,0,0,0,0,0,0,0
+2,1,1,have,24,Because of rumors.,Because of rumors.,1,467,467,0,0,-467,-467,0,0,0,0,0,0,0
+2,1,1,a,25,Because of rumors.,Because of rumors.,1,83,83,0,0,-83,-83,0,0,0,0,0,0,0
+2,1,1,microphone,26,Because of rumors.,Because of rumors.,1,540,540,0,0,-540,-540,0,0,0,0,0,0,0
+2,1,1,or,27,Because of rumors.,Because of rumors.,1,350,350,0,0,-350,-350,0,0,0,0,0,0,0
+2,1,1,"speaker,",28,Because of rumors.,Because of rumors.,1,202,629,202,427,0,-427,629,629,0,427,6068,1,1
+2,1,1,but,29,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,you,30,Because of rumors.,Because of rumors.,1,400,400,400,0,0,0,400,400,0,0,400,1,0
+2,1,1,can,31,Because of rumors.,Because of rumors.,1,301,301,301,0,0,0,301,301,0,0,301,1,0
+2,1,1,use,32,Because of rumors.,Because of rumors.,1,76,76,76,0,0,0,76,76,0,0,76,1,0
+2,1,1,it,33,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,to,34,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,control,35,Because of rumors.,Because of rumors.,1,648,648,648,0,0,0,648,648,0,0,648,1,0
+2,1,1,the,36,Because of rumors.,Because of rumors.,1,200,200,200,0,0,0,200,200,0,0,200,1,0
+2,1,1,music,37,Because of rumors.,Because of rumors.,1,470,470,470,0,0,0,470,470,0,0,470,1,0
+2,1,1,on,38,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,your,39,Because of rumors.,Because of rumors.,1,72,72,72,0,0,0,72,72,0,0,72,1,0
+2,1,1,phone.,40,Because of rumors.,Because of rumors.,1,827,827,827,0,0,0,827,827,0,0,827,1,0
+2,1,1,You,41,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,can,42,Because of rumors.,Because of rumors.,1,151,151,151,0,0,0,151,151,0,0,151,1,0
+2,1,1,glance,43,Because of rumors.,Because of rumors.,1,380,582,380,202,0,-202,380,380,0,0,380,1,0
+2,1,1,at,44,Because of rumors.,Because of rumors.,1,147,147,147,0,0,0,147,147,0,0,349,1,1
+2,1,1,the,45,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,watch,46,Because of rumors.,Because of rumors.,1,475,475,475,0,0,0,475,475,0,0,475,1,0
+2,1,1,face,47,Because of rumors.,Because of rumors.,1,249,249,249,0,0,0,249,249,0,0,249,1,0
+2,1,1,to,48,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,view,49,Because of rumors.,Because of rumors.,1,132,132,132,0,0,0,132,132,0,0,132,1,0
+2,1,1,the,50,Because of rumors.,Because of rumors.,1,243,243,243,0,0,0,243,243,0,0,243,1,0
+2,1,1,artist,51,Because of rumors.,Because of rumors.,1,475,475,475,0,0,0,475,475,0,0,475,1,0
+2,1,1,and,52,Because of rumors.,Because of rumors.,1,84,84,84,0,0,0,84,84,0,0,84,1,0
+2,1,1,title,53,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,of,54,Because of rumors.,Because of rumors.,1,96,96,96,0,0,0,96,96,0,0,96,1,0
+2,1,1,a,55,Because of rumors.,Because of rumors.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,1,song.,56,Because of rumors.,Because of rumors.,1,324,324,324,0,0,0,324,324,0,0,324,1,0
+2,1,2,Two,0,Spots on the sun.,Spots on the sun.,1,618,618,618,0,0,0,618,618,0,0,618,1,0
+2,1,2,days,1,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,"later,",2,Spots on the sun.,Spots on the sun.,1,571,571,571,0,0,0,571,571,0,0,571,1,0
+2,1,2,the,3,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,British,4,Spots on the sun.,Spots on the sun.,1,421,421,421,0,0,0,421,421,0,0,421,1,0
+2,1,2,astronomer,5,Spots on the sun.,Spots on the sun.,1,79,79,79,0,0,0,79,79,0,0,79,1,0
+2,1,2,Richard,6,Spots on the sun.,Spots on the sun.,1,650,650,650,0,0,0,650,650,0,0,650,1,0
+2,1,2,Carrington,7,Spots on the sun.,Spots on the sun.,1,480,480,480,0,0,0,480,480,0,0,480,1,0
+2,1,2,was,8,Spots on the sun.,Spots on the sun.,1,391,391,391,0,0,0,391,391,0,0,391,1,0
+2,1,2,observing,9,Spots on the sun.,Spots on the sun.,1,500,822,500,322,0,-322,500,500,0,0,500,1,0
+2,1,2,the,10,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,interesting,11,Spots on the sun.,Spots on the sun.,1,420,846,420,426,0,-426,846,846,0,426,1168,1,1
+2,1,2,sunspot,12,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,group,13,Spots on the sun.,Spots on the sun.,1,700,700,700,0,0,0,700,700,0,0,700,1,0
+2,1,2,through,14,Spots on the sun.,Spots on the sun.,1,529,529,529,0,0,0,529,529,0,0,529,1,0
+2,1,2,his,15,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,telescope,16,Spots on the sun.,Spots on the sun.,1,655,655,655,0,0,0,655,655,0,0,655,1,0
+2,1,2,when,17,Spots on the sun.,Spots on the sun.,1,196,196,196,0,0,0,196,196,0,0,196,1,0
+2,1,2,he,18,Spots on the sun.,Spots on the sun.,1,369,369,369,0,0,0,369,369,0,0,369,1,0
+2,1,2,saw,19,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,what,20,Spots on the sun.,Spots on the sun.,1,451,451,451,0,0,0,451,451,0,0,451,1,0
+2,1,2,he,21,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,described,22,Spots on the sun.,Spots on the sun.,1,556,556,556,0,0,0,556,556,0,0,556,1,0
+2,1,2,as,23,Spots on the sun.,Spots on the sun.,1,517,517,517,0,0,0,517,517,0,0,517,1,0
+2,1,2,"""two",24,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,patches,25,Spots on the sun.,Spots on the sun.,1,400,400,400,0,0,0,400,400,0,0,400,1,0
+2,1,2,of,26,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,intensely,27,Spots on the sun.,Spots on the sun.,1,524,524,0,0,-524,-524,0,0,0,0,0,0,0
+2,1,2,bright,28,Spots on the sun.,Spots on the sun.,1,203,553,203,350,0,-350,553,553,0,350,1077,1,1
+2,1,2,and,29,Spots on the sun.,Spots on the sun.,1,129,129,129,0,0,0,129,129,0,0,129,1,0
+2,1,2,white,30,Spots on the sun.,Spots on the sun.,1,420,420,420,0,0,0,420,420,0,0,420,1,0
+2,1,2,"light""",31,Spots on the sun.,Spots on the sun.,1,180,180,180,0,0,0,180,180,0,0,180,1,0
+2,1,2,over,32,Spots on the sun.,Spots on the sun.,1,468,468,468,0,0,0,468,468,0,0,468,1,0
+2,1,2,the,33,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,sunspots.,34,Spots on the sun.,Spots on the sun.,1,753,753,753,0,0,0,753,753,0,0,753,1,0
+2,1,2,He,35,Spots on the sun.,Spots on the sun.,1,167,167,167,0,0,0,167,167,0,0,167,1,0
+2,1,2,jotted,36,Spots on the sun.,Spots on the sun.,1,222,222,222,0,0,0,222,222,0,0,222,1,0
+2,1,2,a,37,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,note,38,Spots on the sun.,Spots on the sun.,1,351,351,351,0,0,0,351,351,0,0,351,1,0
+2,1,2,in,39,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,his,40,Spots on the sun.,Spots on the sun.,1,324,324,324,0,0,0,324,324,0,0,324,1,0
+2,1,2,painstaking,41,Spots on the sun.,Spots on the sun.,1,451,451,451,0,0,0,451,451,0,0,451,1,0
+2,1,2,record.,42,Spots on the sun.,Spots on the sun.,1,191,462,191,271,0,-271,462,462,0,271,462,1,0
+2,1,2,That,43,Spots on the sun.,Spots on the sun.,1,101,101,101,0,0,0,101,101,0,0,101,1,0
+2,1,2,night,44,Spots on the sun.,Spots on the sun.,1,802,802,802,0,0,0,802,802,0,0,802,1,0
+2,1,2,there,45,Spots on the sun.,Spots on the sun.,1,250,250,250,0,0,0,250,250,0,0,250,1,0
+2,1,2,was,46,Spots on the sun.,Spots on the sun.,1,126,126,126,0,0,0,126,126,0,0,126,1,0
+2,1,2,scarcely,47,Spots on the sun.,Spots on the sun.,1,396,396,396,0,0,0,396,396,0,0,396,1,0
+2,1,2,a,48,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,square,49,Spots on the sun.,Spots on the sun.,1,752,752,752,0,0,0,752,752,0,0,752,1,0
+2,1,2,inch,50,Spots on the sun.,Spots on the sun.,1,223,223,223,0,0,0,223,223,0,0,223,1,0
+2,1,2,of,51,Spots on the sun.,Spots on the sun.,1,83,83,83,0,0,0,83,83,0,0,83,1,0
+2,1,2,earth,52,Spots on the sun.,Spots on the sun.,1,368,368,368,0,0,0,368,368,0,0,368,1,0
+2,1,2,that,53,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,was,54,Spots on the sun.,Spots on the sun.,1,217,217,217,0,0,0,217,217,0,0,217,1,0
+2,1,2,not,55,Spots on the sun.,Spots on the sun.,1,325,325,325,0,0,0,325,325,0,0,325,1,0
+2,1,2,illuminated,56,Spots on the sun.,Spots on the sun.,1,926,926,926,0,0,0,926,926,0,0,926,1,0
+2,1,2,by,57,Spots on the sun.,Spots on the sun.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,2,aurora.,58,Spots on the sun.,Spots on the sun.,1,529,529,529,0,0,0,529,529,0,0,529,1,0
+2,1,3,I,0,Everywhere in the United States.,Everywhere in the United States.,1,854,854,0,0,-854,-854,0,0,0,0,0,0,0
+2,1,3,agree,1,Everywhere in the United States.,Everywhere in the United States.,1,500,973,500,473,0,-473,973,973,0,473,1827,1,1
+2,1,3,that,2,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,California's,3,Everywhere in the United States.,Everywhere in the United States.,1,622,622,622,0,0,0,622,622,0,0,622,1,0
+2,1,3,"""three",4,Everywhere in the United States.,Everywhere in the United States.,1,900,900,900,0,0,0,900,900,0,0,900,1,0
+2,1,3,strikes,5,Everywhere in the United States.,Everywhere in the United States.,1,261,261,261,0,0,0,261,261,0,0,261,1,0
+2,1,3,and,6,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,you're,7,Everywhere in the United States.,Everywhere in the United States.,1,450,450,450,0,0,0,450,450,0,0,450,1,0
+2,1,3,"out""",8,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,law,9,Everywhere in the United States.,Everywhere in the United States.,1,393,393,393,0,0,0,393,393,0,0,393,1,0
+2,1,3,will,10,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,be,11,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,a,12,Everywhere in the United States.,Everywhere in the United States.,1,240,240,0,0,-240,-240,0,0,0,0,0,0,0
+2,1,3,financial,13,Everywhere in the United States.,Everywhere in the United States.,1,79,203,79,124,0,-124,203,203,0,124,443,1,1
+2,1,3,disaster,14,Everywhere in the United States.,Everywhere in the United States.,1,527,527,527,0,0,0,527,527,0,0,527,1,0
+2,1,3,for,15,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,taxpayers,16,Everywhere in the United States.,Everywhere in the United States.,1,522,522,522,0,0,0,522,522,0,0,522,1,0
+2,1,3,who,17,Everywhere in the United States.,Everywhere in the United States.,1,201,201,201,0,0,0,201,201,0,0,201,1,0
+2,1,3,care,18,Everywhere in the United States.,Everywhere in the United States.,1,502,502,502,0,0,0,502,502,0,0,502,1,0
+2,1,3,about,19,Everywhere in the United States.,Everywhere in the United States.,1,194,194,194,0,0,0,194,194,0,0,194,1,0
+2,1,3,education,20,Everywhere in the United States.,Everywhere in the United States.,1,583,583,583,0,0,0,583,583,0,0,583,1,0
+2,1,3,and,21,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,other,22,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,vital,23,Everywhere in the United States.,Everywhere in the United States.,1,429,429,429,0,0,0,429,429,0,0,429,1,0
+2,1,3,services.,24,Everywhere in the United States.,Everywhere in the United States.,1,547,547,547,0,0,0,547,547,0,0,547,1,0
+2,1,3,But,25,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,it's,26,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,far,27,Everywhere in the United States.,Everywhere in the United States.,1,550,550,550,0,0,0,550,550,0,0,550,1,0
+2,1,3,from,28,Everywhere in the United States.,Everywhere in the United States.,1,230,230,230,0,0,0,230,230,0,0,230,1,0
+2,1,3,clear,29,Everywhere in the United States.,Everywhere in the United States.,1,371,371,371,0,0,0,371,371,0,0,371,1,0
+2,1,3,that,30,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,the,31,Everywhere in the United States.,Everywhere in the United States.,1,98,98,0,0,-98,-98,0,0,0,0,0,0,0
+2,1,3,law,32,Everywhere in the United States.,Everywhere in the United States.,1,401,401,401,0,0,0,401,401,0,0,499,1,1
+2,1,3,can,33,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,even,34,Everywhere in the United States.,Everywhere in the United States.,1,71,71,71,0,0,0,71,71,0,0,71,1,0
+2,1,3,be,35,Everywhere in the United States.,Everywhere in the United States.,1,451,451,451,0,0,0,451,451,0,0,451,1,0
+2,1,3,credited,36,Everywhere in the United States.,Everywhere in the United States.,1,300,300,300,0,0,0,300,300,0,0,300,1,0
+2,1,3,with,37,Everywhere in the United States.,Everywhere in the United States.,1,191,191,0,0,-191,-191,0,0,0,0,0,0,0
+2,1,3,a,38,Everywhere in the United States.,Everywhere in the United States.,1,208,208,208,0,0,0,208,208,0,0,399,1,1
+2,1,3,reduction,39,Everywhere in the United States.,Everywhere in the United States.,1,122,122,122,0,0,0,122,122,0,0,122,1,0
+2,1,3,in,40,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,crime,41,Everywhere in the United States.,Everywhere in the United States.,1,150,150,150,0,0,0,150,150,0,0,150,1,0
+2,1,3,in,42,Everywhere in the United States.,Everywhere in the United States.,1,351,351,351,0,0,0,351,351,0,0,351,1,0
+2,1,3,California.,43,Everywhere in the United States.,Everywhere in the United States.,1,349,349,349,0,0,0,349,349,0,0,349,1,0
+2,1,3,While,44,Everywhere in the United States.,Everywhere in the United States.,1,231,231,231,0,0,0,231,231,0,0,231,1,0
+2,1,3,it's,45,Everywhere in the United States.,Everywhere in the United States.,1,99,99,99,0,0,0,99,99,0,0,99,1,0
+2,1,3,TRUE,46,Everywhere in the United States.,Everywhere in the United States.,1,400,400,400,0,0,0,400,400,0,0,400,1,0
+2,1,3,that,47,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,crime,48,Everywhere in the United States.,Everywhere in the United States.,1,500,500,500,0,0,0,500,500,0,0,500,1,0
+2,1,3,declined,49,Everywhere in the United States.,Everywhere in the United States.,1,530,530,530,0,0,0,530,530,0,0,530,1,0
+2,1,3,in,50,Everywhere in the United States.,Everywhere in the United States.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,3,California,51,Everywhere in the United States.,Everywhere in the United States.,1,450,450,450,0,0,0,450,450,0,0,450,1,0
+2,1,3,last,52,Everywhere in the United States.,Everywhere in the United States.,1,99,99,99,0,0,0,99,99,0,0,99,1,0
+2,1,3,"year,",53,Everywhere in the United States.,Everywhere in the United States.,1,227,227,227,0,0,0,227,227,0,0,227,1,0
+2,1,3,crime,54,Everywhere in the United States.,Everywhere in the United States.,1,354,354,354,0,0,0,354,354,0,0,354,1,0
+2,1,3,also,55,Everywhere in the United States.,Everywhere in the United States.,1,172,172,172,0,0,0,172,172,0,0,172,1,0
+2,1,3,dropped,56,Everywhere in the United States.,Everywhere in the United States.,1,298,298,298,0,0,0,298,298,0,0,298,1,0
+2,1,3,nationwide.,57,Everywhere in the United States.,Everywhere in the United States.,1,501,501,501,0,0,0,501,501,0,0,501,1,0
+2,1,4,Liza,0,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,1978,1978,0,0,-1978,-1978,0,0,0,0,0,0,0
+2,1,4,was,1,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,227,673,227,446,0,-446,673,673,0,446,2651,1,1
+2,1,4,in,2,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,a,3,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,bad,4,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,"temper,",5,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,478,478,478,0,0,0,478,478,0,0,478,1,0
+2,1,4,for,6,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,she,7,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,377,377,377,0,0,0,377,377,0,0,377,1,0
+2,1,4,was,8,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,mixing,9,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,623,623,623,0,0,0,623,623,0,0,623,1,0
+2,1,4,the,10,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,Christmas,11,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,825,825,825,0,0,0,825,825,0,0,825,1,0
+2,1,4,puddings,12,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,801,801,801,0,0,0,801,801,0,0,801,1,0
+2,1,4,in,13,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,the,14,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,"kitchen,",15,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,750,750,750,0,0,0,750,750,0,0,750,1,0
+2,1,4,and,16,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,374,374,374,0,0,0,374,374,0,0,374,1,0
+2,1,4,had,17,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,624,624,624,0,0,0,624,624,0,0,624,1,0
+2,1,4,been,18,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,72,72,72,0,0,0,72,72,0,0,72,1,0
+2,1,4,drawn,19,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,449,449,449,0,0,0,449,449,0,0,449,1,0
+2,1,4,from,20,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,"them,",21,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,424,424,424,0,0,0,424,424,0,0,424,1,0
+2,1,4,with,22,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,201,201,0,0,-201,-201,0,0,0,0,0,0,0
+2,1,4,a,23,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,395,395,395,0,0,0,395,395,0,0,395,1,0
+2,1,4,raisin,24,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,472,472,472,0,0,0,472,472,0,0,673,1,1
+2,1,4,still,25,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,on,26,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,her,27,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,554,554,554,0,0,0,554,554,0,0,554,1,0
+2,1,4,"cheek,",28,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,413,413,413,0,0,0,413,413,0,0,413,1,0
+2,1,4,by,29,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,Nana's,30,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,651,651,651,0,0,0,651,651,0,0,651,1,0
+2,1,4,absurd,31,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,266,266,266,0,0,0,266,266,0,0,266,1,0
+2,1,4,suspicions.,32,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,She,33,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,thought,34,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,the,35,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,best,36,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,way,37,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,of,38,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,getting,39,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,a,40,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,little,41,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,quiet,42,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,was,43,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,to,44,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,take,45,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,Nana,46,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,to,47,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,the,48,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,nursery,49,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,for,50,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,a,51,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,"moment,",52,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,but,53,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,in,54,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,custody,55,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,of,56,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,4,course.,57,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,Mrs.,0,No,No,1,923,1321,923,398,0,-398,923,923,0,0,923,1,0
+2,1,5,Darling,1,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,quivered,2,No,No,1,804,804,804,0,0,0,804,804,0,0,804,1,0
+2,1,5,and,3,No,No,1,603,603,0,0,-603,-603,0,0,0,0,0,0,0
+2,1,5,went,4,No,No,1,572,645,572,73,0,-73,572,572,0,0,572,1,0
+2,1,5,to,5,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,the,6,No,No,1,824,1272,824,448,0,-448,824,824,0,0,824,1,0
+2,1,5,window.,7,No,No,1,76,637,76,561,0,-561,76,76,0,0,76,1,0
+2,1,5,It,8,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,was,9,No,No,1,400,475,400,75,0,-75,400,400,0,0,400,1,0
+2,1,5,securely,10,No,No,1,700,1228,700,528,0,-528,700,700,0,0,700,1,0
+2,1,5,fastened.,11,No,No,1,350,801,350,451,0,-451,350,350,0,0,350,1,0
+2,1,5,She,12,No,No,1,554,554,554,0,0,0,554,554,0,0,554,1,0
+2,1,5,looked,13,No,No,1,396,971,396,575,0,-575,396,396,0,0,396,1,0
+2,1,5,"out,",14,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,and,15,No,No,1,495,895,495,400,0,-400,495,495,0,0,495,1,0
+2,1,5,the,16,No,No,1,84,84,0,0,-84,-84,0,0,0,0,0,0,0
+2,1,5,night,17,No,No,1,467,764,467,297,0,-297,467,467,0,0,467,1,0
+2,1,5,was,18,No,No,1,119,119,0,0,-119,-119,0,0,0,0,0,0,0
+2,1,5,peppered,19,No,No,1,781,1263,781,482,0,-482,781,781,0,0,781,1,0
+2,1,5,with,20,No,No,1,293,293,0,0,-293,-293,0,0,0,0,0,0,0
+2,1,5,stars.,21,No,No,1,430,532,430,102,0,-102,430,430,0,0,430,1,0
+2,1,5,They,22,No,No,1,71,476,71,405,0,-405,71,71,0,0,71,1,0
+2,1,5,were,23,No,No,1,629,947,629,318,0,-318,629,629,0,0,629,1,0
+2,1,5,crowding,24,No,No,1,570,1054,570,484,0,-484,570,570,0,0,570,1,0
+2,1,5,round,25,No,No,1,400,597,400,197,0,-197,400,400,0,0,400,1,0
+2,1,5,the,26,No,No,1,397,397,0,0,-397,-397,0,0,0,0,0,0,0
+2,1,5,"house,",27,No,No,1,731,854,731,123,0,-123,731,731,0,0,731,1,0
+2,1,5,as,28,No,No,1,269,644,269,375,0,-375,269,269,0,0,269,1,0
+2,1,5,if,29,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,curious,30,No,No,1,1049,1049,1049,0,0,0,1049,1049,0,0,1049,1,0
+2,1,5,to,31,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,see,32,No,No,1,450,450,450,0,0,0,450,450,0,0,450,1,0
+2,1,5,what,33,No,No,1,350,767,350,417,0,-417,350,350,0,0,350,1,0
+2,1,5,was,34,No,No,1,75,75,75,0,0,0,75,75,0,0,75,1,0
+2,1,5,to,35,No,No,1,675,775,675,100,0,-100,775,775,0,100,1192,1,1
+2,1,5,take,36,No,No,1,599,599,599,0,0,0,599,599,0,0,599,1,0
+2,1,5,place,37,No,No,1,150,150,150,0,0,0,150,150,0,0,150,1,0
+2,1,5,"there,",38,No,No,1,326,326,326,0,0,0,326,326,0,0,326,1,0
+2,1,5,but,39,No,No,1,424,424,424,0,0,0,424,424,0,0,424,1,0
+2,1,5,she,40,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,did,41,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,not,42,No,No,1,452,452,452,0,0,0,452,452,0,0,452,1,0
+2,1,5,notice,43,No,No,1,174,174,174,0,0,0,174,174,0,0,174,1,0
+2,1,5,"this,",44,No,No,1,475,475,475,0,0,0,475,475,0,0,475,1,0
+2,1,5,nor,45,No,No,1,301,301,301,0,0,0,301,301,0,0,301,1,0
+2,1,5,that,46,No,No,1,378,378,378,0,0,0,378,378,0,0,378,1,0
+2,1,5,one,47,No,No,1,320,320,320,0,0,0,320,320,0,0,320,1,0
+2,1,5,or,48,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,two,49,No,No,1,549,549,549,0,0,0,549,549,0,0,549,1,0
+2,1,5,of,50,No,No,1,151,151,151,0,0,0,151,151,0,0,151,1,0
+2,1,5,the,51,No,No,1,183,183,183,0,0,0,183,183,0,0,183,1,0
+2,1,5,smaller,52,No,No,1,616,616,616,0,0,0,616,616,0,0,616,1,0
+2,1,5,ones,53,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,5,winked,54,No,No,1,475,475,475,0,0,0,475,475,0,0,475,1,0
+2,1,5,at,55,No,No,1,302,302,302,0,0,0,302,302,0,0,8090,1,1
+2,1,5,her.,56,No,No,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,Seeing,0,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,495,945,495,450,0,-450,495,495,0,0,495,1,0
+2,1,6,Peter,1,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,453,852,453,399,0,-399,453,453,0,0,453,1,0
+2,1,6,slowly,2,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,576,658,576,82,0,-82,576,576,0,0,576,1,0
+2,1,6,advancing,3,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,431,1199,431,768,0,-768,431,431,0,0,431,1,0
+2,1,6,upon,4,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,467,467,467,0,0,0,467,467,0,0,467,1,0
+2,1,6,him,5,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,374,674,0,300,-374,-674,0,0,0,0,0,0,0
+2,1,6,through,6,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,356,864,0,508,-356,-864,0,0,0,0,0,0,0
+2,1,6,the,7,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,498,618,498,120,0,-120,498,498,0,0,1228,1,1
+2,1,6,air,8,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,599,599,0,0,-599,-599,0,0,0,0,0,0,0
+2,1,6,with,9,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,802,1202,802,400,0,-400,802,802,0,0,979,1,1
+2,1,6,dagger,10,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,819,2462,0,1643,-819,-2462,0,0,0,0,0,0,0
+2,1,6,"poised,",11,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,474,1176,0,702,-474,-1176,0,0,0,0,0,0,0
+2,1,6,he,12,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,247,643,247,396,0,-396,643,643,0,396,3748,1,1
+2,1,6,sprang,13,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,250,710,250,460,0,-460,710,710,0,460,4692,1,1
+2,1,6,upon,14,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,the,15,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,299,299,299,0,0,0,299,299,0,0,299,1,0
+2,1,6,bulwarks,16,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,649,649,649,0,0,0,649,649,0,0,649,1,0
+2,1,6,to,17,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,526,526,526,0,0,0,526,526,0,0,526,1,0
+2,1,6,cast,18,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,himself,19,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,into,20,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,801,801,801,0,0,0,801,801,0,0,801,1,0
+2,1,6,the,21,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,78,78,78,0,0,0,78,78,0,0,78,1,0
+2,1,6,sea.,22,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,1047,1047,1047,0,0,0,1047,1047,0,0,1047,1,0
+2,1,6,He,23,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,did,24,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,384,384,384,0,0,0,384,384,0,0,384,1,0
+2,1,6,not,25,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,know,26,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,600,600,600,0,0,0,600,600,0,0,600,1,0
+2,1,6,that,27,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,the,28,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,crocodile,29,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,550,550,550,0,0,0,550,550,0,0,550,1,0
+2,1,6,was,30,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,276,276,276,0,0,0,276,276,0,0,276,1,0
+2,1,6,waiting,31,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,1922,1922,1922,0,0,0,1922,1922,0,0,1922,1,0
+2,1,6,for,32,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,206,206,206,0,0,0,206,206,0,0,206,1,0
+2,1,6,him;,33,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,196,196,196,0,0,0,196,196,0,0,196,1,0
+2,1,6,for,34,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,we,35,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,742,742,742,0,0,0,742,742,0,0,742,1,0
+2,1,6,purposely,36,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,425,602,425,177,0,-177,425,425,0,0,425,1,0
+2,1,6,stopped,37,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,800,800,800,0,0,0,800,800,0,0,977,1,1
+2,1,6,the,38,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,clock,39,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,352,352,352,0,0,0,352,352,0,0,352,1,0
+2,1,6,that,40,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,449,449,0,0,-449,-449,0,0,0,0,0,0,0
+2,1,6,this,41,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,206,307,206,101,0,-101,206,206,0,0,206,1,0
+2,1,6,knowledge,42,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,216,642,216,426,0,-426,642,642,0,426,1192,1,1
+2,1,6,might,43,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,75,75,75,0,0,0,75,75,0,0,75,1,0
+2,1,6,be,44,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,75,75,75,0,0,0,75,75,0,0,75,1,0
+2,1,6,spared,45,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,350,350,350,0,0,0,350,350,0,0,350,1,0
+2,1,6,him:,46,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,417,417,0,0,-417,-417,0,0,0,0,0,0,0
+2,1,6,a,47,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,little,48,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,246,246,0,0,-246,-246,0,0,0,0,0,0,0
+2,1,6,mark,49,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,247,700,0,453,-247,-700,0,0,0,0,0,0,0
+2,1,6,of,50,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,78,78,78,0,0,0,78,78,0,0,1441,1,1
+2,1,6,respect,51,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,547,547,547,0,0,0,547,547,0,0,547,1,0
+2,1,6,from,52,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,us,53,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,408,408,408,0,0,0,408,408,0,0,408,1,0
+2,1,6,at,54,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,the,55,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,6,end.,56,He was afraid of Peter and his dagger.,He was afraid of Peter and his dagger.,1,429,429,429,0,0,0,429,429,0,0,429,1,0
+2,1,7,Dorothy,0,At a crossroads.,At a crossroads.,1,578,1028,578,450,0,-450,578,578,0,0,578,1,0
+2,1,7,didn't,1,At a crossroads.,At a crossroads.,1,498,701,498,203,0,-203,498,498,0,0,498,1,0
+2,1,7,know.,2,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,She,3,At a crossroads.,At a crossroads.,1,620,1045,620,425,0,-425,620,620,0,0,620,1,0
+2,1,7,looked,4,At a crossroads.,At a crossroads.,1,400,633,400,233,0,-233,400,400,0,0,400,1,0
+2,1,7,around,5,At a crossroads.,At a crossroads.,1,150,391,150,241,0,-241,150,150,0,0,150,1,0
+2,1,7,her,6,At a crossroads.,At a crossroads.,1,250,350,250,100,0,-100,250,250,0,0,250,1,0
+2,1,7,anxiously,7,At a crossroads.,At a crossroads.,1,526,931,526,405,0,-405,526,526,0,0,526,1,0
+2,1,7,for,8,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,some,9,At a crossroads.,At a crossroads.,1,151,272,151,121,0,-121,151,151,0,0,151,1,0
+2,1,7,familiar,10,At a crossroads.,At a crossroads.,1,371,1022,371,651,0,-651,371,371,0,0,371,1,0
+2,1,7,landmark;,11,At a crossroads.,At a crossroads.,1,702,1376,702,674,0,-674,702,702,0,0,702,1,0
+2,1,7,but,12,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,everything,13,At a crossroads.,At a crossroads.,1,550,1074,550,524,0,-524,550,550,0,0,550,1,0
+2,1,7,was,14,At a crossroads.,At a crossroads.,1,749,972,749,223,0,-223,749,749,0,0,749,1,0
+2,1,7,strange.,15,At a crossroads.,At a crossroads.,1,580,858,580,278,0,-278,580,580,0,0,580,1,0
+2,1,7,Between,16,At a crossroads.,At a crossroads.,1,519,1042,519,523,0,-523,519,519,0,0,519,1,0
+2,1,7,the,17,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,branches,18,At a crossroads.,At a crossroads.,1,526,1032,526,506,0,-506,526,526,0,0,526,1,0
+2,1,7,of,19,At a crossroads.,At a crossroads.,1,141,141,0,0,-141,-141,0,0,0,0,0,0,0
+2,1,7,the,20,At a crossroads.,At a crossroads.,1,250,400,0,150,-250,-400,0,0,0,0,0,0,0
+2,1,7,many,21,At a crossroads.,At a crossroads.,1,454,953,454,499,0,-499,854,854,0,400,1500,1,1
+2,1,7,roads,22,At a crossroads.,At a crossroads.,1,102,211,102,109,0,-109,102,102,0,0,102,1,0
+2,1,7,were,23,At a crossroads.,At a crossroads.,1,950,1295,950,345,0,-345,950,950,0,0,950,1,0
+2,1,7,green,24,At a crossroads.,At a crossroads.,1,372,444,372,72,0,-72,372,372,0,0,372,1,0
+2,1,7,meadows,25,At a crossroads.,At a crossroads.,1,361,1234,361,873,0,-873,361,361,0,0,361,1,0
+2,1,7,and,26,At a crossroads.,At a crossroads.,1,528,528,528,0,0,0,528,528,0,0,528,1,0
+2,1,7,a,27,At a crossroads.,At a crossroads.,1,100,100,100,0,0,0,100,100,0,0,100,1,0
+2,1,7,few,28,At a crossroads.,At a crossroads.,1,150,150,150,0,0,0,150,150,0,0,150,1,0
+2,1,7,shrubs,29,At a crossroads.,At a crossroads.,1,248,248,248,0,0,0,248,248,0,0,248,1,0
+2,1,7,and,30,At a crossroads.,At a crossroads.,1,199,199,199,0,0,0,199,199,0,0,199,1,0
+2,1,7,"trees,",31,At a crossroads.,At a crossroads.,1,485,485,485,0,0,0,485,485,0,0,485,1,0
+2,1,7,but,32,At a crossroads.,At a crossroads.,1,343,343,343,0,0,0,343,343,0,0,343,1,0
+2,1,7,she,33,At a crossroads.,At a crossroads.,1,295,295,0,0,-295,-295,0,0,0,0,0,0,0
+2,1,7,couldn't,34,At a crossroads.,At a crossroads.,1,527,775,527,248,0,-248,527,527,0,0,527,1,0
+2,1,7,see,35,At a crossroads.,At a crossroads.,1,104,104,0,0,-104,-104,0,0,0,0,0,0,0
+2,1,7,the,36,At a crossroads.,At a crossroads.,1,200,200,200,0,0,0,200,200,0,0,200,1,0
+2,1,7,farm-house,37,At a crossroads.,At a crossroads.,1,450,856,450,406,0,-406,450,450,0,0,450,1,0
+2,1,7,from,38,At a crossroads.,At a crossroads.,1,251,374,251,123,0,-123,251,251,0,0,251,1,0
+2,1,7,which,39,At a crossroads.,At a crossroads.,1,529,777,529,248,0,-248,529,529,0,0,529,1,0
+2,1,7,she,40,At a crossroads.,At a crossroads.,1,170,327,170,157,0,-157,170,170,0,0,170,1,0
+2,1,7,had,41,At a crossroads.,At a crossroads.,1,201,290,201,89,0,-89,201,201,0,0,201,1,0
+2,1,7,just,42,At a crossroads.,At a crossroads.,1,150,150,150,0,0,0,150,150,0,0,150,1,0
+2,1,7,"come,",43,At a crossroads.,At a crossroads.,1,83,233,83,150,0,-150,83,83,0,0,83,1,0
+2,1,7,or,44,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,anything,45,At a crossroads.,At a crossroads.,1,485,707,485,222,0,-222,485,485,0,0,485,1,0
+2,1,7,she,46,At a crossroads.,At a crossroads.,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,7,had,47,At a crossroads.,At a crossroads.,1,674,674,674,0,0,0,674,674,0,0,674,1,0
+2,1,7,ever,48,At a crossroads.,At a crossroads.,1,279,279,279,0,0,0,279,279,0,0,279,1,0
+2,1,7,seen,49,At a crossroads.,At a crossroads.,1,353,806,353,453,0,-453,353,353,0,0,353,1,0
+2,1,7,"before,",50,At a crossroads.,At a crossroads.,1,372,372,372,0,0,0,372,372,0,0,372,1,0
+2,1,7,except,51,At a crossroads.,At a crossroads.,1,221,546,221,325,0,-325,221,221,0,0,221,1,0
+2,1,7,the,52,At a crossroads.,At a crossroads.,1,151,352,151,201,0,-201,151,151,0,0,151,1,0
+2,1,7,shaggy,53,At a crossroads.,At a crossroads.,1,448,924,448,476,0,-476,448,448,0,0,448,1,0
+2,1,7,man,54,At a crossroads.,At a crossroads.,1,109,109,109,0,0,0,109,109,0,0,109,1,0
+2,1,7,and,55,At a crossroads.,At a crossroads.,1,316,316,316,0,0,0,316,316,0,0,316,1,0
+2,1,7,Toto.,56,At a crossroads.,At a crossroads.,1,229,229,229,0,0,0,229,229,0,0,10676,1,1
