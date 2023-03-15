@@ -136,41 +136,42 @@ provo_df = merge(provo_df, motr_provo_df, by=c("text_id", "word_text_idx", "metr
          word.x == word) %>%
   dplyr::select(-word.x, -word.y) %>%
   mutate(motr_outlier = if_else(motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
-  filter(motr_outlier == F)
+  filter(motr_outlier == F) %>%
+  gather(measure, value, c("eyetr_value", "motr_value"))
 
 
 ```
 
 ```{r}
 provo_df %>%
-  mutate(word_len = nchar(word)) %>%
+  spread(measure, value) %>%
   ggplot(aes(x = motr_value, y=eyetr_value, color=metric)) +
     geom_point(alpha = 0.2) +
-    facet_wrap(~metric, scales="free") +
+    facet_wrap(.~metric, scales="free") +
     geom_smooth()
 ```
 ```{r}
 provo_df %>%
   mutate(word_len = nchar(word)) %>%
-  ggplot(aes(x = motr_value, y=word_len, color=metric)) +
+  ggplot(aes(x = value, y=word_len, color=metric)) +
     geom_point(alpha = 0.2) +
-    facet_wrap(~metric, scales="free") +
+    facet_grid(metric~measure, scales="free_x") +
     geom_smooth()
 ```
 
 ```{r}
 provo_df %>%
-  ggplot(aes(x = motr_value, y=freq, color=metric)) +
+  ggplot(aes(x = value, y=freq, color=metric)) +
     geom_point(alpha = 0.2) +
-    facet_wrap(~metric, scales="free") +
+    facet_grid(metric~measure, scales="free") +
     geom_smooth()
 ```
 
 ```{r}
 provo_df %>%
-  ggplot(aes(x = motr_value, y=surp, color=metric)) +
+  ggplot(aes(x = value, y=surp, color=metric)) +
     geom_point(alpha = 0.2) +
-    facet_wrap(~metric, scales="free") +
+    facet_grid(metric~measure, scales="free") +
     geom_smooth()
 ```
 
