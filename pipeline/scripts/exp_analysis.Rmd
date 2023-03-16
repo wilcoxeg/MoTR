@@ -45,13 +45,14 @@ for (f in fnames) {
   temp = read.csv(paste0(file_prefix, "/", f)) %>%
     mutate(subj = str_remove(f, "_reading_measures.csv")) %>%
     dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration,
-                  gaze_duration, go_pass_time, subj)
+                  gaze_duration, go_pass_time, FPReg, subj) %>%
+      rename(go_past_time = go_pass_time)
   df = rbind(df, temp)
 }
 
 motr_df = df %>%
   mutate(expr_id = if_else(expr_id == 1, "Attachment", "Provo")) %>%
-  gather(metric, value, 6:9)
+  gather(metric, value, 6:10)
 
 motr_df
 
@@ -66,8 +67,6 @@ motr_agg_df = motr_df %>%
   arrange(expr_id, cond_id, para_nr, word_nr)
 
 motr_agg_df
-
-table(motr_df$subj)
 
 ```
 
@@ -86,6 +85,7 @@ motr_provo_df = motr_agg_df %>%
 
 # Comparison to Provo
 
+
 ```{r}
 # Read in Provo surprisal, frequency and length data
 provo_modeling_df = read.csv("../ancillary_data/provo_df.csv") %>%
@@ -102,18 +102,20 @@ provo_modeling_df
 provo_raw_df = read.csv("../ancillary_data/provo_eyetracking.csv")
 
 provo_eyetracking_df = provo_raw_df %>%
-  dplyr::select(Participant_ID, Text_ID, Word_Number, Sentence_Number, Word_In_Sentence_Number, Word, IA_FIRST_FIXATION_DURATION,IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION) %>%
+  dplyr::select(Participant_ID, Text_ID, Word_Number, Sentence_Number, Word_In_Sentence_Number, Word, IA_FIRST_FIXATION_DURATION,IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION, IA_REGRESSION_OUT) %>%
   rename( first_duration = IA_FIRST_FIXATION_DURATION,
           gaze_duration = IA_FIRST_RUN_DWELL_TIME,
           total_duration = IA_DWELL_TIME,
-          go_pass_time = IA_REGRESSION_PATH_DURATION,
+          go_past_time = IA_REGRESSION_PATH_DURATION,
           subj = Participant_ID,
           text_id = Text_ID,
           sent_id = Sentence_Number,
           word_idx = Word_In_Sentence_Number,
           word_text_idx = Word_Number,
-          word = Word) %>%
+          word = Word,
+          FPReg = IA_REGRESSION_OUT) %>%
   gather(metric, value, 7:10) %>%
+  mutate(value = if_else(is.na(value), as.integer(0), value)) %>%
   drop_na() %>%
   group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
     summarise(value = mean(value)) %>%
@@ -137,26 +139,51 @@ provo_df = merge(provo_df, motr_provo_df, by=c("text_id", "word_text_idx", "metr
   dplyr::select(-word.x, -word.y) %>%
   mutate(motr_outlier = if_else(motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
   filter(motr_outlier == F) %>%
-  gather(measure, value, c("eyetr_value", "motr_value"))
+  gather(measure, value, c("eyetr_value", "motr_value")) %>%
+  filter(metric != "first_duration")
 
 
 ```
 
 ```{r}
+provo_df %>%
+  ggplot(aes(x = value, color=metric)) +
+    geom_density() +
+    facet_wrap(.~measure) +
+    xlab("Reading Measure")
+ggsave("../visualization/density.png", device = "png", width = 6, height = 2.5)
+```
+
+
+
+```{r}
+
+gd_df = provo_df %>% filter(metric == "total_duration") %>% spread(measure, value)
+cor.test(gd_df$eyetr_value, gd_df$motr_value)
+
 provo_df %>%
   spread(measure, value) %>%
   ggplot(aes(x = motr_value, y=eyetr_value, color=metric)) +
     geom_point(alpha = 0.2) +
     facet_wrap(.~metric, scales="free") +
     geom_smooth()
+
+ggsave("../visualization/metric_cor.png", device = "png", width = 6, height = 2.5)
 ```
+
+
 ```{r}
 provo_df %>%
-  mutate(word_len = nchar(word)) %>%
-  ggplot(aes(x = value, y=word_len, color=metric)) +
+  gather(word_prop, word_prop_val, c("freq", "len", "surp")) %>%
+  filter(metric == "gaze_duration") %>%
+  ggplot(aes(x = value, y=word_prop_val, color = measure)) +
     geom_point(alpha = 0.2) +
-    facet_grid(metric~measure, scales="free_x") +
-    geom_smooth()
+    facet_grid(word_prop~measure, scales="free") +
+    geom_smooth() +
+    xlab("Reading Measure")
+
+ggsave("../visualization/word_prop_comps.png", device = "png", width = 6, height = 3)
+
 ```
 
 ```{r}
@@ -203,7 +230,7 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors) {
 
 fit_gam = function(df, mean_predictors, alpha=0.05) {
   # Bootstrap-resample data
-  boot_models = df %>% bootstraps(times=5) %>% 
+  boot_models = df %>% bootstraps(times=10) %>% 
    # Fit a GAM and get predictions for each sample
     mutate(smoothed=map(splits, fit_gam_inner, mean_predictors=mean_predictors))
   
@@ -226,6 +253,7 @@ fit_gam = function(df, mean_predictors, alpha=0.05) {
 ```{r}
 
 gam_modeling_df = provo_df %>%
+  spread(measure, value) %>%
   mutate(len = nchar(word)) %>%
   group_by(metric, text_id) %>%
     arrange(word_text_idx) %>%
@@ -240,7 +268,7 @@ gam_modeling_df = provo_df %>%
 
 smooths_df = data.frame()
 
-metrics = c("gaze_duration", "total_duration", "first_duration", "go_pass_time")
+metrics = c("gaze_duration", "total_duration", "go_past_time")
 for (m in metrics) {
   print(paste0("Fitting model for ", m))
   dummy_df = gam_modeling_df %>% filter(metric == m)
@@ -287,6 +315,7 @@ motr_attach_df = motr_df %>%
   mutate(item_id = as.integer(item_id)) %>%
   mutate(cond_id = as.factor(cond_id)) %>%
   mutate(cond_id = if_else(cond_id == 1, "No Comma", "Comma")) %>%
+  filter(metric != "first_duration", metric != "FPReg") %>%
 
   filter(! (item_id == 4 & cond_id == "No Comma") ) %>% # just because of alignment issues for now
   
@@ -315,17 +344,16 @@ agg_motr_attach_df %>%
     geom_line() +
     #geom_text(aes(label = word, y = if_else(cond_id == "Comma", 3000, 3500)), size = 2) +
     #facet_grid(para_nr~cond_id) +
-  ggtitle("Reading Times (critical region = took a bow)") +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-2:5, labels=c("the", "director", "and", "the", "designer", "took", "a", "bow")) +
+  scale_x_continuous(breaks=-2:5, labels=c("the", "man", "and", "his", "wife", "ran", "away", "from")) +
   facet_grid(~metric) +
   theme(
     legend.position = "bottom",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
-#ggsave("../visualization/conditions.pdf", device="pdf", width = 8, height = 11)
+#ggsave("../visualization/attachment.png", device = "png", width = 6, height = 3)
 
 ```
 
@@ -342,7 +370,7 @@ attach_lm_df = motr_attach_df %>%
          subj = as.factor(subj))
 
 m = attach_lm_df %>%
-  jglmm(value ~ cond_id + (cond_id | item_id) + (cond_id | subj), data=.)
+  lmer(value ~ cond_id + (cond_id | item_id) + (cond_id | subj), data=.)
 
 summary(m)
 
