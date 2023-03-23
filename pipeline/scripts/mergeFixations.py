@@ -5,13 +5,13 @@ from statistics import mean
 
 
 class FixationMerger:
-    def __init__(self, raw_data_divided_path, merged_fixation_path, denoise_threshold: int, btw_line_threshold: int):
+    def __init__(self, raw_data_divided_path, merged_fixation_path, denoise_threshold: int):
         self.in_data_path = raw_data_divided_path
         self.out_data_path = merged_fixation_path
         self.out_data_merged_name = raw_data_divided_path.stem+'_merged.csv'
         self.out_data_merged_denoise_name = raw_data_divided_path.stem + '_merged_denoised.csv'
         self.threshold_fixation = denoise_threshold
-        self.threshold_btw_line = btw_line_threshold
+        # self.threshold_btw_line = btw_line_threshold
         self.start_sent = (0, 1, 2, 3)
         self.mouse_data = self.__read_file()
         self.fixations = self.merge_fixations()
@@ -94,30 +94,30 @@ class FixationMerger:
             while self.fixations[i] and (self.fixations[i][0]['word_nr'] not in self.start_sent):
                 self.fixations[i].pop(0)
 
-    def _clear_noises_bwt_lines(self):
-        for i in range(len(self.fixations)):
-            if self.fixations[i]:
-                j = 1
-                while j < len(self.fixations[i]):
-                    # here is a threshold for denoise:
-                    # 550 (x-pos)-> whether the word is at the end of a line and the reader will jump to the next line.
-                    # change from 450 to 550 has no big influence in filtering.
-                    if ((self.fixations[i][j]['word_nr'] == -1) or
-                            (self.fixations[i][j - 1]['x_mean'] > 550 and
-                             (self.fixations[i][j]['y_mean'] - self.fixations[i][j - 1][
-                                 'y_mean']) > self.threshold_btw_line)):
-                        self.fixations[i].pop(j)
-                        if j < len(self.fixations[i]) and ((self.fixations[i][j]['word_nr'] == -1 or
-                                                            (self.fixations[i][j - 1]['x_mean'] > 550 and
-                                                             (self.fixations[i][j]['y_mean'] - self.fixations[i][j - 1][
-                                                                 'y_mean']) > self.threshold_btw_line))):
-                            continue
-                    j += 1
+    # def _clear_noises_bwt_lines(self):
+    #     for i in range(len(self.fixations)):
+    #         if self.fixations[i]:
+    #             j = 1
+    #             while j < len(self.fixations[i]):
+    #                 # here is a threshold for denoise:
+    #                 # 550 (x-pos)-> whether the word is at the end of a line and the reader will jump to the next line
+    #                 # change from 450 to 550 has no big influence in filtering.
+    #                 if ((self.fixations[i][j]['word_nr'] == -1) or
+    #                         (self.fixations[i][j - 1]['x_mean'] > 550 and
+    #                          (self.fixations[i][j]['y_mean'] - self.fixations[i][j - 1][
+    #                              'y_mean']) > self.threshold_btw_line)):
+    #                     self.fixations[i].pop(j)
+    #                     if j < len(self.fixations[i]) and ((self.fixations[i][j]['word_nr'] == -1 or
+    #                                                         (self.fixations[i][j - 1]['x_mean'] > 550 and
+    #                                                          (self.fixations[i][j]['y_mean'] - self.fixations[i]
+    #                                                          [j - 1]['y_mean']) > self.threshold_btw_line))):
+    #                         continue
+    #                 j += 1
 
     def write_out_denoise_merged_fixations(self) -> None:
         self.__make_directory_for_merged_fixations()
         self._clear_noises_before_reading()
-        self._clear_noises_bwt_lines()
+        # self._clear_noises_bwt_lines()
 
         with open(f'{self.out_data_path}/{self.out_data_merged_denoise_name}', 'w', newline='') as out_csvfile:
             # for checking whether the length of fixations make sense.
@@ -135,7 +135,7 @@ class FixationMerger:
             writer.writeheader()
             for item in self.fixations:
                 for fixation_on_word in item:
-                    if fixation_on_word['duration'] > self.threshold_fixation:
+                    if fixation_on_word['duration'] > self.threshold_fixation and fixation_on_word['word_nr'] != -1:
                         writer.writerow(fixation_on_word)
 
 

@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+import numpy as np
 import os
 from collections import defaultdict
 
@@ -226,6 +227,7 @@ class FeatureExtractor:
 
     def write_out(self):
         self._make_directory()
+        self.output_df.loc[self.output_df['response_chosen'] == '--', 'correctness':'FPReg'] = np.nan
         self.output_df.to_csv(self.output_path / f'reader_{self.output_name_stem}_reading_measures.csv', index=False)
 
 

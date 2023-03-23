@@ -36,7 +36,7 @@ pipe_message = function(.data, status) {message(status); .data}
 
 ```{r}
 
-file_prefix = "../reading_measures/cleaned"
+file_prefix = "../reading_measures/cleaned_f160"
 fnames = list.files(path=file_prefix)
 
 # Read in the data
@@ -61,6 +61,7 @@ motr_df
 ```{r}
 # Average across subjects
 motr_agg_df = motr_df %>%
+  drop_na() %>%
   group_by(expr_id, cond_id, para_nr, word, word_nr, metric) %>%
     summarise(value = mean(value)) %>%
   ungroup() %>%
@@ -102,7 +103,7 @@ provo_modeling_df
 provo_raw_df = read.csv("../ancillary_data/provo_eyetracking.csv")
 
 provo_eyetracking_df = provo_raw_df %>%
-  dplyr::select(Participant_ID, Text_ID, Word_Number, Sentence_Number, Word_In_Sentence_Number, Word, IA_FIRST_FIXATION_DURATION,IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION, IA_REGRESSION_OUT) %>%
+  dplyr::select(Participant_ID, Text_ID, Sentence_Number, Word_In_Sentence_Number, Word, IA_ID, IA_FIRST_FIX_PROGRESSIVE, IA_FIRST_FIXATION_DURATION, IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION, IA_REGRESSION_OUT) %>%
   rename( first_duration = IA_FIRST_FIXATION_DURATION,
           gaze_duration = IA_FIRST_RUN_DWELL_TIME,
           total_duration = IA_DWELL_TIME,
@@ -111,11 +112,15 @@ provo_eyetracking_df = provo_raw_df %>%
           text_id = Text_ID,
           sent_id = Sentence_Number,
           word_idx = Word_In_Sentence_Number,
-          word_text_idx = Word_Number,
+          word_text_idx = IA_ID,  # better than word number
           word = Word,
-          FPReg = IA_REGRESSION_OUT) %>%
-  gather(metric, value, 7:10) %>%
-  mutate(value = if_else(is.na(value), as.integer(0), value)) %>%
+          FPReg = IA_REGRESSION_OUT,
+          ff_progressive = IA_FIRST_FIX_PROGRESSIVE) %>%
+  mutate(gaze_duration = ifelse(ff_progressive == 0, 0, gaze_duration),
+         go_past_time = ifelse(ff_progressive == 0, 0, go_past_time)) %>%
+  dplyr::select(-ff_progressive) %>%
+  gather(metric, value, 7:11) %>%
+  mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   drop_na() %>%
   group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
     summarise(value = mean(value)) %>%
@@ -134,13 +139,13 @@ provo_df = merge(provo_eyetracking_df, provo_modeling_df, by=c("text_id", "sent_
 provo_df = merge(provo_df, motr_provo_df, by=c("text_id", "word_text_idx", "metric")) %>%
   rename(eyetr_value = value) %>%
   arrange(text_id, sent_id, word_idx) %>%
-  filter(word.y == word.x,
-         word.x == word) %>%
+  filter(word.x == word) %>%
   dplyr::select(-word.x, -word.y) %>%
   mutate(motr_outlier = if_else(motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
   filter(motr_outlier == F) %>%
   gather(measure, value, c("eyetr_value", "motr_value")) %>%
-  filter(metric != "first_duration")
+  # filter(metric != "first_duration") %>%
+  filter(metric != "FPReg")
 
 
 ```
@@ -268,7 +273,7 @@ gam_modeling_df = provo_df %>%
 
 smooths_df = data.frame()
 
-metrics = c("gaze_duration", "total_duration", "go_past_time")
+metrics = c("gaze_duration", "total_duration", "go_past_time", "first_duration")
 for (m in metrics) {
   print(paste0("Fitting model for ", m))
   dummy_df = gam_modeling_df %>% filter(metric == m)

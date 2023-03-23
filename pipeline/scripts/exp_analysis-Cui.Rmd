@@ -48,7 +48,7 @@ pipe_message = function(.data, status) {message(status); .data}
 ```{r}
 # Interesting way of reading multiple files in one directory!
 
-file_prefix = "../reading_measures/cleaned_f160_b40"
+file_prefix = "../reading_measures/cleaned_f160"
 fnames = list.files(path=file_prefix)
 # fnames: [1] "reader_55_reading_measures.csv" "reader_56_reading_measures.csv"
 # [3] "reader_59_reading_measures.csv" "reader_61_reading_measures.csv"
@@ -79,12 +79,13 @@ motr_df
 ```{r}
 # Average across subjects
 motr_agg_df = motr_df %>%
+  drop_na() %>%
   group_by(expr_id, cond_id, para_nr, word, word_nr, metric) %>%
     summarise(value = mean(value)) %>%    # sum up four subjects for each metric and divide by 4.
   ungroup() %>%
-  arrange(expr_id, cond_id, para_nr, word_nr)   # like sort in python 
+  arrange(expr_id, cond_id, para_nr, word_nr)   # like sort in python
 
-#View(motr_agg_df)
+# View(motr_agg_df)
 
 motr_agg_df
 
