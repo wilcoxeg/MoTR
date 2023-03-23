@@ -1,0 +1,164 @@
+sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean,response
+55,1,1,1,0, The ,399,10055,10454,101.44,33.06,No
+55,1,1,1,9, away ,447,11629,12076,482.44,45.06,No
+55,1,1,2,1, talked ,223,952,1175,162.67,43.22,No
+55,1,1,2,4, reporter ,423,2025,2448,265.59,41.24,No
+55,1,1,2,6, the ,484,2589,3073,358.95,42.7,No
+55,1,1,2,9, pictures ,543,3380,3923,572.27,39.64,No
+55,1,1,3,8, reported ,484,2237,2721,486.05,42.37,Yes
+55,1,1,4,0, The ,829,383,1212,111.52,30.36,Yes
+55,1,1,5,6, carpenter ,578,1936,2514,395.35,42.35,Yes
+55,1,1,5,9, materials ,275,2611,2886,553.18,33.18,Yes
+55,1,1,6,0, The ,383,771,1154,97,41.13,Yes
+55,1,1,6,1, police ,351,1900,2251,154.71,43.36,Yes
+55,1,1,6,2, arrested ,330,2251,2581,217.69,27.08,Yes
+55,1,1,6,3, the ,390,2581,2971,254.47,36.4,Yes
+55,1,1,6,1, police ,399,3047,3446,138.5,41.31,Yes
+55,1,1,6,2, arrested ,275,3948,4223,211.91,42.36,Yes
+55,1,1,6,4, burglar ,629,4347,4976,292.8,43.36,Yes
+55,1,1,6,5, and ,202,4976,5178,352.12,42,Yes
+55,1,1,6,7, brother ,474,5277,5751,434.58,44.89,Yes
+55,1,1,6,10, lawyer ,351,5899,6250,553.36,44.86,Yes
+55,1,1,6,12, help. ,250,6298,6548,651.7,44.4,Yes
+55,1,1,7,0, The ,327,753,1080,108.85,39.54,No
+55,1,1,8,0, The ,236,1185,1421,91.33,40,Yes
+55,1,1,8,3, about ,579,1662,2241,312.13,39.48,Yes
+55,1,1,8,7, the ,304,2611,2915,468.33,44.83,Yes
+55,1,1,8,13, dessert. ,246,3490,3736,700.9,46.1,Yes
+55,1,2,9,5," model, ",480,1385,1865,330.32,39,Yes
+55,1,2,9,11, bow ,344,2415,2759,557.07,36,Yes
+55,1,2,9,14, show. ,2507,2834,5341,680.75,39.25,Yes
+55,1,2,10,0, The ,230,1080,1310,101.44,39.78,No
+55,1,2,10,7, parents ,471,2632,3103,507.79,38.58,No
+55,1,2,11,4," baby, ",397,1396,1793,295.69,39,No
+55,1,2,11,9, his ,349,2044,2393,477.93,46,No
+55,1,2,12,0, Diane ,651,766,1417,104.96,33.88,Yes
+55,1,2,12,3," boyfriend, ",455,1541,1996,273.5,38.61,Yes
+55,1,2,12,7, felt ,353,2266,2619,450.43,45.57,Yes
+55,1,2,12,8, uncomfortable ,225,2619,2844,535.33,38.78,Yes
+55,1,2,13,1, producer ,422,1051,1473,144.29,35.06,Yes
+55,1,2,13,7, actress ,203,2797,3000,454.88,39.38,Yes
+55,1,2,14,0, The ,351,697,1048,95.86,39.79,Yes
+55,1,2,14,1, audience ,278,1048,1326,171.82,38.64,Yes
+55,1,2,14,2, applauded ,471,1326,1797,233.63,38.74,Yes
+55,1,2,14,4," guitarist, ",346,1851,2197,345.07,37.21,Yes
+55,1,2,14,11, very ,319,3406,3725,662.38,40.23,Yes
+55,1,2,15,0, Jim ,303,1030,1333,101.67,45,No
+55,1,2,15,10, organist ,270,2811,3081,543.27,40.82,No
+55,1,2,16,1, ranger ,424,939,1363,133.71,42.88,No
+55,1,2,16,3, matches ,597,1466,2063,273.92,42.42,No
+55,1,2,16,10, made ,201,3187,3388,544.5,43,No
+55,1,2,16,13, by ,334,3488,3822,641.54,40.69,No
+55,2,1,1,2, now ,474,1178,1652,198.53,42.32,Because of rumors.
+55,2,1,1,6, might ,450,1976,2426,385.5,40.22,Because of rumors.
+55,2,1,1,15, company ,252,4202,4454,141.3,78,Because of rumors.
+55,2,1,1,17, maintaining ,474,4506,4980,277.84,84.26,Because of rumors.
+55,2,1,1,19, customary ,323,5029,5352,370.46,81.54,Because of rumors.
+55,2,1,1,20, silence. ,399,5352,5751,466.62,83.62,Because of rumors.
+55,2,1,1,24, have ,350,6128,6478,667.86,80.86,Because of rumors.
+55,2,1,1,26, microphone ,474,6579,7053,105.89,118.68,Because of rumors.
+55,2,1,1,30, you ,450,7255,7705,335.89,113.89,Because of rumors.
+55,2,1,1,43, glance ,424,9402,9826,127.47,161.76,Because of rumors.
+55,2,1,1,50, the ,347,10280,10627,357.86,158.93,Because of rumors.
+55,2,1,2,0, Two ,275,1424,1699,97.73,36.36,Spots on the sun.
+55,2,1,2,3, the ,350,1999,2349,237.36,38.79,Spots on the sun.
+55,2,1,2,5, astronomer ,227,2497,2724,320.89,45.11,Spots on the sun.
+55,2,1,2,7, Carrington ,251,3199,3450,499.6,42.4,Spots on the sun.
+55,2,1,2,10, the ,219,3954,4173,680.22,43.22,Spots on the sun.
+55,2,1,2,11, interesting ,499,4599,5098,113.65,77.25,Spots on the sun.
+55,2,1,2,12, sunspot ,280,5098,5378,210.73,76.09,Spots on the sun.
+55,2,1,2,16, telescope ,241,6131,6372,413.7,81.8,Spots on the sun.
+55,2,1,2,22, described ,445,7202,7647,686.33,76.17,Spots on the sun.
+55,2,1,2,28, bright ,277,7872,8149,317.91,118.82,Spots on the sun.
+55,2,1,2,28, bright ,426,9072,9498,303.53,125.18,Spots on the sun.
+55,2,1,2,30, white ,216,9556,9772,397.44,108.67,Spots on the sun.
+55,2,1,2,32, over ,416,9957,10373,480.88,126.29,Spots on the sun.
+55,2,1,2,42, record. ,307,11573,11880,260.5,157.17,Spots on the sun.
+55,2,1,2,41, painstaking ,276,12449,12725,167.27,156.64,Spots on the sun.
+55,2,1,2,44, night ,251,13272,13523,328.9,157.7,Spots on the sun.
+55,2,1,2,45, there ,400,13523,13923,394.62,164.12,Spots on the sun.
+55,2,1,2,50, inch ,376,14248,14624,589.2,154.93,Spots on the sun.
+55,2,1,2,58, aurora. ,245,15152,15397,241.1,188.6,Spots on the sun.
+55,2,1,2,55, not ,300,15498,15798,97.83,199.17,Spots on the sun.
+55,2,1,2,56, illuminated ,201,15798,15999,159.38,199.12,Spots on the sun.
+55,2,1,3,1, agree ,351,1262,1613,108.14,31.07,Everywhere in the United States.
+55,2,1,3,3, California's ,545,1668,2213,229.5,35.68,Everywhere in the United States.
+55,2,1,3,4," ""three ",309,2213,2522,310.42,38.75,Everywhere in the United States.
+55,2,1,3,13, financial ,422,3641,4063,633.29,40.71,Everywhere in the United States.
+55,2,1,3,14, disaster ,205,4063,4268,727.38,36.75,Everywhere in the United States.
+55,2,1,3,16, taxpayers ,472,4842,5314,113.74,80.74,Everywhere in the United States.
+55,2,1,3,19, about ,403,5612,6015,267.5,75.81,Everywhere in the United States.
+55,2,1,3,20, education ,297,6015,6312,333.58,81.08,Everywhere in the United States.
+55,2,1,3,22, other ,400,6389,6789,435.69,85.94,Everywhere in the United States.
+55,2,1,3,36, credited ,447,8768,9215,294.72,120.39,Everywhere in the United States.
+55,2,1,3,39, reduction ,201,9289,9490,423.88,115.38,Everywhere in the United States.
+55,2,1,3,41, crime ,347,9566,9913,475.14,121,Everywhere in the United States.
+55,2,1,4,0, Liza ,250,1112,1362,103.1,44.9,Because her work is interrupted needlessly.
+55,2,1,4,5," temper, ",480,1561,2041,243,39.79,Because her work is interrupted needlessly.
+55,2,1,4,8, was ,450,2236,2686,384.44,40,Because her work is interrupted needlessly.
+55,2,1,4,10, the ,205,2837,3042,465,36,Because her work is interrupted needlessly.
+55,2,1,4,11, Christmas ,226,3042,3268,509.89,36.33,Because her work is interrupted needlessly.
+55,2,1,4,28," cheek, ",250,6687,6937,551.6,81.3,Because her work is interrupted needlessly.
+55,2,1,4,30, Nana's ,459,6987,7446,649.33,82.5,Because her work is interrupted needlessly.
+55,2,1,4,31, absurd ,216,7446,7662,710.56,85,Because her work is interrupted needlessly.
+55,2,1,4,37, way ,301,7763,8064,369.42,108.83,Because her work is interrupted needlessly.
+55,2,1,4,32, suspicions. ,724,8166,8890,146.07,120.76,Because her work is interrupted needlessly.
+55,2,1,4,36, best ,457,9204,9661,325.53,122.05,Because her work is interrupted needlessly.
+55,2,1,4,39, getting ,676,9837,10513,448,124,Because her work is interrupted needlessly.
+55,2,1,4,43, was ,448,10641,11089,582.5,115.83,Because her work is interrupted needlessly.
+55,2,1,4,49, nursery ,251,12015,12266,108.5,157.4,Because her work is interrupted needlessly.
+55,2,1,4,55, custody ,250,12989,13239,343.3,157.9,Because her work is interrupted needlessly.
+55,2,1,5,0, Mrs. ,275,1048,1323,99.55,42.73,No
+55,2,1,5,3, and ,378,1498,1876,290.67,38.33,No
+55,2,1,5,9, was ,444,2278,2722,479.89,37.89,No
+55,2,1,5,10, securely ,225,2722,2947,549.89,37.56,No
+55,2,1,5,11, fastened. ,235,2947,3182,618,39,No
+55,2,1,5,12, She ,416,3182,3598,677.82,45.53,No
+55,2,1,5,19, peppered ,402,4947,5349,287.06,81.81,No
+55,2,1,5,22, They ,376,5448,5824,453.87,84,No
+55,2,1,5,27," house, ",226,6472,6698,712.33,85.22,No
+55,2,1,5,33, what ,373,7703,8076,225.2,112.6,No
+55,2,1,5,37, place ,394,8355,8749,356,123.38,No
+55,2,1,5,43, notice ,232,9350,9582,598.67,120.67,No
+55,2,1,5,54, winked ,417,10755,11172,301.47,158.76,No
+55,2,1,6,0, Seeing ,901,1324,2225,109.56,40.31,He was afraid of Peter and his dagger.
+55,2,1,6,2, slowly ,247,2428,2675,226.1,35.5,He was afraid of Peter and his dagger.
+55,2,1,6,3, advancing ,579,2675,3254,280.43,34.83,He was afraid of Peter and his dagger.
+55,2,1,6,4, upon ,465,3685,4150,342.37,38.95,He was afraid of Peter and his dagger.
+55,2,1,6,6, through ,252,4235,4487,445.2,38.9,He was afraid of Peter and his dagger.
+55,2,1,6,8, air ,342,4535,4877,529.71,41,He was afraid of Peter and his dagger.
+55,2,1,6,11," poised, ",212,5075,5287,657.38,40.62,He was afraid of Peter and his dagger.
+55,2,1,6,13, sprang ,445,5354,5799,741.33,41.89,He was afraid of Peter and his dagger.
+55,2,1,6,19, himself ,297,5906,6203,332.17,83.17,He was afraid of Peter and his dagger.
+55,2,1,6,14, upon ,355,6251,6606,102.07,76.21,He was afraid of Peter and his dagger.
+55,2,1,6,16, bulwarks ,275,6750,7025,194.36,73.55,He was afraid of Peter and his dagger.
+55,2,1,6,17, to ,352,7025,7377,246.43,69,He was afraid of Peter and his dagger.
+55,2,1,6,18, cast ,352,7377,7729,288.43,76.64,He was afraid of Peter and his dagger.
+55,2,1,6,27, that ,351,8928,9279,606.57,80.64,He was afraid of Peter and his dagger.
+55,2,1,6,36, purposely ,499,11051,11550,300.95,125.35,He was afraid of Peter and his dagger.
+55,2,1,6,37, stopped ,255,11550,11805,384,120.5,He was afraid of Peter and his dagger.
+55,2,1,6,40, that ,376,11978,12354,499,115.87,He was afraid of Peter and his dagger.
+55,2,1,6,42, knowledge ,756,12454,13210,612.23,118.9,He was afraid of Peter and his dagger.
+55,2,1,6,45, spared ,503,13925,14428,112.25,156.85,He was afraid of Peter and his dagger.
+55,2,1,6,49, mark ,373,14777,15150,247.07,161.93,He was afraid of Peter and his dagger.
+55,2,1,6,56, end. ,350,15600,15950,493.57,161.86,He was afraid of Peter and his dagger.
+55,2,1,7,0, Dorothy ,389,2021,2410,124.06,40.88,At a crossroads.
+55,2,1,7,5, around ,448,2884,3332,363.33,37.94,At a crossroads.
+55,2,1,7,7, anxiously ,629,3408,4037,493.64,39,At a crossroads.
+55,2,1,7,10, familiar ,307,4161,4468,630.42,38.17,At a crossroads.
+55,2,1,7,11, landmark; ,589,4468,5057,711.67,39.96,At a crossroads.
+55,2,1,7,16, Between ,497,5988,6485,315.7,84.9,At a crossroads.
+55,2,1,7,18, branches ,226,6507,6733,432.78,74.11,At a crossroads.
+55,2,1,7,20, the ,370,6790,7160,496.33,79.87,At a crossroads.
+55,2,1,7,24, green ,330,7582,7912,686.46,82.92,At a crossroads.
+55,2,1,7,13, everything ,295,8014,8309,122.92,85.83,At a crossroads.
+55,2,1,7,25, meadows ,251,8882,9133,123.4,119.5,At a crossroads.
+55,2,1,7,29, shrubs ,475,9458,9933,290.53,120.47,At a crossroads.
+55,2,1,7,33, she ,255,10133,10388,442.9,111.4,At a crossroads.
+55,2,1,7,34, couldn't ,495,10388,10883,477.9,117.85,At a crossroads.
+55,2,1,7,37, farm-house ,401,10986,11387,625.25,122.12,At a crossroads.
+55,2,1,7,43," come, ",300,12035,12335,224.92,162.58,At a crossroads.
+55,2,1,7,40, she ,317,12440,12757,110.69,166.15,At a crossroads.
+55,2,1,7,45, anything ,425,13034,13459,286.29,165.94,At a crossroads.
+55,2,1,7,51, except ,449,14183,14632,595.61,159.06,At a crossroads.
+55,2,1,7,56, Toto. ,327,15557,15884,116.77,205.23,At a crossroads.

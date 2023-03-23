@@ -13,8 +13,8 @@ jobs:
       matrix:
         folder:
           - experiments/motr-pilot
-          - experiments/experiment-two
-          - experiments/experiment-three
+          - experiments/motr-localCoherence
+          - experiments/motr-provo
 
     runs-on: ubuntu-latest
     steps:
