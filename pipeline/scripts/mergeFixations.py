@@ -135,7 +135,7 @@ class FixationMerger:
             writer.writeheader()
             for item in self.fixations:
                 for fixation_on_word in item:
-                    if fixation_on_word['duration'] > self.threshold_fixation and fixation_on_word['word_nr'] != -1:
+                    if self.threshold_fixation < fixation_on_word['duration'] < 4000 and fixation_on_word['word_nr'] != -1:
                         writer.writerow(fixation_on_word)
 
 

@@ -8,7 +8,6 @@ sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean
 56,1,1,1,8, ran ,606,5430,6036,447.29,33.88,No
 56,1,1,1,9, away ,557,6036,6593,499.14,34,No
 56,1,1,1,11, the ,513,6698,7211,565.81,34.71,No
-56,1,1,1,13, station. ,7233,7291,14524,645.6,37.7,No
 56,1,1,2,0, Jenny ,1119,896,2015,109.2,42.68,No
 56,1,1,2,4, reporter ,581,2661,3242,249.91,44.13,No
 56,1,1,2,5, and ,606,3242,3848,337.28,41,No
@@ -41,7 +40,6 @@ sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean
 56,1,1,5,6, carpenter ,301,4941,5242,399.5,43.42,Yes
 56,1,1,5,7, ordered ,708,5242,5950,457.11,40.04,Yes
 56,1,1,5,9, materials ,649,5994,6643,564.46,27.23,Yes
-56,1,1,5,12, house. ,6581,6774,13355,666.82,41.29,Yes
 56,1,1,6,0, The ,599,2049,2648,95.54,39.96,Yes
 56,1,1,6,1, police ,249,2648,2897,150.8,39,Yes
 56,1,1,6,2, arrested ,577,2897,3474,207.74,38.96,Yes
@@ -162,7 +160,6 @@ sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean
 56,2,1,1,27, or ,468,26032,26500,192.28,119,Because of rumors.
 56,2,1,1,28," speaker, ",777,26500,27277,243.66,118.25,Because of rumors.
 56,2,1,1,29, but ,780,27277,28057,289.45,113,Because of rumors.
-56,2,1,1,30, you ,4183,28057,32240,326.65,113,Because of rumors.
 56,2,1,1,32, use ,208,32388,32596,393.38,121.75,Because of rumors.
 56,2,1,1,33, it ,500,32596,33096,420.7,123,Because of rumors.
 56,2,1,1,35, control ,754,33126,33880,479.47,116.63,Because of rumors.
@@ -276,7 +273,6 @@ sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean
 56,2,1,3,57, nationwide. ,343,29527,29870,597.29,146.29,Only in California.
 56,2,1,3,3, California's ,828,30638,31466,237,34.79,Only in California.
 56,2,1,3,5, strikes ,431,31611,32042,332.94,34.65,Only in California.
-56,2,1,3,20, education ,7878,32042,39920,354,83,Only in California.
 56,2,1,4,0, Liza ,1647,1933,3580,103.12,37.36,Because her work is interrupted needlessly.
 56,2,1,4,1, was ,648,3580,4228,146.15,33.31,Because her work is interrupted needlessly.
 56,2,1,4,4, bad ,594,4346,4940,204.04,37.62,Because her work is interrupted needlessly.

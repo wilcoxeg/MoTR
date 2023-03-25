@@ -210,7 +210,7 @@ provo_df %>%
 
 ```{r}
 gd_df = provo_df %>% filter(metric == "total_duration") %>% spread(measure, value)
-View(gd_df)
+# View(gd_df)
 
 cor.test(gd_df$eyetr_value, gd_df$motr_value)          #cor rise from 0.529 to 0.5989 
 

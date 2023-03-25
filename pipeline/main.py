@@ -42,16 +42,16 @@ if __name__ == '__main__':
 
     # Step 3: for each divided raw data file, merge the fixations, filter noises
 
-    # input_paths_f = Path('./raw_data_divided').glob('*.csv')
-    # output_path_f = Path('./fixations_merged/f160')
-    # for input_path in input_paths_f:
-    #     # print('I am working on :', input_path)
-    #     # 70 -> threshold for fixation;
-    #     # 35 for filtering space between line. -> change from 30 to 40 has big influences in filtering. More loose.
-    #     objMerger = FixationMerger(input_path, output_path_f, 160)
-    #     objMerger.sort_fixations_by_itemid()
-    #     # objMerger.write_out_all_merged_fixations()
-    #     objMerger.write_out_denoise_merged_fixations()
+    input_paths_f = Path('./raw_data_divided').glob('*.csv')
+    output_path_f = Path('./fixations_merged/f160')
+    for input_path in input_paths_f:
+        # print('I am working on :', input_path)
+        # 70 -> threshold for fixation;
+        # 35 for filtering space between line. -> change from 30 to 40 has big influences in filtering. More loose.
+        objMerger = FixationMerger(input_path, output_path_f, 160)
+        objMerger.sort_fixations_by_itemid()
+        # objMerger.write_out_all_merged_fixations()
+        objMerger.write_out_denoise_merged_fixations()
 
     # Step 4: for each merged fixation file, combine fixations to get linguistic features.
 
@@ -63,22 +63,22 @@ if __name__ == '__main__':
     # combined_df = pd.concat([df1, df2])
     # combined_df.to_csv('./preprocessed_trialData/localCoherence_provo_combined.csv', index=False)
 
-#     input_paths_trial = Path('./preprocessed_trialData/localCoherence_provo_combined.csv')
-#     input_paths_l = Path('./fixations_merged/f160').glob('*_denoised.csv')
-#     output_path_l = Path('./reading_measures/cleaned_f160')
-# 
-#     for input_path in input_paths_l:
-#         print("I am working on: ", input_path)
-#         # 70 is still the threshold for fixation --> the same as above but for different structure of experiment.
-#         objFeatureExtractor = FeatureExtractor(input_paths_trial,
-#                                                input_path,
-#                                                output_path_l, 160)
-#         objFeatureExtractor.check_comprehension_answer()
-#         objFeatureExtractor.get_first_duration()
-#         objFeatureExtractor.get_total_duration()
-#         objFeatureExtractor.get_gaze_duration()
-#         objFeatureExtractor.get_right_bounded_rt()
-#         objFeatureExtractor.get_right_bounded_rt_manual()
-#         objFeatureExtractor.get_go_pass_time()
-#         objFeatureExtractor.get_binary()
-#         objFeatureExtractor.write_out()
+    input_paths_trial = Path('./preprocessed_trialData/localCoherence_provo_combined.csv')
+    input_paths_l = Path('./fixations_merged/f160').glob('*_denoised.csv')
+    output_path_l = Path('./reading_measures/cleaned_f160')
+
+    for input_path in input_paths_l:
+        print("I am working on: ", input_path)
+        # 70 is still the threshold for fixation --> the same as above but for different structure of experiment.
+        objFeatureExtractor = FeatureExtractor(input_paths_trial,
+                                               input_path,
+                                               output_path_l, 160)
+        objFeatureExtractor.check_comprehension_answer()
+        objFeatureExtractor.get_first_duration()
+        objFeatureExtractor.get_total_duration()
+        objFeatureExtractor.get_gaze_duration()
+        objFeatureExtractor.get_right_bounded_rt()
+        objFeatureExtractor.get_right_bounded_rt_manual()
+        objFeatureExtractor.get_go_pass_time()
+        objFeatureExtractor.get_binary()
+        objFeatureExtractor.write_out()

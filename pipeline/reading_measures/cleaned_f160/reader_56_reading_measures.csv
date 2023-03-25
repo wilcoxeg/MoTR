@@ -12,7 +12,7 @@ expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,f
 1,1,1,from,10,No,No,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 1,1,1,the,11,No,No,1.0,513.0,513.0,513.0,513.0,513.0,513.0,1.0,0.0
 1,1,1,police,12,No,No,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-1,1,1,station.,13,No,No,1.0,7233.0,7233.0,7233.0,7233.0,7233.0,7233.0,1.0,0.0
+1,1,1,station.,13,No,No,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 1,1,2,Jenny,0,No,No,1.0,1119.0,1119.0,1119.0,1119.0,1119.0,1119.0,1.0,0.0
 1,1,2,talked,1,No,No,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 1,1,2,to,2,No,No,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
@@ -63,7 +63,7 @@ expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,f
 1,1,5,materials,9,Yes,Yes,1.0,649.0,649.0,649.0,649.0,649.0,649.0,1.0,0.0
 1,1,5,for,10,Yes,Yes,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 1,1,5,the,11,Yes,Yes,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-1,1,5,house.,12,Yes,Yes,1.0,6581.0,6581.0,6581.0,6581.0,6581.0,6581.0,1.0,0.0
+1,1,5,house.,12,Yes,Yes,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 1,1,6,The,0,Yes,Yes,1.0,599.0,599.0,599.0,599.0,599.0,599.0,1.0,0.0
 1,1,6,police,1,Yes,Yes,1.0,249.0,249.0,249.0,249.0,249.0,249.0,1.0,0.0
 1,1,6,arrested,2,Yes,Yes,1.0,577.0,577.0,577.0,577.0,577.0,577.0,1.0,0.0
@@ -246,7 +246,7 @@ expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,f
 2,1,1,or,27,Because of rumors.,Because of rumors.,1.0,468.0,468.0,0.0,0.0,0.0,0.0,0.0,0.0
 2,1,1,"speaker,",28,Because of rumors.,Because of rumors.,1.0,280.0,1057.0,280.0,1057.0,1057.0,11196.0,1.0,1.0
 2,1,1,but,29,Because of rumors.,Because of rumors.,1.0,780.0,780.0,780.0,780.0,780.0,780.0,1.0,0.0
-2,1,1,you,30,Because of rumors.,Because of rumors.,1.0,4183.0,4183.0,4183.0,4183.0,4183.0,4183.0,1.0,0.0
+2,1,1,you,30,Because of rumors.,Because of rumors.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 2,1,1,can,31,Because of rumors.,Because of rumors.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 2,1,1,use,32,Because of rumors.,Because of rumors.,1.0,208.0,208.0,208.0,208.0,208.0,208.0,1.0,0.0
 2,1,1,it,33,Because of rumors.,Because of rumors.,1.0,500.0,500.0,500.0,500.0,500.0,500.0,1.0,0.0
@@ -352,7 +352,7 @@ expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,f
 2,1,3,who,17,Everywhere in the United States.,Only in California.,0.0,541.0,541.0,541.0,541.0,541.0,541.0,1.0,0.0
 2,1,3,care,18,Everywhere in the United States.,Only in California.,0.0,598.0,598.0,598.0,598.0,598.0,598.0,1.0,0.0
 2,1,3,about,19,Everywhere in the United States.,Only in California.,0.0,618.0,618.0,618.0,618.0,618.0,618.0,1.0,0.0
-2,1,3,education,20,Everywhere in the United States.,Only in California.,0.0,630.0,8508.0,630.0,630.0,630.0,630.0,1.0,0.0
+2,1,3,education,20,Everywhere in the United States.,Only in California.,0.0,630.0,630.0,630.0,630.0,630.0,630.0,1.0,0.0
 2,1,3,and,21,Everywhere in the United States.,Only in California.,0.0,526.0,526.0,526.0,526.0,526.0,526.0,1.0,0.0
 2,1,3,other,22,Everywhere in the United States.,Only in California.,0.0,178.0,178.0,178.0,178.0,178.0,178.0,1.0,0.0
 2,1,3,vital,23,Everywhere in the United States.,Only in California.,0.0,523.0,523.0,523.0,523.0,523.0,523.0,1.0,0.0
@@ -389,7 +389,7 @@ expr_id,cond_id,para_nr,word,word_nr,response_true,response_chosen,correctness,f
 2,1,3,crime,54,Everywhere in the United States.,Only in California.,0.0,485.0,485.0,485.0,485.0,485.0,485.0,1.0,0.0
 2,1,3,also,55,Everywhere in the United States.,Only in California.,0.0,547.0,547.0,547.0,547.0,547.0,547.0,1.0,0.0
 2,1,3,dropped,56,Everywhere in the United States.,Only in California.,0.0,601.0,601.0,601.0,601.0,601.0,601.0,1.0,0.0
-2,1,3,nationwide.,57,Everywhere in the United States.,Only in California.,0.0,343.0,343.0,343.0,343.0,343.0,9480.0,1.0,1.0
+2,1,3,nationwide.,57,Everywhere in the United States.,Only in California.,0.0,343.0,343.0,343.0,343.0,343.0,1602.0,1.0,1.0
 2,1,4,Liza,0,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1.0,1647.0,1647.0,1647.0,1647.0,1647.0,1647.0,1.0,0.0
 2,1,4,was,1,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1.0,648.0,648.0,648.0,648.0,648.0,648.0,1.0,0.0
 2,1,4,in,2,Because her work is interrupted needlessly.,Because her work is interrupted needlessly.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
