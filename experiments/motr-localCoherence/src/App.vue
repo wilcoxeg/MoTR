@@ -88,7 +88,7 @@
     </InstructionScreen>
 
     <template v-for="(trial, i) of trials">
-      <Screen :key="i" class="main_screen">
+      <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide>
           <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
@@ -138,7 +138,11 @@
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import localCoherence_items from '../trials/localCoherence.tsv';
+import localCoherence_list1 from '../trials/localCoherence_list1.tsv';
+import localCoherence_list2 from '../trials/localCoherence_list2.tsv';
+import localCoherence_list3 from '../trials/localCoherence_list3.tsv';
+import localCoherence_practice from '../trials/localCoherence_practice.tsv';
+
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -146,7 +150,10 @@ Vue.use(vBlur)
 export default {
   name: 'App',
   data() {
-    const trials = _.shuffle(localCoherence_items);
+    const lists = [localCoherence_list1, localCoherence_list2, localCoherence_list3];
+    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
+    const shuffledItems = _.shuffle(chosenItems); 
+    const trials = _.concat(localCoherence_practice, shuffledItems);
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
     const updatedTrials = trials.map(trial => {
@@ -219,14 +226,15 @@ export default {
         this.currentIndex = elementAtCursor.getAttribute('data-index');
       } else {
         this.$el.querySelector(".oval-cursor").classList.add('blank');
-        const elementAboveCursor = document.elementFromPoint(x, y-3).closest('span');
+        const elementAboveCursor = document.elementFromPoint(x, y-10).closest('span');
         if (elementAboveCursor){
           this.currentIndex = elementAboveCursor.getAttribute('data-index');
         } else {
           this.currentIndex = -1;
         }
       }
-//       console.log(this.currentIndex);
+      // console.log(this.currentIndex);
+      // console.log('len', this.trials.length);
       
       this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
       this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
@@ -310,7 +318,7 @@ export default {
   } 
   .oval-cursor.grow.blank {
     width: 80px;
-    height: 13px;
+    height: 38px;
   }
   .oval-cursor.grow {
     width: 102px;
