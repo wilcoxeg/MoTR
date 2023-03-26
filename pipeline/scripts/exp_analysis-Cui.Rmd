@@ -406,10 +406,12 @@ motr_attach_df = motr_df %>%
                                                                   if_else(cond_id == 7, "practice", "filler")))))))) %>%
   filter(metric != "FPReg") %>%
   filter(cond_id == "relative_high" | cond_id == "relative_low") %>%
+  # filter(cond_id == "No Comma" | cond_id == "Comma") %>%
 
   # filter(! (item_id == 4 & cond_id == "No Comma") ) %>% # just because of alignment issues for now
   
   mutate(crit = if_else(word == "who", word_nr, as.integer(0) )) %>%
+  # mutate(crit = if_else(word == "and", word_nr, as.integer(0) )) %>%
   group_by(cond_id, item_id) %>%
     mutate(crit = unique(crit)[2]) %>%
   ungroup() %>%
