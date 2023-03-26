@@ -42,7 +42,7 @@ local_coherence	1	relative_low	6	20	The niece of the fisherman who got himself a
 local_coherence	1	relative_low	6	19	The grandma of the policeman who educated himself at night became a teacher.	Did the grandma of the policeman become a teacher?	yes	no
 local_coherence	1	relative_low	6	18	The uncle of the girl who prepared herself for the race was a great athlete.	Was the uncle of the girl a great athlete?	yes	no
 local_coherence	1	relative_low	6	17	The nephew of the queen who praised herself all the time was very rude.	Was the queen very rude?	no	yes
-local_coherence	1	relative_high	5	12	The sister of the prince who injured hrself falling off a roof was still sad.	Was the prince sad?	no	yes
+local_coherence	1	relative_high	5	12	The sister of the prince who injured herself falling off a roof was still sad.	Was the prince sad?	no	yes
 local_coherence	1	relative_high	5	11	The daughter of the actor who hated herself for failing always seemed unhappy.	Was the daughter of the actor happy?	no	yes
 local_coherence	1	relative_high	5	10	The sister of the salesman who made a fool of herself at work was very angry.	Was the sister of the salesman angry?	yes	no
 local_coherence	1	relative_high	5	9	The daughter of the man who complimented herself in public was beautiful.	Was the daughter of the man beautiful?	yes	no

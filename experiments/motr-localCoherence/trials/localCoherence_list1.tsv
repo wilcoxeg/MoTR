@@ -2,7 +2,7 @@ experiment	experiment_id	condition	condition_id	item_id	text	question	response_t
 local_coherence	1	adverb_low	4	60	Amy will visit the man she worked with last month, but she is nervous about it.	Is Amy nervous?	yes	no
 local_coherence	1	adverb_low	4	59	Paul will marry the woman he just met last month, but the wedding will be small.	Will Paul have a small wedding?	yes	no
 local_coherence	1	adverb_low	4	58	Dan wrote the speech he will deliver next month, but he hasn't practiced it yet.	Has Dan practiced the speech?	no	yes
-local_coherence	1	adverb_low	4	57	Jeff planned the party he will hold next month, but he hasn't sent invitations.	Has Jeff send invitations?	no	yes
+local_coherence	1	adverb_low	4	57	Jeff planned the party he will hold next month, but he hasn't sent invitations.	Has Jeff sent invitations?	no	yes
 local_coherence	1	and_comma	2	36	The crowd cheered for the model, and the designer took a bow after the show.	Did the designer take a bow?	yes	no
 local_coherence	1	and_comma	2	35	The juggler entertained the children, and their parents drank wine at the party.	Did the juggler drink wine?	no	yes
 local_coherence	1	and_comma	2	34	The woman dressed her baby, and her son got his clothes from the dresser.	Did the women dress her son?	no	yes
@@ -28,7 +28,7 @@ local_coherence	1	and_no_comma	1	30	Jim listened to the pianist and the singer w
 local_coherence	1	and_no_comma	1	29	The ranger gave matches to the camper and his friend made a fire by the tent.	Did the camper make a fire?	no	yes
 local_coherence	1	and_no_comma	1	28	The little girl fed her pet cat and her dog wanted a can of food, too.	Did the little girl feed her dog?	no	yes
 local_coherence	1	and_no_comma	1	27	The tourist photographed the swimmer and the runner got ready for the race.	Did the tourist photograph the runner?	no	yes
-local_coherence	1	and_no_comma	1	26	The swimmer disappointed her coach and her mother tried to console her.	Did the swimmers mother try to console her?	yes	no
+local_coherence	1	and_no_comma	1	26	The swimmer disappointed her coach and her mother tried to console her.	Did the swimmer's mother try to console her?	yes	no
 local_coherence	1	and_no_comma	1	25	The nurse examined the mother and the child played quietly in the corner.	Did the child play quietly?	yes	no
 local_coherence	1	relative_low	6	16	The grandfather of the policewoman who treated herself so badly was troubled.	Was the grandfather of the policewoman troubled?	yes	no
 local_coherence	1	relative_low	6	15	The nephew of the maid who cut herself with the knife called the doctor.	Did the nephew of the maid call the doctor?	yes	no

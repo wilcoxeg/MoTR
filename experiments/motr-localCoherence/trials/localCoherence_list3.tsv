@@ -27,7 +27,7 @@ local_coherence	1	and_comma	2	30	Jim listened to the pianist, and the singer wat
 local_coherence	1	and_comma	2	29	The ranger gave matches to the camper, and his friend made a fire by the tent.	Did the camper make a fire?	no	yes
 local_coherence	1	and_comma	2	28	The little girl fed her pet cat, and her dog wanted a can of food, too.	Did the little girl feed her dog?	no	yes
 local_coherence	1	and_comma	2	27	The tourist photographed the swimmer, and the runner got ready for the race.	Did the tourist photograph the runner?	no	yes
-local_coherence	1	and_comma	2	26	The swimmer disappointed her coach, and her mother tried to console her.	Did the swimmers mother try to console her?	yes	no
+local_coherence	1	and_comma	2	26	The swimmer disappointed her coach, and her mother tried to console her.	Did the swimmer's mother try to console her?	yes	no
 local_coherence	1	and_comma	2	25	The nurse examined the mother, and the child played quietly in the corner.	Did the child play quietly?	yes	no
 local_coherence	1	relative_high	5	24	The niece of the butler who scolded herself for losing the key was very upset.	Was the butler very upset?	no	yes
 local_coherence	1	relative_high	5	23	The aunt of the waiter who trained herself to cook wanted to own a restaurant.	Did the waiter want to own a restaurant?	no	yes
