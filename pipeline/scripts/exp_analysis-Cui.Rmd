@@ -48,7 +48,7 @@ pipe_message = function(.data, status) {message(status); .data}
 ```{r}
 # Interesting way of reading multiple files in one directory!
 
-file_prefix = "../reading_measures/cleaned_f160"
+file_prefix = "../reading_measures/cleaned_f160/provo/"
 fnames = list.files(path=file_prefix)
 
 # fnames: [1] "reader_55_reading_measures.csv" "reader_56_reading_measures.csv"
@@ -103,6 +103,7 @@ motr_provo_df = motr_agg_df %>%
   rename(text_id = para_nr,
          word_text_idx = word_nr,
          motr_value = value) %>%
+  filter(motr_value != 0.0) %>%
   dplyr::select(-expr_id, -cond_id)
 
 motr_provo_df
@@ -175,7 +176,7 @@ provo_df = merge(provo_df, motr_provo_df, by=c("text_id", "word_text_idx", "metr
   # filter(metric != "first_duration") %>%
   filter(metric != "FPReg")
 
-# View(provo_df)
+View(provo_df)
 
 
 ```
