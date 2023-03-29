@@ -295,8 +295,8 @@ export default {
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 9%;
-    padding-right: 9%;
+    padding-left: 8%;
+    padding-right: 8%;
   }
   button {
     position: absolute;
@@ -353,7 +353,7 @@ export default {
     font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 9%;
-    padding-right: 9%;
+    padding-left: 8%;
+    padding-right: 8%;
   }
 </style>
