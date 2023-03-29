@@ -88,7 +88,7 @@
     </InstructionScreen>
 
     <template v-for="(trial, i) of trials">
-      <Screen :key="i" class="main_screen">
+      <Screen :key="i" class="main_screen" :progress="i / trials.length">
         <Slide>
           <form>
             <input type="hidden" class="item_id" :value="trial.item_id">
@@ -138,7 +138,9 @@
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import provo_items from '../trials/provo_items.tsv';
+import provo_list1 from '../trials/provo_list1.tsv';
+import provo_list2 from '../trials/provo_list2.tsv';
+import provo_practice from '../trials/provo_practice.tsv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -146,7 +148,10 @@ Vue.use(vBlur)
 export default {
   name: 'App',
   data() {
-    const trials = _.shuffle(provo_items);
+    const lists = [provo_list1, provo_list2];
+    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
+    const shuffledItems = _.shuffle(chosenItems); 
+    const trials = _.concat(provo_practice, shuffledItems);
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
     const updatedTrials = trials.map(trial => {
@@ -287,8 +292,8 @@ export default {
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 9%;
-    padding-right: 9%;
+    padding-left: 11%;
+    padding-right: 11%;
   }
   button {
     position: absolute;
@@ -345,7 +350,7 @@ export default {
     font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 9%;
-    padding-right: 9%;
+    padding-left: 11%;
+    padding-right: 11%;
   }
 </style>

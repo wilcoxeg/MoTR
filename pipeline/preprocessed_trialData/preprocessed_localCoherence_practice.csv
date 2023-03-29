@@ -1,0 +1,43 @@
+experiment,experiment_id,condition,condition_id,item_id,text,question,response_true,response_distractors,word_nr
+local_coherence,1,practice,7,103,Maya,Did Maya play with the blocks?,yes,no,0
+local_coherence,1,practice,7,103,played,Did Maya play with the blocks?,yes,no,1
+local_coherence,1,practice,7,103,with,Did Maya play with the blocks?,yes,no,2
+local_coherence,1,practice,7,103,the,Did Maya play with the blocks?,yes,no,3
+local_coherence,1,practice,7,103,blocks,Did Maya play with the blocks?,yes,no,4
+local_coherence,1,practice,7,103,and,Did Maya play with the blocks?,yes,no,5
+local_coherence,1,practice,7,103,the,Did Maya play with the blocks?,yes,no,6
+local_coherence,1,practice,7,103,"balls,",Did Maya play with the blocks?,yes,no,7
+local_coherence,1,practice,7,103,but,Did Maya play with the blocks?,yes,no,8
+local_coherence,1,practice,7,103,she,Did Maya play with the blocks?,yes,no,9
+local_coherence,1,practice,7,103,soon,Did Maya play with the blocks?,yes,no,10
+local_coherence,1,practice,7,103,got,Did Maya play with the blocks?,yes,no,11
+local_coherence,1,practice,7,103,bored,Did Maya play with the blocks?,yes,no,12
+local_coherence,1,practice,7,103,with,Did Maya play with the blocks?,yes,no,13
+local_coherence,1,practice,7,103,them.,Did Maya play with the blocks?,yes,no,14
+local_coherence,1,practice,7,102,The,Did the patient get better without treatment?,no,yes,0
+local_coherence,1,practice,7,102,patient,Did the patient get better without treatment?,no,yes,1
+local_coherence,1,practice,7,102,who,Did the patient get better without treatment?,no,yes,2
+local_coherence,1,practice,7,102,the,Did the patient get better without treatment?,no,yes,3
+local_coherence,1,practice,7,102,doctor,Did the patient get better without treatment?,no,yes,4
+local_coherence,1,practice,7,102,treated,Did the patient get better without treatment?,no,yes,5
+local_coherence,1,practice,7,102,became,Did the patient get better without treatment?,no,yes,6
+local_coherence,1,practice,7,102,better,Did the patient get better without treatment?,no,yes,7
+local_coherence,1,practice,7,102,after,Did the patient get better without treatment?,no,yes,8
+local_coherence,1,practice,7,102,only,Did the patient get better without treatment?,no,yes,9
+local_coherence,1,practice,7,102,a,Did the patient get better without treatment?,no,yes,10
+local_coherence,1,practice,7,102,few,Did the patient get better without treatment?,no,yes,11
+local_coherence,1,practice,7,102,treatments.,Did the patient get better without treatment?,no,yes,12
+local_coherence,1,practice,7,101,The,Did the woman buy roses?,no,yes,0
+local_coherence,1,practice,7,101,husband,Did the woman buy roses?,no,yes,1
+local_coherence,1,practice,7,101,of,Did the woman buy roses?,no,yes,2
+local_coherence,1,practice,7,101,the,Did the woman buy roses?,no,yes,3
+local_coherence,1,practice,7,101,beautiful,Did the woman buy roses?,no,yes,4
+local_coherence,1,practice,7,101,woman,Did the woman buy roses?,no,yes,5
+local_coherence,1,practice,7,101,bought,Did the woman buy roses?,no,yes,6
+local_coherence,1,practice,7,101,her,Did the woman buy roses?,no,yes,7
+local_coherence,1,practice,7,101,roses,Did the woman buy roses?,no,yes,8
+local_coherence,1,practice,7,101,and,Did the woman buy roses?,no,yes,9
+local_coherence,1,practice,7,101,candy,Did the woman buy roses?,no,yes,10
+local_coherence,1,practice,7,101,for,Did the woman buy roses?,no,yes,11
+local_coherence,1,practice,7,101,her,Did the woman buy roses?,no,yes,12
+local_coherence,1,practice,7,101,birthday.,Did the woman buy roses?,no,yes,13

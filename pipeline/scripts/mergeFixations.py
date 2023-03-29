@@ -87,7 +87,10 @@ class FixationMerger:
                         writer.writerow(fixation_on_word)
 
     def sort_fixations_by_itemid(self) -> None:
+        # print(self.fixations[0])
+        # print(len(self.fixations))
         self.fixations = sorted(self.fixations, key=lambda x: (x[0]['expr_id'], x[0]['para_nr']))
+        # self.fixations = sorted(self.fixations, key=lambda x: x[0]['para_nr'] if x else float('inf'))
 
     def _clear_noises_before_reading(self):
         for i in range(len(self.fixations)):

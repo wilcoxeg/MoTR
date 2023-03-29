@@ -50,6 +50,7 @@ pipe_message = function(.data, status) {message(status); .data}
 
 file_prefix = "../reading_measures/cleaned_f160"
 fnames = list.files(path=file_prefix)
+
 # fnames: [1] "reader_55_reading_measures.csv" "reader_56_reading_measures.csv"
 # [3] "reader_59_reading_measures.csv" "reader_61_reading_measures.csv"
 
@@ -356,7 +357,6 @@ for (m in metrics) {
 
 
 ```{r}
-
 # Surprisal curves
   ggplot() +
       geom_line(data = smooths_df, aes(x=surp, y=y, color = psychometric), size=0.7) +
@@ -370,6 +370,15 @@ for (m in metrics) {
     legend.position = "none",
     panel.grid.minor = element_blank()
   )
+```
+
+
+
+
+
+
+```{r}
+
 
 
 
@@ -381,25 +390,37 @@ for (m in metrics) {
 
 
 ```{r}
+# View(motr_df)
 
 motr_attach_df = motr_df %>%
   filter(expr_id == "Attachment") %>%
   rename( item_id = para_nr) %>%
   mutate(item_id = as.integer(item_id)) %>%
   mutate(cond_id = as.factor(cond_id)) %>%
-  mutate(cond_id = if_else(cond_id == 1, "No Comma", "Comma")) %>%
+  mutate(cond_id = if_else(cond_id == 1, "No Comma", 
+                          if_else(cond_id == 2, "Comma", 
+                                  if_else(cond_id == 3, "adv_high",
+                                          if_else(cond_id == 4, "adv_low",
+                                                  if_else(cond_id == 5, "relative_high",
+                                                          if_else(cond_id == 6, "relative_low",
+                                                                  if_else(cond_id == 7, "practice", "filler")))))))) %>%
   filter(metric != "FPReg") %>%
+  filter(cond_id == "relative_high" | cond_id == "relative_low") %>%
+  # filter(cond_id == "No Comma" | cond_id == "Comma") %>%
 
-  filter(! (item_id == 4 & cond_id == "No Comma") ) %>% # just because of alignment issues for now
+  # filter(! (item_id == 4 & cond_id == "No Comma") ) %>% # just because of alignment issues for now
   
-  mutate(crit = if_else(word == "and", word_nr, as.integer(0) )) %>%
+  mutate(crit = if_else(word == "who", word_nr, as.integer(0) )) %>%
+  # mutate(crit = if_else(word == "and", word_nr, as.integer(0) )) %>%
   group_by(cond_id, item_id) %>%
     mutate(crit = unique(crit)[2]) %>%
   ungroup() %>%
   mutate(word_nr = word_nr - crit)
+View(motr_attach_df)
 
 
 agg_motr_attach_df = motr_attach_df %>%
+  drop_na() %>%
   filter(word_nr >= -2, word_nr < 6) %>%
   group_by(cond_id, word_nr, metric) %>%
     summarise( m = mean(value),
@@ -408,6 +429,8 @@ agg_motr_attach_df = motr_attach_df %>%
                lower = m - 1.98 * sd,
                n = n()) %>%
   ungroup()
+
+View(agg_motr_attach_df)
 
 agg_motr_attach_df %>%
   ggplot(aes(x = word_nr, y = m, color = cond_id)) +
@@ -419,7 +442,8 @@ agg_motr_attach_df %>%
     #facet_grid(para_nr~cond_id) +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-2:5, labels=c("the", "man", "and", "his", "wife", "ran", "away", "from")) +
+  # scale_x_continuous(breaks=-2:5, labels=c("the", "man", "and", "his", "wife", "ran", "away", "from")) +
+  scale_x_continuous(breaks=-2:5, labels=c('the', 'queen', 'who', 'praised', 'herself', 'all', 'the', 'time')) +
   facet_grid(~metric) +
   theme(
     legend.position = "bottom",
