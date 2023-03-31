@@ -81,9 +81,11 @@
 
 
     <InstructionScreen :title="'Instruction'">
+<!-- 
       <p>Please use the "Fullscreen Mode" for the duration of the experiment:
         <a href="javascript:void(0)" @click="turnOnFullScreen">Fullscreen Mode</a>
       </p>
+ -->
       <p>In this study, you will read short texts and answer questions about them. However, unlike in normal reading, the texts will be blurred. In order to bring the text into focus move your mouse over it. Take as much time to read the text as you need in order to understand it. When you are done reading, answer the question at the bottom and click “next” to move on.</p>
     </InstructionScreen>
 
@@ -175,7 +177,7 @@ export default {
   computed: {
   },
   mounted() { 
-    setInterval(this.saveData, 25);
+    setInterval(this.saveData, 50);
     },
   methods: {
     changeBack() {
@@ -244,20 +246,20 @@ export default {
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;
     },
-    async turnOnFullScreen() {
-      if (!document.fullscreenElement) {
-        try {
-          await document.documentElement.requestFullscreen();
-          return true;
-        } catch (e) {
-          return false;
-        }
-      }
-      return true;
-    },
-    turnOffFullScreen() {
-      document.exitFullscreen();
-    },
+    // async turnOnFullScreen() {
+//       if (!document.fullscreenElement) {
+//         try {
+//           await document.documentElement.requestFullscreen();
+//           return true;
+//         } catch (e) {
+//           return false;
+//         }
+//       }
+//       return true;
+//     },
+//     turnOffFullScreen() {
+//       document.exitFullscreen();
+//     },
     getScreenDimensions() {
       return {
         window_inner_width: window.innerWidth,
