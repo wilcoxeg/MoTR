@@ -48,7 +48,7 @@ pipe_message = function(.data, status) {message(status); .data}
 ```{r}
 # Interesting way of reading multiple files in one directory!
 
-file_prefix = "../reading_measures/cleaned_f160/provo/"
+file_prefix = "../reading_measures/cleaned_f160"
 fnames = list.files(path=file_prefix)
 
 # fnames: [1] "reader_55_reading_measures.csv" "reader_56_reading_measures.csv"
@@ -391,7 +391,7 @@ for (m in metrics) {
 
 
 ```{r}
-# View(motr_df)
+View(motr_df)
 
 motr_attach_df = motr_df %>%
   filter(expr_id == "Attachment") %>%
