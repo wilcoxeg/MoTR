@@ -140,10 +140,8 @@
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import provo_list1 from '../trials/provo_items_list1.tsv';
-import provo_list2 from '../trials/provo_items_list2.tsv';
 import provo_list3 from '../trials/provo_items_list3.tsv';
-import provo_practice from '../trials/provo_practice.tsv';
+import provo_practice from '../trials/provo_items_practice.tsv';
 import _ from 'lodash';
 import Vue from 'vue';
 import vBlur from 'v-blur';
@@ -151,9 +149,7 @@ Vue.use(vBlur)
 export default {
   name: 'App',
   data() {
-    const lists = [provo_list1, provo_list2, provo_list3];
-    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
-    const shuffledItems = _.shuffle(chosenItems); 
+    const shuffledItems = _.shuffle(provo_list3); 
     const trials = _.concat(provo_practice, shuffledItems);
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
@@ -244,7 +240,7 @@ export default {
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;
     },
-   //  async turnOnFullScreen() {
+    // async turnOnFullScreen() {
 //       if (!document.fullscreenElement) {
 //         try {
 //           await document.documentElement.requestFullscreen();
