@@ -1,9 +1,9 @@
 export default {
-  experimentId: '4',
-  serverUrl: 'https://gentle-everglades-00112.herokuapp.com/',
-  socketUrl: 'wss://gentle-everglades-00112.herokuapp.com/socket',
+  experimentId: '5',
+  serverUrl: 'https://cui-motr-new.herokuapp.com/',
+  socketUrl: 'wss://cui-motr-new.herokuapp.com/socket',
   // this will be used in prolific mode
-  completionUrl: 'https://...',
+  completionUrl: 'https://app.prolific.co/submissions/complete?cc=C1I4D2OB',
   contactEmail: 'cui.ding@uzh.ch',
   // Either 'debug', 'directLink' or 'prolific'
   mode: 'prolific',
