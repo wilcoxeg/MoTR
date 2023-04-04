@@ -332,11 +332,13 @@ raw_df = df %>%
   filter(correctness == 1) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
-  filter(subj > 107) %>%
+  filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj)
 
 raw_df
+
+#length(unique(table(raw_df$subj)))
 ```
 
 ```{r}
@@ -434,7 +436,7 @@ motr_coord_plotting_df %>%
     #facet_grid(para_nr~cond_id) +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-4:3, labels=c("man", "and", "his", "wife", "ran", "away", "from", "the")) +
+  scale_x_continuous(breaks=-4:3, labels=c("man", "and/,and", "his", "wife", "ran", "away", "from", "the")) +
   facet_wrap(.~metric, scales="free_y") +
   theme(
     legend.position = "bottom",
@@ -451,9 +453,9 @@ motr_rc_df = motr_df %>%
   group_by(condition, item_id) %>%
     mutate(crit = unique(crit)[2]) %>%
   ungroup() %>%
-  mutate(word_nr = word_nr - crit) %>%
-  mutate(zero = if_else(metric != "FPReg" & value == 0, T, F)) %>%
-  filter(zero == F)
+  mutate(word_nr = word_nr - crit) #%>%
+  #mutate(zero = if_else(metric != "FPReg" & value == 0, T, F)) %>%
+  #filter(zero == F)
 
 agg_motr_rc_df = motr_rc_df %>%
   filter(word_nr >= -4, word_nr < 4) %>%
@@ -474,7 +476,7 @@ for(i in -3:3) {
       mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
       mutate(condition = if_else(condition == "high", 1, 0)) %>%
       mutate(value = scale(value)) 
-    model = lmer(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df)
+    model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
     pval = coef(summary(model))[10]
     estimate = coef(summary(model))[2]
     result_df = data.frame(word_nr = i, metric = m, pval = pval, est = estimate)
