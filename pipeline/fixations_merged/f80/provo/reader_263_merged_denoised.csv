@@ -1,0 +1,361 @@
+sbm_id,expr_id,cond_id,para_nr,word_nr,word,duration,start_t,end_t,x_mean,y_mean,response
+63,2,1,1,0, There ,82,2018,2100,110.67,27.67,Because of rumors.
+63,2,1,1,0, There ,823,2521,3344,95.85,40.45,Because of rumors.
+63,2,1,1,1, are ,179,3344,3523,141.43,44.86,Because of rumors.
+63,2,1,1,2, now ,519,3523,4042,181.57,48.81,Because of rumors.
+63,2,1,1,3, rumblings ,731,4042,4773,251.66,41.14,Because of rumors.
+63,2,1,1,4, that ,125,4773,4898,301.2,31.6,Because of rumors.
+63,2,1,1,5, Apple ,895,4898,5793,341.19,34.08,Because of rumors.
+63,2,1,1,6, might ,199,5793,5992,399,40.38,Because of rumors.
+63,2,1,1,7, soon ,302,5992,6294,432.33,41.42,Because of rumors.
+63,2,1,1,8, invade ,599,6294,6893,497.25,39.83,Because of rumors.
+63,2,1,1,6, might ,450,7043,7493,377.11,29.89,Because of rumors.
+63,2,1,1,4, that ,581,7542,8123,296.7,43.74,Because of rumors.
+63,2,1,1,5, Apple ,100,8123,8223,348.5,41.5,Because of rumors.
+63,2,1,1,6, might ,169,8223,8392,383.71,41,Because of rumors.
+63,2,1,1,7, soon ,151,8392,8543,441.33,40.33,Because of rumors.
+63,2,1,1,8, invade ,301,8543,8844,488.67,42.92,Because of rumors.
+63,2,1,1,9, the ,174,8844,9018,532.86,46,Because of rumors.
+63,2,1,1,10, smart ,302,9018,9320,568.67,44.33,Because of rumors.
+63,2,1,1,11, watch ,323,9320,9643,628,46.54,Because of rumors.
+63,2,1,1,12," space, ",380,9643,10023,673.73,42.07,Because of rumors.
+63,2,1,1,13, though ,371,10023,10394,721.27,43.6,Because of rumors.
+63,2,1,1,15, company ,223,10719,10942,151.89,77.56,Because of rumors.
+63,2,1,1,14, the ,556,10942,11498,91.18,73.86,Because of rumors.
+63,2,1,1,15, company ,274,11498,11772,150.82,83.27,Because of rumors.
+63,2,1,1,16, is ,123,11772,11895,195,87,Because of rumors.
+63,2,1,1,17, maintaining ,1154,11895,13049,246.37,80.52,Because of rumors.
+63,2,1,1,18, its ,123,13049,13172,315.6,73.4,Because of rumors.
+63,2,1,1,19, customary ,627,13172,13799,359.12,78.36,Because of rumors.
+63,2,1,1,20, silence. ,750,13799,14549,442.8,77.63,Because of rumors.
+63,2,1,1,21, The ,193,14549,14742,493.88,80,Because of rumors.
+63,2,1,1,22, watch ,152,14742,14894,538.5,76.67,Because of rumors.
+63,2,1,1,23, doesn't ,401,14894,15295,597.25,83.38,Because of rumors.
+63,2,1,1,24, have ,449,15295,15744,637.89,83.83,Because of rumors.
+63,2,1,1,26, microphone ,501,15822,16323,725.3,86.7,Because of rumors.
+63,2,1,1,27, or ,648,16974,17622,84.27,125.15,Because of rumors.
+63,2,1,1,28," speaker, ",250,17622,17872,149.4,115,Because of rumors.
+63,2,1,1,29, but ,295,17872,18167,184.75,116,Because of rumors.
+63,2,1,1,30, you ,182,18167,18349,219.43,116.43,Because of rumors.
+63,2,1,1,31, can ,320,18349,18669,253.15,119.92,Because of rumors.
+63,2,1,1,32, use ,177,18669,18846,286.86,119.86,Because of rumors.
+63,2,1,1,34, to ,95,18923,19018,328,119,Because of rumors.
+63,2,1,1,35, control ,576,19018,19594,367.74,122.52,Because of rumors.
+63,2,1,1,37, music ,325,19667,19992,454.92,121,Because of rumors.
+63,2,1,1,38, on ,176,19992,20168,489.57,118.57,Because of rumors.
+63,2,1,1,39, your ,525,20168,20693,531.52,118,Because of rumors.
+63,2,1,1,40, phone. ,657,20693,21350,581.08,119.77,Because of rumors.
+63,2,1,1,41, You ,167,21350,21517,618.86,118.29,Because of rumors.
+63,2,1,1,42, can ,252,21517,21769,658.6,112.3,Because of rumors.
+63,2,1,1,43, glance ,425,21769,22194,702,112.41,Because of rumors.
+63,2,1,1,44, at ,250,22194,22444,737,116.7,Because of rumors.
+63,2,1,1,46, watch ,704,23043,23747,91.29,161.68,Because of rumors.
+63,2,1,1,47, face ,199,23747,23946,150.75,163.88,Because of rumors.
+63,2,1,1,48, to ,100,23946,24046,181.25,160.25,Because of rumors.
+63,2,1,1,49, view ,576,24046,24622,209.39,157.13,Because of rumors.
+63,2,1,1,50, the ,100,24622,24722,247.75,157,Because of rumors.
+63,2,1,1,51, artist ,222,24722,24944,282.56,157.22,Because of rumors.
+63,2,1,1,52, and ,154,24944,25098,324.83,159.83,Because of rumors.
+63,2,1,1,53, title ,252,25098,25350,355.4,160,Because of rumors.
+63,2,1,1,54, of ,174,25350,25524,382.43,157.14,Because of rumors.
+63,2,1,1,55, a ,177,25524,25701,398.57,156,Because of rumors.
+63,2,1,1,56, song. ,123,25701,25824,417.6,161.4,Because of rumors.
+63,2,1,2,1, days ,154,6059,6213,118.33,47.67,Spots on the sun.
+63,2,1,2,0, Two ,3000,6213,9213,113.03,43.83,Spots on the sun.
+63,2,1,2,4, British ,229,9834,10063,253.67,30.33,Spots on the sun.
+63,2,1,2,3, the ,299,10063,10362,213.25,33.5,Spots on the sun.
+63,2,1,2,4, British ,125,10362,10487,271.4,42.6,Spots on the sun.
+63,2,1,2,5, astronomer ,475,10487,10962,332.47,44.47,Spots on the sun.
+63,2,1,2,6, Richard ,522,10962,11484,401.33,41.62,Spots on the sun.
+63,2,1,2,7, Carrington ,475,11484,11959,483.42,41.21,Spots on the sun.
+63,2,1,2,8, was ,129,11959,12088,560,45.2,Spots on the sun.
+63,2,1,2,9, observing ,600,12088,12688,631.29,47.96,Spots on the sun.
+63,2,1,2,11, interesting ,651,12712,13363,733.54,43.81,Spots on the sun.
+63,2,1,2,12, sunspot ,479,14084,14563,107.74,77.95,Spots on the sun.
+63,2,1,2,13, group ,221,14563,14784,177.11,76.67,Spots on the sun.
+63,2,1,2,14, through ,878,14784,15662,226.74,83.2,Spots on the sun.
+63,2,1,2,15, his ,249,15662,15911,276.4,81.7,Spots on the sun.
+63,2,1,2,16, telescope ,651,15911,16562,349.65,80.85,Spots on the sun.
+63,2,1,2,17, when ,300,16562,16862,401.67,81.17,Spots on the sun.
+63,2,1,2,18, he ,150,16862,17012,431,80.83,Spots on the sun.
+63,2,1,2,19, saw ,100,17012,17112,461.5,79.5,Spots on the sun.
+63,2,1,2,22, described ,673,17239,17912,573,85.33,Spots on the sun.
+63,2,1,2,23, as ,150,17912,18062,645.83,82.17,Spots on the sun.
+63,2,1,2,24," ""two ",300,18062,18362,671.17,83.5,Spots on the sun.
+63,2,1,2,25, patches ,572,18362,18934,736.09,81.3,Spots on the sun.
+63,2,1,2,27, intensely ,605,19785,20390,107.71,125.04,Spots on the sun.
+63,2,1,2,28, bright ,873,20390,21263,170.86,124.2,Spots on the sun.
+63,2,1,2,29, and ,148,21263,21411,220.33,109,Spots on the sun.
+63,2,1,2,30, white ,151,21411,21562,267.67,109.17,Spots on the sun.
+63,2,1,2,31," light"" ",678,21562,22240,301.89,114.33,Spots on the sun.
+63,2,1,2,32, over ,121,22240,22361,337,119.2,Spots on the sun.
+63,2,1,2,34, sunspots. ,773,22411,23184,435.42,120.35,Spots on the sun.
+63,2,1,2,35, He ,99,23184,23283,498.5,122,Spots on the sun.
+63,2,1,2,36, jotted ,478,23283,23761,547.16,122.68,Spots on the sun.
+63,2,1,2,38, note ,128,23809,23937,595.2,123,Spots on the sun.
+63,2,1,2,40, his ,125,23987,24112,647.2,125.8,Spots on the sun.
+63,2,1,2,41, painstaking ,551,24112,24663,703.95,123.05,Spots on the sun.
+63,2,1,2,42, record. ,173,25438,25611,121,163,Spots on the sun.
+63,2,1,2,43, That ,300,25611,25911,154.5,160,Spots on the sun.
+63,2,1,2,44, night ,150,25911,26061,202.67,161,Spots on the sun.
+63,2,1,2,45, there ,451,26061,26512,233.83,159.94,Spots on the sun.
+63,2,1,2,46, was ,99,26512,26611,287,155.5,Spots on the sun.
+63,2,1,2,47, scarcely ,629,26611,27240,345.48,155.76,Spots on the sun.
+63,2,1,2,49, square ,178,27261,27439,433.14,152,Spots on the sun.
+63,2,1,2,50, inch ,472,27439,27911,455.11,152,Spots on the sun.
+63,2,1,2,52, earth ,300,27961,28261,531.42,154.58,Spots on the sun.
+63,2,1,2,56, illuminated ,426,28885,29311,695.35,162.24,Spots on the sun.
+63,2,1,2,54, was ,250,29361,29611,610,159.6,Spots on the sun.
+63,2,1,2,56, illuminated ,422,29661,30083,715.18,161.82,Spots on the sun.
+63,2,1,2,58, aurora. ,554,30584,31138,105.95,196.55,Spots on the sun.
+63,2,1,2,58, aurora. ,100,31312,31412,87,202.25,Spots on the sun.
+63,2,1,2,30, white ,129,31562,31691,267.6,123.6,Spots on the sun.
+63,2,1,2,31," light"" ",120,31691,31811,295.8,124,Spots on the sun.
+63,2,1,2,47, scarcely ,301,31862,32163,352.58,163.42,Spots on the sun.
+63,2,1,3,1, agree ,446,4873,5319,90.39,43.78,Everywhere in the United States.
+63,2,1,3,3, California's ,154,6019,6173,232.67,39.17,Everywhere in the United States.
+63,2,1,3,3, California's ,829,6444,7273,214.7,34.58,Everywhere in the United States.
+63,2,1,3,4," ""three ",597,7273,7870,308.79,40.88,Everywhere in the United States.
+63,2,1,3,5, strikes ,179,7870,8049,340.43,42,Everywhere in the United States.
+63,2,1,3,7, you're ,501,8122,8623,453.05,47.35,Everywhere in the United States.
+63,2,1,3,9, law ,99,8646,8745,520.25,40,Everywhere in the United States.
+63,2,1,3,10, will ,279,8745,9024,546.91,42.18,Everywhere in the United States.
+63,2,1,3,11, be ,122,9024,9146,572.2,44,Everywhere in the United States.
+63,2,1,3,13, financial ,579,9194,9773,653.7,44,Everywhere in the United States.
+63,2,1,3,16, taxpayers ,501,10772,11273,111,77.1,Everywhere in the United States.
+63,2,1,3,17, who ,100,11273,11373,179.5,72,Everywhere in the United States.
+63,2,1,3,18, care ,200,11373,11573,215.12,78.5,Everywhere in the United States.
+63,2,1,3,20, education ,473,12150,12623,325.37,72.37,Everywhere in the United States.
+63,2,1,3,21, and ,545,12623,13168,400.23,75.32,Everywhere in the United States.
+63,2,1,3,22, other ,233,13168,13401,437.11,73.44,Everywhere in the United States.
+63,2,1,3,23, vital ,93,13401,13494,465,73.25,Everywhere in the United States.
+63,2,1,3,24, services. ,528,13494,14022,540.71,82.1,Everywhere in the United States.
+63,2,1,3,27, far ,98,14145,14243,641,71.5,Everywhere in the United States.
+63,2,1,3,28, from ,279,14243,14522,668.36,74.27,Everywhere in the United States.
+63,2,1,3,29, clear ,200,14522,14722,710.88,78.38,Everywhere in the United States.
+63,2,1,3,30, that ,200,14722,14922,745,81.5,Everywhere in the United States.
+63,2,1,3,16, taxpayers ,101,15049,15150,93,73,Everywhere in the United States.
+63,2,1,3,31, the ,599,15723,16322,95.88,119.58,Everywhere in the United States.
+63,2,1,3,33, can ,223,16396,16619,156.89,121.44,Everywhere in the United States.
+63,2,1,3,34, even ,175,16619,16794,194.86,124,Everywhere in the United States.
+63,2,1,3,35, be ,478,16794,17272,236.63,124,Everywhere in the United States.
+63,2,1,3,36, credited ,271,17272,17543,275.36,121.27,Everywhere in the United States.
+63,2,1,3,37, with ,151,17543,17694,328.5,121.67,Everywhere in the United States.
+63,2,1,3,39, reduction ,652,17718,18370,389.12,126.31,Everywhere in the United States.
+63,2,1,3,40, in ,99,18370,18469,450.25,114,Everywhere in the United States.
+63,2,1,3,41, crime ,603,18469,19072,493.54,118.42,Everywhere in the United States.
+63,2,1,3,43, California. ,277,19145,19422,567.91,121.55,Everywhere in the United States.
+63,2,1,3,44, While ,251,19544,19795,651,122.4,Everywhere in the United States.
+63,2,1,3,45, it's ,124,19795,19919,677,118.8,Everywhere in the United States.
+63,2,1,3,46, true ,103,19919,20022,707.25,118.5,Everywhere in the United States.
+63,2,1,3,47, that ,249,20022,20271,742.5,114.1,Everywhere in the United States.
+63,2,1,3,48, crime ,427,20872,21299,106.41,155.41,Everywhere in the United States.
+63,2,1,3,49, declined ,622,21299,21921,177.64,161.6,Everywhere in the United States.
+63,2,1,3,51, California ,206,21995,22201,256.38,160.88,Everywhere in the United States.
+63,2,1,3,52, last ,120,22201,22321,317.2,164.8,Everywhere in the United States.
+63,2,1,3,53," year, ",501,22321,22822,346.95,163.35,Everywhere in the United States.
+63,2,1,3,54, crime ,125,22822,22947,396.2,159.2,Everywhere in the United States.
+63,2,1,3,55, also ,225,22947,23172,441.44,158.89,Everywhere in the United States.
+63,2,1,3,56, dropped ,279,23172,23451,501.55,164.73,Everywhere in the United States.
+63,2,1,3,57, nationwide. ,492,23451,23943,569.25,162,Everywhere in the United States.
+63,2,1,3,41, crime ,108,23993,24101,472.5,121.25,Everywhere in the United States.
+63,2,1,3,39, reduction ,324,24171,24495,404.85,116.46,Everywhere in the United States.
+63,2,1,3,37, with ,200,24521,24721,328.38,124.75,Everywhere in the United States.
+63,2,1,3,36, credited ,549,24721,25270,267,124.14,Everywhere in the United States.
+63,2,1,4,0, Liza ,425,1491,1916,93.47,42.88,Because her work is interrupted needlessly.
+63,2,1,4,3, a ,474,2039,2513,183.53,38,Because her work is interrupted needlessly.
+63,2,1,4,4, bad ,500,2513,3013,201,38.7,Because her work is interrupted needlessly.
+63,2,1,4,5," temper, ",176,3013,3189,261.57,40.29,Because her work is interrupted needlessly.
+63,2,1,4,6, for ,129,3189,3318,301.6,45.4,Because her work is interrupted needlessly.
+63,2,1,4,7, she ,395,3318,3713,316.88,46,Because her work is interrupted needlessly.
+63,2,1,4,9, mixing ,624,3789,4413,421.12,47.76,Because her work is interrupted needlessly.
+63,2,1,4,11, Christmas ,701,4489,5190,507.39,44,Because her work is interrupted needlessly.
+63,2,1,4,12, puddings ,573,5190,5763,609.83,36.48,Because her work is interrupted needlessly.
+63,2,1,4,14, the ,134,5789,5923,668,36.4,Because her work is interrupted needlessly.
+63,2,1,4,15," kitchen, ",343,5923,6266,716.07,41.43,Because her work is interrupted needlessly.
+63,2,1,4,16, and ,123,6266,6389,753.8,43,Because her work is interrupted needlessly.
+63,2,1,4,33, She ,266,6623,6889,91.82,112.55,Because her work is interrupted needlessly.
+63,2,1,4,17, had ,401,6939,7340,88.81,80.75,Because her work is interrupted needlessly.
+63,2,1,4,18, been ,99,7340,7439,124.25,69.75,Because her work is interrupted needlessly.
+63,2,1,4,20, from ,101,7689,7790,238.75,74.75,Because her work is interrupted needlessly.
+63,2,1,4,19, drawn ,350,8190,8540,172.93,76,Because her work is interrupted needlessly.
+63,2,1,4,21," them, ",196,8616,8812,285.25,73.38,Because her work is interrupted needlessly.
+63,2,1,4,22, with ,225,8812,9037,322.33,80.56,Because her work is interrupted needlessly.
+63,2,1,4,23, a ,101,9037,9138,346.75,83,Because her work is interrupted needlessly.
+63,2,1,4,24, raisin ,551,9138,9689,380.36,81.09,Because her work is interrupted needlessly.
+63,2,1,4,25, still ,150,9689,9839,417.17,79.83,Because her work is interrupted needlessly.
+63,2,1,4,26, on ,174,9839,10013,444,77.57,Because her work is interrupted needlessly.
+63,2,1,4,27, her ,176,10013,10189,472.71,76,Because her work is interrupted needlessly.
+63,2,1,4,28," cheek, ",226,10189,10415,519.11,76,Because her work is interrupted needlessly.
+63,2,1,4,29, by ,99,10415,10514,559,76,Because her work is interrupted needlessly.
+63,2,1,4,30, Nana's ,575,10514,11089,586.74,76,Because her work is interrupted needlessly.
+63,2,1,4,31, absurd ,184,11089,11273,660.86,78.14,Because her work is interrupted needlessly.
+63,2,1,4,32, suspicions. ,416,11273,11689,721.06,78,Because her work is interrupted needlessly.
+63,2,1,4,33, She ,100,12539,12639,91.75,123.5,Because her work is interrupted needlessly.
+63,2,1,4,35, the ,251,12989,13240,192.2,119.5,Because her work is interrupted needlessly.
+63,2,1,4,33, She ,175,13314,13489,109.29,114.14,Because her work is interrupted needlessly.
+63,2,1,4,36, best ,271,13618,13889,229.82,117.82,Because her work is interrupted needlessly.
+63,2,1,4,37, way ,200,13889,14089,265.88,118.5,Because her work is interrupted needlessly.
+63,2,1,4,38, of ,350,14089,14439,288.79,118.07,Because her work is interrupted needlessly.
+63,2,1,4,39, getting ,149,14439,14588,344.83,116.67,Because her work is interrupted needlessly.
+63,2,1,4,41, little ,99,14639,14738,393.25,116,Because her work is interrupted needlessly.
+63,2,1,4,42, quiet ,148,14738,14886,438.5,115,Because her work is interrupted needlessly.
+63,2,1,4,43, was ,378,14886,15264,467.73,114.93,Because her work is interrupted needlessly.
+63,2,1,4,45, take ,273,15313,15586,540.55,113.73,Because her work is interrupted needlessly.
+63,2,1,4,46, Nana ,250,15586,15836,579.8,112,Because her work is interrupted needlessly.
+63,2,1,4,48, the ,127,15886,16013,638.2,117.4,Because her work is interrupted needlessly.
+63,2,1,4,49, nursery ,323,16013,16336,695.08,115.77,Because her work is interrupted needlessly.
+63,2,1,4,50, for ,150,16336,16486,720.67,116,Because her work is interrupted needlessly.
+63,2,1,4,52," moment, ",378,16937,17315,119.33,162.27,Because her work is interrupted needlessly.
+63,2,1,4,53, but ,100,17620,17720,173.75,161.5,Because her work is interrupted needlessly.
+63,2,1,4,54, in ,217,17720,17937,192.67,158.56,Because her work is interrupted needlessly.
+63,2,1,4,55, custody ,624,17937,18561,231.32,159.56,Because her work is interrupted needlessly.
+63,2,1,4,56, of ,249,18561,18810,281.1,163,Because her work is interrupted needlessly.
+63,2,1,4,54, in ,131,18912,19043,187.2,150,Because her work is interrupted needlessly.
+63,2,1,4,53, but ,171,19043,19214,182,150,Because her work is interrupted needlessly.
+63,2,1,4,54, in ,149,19214,19363,191.17,152,Because her work is interrupted needlessly.
+63,2,1,4,55, custody ,523,19363,19886,228.29,158.05,Because her work is interrupted needlessly.
+63,2,1,4,57, course. ,584,19936,20520,305.96,152.39,Because her work is interrupted needlessly.
+63,2,1,5,0, Mrs. ,629,964,1593,94.8,34.16,No
+63,2,1,5,1, Darling ,100,1593,1693,140.75,41,No
+63,2,1,5,2, quivered ,201,1693,1894,212.12,39.25,No
+63,2,1,5,4, went ,99,2438,2537,326.5,48.75,No
+63,2,1,5,5, to ,125,2537,2662,340.4,46.4,No
+63,2,1,5,6, the ,99,2662,2761,371.5,39,No
+63,2,1,5,7, window. ,583,2761,3344,420.78,37.74,No
+63,2,1,5,9, was ,125,3361,3486,488.4,37,No
+63,2,1,5,10, securely ,277,3486,3763,535,39.18,No
+63,2,1,5,11, fastened. ,430,3763,4193,604.18,44.41,No
+63,2,1,5,12, She ,118,4193,4311,677.6,36.2,No
+63,2,1,5,13, looked ,550,4311,4861,719.77,36.68,No
+63,2,1,5,18, was ,325,5062,5387,212.69,85.38,No
+63,2,1,5,15, and ,224,5837,6061,91.67,83.56,No
+63,2,1,5,17, night ,99,6139,6238,164.5,78,No
+63,2,1,5,18, was ,126,6238,6364,206,81,No
+63,2,1,5,19, peppered ,530,6364,6894,242.52,86.86,No
+63,2,1,5,20, with ,149,6894,7043,322.17,83,No
+63,2,1,5,21, stars. ,500,7043,7543,366.2,84,No
+63,2,1,5,23, were ,149,7612,7761,458.33,86.83,No
+63,2,1,5,25, round ,101,8243,8344,584.5,78,No
+63,2,1,5,27," house, ",249,8644,8893,687,75,No
+63,2,1,5,25, round ,227,8916,9143,594.33,70.33,No
+63,2,1,5,27," house, ",350,9211,9561,672.07,76.5,No
+63,2,1,5,28, as ,181,9561,9742,703.57,75.57,No
+63,2,1,5,30, curious ,181,9912,10093,109.29,121.71,No
+63,2,1,5,33, what ,133,10511,10644,219.2,118.2,No
+63,2,1,5,34, was ,442,10644,11086,256.61,120,No
+63,2,1,5,38," there, ",176,11312,11488,413.43,109.57,No
+63,2,1,5,39, but ,354,11488,11842,447.64,121.29,No
+63,2,1,5,40, she ,369,11842,12211,478.93,127.93,No
+63,2,1,5,42, not ,102,12261,12363,544,125,No
+63,2,1,5,43, notice ,298,12363,12661,580.17,125,No
+63,2,1,5,44," this, ",129,12661,12790,623,127.8,No
+63,2,1,5,46, that ,100,12840,12940,697,121,No
+63,2,1,5,47, one ,221,12940,13161,719.22,116.11,No
+63,2,1,5,50, of ,155,14161,14316,122.17,160.17,No
+63,2,1,5,51, the ,173,14316,14489,142,160,No
+63,2,1,5,54, winked ,101,14711,14812,308,157.25,No
+63,2,1,5,52, smaller ,275,15112,15387,205.82,160.91,No
+63,2,1,5,53, ones ,106,15387,15493,250.5,153,No
+63,2,1,5,54, winked ,520,15493,16013,312,156.76,No
+63,2,1,6,0, Seeing ,175,1678,1853,90.71,40,He couldn’t get over the bulwarks.
+63,2,1,6,1, Peter ,124,1853,1977,162,41.2,He couldn’t get over the bulwarks.
+63,2,1,6,2, slowly ,576,1977,2553,209.17,44,He couldn’t get over the bulwarks.
+63,2,1,6,3, advancing ,200,2553,2753,280,45.12,He couldn’t get over the bulwarks.
+63,2,1,6,4, upon ,100,2753,2853,352,47,He couldn’t get over the bulwarks.
+63,2,1,6,5, him ,479,2853,3332,392.47,46,He couldn’t get over the bulwarks.
+63,2,1,6,6, through ,150,3332,3482,448.17,41.33,He couldn’t get over the bulwarks.
+63,2,1,6,7, the ,120,3482,3602,484.8,39,He couldn’t get over the bulwarks.
+63,2,1,6,8, air ,100,3602,3702,514.25,39,He couldn’t get over the bulwarks.
+63,2,1,6,9, with ,350,3702,4052,555.29,43.79,He couldn’t get over the bulwarks.
+63,2,1,6,10, dagger ,150,4052,4202,599.33,41.33,He couldn’t get over the bulwarks.
+63,2,1,6,11," poised, ",250,4202,4452,654.7,40.7,He couldn’t get over the bulwarks.
+63,2,1,6,12, he ,100,4452,4552,699.75,43.25,He couldn’t get over the bulwarks.
+63,2,1,6,13, sprang ,228,4552,4780,731.33,46.56,He couldn’t get over the bulwarks.
+63,2,1,6,14, upon ,221,5282,5503,99.11,84.44,He couldn’t get over the bulwarks.
+63,2,1,6,15, the ,100,5503,5603,132.25,82.5,He couldn’t get over the bulwarks.
+63,2,1,6,16, bulwarks ,151,5603,5754,191.83,76.67,He couldn’t get over the bulwarks.
+63,2,1,6,17, to ,398,5754,6152,243.06,76,He couldn’t get over the bulwarks.
+63,2,1,6,18, cast ,128,6152,6280,264.4,78.8,He couldn’t get over the bulwarks.
+63,2,1,6,19, himself ,202,6280,6482,309.5,80.75,He couldn’t get over the bulwarks.
+63,2,1,6,22, sea. ,468,6585,7053,433.95,80.58,He couldn’t get over the bulwarks.
+63,2,1,6,27, that ,200,7353,7553,605.62,70.88,He couldn’t get over the bulwarks.
+63,2,1,6,28, the ,227,7553,7780,634,83.56,He couldn’t get over the bulwarks.
+63,2,1,6,29, crocodile ,500,7780,8280,693.6,82.75,He couldn’t get over the bulwarks.
+63,2,1,6,31, waiting ,333,8753,9086,93.38,121.92,He couldn’t get over the bulwarks.
+63,2,1,6,33, him; ,100,9136,9236,183.5,125.5,He couldn’t get over the bulwarks.
+63,2,1,6,34, for ,416,9236,9652,218.12,123,He couldn’t get over the bulwarks.
+63,2,1,6,36, purposely ,228,9702,9930,303.44,125.56,He couldn’t get over the bulwarks.
+63,2,1,6,37, stopped ,150,10452,10602,400.67,124.83,He couldn’t get over the bulwarks.
+63,2,1,6,38, the ,225,10602,10827,420.11,120.22,He couldn’t get over the bulwarks.
+63,2,1,6,39, clock ,108,10827,10935,461.5,120,He couldn’t get over the bulwarks.
+63,2,1,6,40, that ,451,10935,11386,512.83,120,He couldn’t get over the bulwarks.
+63,2,1,6,42, knowledge ,317,11436,11753,585,110.46,He couldn’t get over the bulwarks.
+63,2,1,6,40, that ,99,11782,11881,498.25,124.75,He couldn’t get over the bulwarks.
+63,2,1,6,39, clock ,173,11881,12054,480,128,He couldn’t get over the bulwarks.
+63,2,1,6,42, knowledge ,348,12130,12478,613.71,122.64,He couldn’t get over the bulwarks.
+63,2,1,6,43, might ,207,12478,12685,666.62,123.62,He couldn’t get over the bulwarks.
+63,2,1,6,44, be ,117,12685,12802,703.6,120,He couldn’t get over the bulwarks.
+63,2,1,6,45, spared ,250,12802,13052,737.6,120,He couldn’t get over the bulwarks.
+63,2,1,6,46, him: ,522,13281,13803,109.43,155.14,He couldn’t get over the bulwarks.
+63,2,1,6,48, little ,150,13852,14002,151,158.67,He couldn’t get over the bulwarks.
+63,2,1,6,49, mark ,200,14002,14202,191.62,165.25,He couldn’t get over the bulwarks.
+63,2,1,6,50, of ,101,14202,14303,222.5,168,He couldn’t get over the bulwarks.
+63,2,1,6,51, respect ,199,14303,14502,259.38,163.62,He couldn’t get over the bulwarks.
+63,2,1,6,52, from ,400,14502,14902,309.81,161.94,He couldn’t get over the bulwarks.
+63,2,1,6,53, us ,133,14902,15035,355.4,162,He couldn’t get over the bulwarks.
+63,2,1,6,54, at ,118,15035,15153,370.8,165.2,He couldn’t get over the bulwarks.
+63,2,1,6,55, the ,150,15153,15303,398.33,168,He couldn’t get over the bulwarks.
+63,2,1,6,56, end. ,249,15303,15552,421.4,166.9,He couldn’t get over the bulwarks.
+63,2,1,6,36, purposely ,550,15753,16303,305.09,122.23,He couldn’t get over the bulwarks.
+63,2,1,6,35, we ,99,16303,16402,243.75,128.25,He couldn’t get over the bulwarks.
+63,2,1,6,34, for ,224,16653,16877,221.44,126,He couldn’t get over the bulwarks.
+63,2,1,6,36, purposely ,133,16902,17035,287.8,116.6,He couldn’t get over the bulwarks.
+63,2,1,7,0, Dorothy ,417,1384,1801,91,36.24,At a crossroads.
+63,2,1,7,2, know. ,204,1879,2083,219.38,37.38,At a crossroads.
+63,2,1,7,4, looked ,398,2654,3052,317.88,42.75,At a crossroads.
+63,2,1,7,5, around ,181,3052,3233,365.29,39.29,At a crossroads.
+63,2,1,7,6, her ,422,3233,3655,408.71,41.88,At a crossroads.
+63,2,1,7,7, anxiously ,203,3655,3858,478,33.38,At a crossroads.
+63,2,1,7,8, for ,124,3858,3982,521.8,34.2,At a crossroads.
+63,2,1,7,9, some ,445,3982,4427,553.56,35,At a crossroads.
+63,2,1,7,10, familiar ,177,4427,4604,627.57,35.43,At a crossroads.
+63,2,1,7,11, landmark; ,625,4604,5229,692.4,42.16,At a crossroads.
+63,2,1,7,13, everything ,275,5877,6152,99,79.73,At a crossroads.
+63,2,1,7,14, was ,125,6152,6277,183.4,71,At a crossroads.
+63,2,1,7,15, strange. ,725,6277,7002,248.97,79.38,At a crossroads.
+63,2,1,7,16, Between ,379,7002,7381,305.07,78.07,At a crossroads.
+63,2,1,7,18, branches ,599,7432,8031,400.21,75.08,At a crossroads.
+63,2,1,7,21, many ,205,8154,8359,534,72.88,At a crossroads.
+63,2,1,7,22, roads ,493,8359,8852,564.05,79.75,At a crossroads.
+63,2,1,7,23, were ,156,8852,9008,628.5,77.67,At a crossroads.
+63,2,1,7,24, green ,324,9008,9332,670.85,81.92,At a crossroads.
+63,2,1,7,25, meadows ,350,9332,9682,722.93,82.43,At a crossroads.
+63,2,1,7,30, and ,370,9932,10302,232.07,116.53,At a crossroads.
+63,2,1,7,26, and ,180,10702,10882,97,126.14,At a crossroads.
+63,2,1,7,28, few ,151,10951,11102,143.67,125.17,At a crossroads.
+63,2,1,7,29, shrubs ,180,11102,11282,182.14,126.43,At a crossroads.
+63,2,1,7,30, and ,198,11779,11977,239.25,128,At a crossroads.
+63,2,1,7,31," trees, ",102,11977,12079,286.25,116.75,At a crossroads.
+63,2,1,7,33, she ,648,12657,13305,348.04,116.12,At a crossroads.
+63,2,1,7,34, couldn't ,547,13305,13852,399.14,114.5,At a crossroads.
+63,2,1,7,35, see ,176,13852,14028,448.86,110.86,At a crossroads.
+63,2,1,7,36, the ,428,14028,14456,480,108.35,At a crossroads.
+63,2,1,7,37, farm-house ,499,14456,14955,544.65,115.3,At a crossroads.
+63,2,1,7,38, from ,276,14955,15231,612.64,115.64,At a crossroads.
+63,2,1,7,39, which ,200,15231,15431,659.75,111,At a crossroads.
+63,2,1,7,40, she ,271,15431,15702,706.18,108.73,At a crossroads.
+63,2,1,7,42, just ,277,16232,16509,96.64,164,At a crossroads.
+63,2,1,7,43," come, ",118,16509,16627,139.2,159.8,At a crossroads.
+63,2,1,7,45, anything ,550,16682,17232,221.23,159.73,At a crossroads.
+63,2,1,7,47, had ,155,17253,17408,314.5,162.33,At a crossroads.
+63,2,1,7,48, ever ,200,17408,17608,339.88,165.62,At a crossroads.
+63,2,1,7,49, seen ,120,17608,17728,387.8,164.6,At a crossroads.
+63,2,1,7,50," before, ",453,17728,18181,430.67,166,At a crossroads.
+63,2,1,7,51, except ,100,18181,18281,502.75,164.25,At a crossroads.
+63,2,1,7,52, the ,150,18281,18431,545,165,At a crossroads.
+63,2,1,7,53, shaggy ,201,18431,18632,581,166.88,At a crossroads.
+63,2,1,7,54, man ,121,18632,18753,644.4,161,At a crossroads.
+63,2,1,7,55, and ,250,18753,19003,685.2,161.5,At a crossroads.
+63,2,1,7,56, Toto. ,98,19003,19101,699,164.25,At a crossroads.
+63,2,1,7,55, and ,101,19101,19202,680,167,At a crossroads.
