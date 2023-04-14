@@ -37,7 +37,7 @@ pipe_message = function(.data, status) {message(status); .data}
 
 ```{r}
 
-file_prefix = "../reading_measures/cleaned_f160"
+file_prefix = "../reading_measures/motr_lc_200"
 fnames = list.files(path=file_prefix)
 
 # Read in the data
@@ -316,8 +316,14 @@ for (m in metrics) {
 
 ```{r}
 
-file_prefix = "/Users/ethan/Desktop/motr_results/"
+rate = 160
+
+file_prefix = "/Users/ethan/Desktop/motr_lc_160/"
 fnames = list.files(path=file_prefix)
+
+#library(jglmm)
+#options(JULIA_HOME = "/Applications/Julia-1.8.app/Contents/Resources/julia/bin/")
+#jglmm_setup()
 
 # Read in the data
 df = data.frame()
@@ -328,17 +334,34 @@ for (f in fnames) {
   df = rbind(df, temp)
 }
 
+filter_df = df %>%
+  group_by(para_nr, subj) %>%
+    summarise(correct = if_else(unique(correctness) == 1, 1, 0)) %>%
+  ungroup() %>%
+  drop_na() %>%
+  group_by(subj) %>%
+    summarise(p_correct = mean(correct)) %>%
+  ungroup() %>%
+  mutate(p_correct = round(p_correct, digits = 2))
+
+filter_df %>%
+  filter(p_correct < 0.8)
+  
+
+```
+
+```{r}
+
 raw_df = df %>%
-  filter(correctness == 1) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
+  # Filter out participants who were bots
   filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj)
 
 raw_df
 
-#length(unique(table(raw_df$subj)))
 ```
 
 ```{r}
@@ -373,11 +396,9 @@ motr_agg_df = motr_df %>%
 
 motr_agg_df
 
-table(motr_df$item_id)
-
 ```
 
-```{r}
+```{r, echo=F}
 
 motr_coord_df = motr_df %>%
   filter(experiment == "Coordination") %>%
@@ -392,7 +413,7 @@ motr_coord_df = motr_df %>%
   filter(zero == F)
 
 agg_motr_coord_df = motr_coord_df %>%
-  filter(word_nr >-5, word_nr < 4) %>%
+  filter(word_nr >-3, word_nr < 4) %>%
   drop_na() %>%
   group_by(condition, word_nr, metric) %>%
     summarise( m = mean(value),
@@ -404,16 +425,24 @@ agg_motr_coord_df = motr_coord_df %>%
 
 
 motr_coord_stats_df = data.frame()
-for(i in -3:3) {
-  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration")){
+for(i in -2:3) {
+  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg")){
     temp_df = motr_coord_df %>% filter(metric == m) %>% filter(word_nr == i) %>%
-      mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
-      mutate(condition = if_else(condition == "comma", 1, 0)) %>%
-      mutate(value = scale(value)) 
-    model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
-    pval = coef(summary(model))[10]
-    estimate = coef(summary(model))[2]
-    result_df = data.frame(word_nr = i, metric = m, pval = pval, est = estimate)
+      mutate(item_id = as.factor(item_id), subj = as.factor(subj), condition = if_else(condition == "comma", 1, -1))
+    if (m == "FPReg") {
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, family = "binomial")
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[8]
+    } else {
+      temp_df = temp_df %>% mutate(value = scale(value)) #scale real-valued numbers for lmer
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df)
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[10]
+    }
+    #estimate = coef(summary(model))[2]
+    result_df = data.frame(word_nr = i, metric = m, pval = pval)
     motr_coord_stats_df = rbind(motr_coord_stats_df, result_df)
   }
 }
@@ -421,27 +450,32 @@ for(i in -3:3) {
 motr_coord_plotting_df = merge(agg_motr_coord_df, motr_coord_stats_df, all=T, by = c("word_nr", "metric"))
 
 motr_coord_plotting_df %>%
-  mutate(sig = case_when( pval >= 0.05 ~ " ",
+  mutate(metric = factor(metric, levels = c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg"),
+                         labels = c("First Duration", "Gaze Duration", "Go Past Time", "Total Duration", "First Pass Regression (prob)"))) %>%
+  mutate(sig = case_when( pval >= 0.1 ~ " ",
+                      pval < 0.10 &  pval >= 0.05 ~ "•",
                       pval < 0.05 & pval >= 0.01  ~ "*",
                       pval < 0.01 & pval >= 0.001  ~ "**",
                       pval < 0.001  ~ "***")) %>%
   ggplot(aes(x = word_nr, y = m, color = condition)) +
-    #geom_rect(aes(xmin = -0.5, xmax = 3.5, ymin = 300, ymax = 800), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
+    geom_rect(aes(xmin = -0.5, xmax = 2.5, ymin = if_else(metric=="First Pass Regression (prob)", 0, 100), ymax = if_else(metric=="First Pass Regression (prob)", 0.08, 780)), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
     geom_point() +
-    geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3) +
+    geom_errorbar(aes(ymax = upper, ymin = lower), width = 0) +
     geom_line() +
-    geom_text(aes(label = sig, y = if_else(metric=="FPReg", 0, 700)), color = "black") +
-    geom_text(aes(label = " ", y = if_else(metric=="FPReg", 0, 750))) +
+    geom_text(aes(label = sig, y = if_else(metric=="First Pass Regression (prob)", 0.06, 750)), color = "black") +
+    geom_text(aes(label = " ", y = if_else(metric=="First Pass Regression (prob)", 0.06, 770))) +
     #geom_text(aes(label = word, y = if_else(cond_id == "Comma", 3000, 3500)), size = 2) +
     #facet_grid(para_nr~cond_id) +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-4:3, labels=c("man", "and/,and", "his", "wife", "ran", "away", "from", "the")) +
-  facet_wrap(.~metric, scales="free_y") +
+  scale_x_continuous(breaks=-2:3, labels=c("his", "wife", "ran", "away", "from", "the")) +
+  facet_wrap(.~metric, scales="free_y", nrow=2) +
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+
+ggsave(paste0("../visualization/fix_threshold/coord_", rate, ".pdf"), device="pdf", width = 8, height = 5)
 
 ```
 
@@ -453,12 +487,12 @@ motr_rc_df = motr_df %>%
   group_by(condition, item_id) %>%
     mutate(crit = unique(crit)[2]) %>%
   ungroup() %>%
-  mutate(word_nr = word_nr - crit) #%>%
-  #mutate(zero = if_else(metric != "FPReg" & value == 0, T, F)) %>%
-  #filter(zero == F)
+  mutate(word_nr = word_nr - crit) %>%
+  mutate(zero = if_else(metric != "FPReg" & value == 0, T, F)) %>%
+  filter(zero == F)
 
 agg_motr_rc_df = motr_rc_df %>%
-  filter(word_nr >= -4, word_nr < 4) %>%
+  filter(word_nr >= -2, word_nr <= 3) %>%
   drop_na() %>%
   group_by(condition, word_nr, metric) %>%
     summarise( m = mean(value),
@@ -470,16 +504,24 @@ agg_motr_rc_df = motr_rc_df %>%
 
 
 motr_rc_stats_df = data.frame()
-for(i in -3:3) {
-  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration")){
+for(i in -2:3) {
+  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg")){
     temp_df = motr_rc_df %>% filter(metric == m) %>% filter(word_nr == i) %>%
-      mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
-      mutate(condition = if_else(condition == "high", 1, 0)) %>%
-      mutate(value = scale(value)) 
-    model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
-    pval = coef(summary(model))[10]
+      mutate(item_id = as.factor(item_id), subj = as.factor(subj), condition = if_else(condition == "high", 1, 0))
+    if (m == "FPReg") {
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, family = "binomial")
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[8]
+    } else {
+      temp_df = temp_df %>% mutate(value = scale(value)) #scale real-valued numbers for lmer
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df)
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[10]
+    }
     estimate = coef(summary(model))[2]
-    result_df = data.frame(word_nr = i, metric = m, pval = pval, est = estimate)
+    result_df = data.frame(word_nr = i, metric = m, pval = pval)
     motr_rc_stats_df = rbind(motr_rc_stats_df, result_df)
   }
 }
@@ -487,29 +529,61 @@ for(i in -3:3) {
 motr_rc_plotting_df = merge(agg_motr_rc_df, motr_rc_stats_df, all=T, by = c("word_nr", "metric"))
 
 motr_rc_plotting_df %>%
-  mutate(sig = case_when( pval >= 0.05 ~ " ",
-                        pval < 0.05 & pval >= 0.01  ~ "*",
-                        pval < 0.01 & pval >= 0.001  ~ "**",
-                        pval < 0.001  ~ "***")) %>%
+  mutate(metric = factor(metric, levels = c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg"),
+                         labels = c("First Duration", "Gaze Duration", "Go Past Time", "Total Duration", "First Pass Regression (prob)"))) %>%
+  mutate(sig = case_when( pval >= 0.1 ~ " ",
+                      pval < 0.10 &  pval >= 0.05 ~ "•",
+                      pval < 0.05 & pval >= 0.01  ~ "*",
+                      pval < 0.01 & pval >= 0.001  ~ "**",
+                      pval < 0.001  ~ "***")) %>%
   ggplot(aes(x = word_nr, y = m, color = condition)) +
-    #geom_rect(aes(xmin = 2.5, xmax = 5.5, ymin = 100, ymax = 800), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
+    geom_rect(aes(xmin = -0.5, xmax = 2.5, ymin = if_else(metric=="First Pass Regression (prob)", 0, 300), ymax = if_else(metric=="First Pass Regression (prob)", 0.09, 850)), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3) +
     geom_line() +
-    geom_text(aes(label = sig, y = if_else(metric=="FPReg", 0, 700)), color = "black") +
-    geom_text(aes(label = " ", y = if_else(metric=="FPReg", 0, 750))) +
+    geom_text(aes(label = sig, y = if_else(metric=="First Pass Regression (prob)", 0.08, 750)), color = "black") +
+    geom_text(aes(label = " ", y = if_else(metric=="First Pass Regression (prob)", 0.085, 770))) +
     #geom_text(aes(label = word, y = if_else(cond_id == "Comma", 3000, 3500)), size = 2) +
     #facet_grid(para_nr~cond_id) +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-4:3, labels=c("the", "fisherman", "who", "got", "himself\n herself", "a", "boat", "was")) +
+  scale_x_continuous(breaks=-2:3, labels=c( "who", "got", "himself\n herself", "a", "boat", "was")) +
   facet_wrap(.~metric, scales="free_y") +
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+
+ggsave(paste0("../visualization/fix_threshold/rc_", rate, ".pdf"), device="pdf", width = 8, height = 5)
+
   
 ```
+
+```{r}
+
+library(jglmm)
+options(JULIA_HOME = "/Applications/Julia-1.8.app/Contents/Resources/julia/bin/")
+jglmm_setup()
+
+temp_df = motr_adv_df %>%
+  filter(metric == "FPReg") %>%
+  filter(word_nr == 1) %>%
+  mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
+  #mutate(condition = as.factor(condition))
+  mutate(condition = if_else(condition == "high", 1, 0))
+
+model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, family="binomial")
+nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+pval = nums[length(nums)]
+
+x = as.character(summary(model))
+y = str_extract_all(x, "[0-9]+.[0-9]+")[-1]
+
+y = as.double(substr(x, nchar(x)-61, nchar(x)-55))
+
+
+```
+
 
 ```{r}
 motr_adv_df = motr_df %>%
@@ -523,7 +597,7 @@ motr_adv_df = motr_df %>%
   filter(zero == F)
 
 agg_motr_adv_df = motr_adv_df %>%
-  filter(word_nr >= -4, word_nr < 4) %>%
+  filter(word_nr >= -2, word_nr <= 3) %>%
   drop_na() %>%
   group_by(condition, word_nr, metric) %>%
     summarise( m = mean(value),
@@ -533,17 +607,27 @@ agg_motr_adv_df = motr_adv_df %>%
                n = n()) %>%
   ungroup()
 
+table(temp_df$condition, temp_df$value)
+
 motr_adv_stats_df = data.frame()
-for(i in -3:3) {
-  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration")){
+for(i in -2:3) {
+  for(m in c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg")){
     temp_df = motr_adv_df %>% filter(metric == m) %>% filter(word_nr == i) %>%
-      mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
-      mutate(condition = if_else(condition == "high", 1, 0)) %>%
-      mutate(value = scale(value)) 
-    model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
-    pval = coef(summary(model))[10]
+      mutate(item_id = as.factor(item_id), subj = as.factor(subj), condition = if_else(condition == "high", 1, 0))
+    if (m == "FPReg") {
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, family = "binomial")
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[8]
+    } else {
+      temp_df = temp_df %>% mutate(value = scale(value)) #scale real-valued numbers for lmer
+      model = jglmm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df)
+      nums = str_extract_all(as.character(summary(model)), "[0-9]+.[0-9]+")[[1]]
+      pval = nums[length(nums)]
+      #pval = coef(summary(model))[10]
+    }
     estimate = coef(summary(model))[2]
-    result_df = data.frame(word_nr = i, metric = m, pval = pval, est = estimate)
+    result_df = data.frame(word_nr = i, metric = m, pval = pval)
     motr_adv_stats_df = rbind(motr_adv_stats_df, result_df)
   }
 }
@@ -551,45 +635,29 @@ for(i in -3:3) {
 motr_adv_plotting_df = merge(agg_motr_adv_df, motr_adv_stats_df, all=T, by = c("word_nr", "metric"))
 
 motr_adv_plotting_df %>%
+  mutate(metric = factor(metric, levels = c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg"),
+                         labels = c("First Duration", "Gaze Duration", "Go Past Time", "Total Duration", "First Pass Regression (prob)"))) %>%
   mutate(sig = case_when( pval >= 0.05 ~ " ",
                         pval < 0.05 & pval >= 0.01  ~ "*",
                         pval < 0.01 & pval >= 0.001  ~ "**",
                         pval < 0.001  ~ "***")) %>%
   ggplot(aes(x = word_nr, y = m, color = condition)) +
-    #geom_rect(aes(xmin = 2.5, xmax = 5.5, ymin = 100, ymax = 800), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
+    geom_rect(aes(xmin = -0.5, xmax = 2.5, ymin = if_else(metric=="First Pass Regression (prob)", 0, 300), ymax = if_else(metric=="First Pass Regression (prob)", 0.2, 850)), fill=alpha("white", 0), color = "#45ef70", linetype = "dotted") +
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.3) +
     geom_line() +
-    geom_text(aes(label = sig, y = if_else(metric=="FPReg", 0, 700)), color = "black") +
-    geom_text(aes(label = " ", y = if_else(metric=="FPReg", 0, 750))) +
+    geom_text(aes(label = sig, y = if_else(metric=="First Pass Regression (prob)", 0.16, 800)), color = "black") +
+    #geom_text(aes(label = " ", y = if_else(metric=="First Pass Regression (prob)", 0.17, 750))) +
   ylab("Reading Time") +
   xlab("Condition") +
-  scale_x_continuous(breaks=-4:3, labels=c("the", "photos", "she", "took", "last/next", "week,", "but", "she")) +
+  scale_x_continuous(breaks=-2:3, labels=c("she", "took", "last/next", "week,", "but", "she")) +
   facet_wrap(.~metric, scales="free_y") +
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
-```
-
-
-```{r}
-
-options(JULIA_HOME = "/Applications/Julia-1.8.app/Contents/Resources/julia/bin/")
-library(jglmm)
-jglmm_setup()
-
-attach_lm_df = motr_attach_df %>%
-  filter(metric == "gaze_duration") %>%
-  filter(word_nr == 3) %>%
-  mutate(item_id = as.factor(item_id),
-         subj = as.factor(subj))
-
-m = attach_lm_df %>%
-  lmer(value ~ cond_id + (cond_id | item_id) + (cond_id | subj), data=.)
-
-summary(m)
+ggsave(paste0("../visualization/fix_threshold/adv_", rate, ".pdf"), device="pdf", width = 8, height = 5)
 
 
 ```
