@@ -30,12 +30,19 @@ class FileDivider:
     def _fill_nan_response_column(self) -> None:
         self.raw_data_df['response'].fillna(method='bfill', inplace=True)
         self.raw_data_df['ItemId'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['ItemId'] = self.raw_data_df['ItemId'].astype(float)
+        self.raw_data_df['ItemId'] = self.raw_data_df['ItemId'].astype(int)
         self.raw_data_df['Experiment'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Experiment'] = self.raw_data_df['Experiment'].astype(float).astype(int)
         self.raw_data_df['Condition'].fillna(method='ffill', inplace=True)
+        self.raw_data_df['Condition'] = self.raw_data_df['Condition'].astype(float).astype(int)
         self.raw_data_df['Index'].fillna(value=-100, inplace=True)
+        self.raw_data_df['Index'] = self.raw_data_df['Index'].astype(float).astype(int)
         # self.raw_data_df['Word'].fillna(value="NULL", inplace=True)
         self.raw_data_df['mousePositionX'].fillna(value=425, inplace=True)
+        self.raw_data_df['mousePositionX'] = self.raw_data_df['mousePositionX'].astype(float).astype(int)
         self.raw_data_df['mousePositionY'].fillna(value=285, inplace=True)
+        self.raw_data_df['mousePositionY'] = self.raw_data_df['mousePositionY'].astype(float).astype(int)
 
 
 

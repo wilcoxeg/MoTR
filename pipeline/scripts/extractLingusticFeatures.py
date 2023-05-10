@@ -254,7 +254,8 @@ class FeatureExtractor:
     def write_out(self):
         self._make_directory()
         self.output_df.loc[self.output_df['response_chosen'] == '--', 'correctness':'FPReg'] = np.nan
-        self.output_df.to_csv(self.output_path / f'reader_{self.output_name_stem}_reading_measures.csv', index=False)
+        filtered_df = self.output_df[self.output_df['response_chosen'] != '--']
+        filtered_df.to_csv(self.output_path / f'reader_{self.output_name_stem}_reading_measures.csv', index=False)
 
 
 # input_paths_trial = Path('../preprocessed_trialData/filtered_preprocessed_trial_data.csv')

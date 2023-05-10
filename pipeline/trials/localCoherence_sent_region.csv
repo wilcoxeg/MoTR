@@ -1,0 +1,609 @@
+experiment,experiment_id,condition,condition_id,item_id,text,region,region_id,question,response_true,response_distractors
+local_coherence,1,adverb_high,3,72,Kim will display the photos she took,other,-1,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_high,3,72,"next month,",adverb,0,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_high,3,72,but she won't show,adverb+1,1,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_high,3,72,all of them.,adverb+2,2,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_high,3,70,John hired the clerk he will promote,other,-1,Did John fire an employee?,yes,no
+local_coherence,1,adverb_high,3,70,"last month, ",adverb,0,Did John fire an employee?,yes,no
+local_coherence,1,adverb_high,3,70,but he fired,adverb+1,1,Did John fire an employee?,yes,no
+local_coherence,1,adverb_high,3,70,another employee.,adverb+2,2,Did John fire an employee?,yes,no
+local_coherence,1,adverb_high,3,69,Jim painted the picture he will display ,other,-1,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_high,3,69,last month,adverb,0,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_high,3,69,but he isn't happy,adverb+1,1,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_high,3,69,with it.,adverb+2,2,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_high,3,68,Cathy will burn the wood she gathered,other,-1,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_high,3,68,"next week,",adverb,0,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_high,3,68,but she will save,adverb+1,1,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_high,3,68,some of it.,adverb+2,2,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_high,3,67,Mark will answer the email he got,other,-1,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_high,3,67,"next week,",adverb,0,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_high,3,67,but he doesn't know,adverb+1,1,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_high,3,67,what to write.,adverb+2,2,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_high,3,66,Chris cleaned the bookcase he will sell ,other,-1,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_high,3,66,"last week,",adverb,0,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_high,3,66,but it is,adverb+1,1,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_high,3,66,still very dusty.,adverb+2,2,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_high,3,65,Susan bought the wine she will drink,other,-1,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_high,3,65,"last week, ",adverb,0,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_high,3,65,but she didn't buy,adverb+1,1,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_high,3,65,any cheese.,adverb+2,2,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_high,3,64,Mike watered the flower he will sell,other,-1,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_high,3,64,"yesterday,",adverb,0,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_high,3,64,but he forgot ,adverb+1,1,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_high,3,64,to water the bush.,adverb+2,2,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_high,3,63,Mary called the applicant she will interview,other,-1,Did the applicant answer?,no,yes
+local_coherence,1,adverb_high,3,63,"yesterday,",adverb,0,Did the applicant answer?,no,yes
+local_coherence,1,adverb_high,3,63,but there was,adverb+1,1,Did the applicant answer?,no,yes
+local_coherence,1,adverb_high,3,63,no answer.,adverb+2,2,Did the applicant answer?,no,yes
+local_coherence,1,adverb_high,3,62,James will fix the car he drove,other,-1,Did James drive a car?,yes,no
+local_coherence,1,adverb_high,3,62,"tomorrow,",adverb,0,Did James drive a car?,yes,no
+local_coherence,1,adverb_high,3,62,but he will need,adverb+1,1,Did James drive a car?,yes,no
+local_coherence,1,adverb_high,3,62,some help.,adverb+2,2,Did James drive a car?,yes,no
+local_coherence,1,adverb_high,3,61,Linda will wear the sweater she washed ,other,-1,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_high,3,61,"tomorrow, ",adverb,0,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_high,3,61,but she won't wear ,adverb+1,1,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_high,3,61,her skirt.,adverb+2,2,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_low,4,60,Amy will visit the man she worked with,other,-1,Is Amy nervous?,yes,no
+local_coherence,1,adverb_low,4,60,"last month,",adverb,0,Is Amy nervous?,yes,no
+local_coherence,1,adverb_low,4,60,but she is nervous,adverb+1,1,Is Amy nervous?,yes,no
+local_coherence,1,adverb_low,4,60,about it.,adverb+2,2,Is Amy nervous?,yes,no
+local_coherence,1,adverb_low,4,59,Paul will marry the woman he just met,other,-1,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_low,4,59,"last month,",adverb,0,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_low,4,59,but the wedding will be,adverb+1,1,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_low,4,59,small.,adverb+2,2,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_low,4,58,Dan wrote the speech he will deliver,other,-1,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_low,4,58,"next month,",adverb,0,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_low,4,58,but he hasn't practiced ,adverb+1,1,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_low,4,58,it yet.,adverb+2,2,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_low,4,57,Jeff planned the party he will hold,other,-1,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_low,4,57,"next month,",adverb,0,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_low,4,57,but he hasn't sent,adverb+1,1,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_low,4,57,invitations.,adverb+2,2,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_low,4,56,Lisa will change the plans she made,other,-1,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_low,4,56,"last week,",adverb,0,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_low,4,56,but she won't cancel,adverb+1,1,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_low,4,56,any of them.,adverb+2,2,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_low,4,55,Tom will plant the tree he bought,other,-1,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_low,4,55,"last week,",adverb,0,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_low,4,55,but he isn't sure,adverb+1,1,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_low,4,55,where to put it.,adverb+2,2,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_low,4,54,Joseph brewed the beer he will serve,other,-1,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_low,4,54,"next week,",adverb,0,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_low,4,54,but it is,adverb+1,1,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_low,4,54,not very tasty.,adverb+2,2,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_low,4,53,Jane prepared the lecture she will give,other,-1,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_low,4,53,"next week,",adverb,0,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_low,4,53,but still needs,adverb+1,1,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_low,4,53,to review it.,adverb+2,2,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_low,4,52,Sue insulted the candidate she will debate,other,-1,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_low,4,52,"tomorrow,",adverb,0,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_low,4,52,but she wishes,adverb+1,1,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_low,4,52,she hadn't.,adverb+2,2,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_low,4,51,David caught the fish he will cook,other,-1,Will David cook the fish?,yes,no
+local_coherence,1,adverb_low,4,51,"tomorrow,",adverb,0,Will David cook the fish?,yes,no
+local_coherence,1,adverb_low,4,51,but it is,adverb+1,1,Will David cook the fish?,yes,no
+local_coherence,1,adverb_low,4,51,not his favorite kind.,adverb+2,2,Will David cook the fish?,yes,no
+local_coherence,1,adverb_low,4,50,Robert will meet the friend he phoned ,other,-1,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_low,4,50,"yesterday,",adverb,0,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_low,4,50,but he doesn't want,adverb+1,1,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_low,4,50,to.,adverb+2,2,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_low,4,49,Anne will serve the apples she picked ,other,-1,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_low,4,49,"yesterday,",adverb,0,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_low,4,49,but she won't serve ,adverb+1,1,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_low,4,49,the plums.,adverb+2,2,Will Anne serve the plums?,no,yes
+local_coherence,1,and_no_comma,1,48,The witness identified the man and his wife,other,-1,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_no_comma,1,48,ran,verb,0,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_no_comma,1,48,away from,verb+1,1,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_no_comma,1,48,the police station.,verb+2,2,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_no_comma,1,47,Jenny talked to the reporter and the photographer,other,-1,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_no_comma,1,47,took,verb,0,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_no_comma,1,47,pictures,verb+1,1,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_no_comma,1,47,of the scene.,verb+2,2,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_no_comma,1,46,The robber shot the jeweler and the salesman,other,-1,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_no_comma,1,46,reported,verb,0,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_no_comma,1,46,the crime,verb+1,1,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_no_comma,1,46,to the police.,verb+2,2,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_no_comma,1,45,The journalist criticized Nick and Sam,other,-1,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_no_comma,1,45,called,verb,0,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_no_comma,1,45,the newspaper ,verb+1,1,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_no_comma,1,45,to complain.,verb+2,2,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_no_comma,1,43,Sam hired the plumber and the carpenter,other,-1,Did the carpenter order materials?,yes,no
+local_coherence,1,and_no_comma,1,43,ordered,verb,0,Did the carpenter order materials?,yes,no
+local_coherence,1,and_no_comma,1,43,the materials,verb+1,1,Did the carpenter order materials?,yes,no
+local_coherence,1,and_no_comma,1,43,for the house.,verb+2,2,Did the carpenter order materials?,yes,no
+local_coherence,1,and_no_comma,1,42,The police arrested the burglar and his brother,other,-1,Was the burglar arrested?,yes,no
+local_coherence,1,and_no_comma,1,42,phoned,verb,0,Was the burglar arrested?,yes,no
+local_coherence,1,and_no_comma,1,42,a lawyer,verb+1,1,Was the burglar arrested?,yes,no
+local_coherence,1,and_no_comma,1,42,for help.,verb+2,2,Was the burglar arrested?,yes,no
+local_coherence,1,and_no_comma,1,41,The knight greeted the king and the queen,other,-1,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_no_comma,1,41,waved,verb,0,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_no_comma,1,41,to her people,verb+1,1,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_no_comma,1,41,at the feast.,verb+2,2,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_no_comma,1,40,The customer complained about the waiter and the chef,other,-1,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_no_comma,1,40,gave,verb,0,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_no_comma,1,40,him,verb+1,1,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_no_comma,1,40,a free dessert.,verb+2,2,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_no_comma,1,39,The woman could not find Bill and his girlfriend,other,-1,Could the woman find Bill?,no,yes
+local_coherence,1,and_no_comma,1,39,became,verb,0,Could the woman find Bill?,no,yes
+local_coherence,1,and_no_comma,1,39,nervous,verb+1,1,Could the woman find Bill?,no,yes
+local_coherence,1,and_no_comma,1,39,and upset.,verb+2,2,Could the woman find Bill?,no,yes
+local_coherence,1,and_no_comma,1,38,Bobby yelled at the teacher and the principal,other,-1,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_no_comma,1,38,asked,verb,0,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_no_comma,1,38,his parents,verb+1,1,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_no_comma,1,38,for a meeting.,verb+2,2,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_no_comma,1,37,The teacher praised the girl and her family,other,-1,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_no_comma,1,37,was,verb,0,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_no_comma,1,37,proud of,verb+1,1,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_no_comma,1,37,her good grades.,verb+2,2,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_comma,2,36,"The crowd cheered for the model, and the designer",other,-1,Did the designer take a bow?,yes,no
+local_coherence,1,and_comma,2,36,took,verb,0,Did the designer take a bow?,yes,no
+local_coherence,1,and_comma,2,36,a bow,verb+1,1,Did the designer take a bow?,yes,no
+local_coherence,1,and_comma,2,36,after the show.,verb+2,2,Did the designer take a bow?,yes,no
+local_coherence,1,and_comma,2,35,"The juggler entertained the children, and their parents",other,-1,Did the juggler drink wine?,no,yes
+local_coherence,1,and_comma,2,35,drank,verb,0,Did the juggler drink wine?,no,yes
+local_coherence,1,and_comma,2,35,wine,verb+1,1,Did the juggler drink wine?,no,yes
+local_coherence,1,and_comma,2,35,at the party.,verb+2,2,Did the juggler drink wine?,no,yes
+local_coherence,1,and_comma,2,34,"The woman dressed her baby, and her son",other,-1,Did the women dress her son?,no,yes
+local_coherence,1,and_comma,2,34,got,verb,0,Did the women dress her son?,no,yes
+local_coherence,1,and_comma,2,34,his clothes,verb+1,1,Did the women dress her son?,no,yes
+local_coherence,1,and_comma,2,34,from the dresser.,verb+2,2,Did the women dress her son?,no,yes
+local_coherence,1,and_comma,2,33,"Diane hugged her boyfriend, and her friend",other,-1,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_comma,2,33,felt,verb,0,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_comma,2,33,uncomfortable,verb+1,1,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_comma,2,33,watching them.,verb+2,2,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_comma,2,32,"The producer replaced the actor, and the actress",other,-1,Did the producer replace the actor?,yes,no
+local_coherence,1,and_comma,2,32,quit ,verb,0,Did the producer replace the actor?,yes,no
+local_coherence,1,and_comma,2,32,the movie,verb+1,1,Did the producer replace the actor?,yes,no
+local_coherence,1,and_comma,2,32,after the fight.,verb+2,2,Did the producer replace the actor?,yes,no
+local_coherence,1,and_comma,2,31,"The audience applauded the guitarist, and the band",other,-1,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_comma,2,31,cheered,verb,0,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_comma,2,31,for him,verb+1,1,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_comma,2,31,very loudly.,verb+2,2,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_comma,2,30,"Jim listened to the pianist, and the singer",other,-1,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_comma,2,30,watched,verb,0,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_comma,2,30,the organist,verb+1,1,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_comma,2,30,at the concert.,verb+2,2,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_comma,2,29,"The ranger gave matches to the camper, and his friend",other,-1,Did the camper make a fire?,no,yes
+local_coherence,1,and_comma,2,29,made,verb,0,Did the camper make a fire?,no,yes
+local_coherence,1,and_comma,2,29,a fire,verb+1,1,Did the camper make a fire?,no,yes
+local_coherence,1,and_comma,2,29,by the tent.,verb+2,2,Did the camper make a fire?,no,yes
+local_coherence,1,and_comma,2,28,"The little girl fed her pet cat, and her dog",other,-1,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_comma,2,28,wanted,verb,0,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_comma,2,28,a can,verb+1,1,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_comma,2,28,"of food, too.",verb+2,2,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_comma,2,27,"The tourist photographed the swimmer, and the runner",other,-1,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_comma,2,27,got,verb,0,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_comma,2,27,ready,verb+1,1,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_comma,2,27,for the race.,verb+2,2,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_comma,2,26,"The swimmer disappointed her coach, and her mother",other,-1,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_comma,2,26,tried,verb,0,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_comma,2,26,to console,verb+1,1,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_comma,2,26,her.,verb+2,2,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_comma,2,25,"The nurse examined the mother, and the child",other,-1,Did the child play quietly?,yes,no
+local_coherence,1,and_comma,2,25,played,verb,0,Did the child play quietly?,yes,no
+local_coherence,1,and_comma,2,25,quietly,verb+1,1,Did the child play quietly?,yes,no
+local_coherence,1,and_comma,2,25,in the corner.,verb+2,2,Did the child play quietly?,yes,no
+local_coherence,1,relative_high,5,24,The niece of the butler who scolded,other,-1,Was the butler very upset?,no,yes
+local_coherence,1,relative_high,5,24,herself,reflexive,0,Was the butler very upset?,no,yes
+local_coherence,1,relative_high,5,24,for losing the key,reflexive+1,1,Was the butler very upset?,no,yes
+local_coherence,1,relative_high,5,24,was very upset.,reflexive+2,2,Was the butler very upset?,no,yes
+local_coherence,1,relative_high,5,23,The aunt of the waiter who trained,other,-1,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_high,5,23,herself,reflexive,0,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_high,5,23,to cook,reflexive+1,1,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_high,5,23,wanted to own a restaurant.,reflexive+2,2,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_high,5,22,The sister of the boy who taught ,other,-1,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_high,5,22,herself ,reflexive,0,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_high,5,22,advanced mathematics,reflexive+1,1,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_high,5,22,was very smart.,reflexive+2,2,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_high,5,21,The daughter of the king who devoted,other,-1,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_high,5,21,herself,reflexive,0,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_high,5,21,to the kingdom,reflexive+1,1,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_high,5,21,was never emotional.,reflexive+2,2,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_high,5,20,The niece of the fisherman who got,other,-1,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_high,5,20,herself ,reflexive,0,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_high,5,20,a sailboat,reflexive+1,1,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_high,5,20,learned to sail.,reflexive+2,2,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_high,5,19,The grandma of the policeman who educated,other,-1,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_high,5,19,herself,reflexive,0,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_high,5,19,at night,reflexive+1,1,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_high,5,19,became a teacher.,reflexive+2,2,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_high,5,18,The uncle of the girl who prepared,other,-1,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_high,5,18,himself,reflexive,0,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_high,5,18,for the race,reflexive+1,1,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_high,5,18,was a great athlete.,reflexive+2,2,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_high,5,17,The nephew of the queen who praised,other,-1,Was the queen very rude?,no,yes
+local_coherence,1,relative_high,5,17,himself,reflexive,0,Was the queen very rude?,no,yes
+local_coherence,1,relative_high,5,17,all the time,reflexive+1,1,Was the queen very rude?,no,yes
+local_coherence,1,relative_high,5,17,was very rude.,reflexive+2,2,Was the queen very rude?,no,yes
+local_coherence,1,relative_high,5,16,The grandfather of the policewoman who treated,other,-1,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_high,5,16,himself,reflexive,0,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_high,5,16,so badly,reflexive+1,1,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_high,5,16,was troubled.,reflexive+2,2,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_high,5,15,The nephew of the maid who cut,other,-1,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_high,5,15,himself,reflexive,0,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_high,5,15,with the knife,reflexive+1,1,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_high,5,15,called the doctor.,reflexive+2,2,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_high,5,14,The brother of the ballerina who found,other,-1,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_high,5,14,himself,reflexive,0,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_high,5,14,in a lot of trouble,reflexive+1,1,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_high,5,14,phoned home.,reflexive+2,2,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_high,5,13,The son of the princess who scratched,other,-1,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_high,5,13,himself,reflexive,0,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_high,5,13,in public,reflexive+1,1,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_high,5,13,was awfully embarrassed.,reflexive+2,2,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_low,6,12,The sister of the prince who injured,other,-1,Was the prince sad?,no,yes
+local_coherence,1,relative_low,6,12,himself,reflexive,0,Was the prince sad?,no,yes
+local_coherence,1,relative_low,6,12,falling off a roof,reflexive+1,1,Was the prince sad?,no,yes
+local_coherence,1,relative_low,6,12,was still sad.,reflexive+2,2,Was the prince sad?,no,yes
+local_coherence,1,relative_low,6,11,The daughter of the actor who hated,other,-1,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_low,6,11,himself ,reflexive,0,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_low,6,11,for failing,reflexive+1,1,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_low,6,11,always seemed unhappy.,reflexive+2,2,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_low,6,10,The sister of the salesman who made a fool of,other,-1,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_low,6,10,himself,reflexive,0,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_low,6,10,at work,reflexive+1,1,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_low,6,10,was very angry.,reflexive+2,2,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_low,6,8,The aunt of the schoolboy who hurt,other,-1,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_low,6,8,himself,reflexive,0,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_low,6,8,was concerned,reflexive+1,1,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_low,6,8,about the injury.,reflexive+2,2,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_low,6,7,The grandma of the fireman who criticized,other,-1,Was the fireman anxious?,no,yes
+local_coherence,1,relative_low,6,7,himself,reflexive,0,Was the fireman anxious?,no,yes
+local_coherence,1,relative_low,6,7,far too often,reflexive+1,1,Was the fireman anxious?,no,yes
+local_coherence,1,relative_low,6,7,was anxious.,reflexive+2,2,Was the fireman anxious?,no,yes
+local_coherence,1,relative_low,6,6,The grandfather of the woman who killed,other,-1,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_low,6,6,herself ,reflexive,0,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_low,6,6,last summer,reflexive+1,1,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_low,6,6,had been to prison.,reflexive+2,2,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_low,6,5,The brother of the schoolgirl who burned,other,-1,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_low,6,5,herself,reflexive,0,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_low,6,5,was usually,reflexive+1,1,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_low,6,5,very careful.,reflexive+2,2,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,adverb_high,3,71,Bob will complete the project he started,other,-1,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_high,3,71,"next month,",adverb,0,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_high,3,71,but Fred won't finish,adverb+1,1,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_high,3,71,his.,adverb+2,2,Will Fred finish his project?,no,yes
+local_coherence,1,relative_low,6,4,The son of the lady who politely introduced,other,-1,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_low,6,4,herself,reflexive,0,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_low,6,4,was popular,reflexive+1,1,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_low,6,4,at the party.,reflexive+2,2,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_low,6,3,The uncle of the waitress who hurt,other,-1,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_low,6,3,herself,reflexive,0,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_low,6,3,was shocked,reflexive+1,1,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_low,6,3,by the accident.,reflexive+2,2,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_low,6,1,The son of the actress who shot,other,-1,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_low,6,1,herself,reflexive,0,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_low,6,1,on the set,reflexive+1,1,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_low,6,1,was under investigation.,reflexive+2,2,Was the son of the actress under investigation?,yes,no
+local_coherence,1,adverb_low,4,71,Bob will complete the project he started,other,-1,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_low,4,71,"last month,",adverb,0,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_low,4,71,but Fred won't finish,adverb+1,1,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_low,4,71,his.,adverb+2,2,Will Fred finish his project?,no,yes
+local_coherence,1,adverb_low,4,70,John hired the clerk he will promote,other,-1,Did John fire an employee?,yes,no
+local_coherence,1,adverb_low,4,70,"next month,",adverb,0,Did John fire an employee?,yes,no
+local_coherence,1,adverb_low,4,70,but he fired,adverb+1,1,Did John fire an employee?,yes,no
+local_coherence,1,adverb_low,4,70,another employee.,adverb+2,2,Did John fire an employee?,yes,no
+local_coherence,1,adverb_low,4,69,Jim painted the picture he will display,other,-1,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_low,4,69,"next month,",adverb,0,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_low,4,69,but he isn't happy,adverb+1,1,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_low,4,69,with it.,adverb+2,2,Did Jim paint the picture?,yes,no
+local_coherence,1,adverb_low,4,68,Cathy will burn the wood she gathered,other,-1,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_low,4,68,"last week,",adverb,0,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_low,4,68,but she will save,adverb+1,1,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_low,4,68,some of it.,adverb+2,2,Will Cathy burn all the wood?,no,yes
+local_coherence,1,adverb_low,4,67,Mark will answer the email he got,other,-1,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_low,4,67,"last week,",adverb,0,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_low,4,67,but he doesn't know,adverb+1,1,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_low,4,67,what to write.,adverb+2,2,Will Mark answer the email?,yes,no
+local_coherence,1,adverb_low,4,66,Chris cleaned the bookcase he will sell,other,-1,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_low,4,66,"next week,",adverb,0,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_low,4,66,but it is,adverb+1,1,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_low,4,66,still very dusty.,adverb+2,2,Did Chris clean the bookcase?,yes,no
+local_coherence,1,adverb_low,4,65,Susan bought the wine she will drink,other,-1,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_low,4,65,"next week,",adverb,0,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_low,4,65,but she didn't buy,adverb+1,1,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_low,4,65,any cheese.,adverb+2,2,Did Susan buy any cheese?,no,yes
+local_coherence,1,adverb_low,4,64,Mike watered the flower he will sell,other,-1,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_low,4,64,"tomorrow,",adverb,0,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_low,4,64,but he forgot,adverb+1,1,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_low,4,64,to water the bush.,adverb+2,2,Did Mike forget to water the flowers?,no,yes
+local_coherence,1,adverb_low,4,63,Mary called the applicant she will interview,other,-1,Did the applicant answer?,no,yes
+local_coherence,1,adverb_low,4,63,"tomorrow,",adverb,0,Did the applicant answer?,no,yes
+local_coherence,1,adverb_low,4,63,but there was,adverb+1,1,Did the applicant answer?,no,yes
+local_coherence,1,adverb_low,4,63,no answer.,adverb+2,2,Did the applicant answer?,no,yes
+local_coherence,1,adverb_low,4,62,James will fix the car he drove ,other,-1,Did James drive a car?,yes,no
+local_coherence,1,adverb_low,4,62,"yesterday,",adverb,0,Did James drive a car?,yes,no
+local_coherence,1,adverb_low,4,62,but he will need,adverb+1,1,Did James drive a car?,yes,no
+local_coherence,1,adverb_low,4,62,some help.,adverb+2,2,Did James drive a car?,yes,no
+local_coherence,1,adverb_low,4,61,Linda will wear the sweater she washed,other,-1,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_low,4,61,"yesterday,",adverb,0,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_low,4,61,but she won't wear,adverb+1,1,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_low,4,61,her skirt.,adverb+2,2,Will Linda wear her skirt?,no,yes
+local_coherence,1,adverb_high,3,60,Amy will visit the man she worked with,other,-1,Is Amy nervous?,yes,no
+local_coherence,1,adverb_high,3,60,"next month,",adverb,0,Is Amy nervous?,yes,no
+local_coherence,1,adverb_high,3,60,but she is nervous,adverb+1,1,Is Amy nervous?,yes,no
+local_coherence,1,adverb_high,3,60,about it.,adverb+2,2,Is Amy nervous?,yes,no
+local_coherence,1,adverb_high,3,59,Paul will marry the woman he just met,other,-1,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_high,3,59,"next month,",adverb,0,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_high,3,59,but the wedding will be,adverb+1,1,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_high,3,59,small.,adverb+2,2,Will Paul have a small wedding?,yes,no
+local_coherence,1,adverb_high,3,58,Dan wrote the speech he will deliver ,other,-1,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_high,3,58,"last month,",adverb,0,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_high,3,58,but he hasn't practiced,adverb+1,1,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_high,3,58,it yet.,adverb+2,2,Has Dan practiced the speech?,no,yes
+local_coherence,1,adverb_high,3,56,Lisa will change the plans she made,other,-1,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_high,3,56,"next week,",adverb,0,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_high,3,56,but she won't cancel,adverb+1,1,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_high,3,56,any of them.,adverb+2,2,Will Lisa change her plans?,yes,no
+local_coherence,1,adverb_high,3,54,Joseph brewed the beer he will serve,other,-1,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_high,3,54,"last week,",adverb,0,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_high,3,54,but it is,adverb+1,1,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_high,3,54,not very tasty.,adverb+2,2,Will Joseph serve the beer?,yes,no
+local_coherence,1,adverb_high,3,53,Jane prepared the lecture she will give,other,-1,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_high,3,53,"last week,",adverb,0,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_high,3,53,but still needs,adverb+1,1,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_high,3,53,to review it.,adverb+2,2,Did Jane review the lecture?,no,yes
+local_coherence,1,adverb_high,3,52,Sue insulted the candidate she will debate,other,-1,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_high,3,52,"yesterday,",adverb,0,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_high,3,52,but she wishes,adverb+1,1,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_high,3,52,she hadn't.,adverb+2,2,Did Sue insult the candidate?,yes,no
+local_coherence,1,adverb_high,3,50,Robert will meet the friend he phoned,other,-1,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_high,3,50,"tomorrow,",adverb,0,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_high,3,50,but he doesn't want,adverb+1,1,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_high,3,50,to.,adverb+2,2,Does Robert want to meet his friend?,no,yes
+local_coherence,1,adverb_high,3,49,Anne will serve the apples she picked,other,-1,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_high,3,49,"tomorrow,",adverb,0,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_high,3,49,but she won't serve,adverb+1,1,Will Anne serve the plums?,no,yes
+local_coherence,1,adverb_high,3,49,the plums.,adverb+2,2,Will Anne serve the plums?,no,yes
+local_coherence,1,and_comma,2,48,"The witness identified the man, and his wife",other,-1,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_comma,2,48,ran ,verb,0,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_comma,2,48,away from ,verb+1,1,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_comma,2,48,the police station.,verb+2,2,Did the witness run away from the police station?,no,yes
+local_coherence,1,and_comma,2,47,"Jenny talked to the reporter, and the photographer",other,-1,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_comma,2,47,took,verb,0,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_comma,2,47,pictures,verb+1,1,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_comma,2,47,of the scene.,verb+2,2,Did Jenny talk to the photographer?,no,yes
+local_coherence,1,and_comma,2,46,"The robber shot the jeweler, and the salesman",other,-1,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_comma,2,46,reported,verb,0,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_comma,2,46,the crime,verb+1,1,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_comma,2,46,to the police.,verb+2,2,Did the robber shoot the jeweler?,yes,no
+local_coherence,1,and_comma,2,45,"The journalist criticized Nick, and Sam",other,-1,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_comma,2,45,called,verb,0,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_comma,2,45,the newspaper,verb+1,1,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_comma,2,45,to complain.,verb+2,2,Did Sam call the newspaper?,yes,no
+local_coherence,1,and_comma,2,44,"The actress yelled at the cameraman, and the director",other,-1,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_comma,2,44,hurried,verb,0,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_comma,2,44,out of,verb+1,1,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_comma,2,44,the room.,verb+2,2,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_comma,2,43,"Sam hired the plumber, and the carpenter",other,-1,Did the carpenter order materials?,yes,no
+local_coherence,1,and_comma,2,43,ordered,verb,0,Did the carpenter order materials?,yes,no
+local_coherence,1,and_comma,2,43,the materials ,verb+1,1,Did the carpenter order materials?,yes,no
+local_coherence,1,and_comma,2,43,for the house.,verb+2,2,Did the carpenter order materials?,yes,no
+local_coherence,1,and_comma,2,42,"The police arrested the burglar, and his brother",other,-1,Was the burglar arrested?,yes,no
+local_coherence,1,and_comma,2,42,phoned,verb,0,Was the burglar arrested?,yes,no
+local_coherence,1,and_comma,2,42,a lawyer ,verb+1,1,Was the burglar arrested?,yes,no
+local_coherence,1,and_comma,2,42,for help.,verb+2,2,Was the burglar arrested?,yes,no
+local_coherence,1,and_comma,2,41,"The knight greeted the king, and the queen",other,-1,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_comma,2,41,waved,verb,0,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_comma,2,41,to her people,verb+1,1,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_comma,2,41,at the feast.,verb+2,2,Did the king wave to people at the feast?,no,yes
+local_coherence,1,and_comma,2,39,"The woman could not find Bill, and his girlfriend",other,-1,Could the woman find Bill?,no,yes
+local_coherence,1,and_comma,2,39,became,verb,0,Could the woman find Bill?,no,yes
+local_coherence,1,and_comma,2,39,nervous,verb+1,1,Could the woman find Bill?,no,yes
+local_coherence,1,and_comma,2,39,and upset.,verb+2,2,Could the woman find Bill?,no,yes
+local_coherence,1,and_comma,2,38,"Bobby yelled at the teacher, and the principal ",other,-1,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_comma,2,38,asked,verb,0,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_comma,2,38,his parents,verb+1,1,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_comma,2,38,for a meeting.,verb+2,2,Did Bobby yell at the teacher?,yes,no
+local_coherence,1,and_no_comma,1,44,The actress yelled at the cameraman and the director,other,-1,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_no_comma,1,44,hurried,verb,0,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_no_comma,1,44,out,verb+1,1,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_no_comma,1,44,of the room.,verb+2,2,Did the cameraman hurry out of the room?,no,yes
+local_coherence,1,and_comma,2,37,"The teacher praised the girl, and her family",other,-1,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_comma,2,37,was,verb,0,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_comma,2,37,proud of,verb+1,1,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_comma,2,37,her good grades.,verb+2,2,Was the girl's family proud of her grades?,yes,no
+local_coherence,1,and_no_comma,1,36,The crowd cheered for the model and the designer,other,-1,Did the designer take a bow?,yes,no
+local_coherence,1,and_no_comma,1,36,took,verb,0,Did the designer take a bow?,yes,no
+local_coherence,1,and_no_comma,1,36,a bow ,verb+1,1,Did the designer take a bow?,yes,no
+local_coherence,1,and_no_comma,1,36,after the show.,verb+2,2,Did the designer take a bow?,yes,no
+local_coherence,1,and_no_comma,1,35,The juggler entertained the children and their parents,other,-1,Did the juggler drink wine?,no,yes
+local_coherence,1,and_no_comma,1,35,drank,verb,0,Did the juggler drink wine?,no,yes
+local_coherence,1,and_no_comma,1,35,wine ,verb+1,1,Did the juggler drink wine?,no,yes
+local_coherence,1,and_no_comma,1,35,at the party.,verb+2,2,Did the juggler drink wine?,no,yes
+local_coherence,1,and_no_comma,1,34,The woman dressed her baby and her son,other,-1,Did the women dress her son?,no,yes
+local_coherence,1,and_no_comma,1,34,got,verb,0,Did the women dress her son?,no,yes
+local_coherence,1,and_no_comma,1,34,his clothes,verb+1,1,Did the women dress her son?,no,yes
+local_coherence,1,and_no_comma,1,34,from the dresser.,verb+2,2,Did the women dress her son?,no,yes
+local_coherence,1,and_no_comma,1,33,Diane hugged her boyfriend and her friend,other,-1,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_no_comma,1,33,felt,verb,0,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_no_comma,1,33,uncomfortable,verb+1,1,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_no_comma,1,33,watching them.,verb+2,2,Did Diane's friend feel uncomfortable?,yes,no
+local_coherence,1,and_no_comma,1,32,The producer replaced the actor and the actress,other,-1,Did the producer replace the actor?,yes,no
+local_coherence,1,and_no_comma,1,32,quit,verb,0,Did the producer replace the actor?,yes,no
+local_coherence,1,and_no_comma,1,32,the movie,verb+1,1,Did the producer replace the actor?,yes,no
+local_coherence,1,and_no_comma,1,32,after the fight.,verb+2,2,Did the producer replace the actor?,yes,no
+local_coherence,1,and_no_comma,1,30,Jim listened to the pianist and the singer,other,-1,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_no_comma,1,30,watched ,verb,0,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_no_comma,1,30,the organist,verb+1,1,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_no_comma,1,30,at the concert.,verb+2,2,Did the singer listen to the pianist?,no,yes
+local_coherence,1,and_no_comma,1,29,The ranger gave matches to the camper and his friend,other,-1,Did the camper make a fire?,no,yes
+local_coherence,1,and_no_comma,1,29,made ,verb,0,Did the camper make a fire?,no,yes
+local_coherence,1,and_no_comma,1,29,a fire,verb+1,1,Did the camper make a fire?,no,yes
+local_coherence,1,and_no_comma,1,29,by the tent.,verb+2,2,Did the camper make a fire?,no,yes
+local_coherence,1,and_no_comma,1,28,The little girl fed her pet cat and her dog,other,-1,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_no_comma,1,28,wanted,verb,0,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_no_comma,1,28,a can,verb+1,1,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_no_comma,1,28,"of food, too.",verb+2,2,Did the little girl feed her dog?,no,yes
+local_coherence,1,and_no_comma,1,27,The tourist photographed the swimmer and the runner,other,-1,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_no_comma,1,27,got,verb,0,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_no_comma,1,27,ready,verb+1,1,Did the tourist photograph the runner?,no,yes
+local_coherence,1,and_no_comma,1,27,for the race.,verb+2,2,Did the tourist photograph the runner?,no,yes
+local_coherence,1,adverb_high,3,57,Jeff planned the party he will hold,other,-1,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_high,3,57,"last month,",adverb,0,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_high,3,57,but he hasn't sent,adverb+1,1,Has Jeff send invitations?,no,yes
+local_coherence,1,adverb_high,3,57,invitations.,adverb+2,2,Has Jeff send invitations?,no,yes
+local_coherence,1,and_no_comma,1,26,The swimmer disappointed her coach and her mother,other,-1,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_no_comma,1,26,tried ,verb,0,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_no_comma,1,26,to console,verb+1,1,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_no_comma,1,26,her.,verb+2,2,Did the swimmers mother try to console her?,yes,no
+local_coherence,1,and_no_comma,1,25,The nurse examined the mother and the child,other,-1,Did the child play quietly?,yes,no
+local_coherence,1,and_no_comma,1,25,played,verb,0,Did the child play quietly?,yes,no
+local_coherence,1,and_no_comma,1,25,quietly,verb+1,1,Did the child play quietly?,yes,no
+local_coherence,1,and_no_comma,1,25,in the corner.,verb+2,2,Did the child play quietly?,yes,no
+local_coherence,1,relative_low,6,24,The niece of the butler who scolded,other,-1,Was the butler very upset?,no,yes
+local_coherence,1,relative_low,6,24,himself ,reflexive,0,Was the butler very upset?,no,yes
+local_coherence,1,relative_low,6,24,for losing the key,reflexive+1,1,Was the butler very upset?,no,yes
+local_coherence,1,relative_low,6,24,was very upset.,reflexive+2,2,Was the butler very upset?,no,yes
+local_coherence,1,relative_low,6,23,The aunt of the waiter who trained,other,-1,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_low,6,23,himself,reflexive,0,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_low,6,23,to cook,reflexive+1,1,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_low,6,23,wanted to own a restaurant.,reflexive+2,2,Did the waiter want to own a restaurant?,no,yes
+local_coherence,1,relative_low,6,22,The sister of the boy who taught,other,-1,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_low,6,22,himself,reflexive,0,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_low,6,22,advanced mathematics,reflexive+1,1,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_low,6,22,was very smart.,reflexive+2,2,Was the sister of the boy very smart?,yes,no
+local_coherence,1,relative_low,6,21,The daughter of the king who devoted,other,-1,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_low,6,21,himself,reflexive,0,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_low,6,21,to the kingdom,reflexive+1,1,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_low,6,21,was never emotional.,reflexive+2,2,Was the daughter of the king emotional?,no,yes
+local_coherence,1,relative_low,6,20,The niece of the fisherman who got,other,-1,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_low,6,20,himself,reflexive,0,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_low,6,20,a sailboat,reflexive+1,1,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_low,6,20,learned to sail.,reflexive+2,2,Did the niece of the fisherman learn to sail?,yes,no
+local_coherence,1,relative_low,6,19,The grandma of the policeman who educated,other,-1,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_low,6,19,himself,reflexive,0,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_low,6,19,at night,reflexive+1,1,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_low,6,19,became a teacher.,reflexive+2,2,Did the grandma of the policeman become a teacher?,yes,no
+local_coherence,1,relative_low,6,18,The uncle of the girl who prepared,other,-1,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_low,6,18,herself,reflexive,0,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_low,6,18,for the race,reflexive+1,1,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_low,6,18,was a great athlete.,reflexive+2,2,Was the uncle of the girl a great athlete?,yes,no
+local_coherence,1,relative_low,6,17,The nephew of the queen who praised,other,-1,Was the queen very rude?,no,yes
+local_coherence,1,relative_low,6,17,herself,reflexive,0,Was the queen very rude?,no,yes
+local_coherence,1,relative_low,6,17,all the time,reflexive+1,1,Was the queen very rude?,no,yes
+local_coherence,1,relative_low,6,17,was very rude.,reflexive+2,2,Was the queen very rude?,no,yes
+local_coherence,1,relative_low,6,16,The grandfather of the policewoman who treated,other,-1,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_low,6,16,herself,reflexive,0,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_low,6,16,so badly,reflexive+1,1,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_low,6,16,was troubled.,reflexive+2,2,Was the grandfather of the policewoman troubled?,yes,no
+local_coherence,1,relative_low,6,15,The nephew of the maid who cut,other,-1,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_low,6,15,herself,reflexive,0,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_low,6,15,with the knife,reflexive+1,1,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_low,6,15,called the doctor.,reflexive+2,2,Did the nephew of the maid call the doctor?,yes,no
+local_coherence,1,relative_low,6,14,The brother of the ballerina who found,other,-1,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_low,6,14,herself,reflexive,0,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_low,6,14,in a lot of trouble,reflexive+1,1,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_low,6,14,phoned home.,reflexive+2,2,Did the ballerina phone home?,no,yes
+local_coherence,1,relative_low,6,13,The son of the princess who scratched,other,-1,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_low,6,13,herself,reflexive,0,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_low,6,13,in public,reflexive+1,1,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_low,6,13,was awfully embarrassed.,reflexive+2,2,Was the princess embarrassed?,no,yes
+local_coherence,1,relative_high,5,12,The sister of the prince who injured,other,-1,Was the prince sad?,no,yes
+local_coherence,1,relative_high,5,12,herself,reflexive,0,Was the prince sad?,no,yes
+local_coherence,1,relative_high,5,12,falling off a roof,reflexive+1,1,Was the prince sad?,no,yes
+local_coherence,1,relative_high,5,12,was still sad.,reflexive+2,2,Was the prince sad?,no,yes
+local_coherence,1,relative_high,5,11,The daughter of the actor who hated,other,-1,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_high,5,11,herself,reflexive,0,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_high,5,11,for failing,reflexive+1,1,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_high,5,11,always seemed unhappy.,reflexive+2,2,Was the daughter of the actor happy?,no,yes
+local_coherence,1,relative_high,5,10,The sister of the salesman who made a fool of,other,-1,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_high,5,10,herself,reflexive,0,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_high,5,10,at work,reflexive+1,1,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_high,5,10,was very angry.,reflexive+2,2,Was the sister of the salesman angry?,yes,no
+local_coherence,1,relative_high,5,9,The daughter of the man who complimented,other,-1,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_high,5,9,herself,reflexive,0,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_high,5,9,in public,reflexive+1,1,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_high,5,9,was beautiful.,reflexive+2,2,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_high,5,8,The aunt of the schoolboy who hurt,other,-1,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_high,5,8,herself,reflexive,0,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_high,5,8,was concerned,reflexive+1,1,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_high,5,8,about the injury.,reflexive+2,2,Was the schoolboy concerned about the injury?,no,yes
+local_coherence,1,relative_high,5,7,The grandma of the fireman who criticized,other,-1,Was the fireman anxious?,no,yes
+local_coherence,1,relative_high,5,7,herself,reflexive,0,Was the fireman anxious?,no,yes
+local_coherence,1,relative_high,5,7,far too often,reflexive+1,1,Was the fireman anxious?,no,yes
+local_coherence,1,relative_high,5,7,was anxious.,reflexive+2,2,Was the fireman anxious?,no,yes
+local_coherence,1,relative_high,5,6,The grandfather of the woman who killed,other,-1,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_high,5,6,himself,reflexive,0,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_high,5,6,last summer,reflexive+1,1,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_high,5,6,had been to prison.,reflexive+2,2,Had the grandfather of the woman been to prison?,yes,no
+local_coherence,1,relative_high,5,5,The brother of the schoolgirl who burned,other,-1,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_high,5,5,himself,reflexive,0,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_high,5,5,was usually,reflexive+1,1,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_high,5,5,very careful.,reflexive+2,2,Was the brother of the schoolgirl usually careful?,yes,no
+local_coherence,1,relative_high,5,4,The son of the lady who politely introduced,other,-1,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_high,5,4,himself,reflexive,0,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_high,5,4,was popular,reflexive+1,1,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_high,5,4,at the party.,reflexive+2,2,Was the lady popular at the party?,no,yes
+local_coherence,1,relative_high,5,3,The uncle of the waitress who hurt,other,-1,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_high,5,3,himself,reflexive,0,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_high,5,3,was shocked ,reflexive+1,1,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_high,5,3,by the accident.,reflexive+2,2,Was the waitress shocked by the accident?,no,yes
+local_coherence,1,relative_high,5,2,The brother of the bride who embarrassed,other,-1,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_high,5,2,himself,reflexive,0,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_high,5,2,at the wedding,reflexive+1,1,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_high,5,2,felt ashamed.,reflexive+2,2,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_low,6,2,The brother of the bride who embarrassed,other,-1,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_low,6,2,herself,reflexive,0,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_low,6,2,at the wedding,reflexive+1,1,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,relative_low,6,2,felt ashamed.,reflexive+2,2,Was the brother of the bride ashamed?,yes,no
+local_coherence,1,adverb_high,3,55,Tom will plant the tree he bought,other,-1,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_high,3,55,"next week,",adverb,0,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_high,3,55,but he isn't sure,adverb+1,1,Does Tom know where to put the tree?,no,yes
+local_coherence,1,adverb_high,3,55,where to put it.,adverb+2,2,Does Tom know where to put the tree?,no,yes
+local_coherence,1,relative_high,5,1,The son of the actress who shot,other,-1,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_high,5,1,himself,reflexive,0,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_high,5,1,on the set,reflexive+1,1,Was the son of the actress under investigation?,yes,no
+local_coherence,1,relative_high,5,1,was under investigation.,reflexive+2,2,Was the son of the actress under investigation?,yes,no
+local_coherence,1,adverb_high,3,51,David caught the fish he will cook,other,-1,Will David cook the fish?,yes,no
+local_coherence,1,adverb_high,3,51,"yesterday,",adverb,0,Will David cook the fish?,yes,no
+local_coherence,1,adverb_high,3,51,but it is,adverb+1,1,Will David cook the fish?,yes,no
+local_coherence,1,adverb_high,3,51,not his favorite kind.,adverb+2,2,Will David cook the fish?,yes,no
+local_coherence,1,filler,8,134,"The children of the rich man were spoiled, but they were charming and handsome.",other,-1,Were the children of the rich man spoiled?,yes,no
+local_coherence,1,filler,8,133,"Yesterday, the wife of the politician discussed health care with old people.",other,-1,Did the politician discuss health care?,no,yes
+local_coherence,1,filler,8,132,The boyfriend of the model was killed in an accident while skiing last week.,other,-1,Did the boyfriend of the model go skiing?,yes,no
+local_coherence,1,filler,8,131,The cute girl who was on the cover of the magazine became a famous doctor.,other,-1,Did the cute girl become a doctor?,yes,no
+local_coherence,1,and_no_comma,1,31,The audience applauded the guitarist and the band,other,-1,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_no_comma,1,31,cheered,verb,0,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_no_comma,1,31,for him,verb+1,1,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,and_no_comma,1,31,very loudly.,verb+2,2,Did the audience applaud the guitarist?,yes,no
+local_coherence,1,filler,8,130,"The writer of the novels thought himself to be a genius, but he wasn't.",other,-1,Was the writer a genius?,no,yes
+local_coherence,1,filler,8,129,"Todd wanted to be a barber, but his shaky hands prevented him from becoming one.",other,-1,Did Todd want to be an actor?,no,yes
+local_coherence,1,filler,8,128,"Julie dated Adam and Andy, but she married Jeff in Las Vegas last month.",other,-1,Did Julie marry Adam?,no,yes
+local_coherence,1,and_comma,2,40,"The customer complained about the waiter, and the chef",other,-1,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_comma,2,40,gave,verb,0,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_comma,2,40,him,verb+1,1,Did the customer get a free dessert?,yes,no
+local_coherence,1,and_comma,2,40,a free dessert.,verb+2,2,Did the customer get a free dessert?,yes,no
+local_coherence,1,filler,8,127,The student who was running out of money gave himself a haircut last week.,other,-1,Did the student cut his hair?,yes,no
+local_coherence,1,filler,8,126,"Judy cooked in the kitchen, and Richard barbecued outside in the yard.",other,-1,Did Richard barbecue in the yard?,yes,no
+local_coherence,1,filler,8,125,"The gardener was happy with the flowers, but the owner of the house was not.",other,-1,Was the owner happy with the flowers?,no,yes
+local_coherence,1,filler,8,124,"Sarah and her mother had steak, potatoes, and green beans for dinner last night.",other,-1,Did Sarah eat spaghetti and meatballs?,no,yes
+local_coherence,1,filler,8,123,Margo will open bakeries in Chicago and New York after getting a loan next year.,other,-1,Will Margo open a bakery in New York?,yes,no
+local_coherence,1,filler,8,122,Cindy treated herself to a vacation in China and several other Asian countries.,other,-1,Did Cindy go on a vacation to Africa?,no,yes
+local_coherence,1,filler,8,121,The nurse took care of the old lady who could not take care of herself.,other,-1,Could the old lady take care of herself?,no,yes
+local_coherence,1,relative_low,6,9,The daughter of the man who complimented,other,-1,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_low,6,9,himself,reflexive,0,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_low,6,9,in public,reflexive+1,1,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,relative_low,6,9,was beautiful.,reflexive+2,2,Was the daughter of the man beautiful?,yes,no
+local_coherence,1,filler,8,120,The pilot will fly a new airplane to Europe and back beginning next week.,other,-1,Will the pilot fly to Europe?,yes,no
+local_coherence,1,filler,8,119,Megan got angry with her boss and sued him for discrimination last month.,other,-1,Did the boss sue for discrimination?,no,yes
+local_coherence,1,filler,8,118,The father of the pretty girl cleaned up the house all by himself last week.,other,-1,Did the pretty girl clean the house?,no,yes
+local_coherence,1,filler,8,117,Bill will quit his job next month to take care of his kids and step-children.,other,-1,Will Bill quit his job?,yes,no
+local_coherence,1,filler,8,116,The thief noticed the boy and the girl watching him from the upstairs window.,other,-1,Did the boy watch the thief?,yes,no
+local_coherence,1,filler,8,115,The boy who was wearing a blue cap went missing on his way home last week.,other,-1,Was the boy wearing a blue cap?,yes,no
+local_coherence,1,filler,8,114,"Hugh took too long to propose, and his girlfriend decided to marry someone else.",other,-1,Did Hughs girlfriend propose to him?,no,yes
+local_coherence,1,filler,8,113,The old man amused himself by gossiping with his children and friends.,other,-1,Did the old man gossip with his friends?,yes,no
+local_coherence,1,filler,8,112,"Jane and John studied math and history yesterday, but they failed the exams.",other,-1,Did Jane and John pass the exams?,no,yes
+local_coherence,1,practice,7,108,"The semester will start next week, but the students and teachers are not ready.",other,-1,Are the students and teachers ready?,no,yes
+local_coherence,1,practice,7,107,The mother of the prisoner sent him packages that contained cookies and novels.,other,-1,Did the mother send packages to the prisoner?,yes,no
+local_coherence,1,filler,8,111,The infant was able to stand by himself for the first time last week.,other,-1,Did the infant stand by himself last week?,yes,no
+local_coherence,1,practice,7,106,The visitors at the zoo watched the zookeeper who the monkeys and apes teased.,other,-1,Did the monkeys tease the zookeeper?,yes,no
+local_coherence,1,practice,7,105,The reporter had dinner yesterday with the baseball player who Kevin admired.,other,-1,Did the reporter have dinner with Kevin?,no,yes
+local_coherence,1,practice,7,104,The therapist set up a meeting with the upset woman and her husband yesterday.,other,-1,Did the therapist set up a meeting?,yes,no
+local_coherence,1,practice,7,103,"Maya played with the blocks and the balls, but she soon got bored with them.",other,-1,Did Maya play with the blocks?,yes,no
+local_coherence,1,adverb_low,4,72,Kim will display the photos she took,other,-1,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_low,4,72,"last month,",adverb,0,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_low,4,72,but she won't show,adverb+1,1,Will Kim show all the photos?,no,yes
+local_coherence,1,adverb_low,4,72,all of them.,adverb+2,2,Will Kim show all the photos?,no,yes
+local_coherence,1,practice,7,102,The patient who the doctor treated became better after only a few treatments.,other,-1,Did the patient get better without treatment?,no,yes
+local_coherence,1,practice,7,101,The husband of the beautiful woman bought her roses and candy for her birthday.,other,-1,Did the woman buy roses?,no,yes

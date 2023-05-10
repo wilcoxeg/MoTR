@@ -35,6 +35,8 @@ class FixationMerger:
                            'para_nr': int(row['ItemId']),
                            'word_nr': int(row['Index']), 'word': str(row['Word']), 't': int(row['responseTime']),
                            'x': int(row['mousePositionX']), 'y': int(row['mousePositionY']),
+                           # 'wb': str(row['wordPositionBottom']), 'wt': str(row['wordPositionTop']),
+                           # 'wl': str(row['wordPositionLeft']), 'wr': str(row['wordPositionRight']),
                            'response': str(row['response'])} for row in csvreader]
         # print(mouse_data)
         return mouse_data
@@ -63,6 +65,8 @@ class FixationMerger:
                         'word_nr': self.mouse_data[i]['word_nr'], 'word': self.mouse_data[i]['word'],
                         'duration': fixed_time, 'start_t': self.mouse_data[i]['t'], 'end_t': self.mouse_data[i+1]['t'],
                         'x_mean': round(mean(x_coordinates), 2), 'y_mean': round(mean(y_coordinates), 2),
+                        # 'wb': self.mouse_data[i]['wb'], 'wt': self.mouse_data[i]['wt'],
+                        # 'wl': self.mouse_data[i]['wl'], 'wr': self.mouse_data[i]['wr'],
                         'response': self.mouse_data[i]['response']
                     }
                     fixations_for_one_item.append(merged_fixation_on_word)
@@ -134,6 +138,8 @@ class FixationMerger:
             # to avoid errors given by mess data, we can manually type fieldnames here later.
             fieldnames = ['sbm_id', 'expr_id', 'cond_id', 'para_nr', 'word_nr', 'word', 'duration', 'start_t', 'end_t',
                           'x_mean', 'y_mean', 'response']
+            # fieldnames = ['sbm_id', 'expr_id', 'cond_id', 'para_nr', 'word_nr', 'word', 'duration', 'start_t', 'end_t',
+            #               'x_mean', 'y_mean', 'wb', 'wt', 'wl', 'wr', 'response']
             writer = csv.DictWriter(out_csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for item in self.fixations:
