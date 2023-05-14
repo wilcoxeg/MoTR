@@ -36,7 +36,7 @@ pipe_message = function(.data, status) {message(status); .data}
 
 rate = 160
 
-file_prefix = "/Users/ethan/Desktop/motr_provo_160/"
+file_prefix = "/Users/cui/Desktop/motr_provo_160/"
 fnames = list.files(path=file_prefix)
 
 df = data.frame()
@@ -57,20 +57,21 @@ filter_df = df %>%
   ungroup() %>%
   mutate(p_correct = round(p_correct, digits = 2))
 
-filter_df %>%
+filter_df = filter_df %>%
   filter(p_correct < 0.8)
+# View(filter_df)
+## reader_3:0.70, reader_60:0.79, reader_76:0.72 , reader_256:0.71 , reader_262:0.57 
 
 raw_df = df %>%
+  mutate(word = str_trim(word)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
-  filter(! subj %in% c(3, 60, 76, 256, 262))
+  filter(! subj %in% c(3, 60, 76, 256, 262)) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj) %>%
   drop_na()
 
 raw_df
-
-
 ```
 
 
@@ -78,11 +79,14 @@ raw_df
 # Average across subjects
 motr_agg_df = raw_df %>%
   gather(metric, value, 6:10) %>%
-  # Filter out words with a reading-time of zero
-  #mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  #filter(zero == F) %>%
+    group_by(para_nr, word_nr, word, metric) %>%
+    # for non-binary measures, filter out that are super long
+    mutate(outlier = if_else(metric != "FPReg" & value > (mean(value) + 3 * sd(value) ), T, F)) %>%
+    filter(outlier == F) %>%
+  # # Filter out words with a reading-time of zero
+  # mutate(zero = if_else(metric != "FPReg" & value == 0, T, F)) %>%
+  # filter(zero == F) %>%
   drop_na() %>%
-  group_by(para_nr, word_nr, word, metric) %>%
     summarise(value = mean(value),
               nsubj = length(unique(subj))) %>%
   ungroup() %>%
@@ -105,7 +109,7 @@ motr_agg_df
 
 ```{r}
 # Read in Provo surprisal, frequency and length data
-provo_modeling_df = read.csv("../ancillary_data/provo_df.csv") %>%
+provo_modeling_df = read.csv("/Users/cui/Documents/ETH/MoTR/pipeline/ancillary_data/provo_df.csv") %>%
   dplyr::select(text_id, sent_id, trigger_idx, word, freq, surp, len) %>%
   rename(word_idx = trigger_idx)
 
@@ -116,11 +120,11 @@ provo_modeling_df
 ```{r}
 # Read in Provo eyetracking data
 
-provo_raw_df = read.csv("../ancillary_data/provo_eyetracking.csv")
+provo_raw_df = read.csv("/Users/cui/Documents/ETH/MoTR/pipeline/ancillary_data/provo_eyetracking.csv")
 
 provo_eyetracking_df = provo_raw_df %>%
-  dplyr::select(Participant_ID, Text_ID, Sentence_Number, Word_In_Sentence_Number, Word, IA_ID, IA_FIRST_FIX_PROGRESSIVE, IA_FIRST_FIXATION_DURATION, IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION, IA_REGRESSION_OUT) %>%
-  rename( first_duration = IA_FIRST_FIXATION_DURATION,
+  dplyr::select(Participant_ID, Text_ID, Sentence_Number, Word_In_Sentence_Number, Word, Word_Number, IA_FIRST_FIX_PROGRESSIVE, IA_FIRST_RUN_DWELL_TIME, IA_DWELL_TIME, IA_REGRESSION_PATH_DURATION, IA_REGRESSION_OUT) %>%
+  rename( #first_duration = IA_FIRST_FIXATION_DURATION,   
           gaze_duration = IA_FIRST_RUN_DWELL_TIME,
           total_duration = IA_DWELL_TIME,
           go_past_time = IA_REGRESSION_PATH_DURATION,
@@ -128,27 +132,33 @@ provo_eyetracking_df = provo_raw_df %>%
           text_id = Text_ID,
           sent_id = Sentence_Number,
           word_idx = Word_In_Sentence_Number,
-          word_text_idx = IA_ID,  # better than word number
-          word = Word,
+          word_text_idx = Word_Number,   # IA_ID?
+          word = Word,      
           FPReg = IA_REGRESSION_OUT,
           ff_progressive = IA_FIRST_FIX_PROGRESSIVE) %>%
+  mutate(first_duration = gaze_duration) %>%
   mutate(gaze_duration = ifelse(ff_progressive == 0, 0, gaze_duration),
          go_past_time = ifelse(ff_progressive == 0, 0, go_past_time)) %>%
   dplyr::select(-ff_progressive) %>%
   gather(metric, value, 7:11) %>%
   mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   drop_na() %>%
+  mutate(word = str_trim(word)) %>%
   mutate(subj = str_remove(subj, "Sub")) %>%
-  mutate(subj = as.integer(subj)) #%>%
-  # Filter out words with a reading-time of zero
-  #mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  #filter(zero == F)
+  mutate(subj = as.integer(subj)) %>%
+    group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
+    mutate(outlier = if_else(metric != "FPReg" & value > (mean(value) + 3 * sd(value) ), T, F)) %>%
+    filter(outlier == F) %>%
+  ungroup() #%>%
+  # # Filter out words with a reading-time of zero
+  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  # filter(zero == F)
 
 # Aggregate cross-participant data for all subjects
 provo_eyetracking_agg_df = provo_eyetracking_df %>%
   group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
-    summarise(value = mean(value)) %>%
-  ungroup()
+    summarise(value = mean(value), .groups = 'drop') 
+
 
 ```
 
@@ -160,7 +170,7 @@ provo_eyetracking_subj1_df = provo_eyetracking_df %>%
   group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
     summarise(value = mean(value)) %>%
   ungroup() %>%
-  rename(value_1 = value)%>%
+  rename(value_1 = value) %>%
   dplyr::select(-sent_id, -word_idx)
   
   provo_eyetracking_subj2_df = provo_eyetracking_df %>%
@@ -175,9 +185,9 @@ provo_eyetr_grouped_df = merge(provo_eyetracking_subj2_df, provo_eyetracking_sub
   filter(word.x == word.y) %>%
   dplyr::select(-word.x, -word.y) %>%
   group_by(metric) %>%
-    mutate(motr_outlier = if_else(value_1 > (mean(value_1) + 3 * sd(value_1) ), T, F)) %>%
+    mutate(motr_outlier = if_else(metric != "FPReg" & value_1 > (mean(value_1) + 3 * sd(value_1) ), T, F)) %>%
     filter(motr_outlier == F) %>%
-    mutate(eyetr_outlier = if_else(value_2 > (mean(value_2) + 3 * sd(value_2) ), T, F)) %>%
+    mutate(eyetr_outlier = if_else(metric != "FPReg" & value_2 > (mean(value_2) + 3 * sd(value_2) ), T, F)) %>%
     filter(eyetr_outlier == F) %>%
   ungroup() %>%
   gather(measure, value, c("value_1", "value_2")) %>%
@@ -191,19 +201,23 @@ provo_eyetr_grouped_df = merge(provo_eyetracking_subj2_df, provo_eyetracking_sub
 provo_df = merge(provo_eyetracking_agg_df, provo_modeling_df, by=c("text_id", "sent_id", "word_idx")) %>%
   mutate(word_text_idx = as.integer(word_text_idx - 1)) %>%
   arrange(text_id, sent_id, word_idx) %>%
-  rename(eyetr_value = value)
+  rename(eyetr_value = value) 
 
 provo_df = merge(provo_df, motr_agg_df, by=c("text_id", "word_text_idx", "metric")) %>%
-  arrange(text_id, sent_id, word_idx) %>%
-  filter(word.x == word.y) %>%
-  dplyr::select(-word.x, -word.y) %>%
-  group_by(metric) %>%
-    mutate(motr_outlier = if_else(motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
-    filter(motr_outlier == F) %>%
-    mutate(eyetr_outlier = if_else(eyetr_value > (mean(eyetr_value) + 3 * sd(eyetr_value) ), T, F)) %>%
-    filter(eyetr_outlier == F) %>%
-  ungroup() %>%
-  gather(measure, value, c("eyetr_value", "motr_value"))
+arrange(text_id, sent_id, word_idx) %>%
+  # almost all the word.x != word.y is because of normalization problem, so we can keep them, instead, deleting some special cases
+  filter(!(text_id == 13 & word_text_idx >= 20 & word_text_idx <= 52)) %>%
+  filter(!(text_id == 3 & word_text_idx >= 46 & word_text_idx <= 57)) %>%
+# # filter(word.y == word) %>%
+dplyr::select(-word.x, -word.y) %>%
+group_by(metric) %>%
+  mutate(motr_outlier = if_else(metric != "FPReg" & motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
+  filter(motr_outlier == F) %>%
+  mutate(eyetr_outlier = if_else(metric != "FPReg" & eyetr_value > (mean(eyetr_value) + 3 * sd(eyetr_value) ), T, F)) %>%
+  filter(eyetr_outlier == F) %>%
+ungroup() %>%
+gather(measure, value, c("eyetr_value", "motr_value")) %>%
+  dplyr::select(-motr_outlier, -eyetr_outlier)
 
 
 ```
@@ -217,7 +231,7 @@ provo_df %>%
     facet_wrap(.~measure, scales="free_y") +
     xlab("Reading Time (ms)")
 
-ggsave("../visualization/density.png", device = "png", width = 6, height = 2.5)
+# ggsave("../visualization/density.png", device = "png", width = 6, height = 2.5)
 ```
 
 
@@ -254,10 +268,11 @@ print(cor.test(cor_df$value_1, cor_df$value_2)$estimate)
 
 print("Regression")
 
-gd_df = provo_df %>% filter(metric == "FPReg") %>% spread(measure, value)
-print(cor.test(gd_df$eyetr_value, gd_df$motr_value)$estimate)
+reg_df = provo_df %>% filter(metric == "FPReg") %>% spread(measure, value)
+print(cor.test(reg_df$eyetr_value, reg_df$motr_value)$estimate)
 
-cor_df = provo_eyetr_grouped_df %>% filter(metric == "FPReg") %>% spread(measure, value)
+cor_df = provo_eyetr_grouped_df %>% filter(metric == "FPReg") %>% group_by(text_id, metric, measure) %>%
+  summarize(value = mean(value, na.rm = TRUE), .groups = 'drop') %>% spread(measure, value)
 print(cor.test(cor_df$value_1, cor_df$value_2)$estimate)
 
 ```
@@ -278,11 +293,12 @@ provo_df %>%
     geom_smooth()
 
 
-ggsave("../visualization/metric_cor.png", device = "png", width = 6, height = 2.5)
+# ggsave("../visualization/metric_cor.png", device = "png", width = 6, height = 2.5)
 ```
 ## Correlations to Word-Level Statistical Properties
 
 ```{r}
+print("Gaze Duration")
 print("Len")
 cor_df = provo_df %>% filter(metric == "gaze_duration") %>% spread(measure, value)
 print(cor.test(cor_df$eyetr_value, cor_df$len)$estimate)
@@ -299,6 +315,60 @@ print(cor.test(cor_df$eyetr_value, cor_df$surp)$estimate)
 print(cor.test(cor_df$motr_value, cor_df$surp)$estimate)
 
 
+```
+
+```{r}
+print("Total Duration")
+print("Len")
+cor_df = provo_df %>% filter(metric == "total_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$len)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$len)$estimate)
+
+print("Freq")
+cor_df = provo_df %>% filter(metric == "total_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$freq)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$freq)$estimate)
+
+print("Surp")
+cor_df = provo_df %>% filter(metric == "total_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$surp)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$surp)$estimate)
+```
+
+```{r}
+print("First Duration")
+print("Len")
+cor_df = provo_df %>% filter(metric == "first_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$len)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$len)$estimate)
+
+print("Freq")
+cor_df = provo_df %>% filter(metric == "first_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$freq)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$freq)$estimate)
+
+print("Surp")
+cor_df = provo_df %>% filter(metric == "first_duration") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$surp)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$surp)$estimate)
+```
+
+```{r}
+print("Go Past Time")
+print("Len")
+cor_df = provo_df %>% filter(metric == "go_past_time") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$len)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$len)$estimate)
+
+print("Freq")
+cor_df = provo_df %>% filter(metric == "go_past_time") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$freq)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$freq)$estimate)
+
+print("Surp")
+cor_df = provo_df %>% filter(metric == "go_past_time") %>% spread(measure, value)
+print(cor.test(cor_df$eyetr_value, cor_df$surp)$estimate)
+print(cor.test(cor_df$motr_value, cor_df$surp)$estimate)
 ```
 
 ```{r}
@@ -321,7 +391,7 @@ provo_df %>%
     strip.placement = "outside"
   )
 
-ggsave("../visualization/word_prop_comps.png", device = "png", width = 6, height = 3)
+# ggsave("../visualization/word_prop_comps.png", device = "png", width = 6, height = 3)
 
 ```
 
@@ -344,6 +414,7 @@ provo_df %>%
 
 ## Shape of surprisal / RT relationship
 
+### for current word:
 ```{r}
 
 fit_gam_inner = function(bootstrap_sample, mean_predictors) {
@@ -357,7 +428,7 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors) {
   newdata = data.frame(surp=seq(0,20,by=0.1), prev_surp=mean_predictors$surp,
                        #surp=mean_predictors$surp, prev_surp=seq(0,20,by=0.1),
                        freq=mean_predictors$freq, prev_freq=mean_predictors$freq,
-                       len=mean_predictors$freq, prev_len=mean_predictors$freq)
+                       len=mean_predictors$len, prev_len=mean_predictors$len)
 
   # Returns a matrix N_samples * N_terms.
   per_term_predictions = predict(m, newdata=newdata, terms=terms_to_predict, type="terms")
@@ -396,7 +467,7 @@ fit_gam = function(df, mean_predictors, alpha=0.05) {
 
 gam_modeling_df = provo_df %>%
   spread(measure, value) %>%
-  mutate(len = nchar(word)) %>%
+  # mutate(len = nchar(word)) %>%      # len has already exists, but do not count punct into len.
   group_by(metric, text_id) %>%
     arrange(word_text_idx) %>%
     mutate(prev_surp = lag(surp),
@@ -459,18 +530,146 @@ for(m in c("gaze_duration", "total_duration", "go_past_time", "first_duration"))
       facet_wrap(psychometric~., nrow = 1) +
       ylab("Slowdown due to Surprisal (ms)") +
       xlab("Surprisal of Word") +
-      ggtitle("MoTR Times and Previous Word Surprisal")
+      ggtitle("MoTR Times and Current Word Surprisal")
   theme(
     legend.position = "none",
     panel.grid.minor = element_blank()
   )
   
-ggsave("../visualization/surprisal_rt_link.png", device = "png", width = 6, height = 2.5)
+# ggsave("../visualization/surprisal_rt_link.png", device = "png", width = 6, height = 2.5)
 
 
 ```
 
+### for previous word:
 
+```{r}
+fit_gam_inner_2 = function(bootstrap_sample, mean_predictors) {
+  
+  df = bootstrap_sample$data
+  weights = tabulate(as.integer(bootstrap_sample), nrow(df))
+  
+  m = gam(psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + te(freq, len, bs = 'cr') + te(prev_freq, prev_len, bs = 'cr'), data = df, weights = weights)
+  terms_to_predict = c("s(surp)", "s(prev_surp)")
+  
+  newdata = data.frame(surp=mean_predictors$surp, prev_surp=seq(0,20,by=0.1),
+                       freq=mean_predictors$freq, prev_freq=mean_predictors$freq,
+                       len=mean_predictors$len, prev_len=mean_predictors$len)
+
+  # Returns a matrix N_samples * N_terms.
+  per_term_predictions = predict(m, newdata=newdata, terms=terms_to_predict, type="terms")
+
+  # Additive model -- sum across predictor response contributions (matrix columns).
+  predictions = rowSums(per_term_predictions)
+
+  return(newdata %>% mutate(y=predictions))
+}
+
+fit_gam_2 = function(df, mean_predictors, alpha=0.05) {
+  # Bootstrap-resample data
+  boot_models = df %>% bootstraps(times=10) %>% 
+   # Fit a GAM and get predictions for each sample
+    mutate(smoothed=map(splits, fit_gam_inner_2, mean_predictors=mean_predictors))
+  
+  # Extract mean and 5% and 95% percentile y-values for each surprisal value
+  result = boot_models %>% 
+    unnest(smoothed) %>% 
+    dplyr::select(prev_surp, y) %>%
+    group_by(prev_surp) %>%
+      summarise(y_lower=quantile(y, alpha / 2), 
+                y_upper=quantile(y, 1 - alpha / 2),
+                y=mean(y)) %>% 
+    ungroup()
+  
+  return (result)
+}
+```
+
+```{r}
+gam_modeling_df_2 = provo_df %>%
+  spread(measure, value) %>%
+  # mutate(len = nchar(word)) %>%  # len has already exists, but do not count punct into len.
+  group_by(metric, text_id) %>%
+    arrange(word_text_idx) %>%
+    mutate(prev_surp = lag(surp),
+           prev_freq = lag(freq),
+           prev_len = lag(len),
+           prev_eyetr_value = lag(eyetr_value)) %>%
+  ungroup() %>%
+  drop_na() %>%
+  rename(psychometric = motr_value)
+
+smooths_df = data.frame()
+
+metrics = c("gaze_duration", "total_duration", "go_past_time", "first_duration")
+for (m in metrics) {
+  print(paste0("Fitting model for ", m))
+  dummy_df = gam_modeling_df_2 %>% filter(metric == m)
+  mean_predictors = dummy_df %>% summarise(surp = mean(surp), len = mean(len), freq = mean(freq))
+  smooths = dummy_df %>% fit_gam_2(., mean_predictors)
+  #Fix 0 surprisal = 0 ms
+  gam_smooths = smooths %>% mutate(delta = 0 - y[1], y=y + delta, y_lower= y_lower + delta, y_upper=y_upper + delta)
+  smooths_df = rbind(smooths_df, gam_smooths %>% mutate(psychometric = m))
+}
+```
+
+```{r}
+get_d_points = function(df) {
+    x = density(df$surp)$x
+    y = density(df$surp)$y
+    return(data.frame(x, y))
+  }
+
+density_data = data.frame()
+
+for(m in c("gaze_duration", "total_duration", "go_past_time", "first_duration")) {
+  dummy_df = provo_df %>% filter(metric == m) %>%
+      do({get_d_points(.)}) %>%
+      filter(x>0, x<20)
+  density_data = rbind(density_data, dummy_df %>% mutate(metric=m))
+}
+```
+
+
+```{r}
+# Surprisal curves
+  ggplot() +
+      # Density Data
+      annotate("rect", xmin=0, xmax=20, ymin=-20,ymax=-10, fill="#f4f4f4", color="grey", alpha=1, size = 0) +
+      geom_line(data = density_data, aes(x=x, y=y*50 - 18), color="#aaaaaa", size = 0.4) +
+      # Surrp / Rt data
+      geom_line(data = smooths_df, aes(x=prev_surp, y=y, color = psychometric), size=0.7) +
+      geom_ribbon(data = smooths_df, aes(x=prev_surp, ymin=y_lower, ymax=y_upper, fill = psychometric), alpha=0.3, size=0.5) +
+      scale_x_continuous(labels=c(0, 10, 20), breaks=c(0, 10, 20), minor_breaks = NULL) +
+      facet_wrap(psychometric~., nrow = 1) +
+      ylab("Slowdown due to Surprisal (ms)") +
+      xlab("Surprisal of Word") +
+      ggtitle("MoTR Times and Previous Word Surprisal")
+  theme(
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Precision and Recall for FPReg
+
+```{r}
+FPReg_df = provo_df %>% filter(metric == "FPReg") %>% spread(measure, value)
+confusion_matrix <- table(FPReg_df$motr_value > 0, FPReg_df$eyetr_value > 0)
+confusion_matrix
+
+true_positives <- confusion_matrix[2, 2]
+false_positives <- confusion_matrix[2, 1]
+false_negatives <- confusion_matrix[1, 2]
+
+precision <- true_positives / (true_positives + false_positives)
+recall <- true_positives / (true_positives + false_negatives)
+
+print("precision of Motr FPReg:")
+print(precision)
+print("Recall of Motr FPReg:")
+print(recall)
+```
 
 
 
