@@ -137,8 +137,8 @@ provo_eyetracking_df = provo_raw_df %>%
           FPReg = IA_REGRESSION_OUT,
           ff_progressive = IA_FIRST_FIX_PROGRESSIVE) %>%
   mutate(first_duration = gaze_duration) %>%
-  mutate(gaze_duration = ifelse(ff_progressive == 0, 0, gaze_duration),
-         go_past_time = ifelse(ff_progressive == 0, 0, go_past_time)) %>%
+  mutate(gaze_duration = if_else(ff_progressive == 0, 0, gaze_duration),
+         go_past_time = if_else(ff_progressive == 0, 0, go_past_time)) %>%
   dplyr::select(-ff_progressive) %>%
   gather(metric, value, 7:11) %>%
   mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
