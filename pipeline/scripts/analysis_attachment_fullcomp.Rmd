@@ -43,8 +43,8 @@ fnames = list.files(path=file_prefix)
 df = data.frame()
 for (f in fnames) {
   temp = read.csv(paste0(file_prefix, "/", f)) %>%
-    mutate(subj = str_remove(f, "_reading_measures.csv")) %>%
-    rename(go_past_time = 15)
+    mutate(subj = str_remove(f, "_reading_measures.csv")) #%>%
+    #rename(go_past_time = 15)   # sorry, I forgot to correct the names for some files. With the new data, all files in the folders have the correct name
   df = rbind(df, temp)
 }
 
@@ -64,8 +64,9 @@ filter_df %>%
 raw_df = df %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
-  # Filter out participants who were bots
-  filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
+  # Filter out participants who were bots & low accuracy: reader_26 0.76, reader_262 0.64, reader_276 0.56, reader_28 0.77, reader_294 0.74,
+  # reader_334 0.65, reader_338 0.74, reader_353 0.66, reader_373 0.78, reader_385 0.57
+  filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19, 26, 262, 276, 28, 294, 334, 338, 353, 373, 385) ) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj, sent_rg_id, sent_rg)
 
@@ -109,14 +110,14 @@ motr_df = raw_df %>%
   filter(zero == F) %>%
   
   #Filter out words that are more than 4 SDs away from the mean of their reading time
-  group_by(metric) %>%
+  group_by(metric, condition, word) %>%
     mutate(outlier = value > (mean(value) + 4 * sd(value))) %>%
   ungroup() %>%
-  mutate(outlier_discard = if_else(metric %in% c("first_duration", "first_fixation", "total_fixation", "go_past_time") & outlier == T, F, T)) %>%
+  mutate(outlier_discard = if_else(metric %in% c("first_duration", "gaze_duration", "total_fixation", "go_past_time") & outlier == T, F, T)) %>%
   filter(outlier_discard == T) %>%
   drop_na() %>%
   
-  # Finally, filter out all the sentences that were skimmed
+    # Finally, filter out all the sentences that were skimmed
   filter(skimming == F) %>%
   dplyr::select(-fixed, -n_fixed, -n_words, -fix_threshold, -skimming, -outlier)
 
@@ -124,7 +125,8 @@ motr_clean_df = motr_df %>%
   group_by(subj, experiment, condition, item_id, sent_rg_id, metric) %>%
       summarise(value = mean(value)) %>%
   ungroup() %>%
-  mutate(measure = "MoTR")
+  mutate(measure = "MoTR") %>%
+  mutate(value = ifelse(metric == "FPReg" & value > 0, 1, value))   # If there is a regression initiated from this region, the FPReg is 1, instead of a prob, right?
 
 motr_agg_df = motr_clean_df %>%
   group_by(experiment, condition, item_id, sent_rg_id, metric, measure) %>%
@@ -137,7 +139,7 @@ motr_agg_df = motr_clean_df %>%
     summarise( m = mean(diff),
                sd = std.error(diff),
                upper = m + 1.96 * sd,
-               lower = m - 1.98 * sd) %>%
+               lower = m - 1.96 * sd) %>%
   ungroup()
 
 ```
