@@ -109,11 +109,11 @@ motr_df = raw_df %>%
   mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
   filter(zero == F) %>%
   
-  #Filter out words that are more than 4 SDs away from the mean of their reading time
-  group_by(metric, condition, word) %>%
-    mutate(outlier = value > (mean(value) + 4 * sd(value))) %>%
+  #Filter out words that are more than 3 SDs away from the mean of their reading time
+  group_by(metric) %>%
+    mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
   ungroup() %>%
-  mutate(outlier_discard = if_else(metric %in% c("first_duration", "gaze_duration", "total_fixation", "go_past_time") & outlier == T, F, T)) %>%
+  mutate(outlier_discard = if_else(metric %in% c("first_duration", "gaze_duration", "total_duration", "go_past_time") & outlier == T, F, T)) %>%
   filter(outlier_discard == T) %>%
   drop_na() %>%
   
@@ -125,8 +125,7 @@ motr_clean_df = motr_df %>%
   group_by(subj, experiment, condition, item_id, sent_rg_id, metric) %>%
       summarise(value = mean(value)) %>%
   ungroup() %>%
-  mutate(measure = "MoTR") %>%
-  mutate(value = ifelse(metric == "FPReg" & value > 0, 1, value))   # If there is a regression initiated from this region, the FPReg is 1, instead of a prob, right?
+  mutate(measure = "MoTR")
 
 motr_agg_df = motr_clean_df %>%
   group_by(experiment, condition, item_id, sent_rg_id, metric, measure) %>%
