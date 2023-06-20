@@ -1,85 +1,85 @@
 "","experiment","sent_rg_id","metric","measure","pval"
-"1","Coordination",-1,"gaze_duration","MoTR",0.202139988230561
-"2","Coordination",0,"gaze_duration","MoTR",0.00772802507546982
-"3","Coordination",1,"gaze_duration","MoTR",0.939683923373754
-"4","Coordination",2,"gaze_duration","MoTR",0.349670190981247
-"5","Coordination",-1,"go_past_time","MoTR",0.425606754138846
-"6","Coordination",0,"go_past_time","MoTR",0.0338016769444665
-"7","Coordination",1,"go_past_time","MoTR",0.342964780439307
-"8","Coordination",2,"go_past_time","MoTR",0.656722524463863
-"9","Coordination",-1,"go_past_time","G-Maze",0.64037870430144
-"10","Coordination",0,"go_past_time","G-Maze",0.556030528702872
-"11","Coordination",1,"go_past_time","G-Maze",0.948457874143103
-"12","Coordination",2,"go_past_time","G-Maze",0.635096416310669
-"13","Coordination",-1,"go_past_time","A-Maze",0.222428991993916
-"14","Coordination",0,"go_past_time","A-Maze",0.00994584989970666
-"15","Coordination",1,"go_past_time","A-Maze",0.073473366986107
+"1","Coordination",-1,"gaze_duration","MoTR",0.151240605616533
+"2","Coordination",0,"gaze_duration","MoTR",0.044470653691946
+"3","Coordination",1,"gaze_duration","MoTR",0.0114054380864762
+"4","Coordination",2,"gaze_duration","MoTR",0.166829876080246
+"5","Coordination",-1,"go_past_time","MoTR",0.153794531670508
+"6","Coordination",0,"go_past_time","MoTR",0.0134192658503384
+"7","Coordination",1,"go_past_time","MoTR",0.00606366756594278
+"8","Coordination",2,"go_past_time","MoTR",0.0132513109471061
+"9","Coordination",-1,"go_past_time","G-Maze",0.733417326050278
+"10","Coordination",0,"go_past_time","G-Maze",0.567597350644806
+"11","Coordination",1,"go_past_time","G-Maze",0.934855867110778
+"12","Coordination",2,"go_past_time","G-Maze",0.687728252935021
+"13","Coordination",-1,"go_past_time","A-Maze",0.850390112870229
+"14","Coordination",0,"go_past_time","A-Maze",0.0213364055239739
+"15","Coordination",1,"go_past_time","A-Maze",0.155032059683391
 "16","Coordination",2,"go_past_time","A-Maze",0.778373668649658
-"17","Coordination",-1,"go_past_time","SPR",0.45979886182287
-"18","Coordination",0,"go_past_time","SPR",0.328093745692553
-"19","Coordination",1,"go_past_time","SPR",0.99528454429976
-"20","Coordination",2,"go_past_time","SPR",0.643088007600237
-"21","Coordination",-1,"total_duration","MoTR",0.0160667289539373
-"22","Coordination",0,"total_duration","MoTR",0.00133516980680989
-"23","Coordination",1,"total_duration","MoTR",0.335644607877723
-"24","Coordination",2,"total_duration","MoTR",0.498690989965885
-"25","Coordination",-1,"FPReg","MoTR",0.999600042659577
-"26","Coordination",0,"FPReg","MoTR",0.36546517038242
-"27","Coordination",1,"FPReg","MoTR",0.108332746933536
-"28","Coordination",2,"FPReg","MoTR",0.345782045447007
-"29","Relative Clause",-1,"gaze_duration","MoTR",0.871795686185487
-"30","Relative Clause",0,"gaze_duration","MoTR",0.0675016553122626
-"31","Relative Clause",1,"gaze_duration","MoTR",0.0816409034516049
-"32","Relative Clause",2,"gaze_duration","MoTR",0.487427318678458
-"33","Relative Clause",-1,"go_past_time","MoTR",0.100672138685793
-"34","Relative Clause",0,"go_past_time","MoTR",0.00370056601943422
-"35","Relative Clause",1,"go_past_time","MoTR",0.0387647337618871
-"36","Relative Clause",2,"go_past_time","MoTR",0.343956662669388
-"37","Relative Clause",-1,"go_past_time","G-Maze",0.482623446782867
+"17","Coordination",-1,"go_past_time","SPR",0.721331064872098
+"18","Coordination",0,"go_past_time","SPR",0.811807075049358
+"19","Coordination",1,"go_past_time","SPR",0.927934753894155
+"20","Coordination",2,"go_past_time","SPR",0.281825453992182
+"21","Coordination",-1,"total_duration","MoTR",0.0147584442707659
+"22","Coordination",0,"total_duration","MoTR",0.0047515321474573
+"23","Coordination",1,"total_duration","MoTR",0.011230264190336
+"24","Coordination",2,"total_duration","MoTR",0.981198951504076
+"25","Coordination",-1,"FPReg","MoTR",0.183272392629488
+"26","Coordination",0,"FPReg","MoTR",0.0900535278022636
+"27","Coordination",1,"FPReg","MoTR",0.00122499305694694
+"28","Coordination",2,"FPReg","MoTR",0.000821904836561378
+"29","Relative Clause",-1,"gaze_duration","MoTR",0.535880611797879
+"30","Relative Clause",0,"gaze_duration","MoTR",0.0119492088017967
+"31","Relative Clause",1,"gaze_duration","MoTR",0.341170120485853
+"32","Relative Clause",2,"gaze_duration","MoTR",0.757433689887771
+"33","Relative Clause",-1,"go_past_time","MoTR",0.519942304614437
+"34","Relative Clause",0,"go_past_time","MoTR",0.00253498736191045
+"35","Relative Clause",1,"go_past_time","MoTR",0.160074500070657
+"36","Relative Clause",2,"go_past_time","MoTR",0.627887661075139
+"37","Relative Clause",-1,"go_past_time","G-Maze",0.397621060451243
 "38","Relative Clause",0,"go_past_time","G-Maze",0.00324366288359728
-"39","Relative Clause",1,"go_past_time","G-Maze",0.138127066658079
-"40","Relative Clause",2,"go_past_time","G-Maze",0.232065888843378
-"41","Relative Clause",-1,"go_past_time","A-Maze",0.950282623871359
+"39","Relative Clause",1,"go_past_time","G-Maze",0.107636519610116
+"40","Relative Clause",2,"go_past_time","G-Maze",0.16946175361381
+"41","Relative Clause",-1,"go_past_time","A-Maze",0.781440789632248
 "42","Relative Clause",0,"go_past_time","A-Maze",0.0151451762762957
-"43","Relative Clause",1,"go_past_time","A-Maze",0.495098885002184
-"44","Relative Clause",2,"go_past_time","A-Maze",0.813880933973036
-"45","Relative Clause",-1,"go_past_time","SPR",0.633600620219536
-"46","Relative Clause",0,"go_past_time","SPR",0.649538664980342
-"47","Relative Clause",1,"go_past_time","SPR",0.934718870086916
-"48","Relative Clause",2,"go_past_time","SPR",0.527018218930789
-"49","Relative Clause",-1,"total_duration","MoTR",0.00454775631783552
-"50","Relative Clause",0,"total_duration","MoTR",0.000590166147773328
-"51","Relative Clause",1,"total_duration","MoTR",0.00311484909419715
-"52","Relative Clause",2,"total_duration","MoTR",0.653295353442561
-"53","Relative Clause",-1,"FPReg","MoTR",0.999971055366084
-"54","Relative Clause",0,"FPReg","MoTR",0.00346225820921061
-"55","Relative Clause",1,"FPReg","MoTR",0.750086543995575
-"56","Relative Clause",2,"FPReg","MoTR",0.707483240689225
-"57","Adverb",-1,"gaze_duration","MoTR",0.181028552419744
-"58","Adverb",0,"gaze_duration","MoTR",0.000607041104390312
-"59","Adverb",1,"gaze_duration","MoTR",0.0133843019945894
-"60","Adverb",2,"gaze_duration","MoTR",0.220809026335699
-"61","Adverb",-1,"go_past_time","MoTR",0.528880048546753
-"62","Adverb",0,"go_past_time","MoTR",0.0000701726718298409
-"63","Adverb",1,"go_past_time","MoTR",0.0000414013818644327
-"64","Adverb",2,"go_past_time","MoTR",0.11120156956471
-"65","Adverb",-1,"go_past_time","G-Maze",0.993981029946173
-"66","Adverb",0,"go_past_time","G-Maze",0.000579204758181428
+"43","Relative Clause",1,"go_past_time","A-Maze",0.767978314067205
+"44","Relative Clause",2,"go_past_time","A-Maze",0.768681608931179
+"45","Relative Clause",-1,"go_past_time","SPR",0.666782089878218
+"46","Relative Clause",0,"go_past_time","SPR",0.907952548327445
+"47","Relative Clause",1,"go_past_time","SPR",0.353817199344125
+"48","Relative Clause",2,"go_past_time","SPR",0.236336749274118
+"49","Relative Clause",-1,"total_duration","MoTR",0.0456986635125092
+"50","Relative Clause",0,"total_duration","MoTR",0.00000649226125724926
+"51","Relative Clause",1,"total_duration","MoTR",0.0782899991101729
+"52","Relative Clause",2,"total_duration","MoTR",0.332229781977152
+"53","Relative Clause",-1,"FPReg","MoTR",0.851547145119364
+"54","Relative Clause",0,"FPReg","MoTR",0.000359302142218171
+"55","Relative Clause",1,"FPReg","MoTR",0.05091513240756
+"56","Relative Clause",2,"FPReg","MoTR",0.107487430398152
+"57","Adverb",-1,"gaze_duration","MoTR",0.346864878054393
+"58","Adverb",0,"gaze_duration","MoTR",0.000197696800396563
+"59","Adverb",1,"gaze_duration","MoTR",0.000787308755973219
+"60","Adverb",2,"gaze_duration","MoTR",0.623818728831531
+"61","Adverb",-1,"go_past_time","MoTR",0.354054132634499
+"62","Adverb",0,"go_past_time","MoTR",0.0000198330174108415
+"63","Adverb",1,"go_past_time","MoTR",0.00000516034773683452
+"64","Adverb",2,"go_past_time","MoTR",0.012089789967702
+"65","Adverb",-1,"go_past_time","G-Maze",0.380178054719011
+"66","Adverb",0,"go_past_time","G-Maze",0.000623832615807247
 "67","Adverb",1,"go_past_time","G-Maze",0.43875321337139
 "68","Adverb",2,"go_past_time","G-Maze",0.206086994962083
-"69","Adverb",-1,"go_past_time","A-Maze",0.27654762292661
-"70","Adverb",0,"go_past_time","A-Maze",0.0000606407487578166
+"69","Adverb",-1,"go_past_time","A-Maze",0.717846906136027
+"70","Adverb",0,"go_past_time","A-Maze",0.0000593799886647808
 "71","Adverb",1,"go_past_time","A-Maze",0.015290445015025
 "72","Adverb",2,"go_past_time","A-Maze",0.583826769790421
-"73","Adverb",-1,"go_past_time","SPR",0.608180344850936
-"74","Adverb",0,"go_past_time","SPR",0.295722387998924
-"75","Adverb",1,"go_past_time","SPR",0.00240456566696848
-"76","Adverb",2,"go_past_time","SPR",0.982838527538655
-"77","Adverb",-1,"total_duration","MoTR",0.00393199830776435
-"78","Adverb",0,"total_duration","MoTR",0.00000663687648315219
-"79","Adverb",1,"total_duration","MoTR",0.0060801041957112
-"80","Adverb",2,"total_duration","MoTR",0.268075997973675
-"81","Adverb",-1,"FPReg","MoTR",0.99998787651746
-"82","Adverb",0,"FPReg","MoTR",0.000843995735954226
-"83","Adverb",1,"FPReg","MoTR",0.657403293450633
-"84","Adverb",2,"FPReg","MoTR",0.084315414753801
+"73","Adverb",-1,"go_past_time","SPR",0.680625434884316
+"74","Adverb",0,"go_past_time","SPR",0.110305026561053
+"75","Adverb",1,"go_past_time","SPR",0.0029904507028509
+"76","Adverb",2,"go_past_time","SPR",0.938058188731072
+"77","Adverb",-1,"total_duration","MoTR",0.000223518430963927
+"78","Adverb",0,"total_duration","MoTR",0.000000162920007880653
+"79","Adverb",1,"total_duration","MoTR",0.0000169595846687073
+"80","Adverb",2,"total_duration","MoTR",0.351921185372518
+"81","Adverb",-1,"FPReg","MoTR",0.32138673171899
+"82","Adverb",0,"FPReg","MoTR",0.00000000733561430268321
+"83","Adverb",1,"FPReg","MoTR",0.0000000000000376901069249052
+"84","Adverb",2,"FPReg","MoTR",0.00379895414094315

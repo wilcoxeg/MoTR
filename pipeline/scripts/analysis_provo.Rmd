@@ -54,17 +54,33 @@ filter_df = df %>%
   mutate(p_correct = round(p_correct, digits = 2))
 
 filter_df = filter_df %>% filter(p_correct < 0.8)
+filter_list = filter_df$subj
 ## reader_3:0.70, reader_60:0.79, reader_76:0.72 , reader_256:0.71 , reader_262:0.57 
 
 raw_df = df %>%
+  filter(! subj %in% c(filter_list)) %>%
   mutate(word = str_trim(word)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.character(subj)) %>%
-  filter(! subj %in% c("3", "60", "76", "256", "262")) %>% # Explanation for this filtering
+  #filter(! subj %in% c("3", "60", "76", "256", "262")) %>% # Explanation for this filtering
   mutate(FPReg = if_else(total_duration == 0, -1, FPReg)) %>% #If the word is skipped we can't say that it wasn't regressed on the first pass. Set to a "NA"
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj)
 
 length(unique(raw_df$subj))
+
+df %>%
+  filter(! subj %in% c(filter_list)) %>%
+  filter(FPReg >= 0) %>%
+  dplyr::select(FPReg) %>%
+  drop_na() %>%
+  summarise( m = mean(FPReg))
+
+df %>%
+  filter(! subj %in% c(filter_list)) %>%
+  dplyr::select(FPFix) %>%
+  drop_na() %>%
+  summarise( m = mean(FPFix))
+
 
 ```
 
@@ -74,6 +90,11 @@ length(unique(raw_df$subj))
 motr_agg_df = raw_df %>%
   gather(metric, value, 6:10) %>%
     filter(value >= 0) %>% #Removes the "NA" values for FPReg
+  
+    # ==== Remove skipped words
+    #mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+    #filter(zero == F) %>%
+  
     drop_na() %>%
     group_by(para_nr, word_nr, word, metric) %>% 
       mutate(outlier = if_else(value > (mean(value) + 3 * sd(value)), T, F)) %>% filter(outlier == F) %>%
@@ -145,7 +166,11 @@ provo_eyetracking_df = provo_raw_df %>%
   
   # drop_na() %>%     # will drop the whole row with all the metrics
   gather(metric, value, 7:12) %>%
-  filter(value >= 0) %>%
+  
+  # ==== Remove skipped words
+  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  # filter(zero == F) %>%
+  
   # mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   # mutate(value = if_else(metric != "FPReg" & is.na(value), as.integer(0), as.integer(value))) %>%
   drop_na() %>%
@@ -156,9 +181,6 @@ provo_eyetracking_df = provo_raw_df %>%
     mutate(outlier = if_else(metric != "FPReg" & metric != "skip" & value > (mean(value) + 3 * sd(value) ), T, F)) %>%
     filter(outlier == F) %>%
   ungroup() #%>%
-  # # Filter out words with a reading-time of zero
-  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  # filter(zero == F)
 
 # Aggregate cross-participant data for all subjects
 provo_eyetracking_agg_df = provo_eyetracking_df %>%
@@ -171,6 +193,16 @@ provo_eyetracking_agg_df = provo_eyetracking_df %>%
 
 # View(provo_eyetracking_agg_df)
 # write.csv(provo_eyetracking_agg_df, file = "/Users/cui/Desktop/MoTR/pipeline/ancillary_data/provo_eyetracking_agg_df.csv", row.names = FALSE)
+
+provo_raw_df %>%
+  dplyr::select(IA_REGRESSION_OUT) %>%
+  drop_na() %>%
+  summarise( m = mean(IA_REGRESSION_OUT))
+
+provo_raw_df %>%
+  dplyr::select(IA_SKIP) %>%
+  drop_na() %>%
+  summarise( m = mean(IA_SKIP))
 
 
 ```

@@ -58,21 +58,25 @@ filter_df = df %>%
   ungroup() %>%
   mutate(p_correct = round(p_correct, digits = 2))
 
-filter_df %>%
-  filter(p_correct < 0.8)
+filter_df = filter_df %>% filter(p_correct < 0.8)
+filter_list = filter_df$subj
+subj_list = unique(df$subj)
 
 raw_df = df %>%
+  filter(! subj %in% c(filter_list)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
   # Filter out participants who were bots
-  filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
+  #filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj, sent_rg_id, sent_rg)
 
 raw_df
+
+
 ```
 
-```{r}
+```{r, warning=F}
 
 motr_df = raw_df %>%
   gather(metric, value, 6:10) %>%
@@ -95,24 +99,21 @@ motr_df = raw_df %>%
   dplyr::select(-cond_id, -expr_id) %>%
   filter(experiment != "Filler") %>%
   
-    # Filter out sentences where the participant focuses on less than 1/5 of the total words, i.e. where they are skimming
+  # Filter out sentences where the participant focuses on less than 1/5 of the total words, i.e. where they are skimming
   group_by(item_id, subj, metric, condition, experiment) %>%
     mutate(fixed = if_else(value > 0, 1, 0),
+           fixed = if_else(metric == "FPReg", 1, fixed),
            n_fixed = sum(fixed),
            n_words = n()) %>%
   ungroup() %>%
   mutate(fix_threshold = n_fixed > (n_words / 5)) %>%
-  mutate(skimming = if_else(metric != "FPReg" & fix_threshold == F,T, F)) %>%
-  
-  #Filter out words with a reading-time of zero
-  mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  filter(zero == F) %>%
+  mutate(skimming = if_else(fix_threshold == F,T, F)) %>%
   
   #Filter out words that are more than 4 SDs away from the mean of their reading time
   group_by(metric) %>%
-    mutate(outlier = value > (mean(value) + 4 * sd(value))) %>%
+    mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
   ungroup() %>%
-  mutate(outlier_discard = if_else(metric %in% c("first_duration", "first_fixation", "total_fixation", "go_past_time") & outlier == T, F, T)) %>%
+  mutate(outlier_discard = if_else(metric %in% c("first_duration", "gaze_duration", "total_duration", "go_past_time") & outlier == T, F, T)) %>%
   filter(outlier_discard == T) %>%
   drop_na() %>%
   
@@ -121,9 +122,16 @@ motr_df = raw_df %>%
   dplyr::select(-fixed, -n_fixed, -n_words, -fix_threshold, -skimming, -outlier)
 
 motr_clean_df = motr_df %>%
+  
+  #Filter out sentence regions with a reading-time of zero
+  mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  filter(zero == F) %>%
+  dplyr::select(-zero) %>%
+  
   group_by(subj, experiment, condition, item_id, sent_rg_id, metric) %>%
-      summarise(value = mean(value)) %>%
+      summarise(value = if_else(metric == "FPReg", as.double(any(value)), mean(value))) %>%
   ungroup() %>%
+  
   mutate(measure = "MoTR")
 
 motr_agg_df = motr_clean_df %>%
@@ -137,7 +145,7 @@ motr_agg_df = motr_clean_df %>%
     summarise( m = mean(diff),
                sd = std.error(diff),
                upper = m + 1.96 * sd,
-               lower = m - 1.98 * sd) %>%
+               lower = m - 1.96 * sd) %>%
   ungroup()
 
 ```
@@ -189,7 +197,9 @@ gmaze_clean_df = gmaze_df %>%
   dplyr::select(condition, item_id, word_nr, value, subj, word) %>%
   merge(region_reference_df, by = c("item_id", "word", "word_nr")) %>%
   filter(! condition %in% c("filler", "practice")) %>%
-  filter(value < 5000) %>%
+  drop_na() %>%
+  mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
+  filter(outlier == F) %>%
   mutate(experiment = case_when(
     condition %in% c("adverb_high", "adverb_low") ~ "Adverb",
     condition %in% c("and_comma", "and_no_comma") ~ "Coordination",
@@ -230,7 +240,9 @@ amaze_clean_df = amaze_df %>%
   dplyr::select(condition, item_id, word_nr, value, subj, word) %>%
   merge(region_reference_df, by = c("item_id", "word", "word_nr")) %>%
   filter(! condition %in% c("filler", "practice")) %>%
-  filter(value < 5000) %>%
+  drop_na() %>%
+  mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
+  filter(outlier == F) %>%
   mutate(experiment = case_when(
     condition %in% c("adverb_high", "adverb_low") ~ "Adverb",
     condition %in% c("and_comma", "and_no_comma") ~ "Coordination",
@@ -272,6 +284,9 @@ spr_clean_df = spr_df %>%
   mutate(word_nr = word_nr - 1) %>%
   merge(region_reference_df, by = c("item_id", "word", "word_nr")) %>%
   filter(! condition %in% c("filler", "practice")) %>%
+  drop_na() %>%
+  mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
+  filter(outlier == F) %>%
   mutate(experiment = case_when(
     condition %in% c("adverb_high", "adverb_low") ~ "Adverb",
     condition %in% c("and_comma", "and_no_comma") ~ "Coordination",
@@ -314,12 +329,19 @@ comb_agg_df = rbind(motr_agg_df, eyetr_agg_df, gmaze_agg_df, spr_agg_df, amaze_a
 
 comb_clean_df = rbind(motr_clean_df, gmaze_clean_df, spr_clean_df, amaze_clean_df)
 
+comb_clean_df %>%
+  filter(measure == "MoTR", metric == "FPReg") %>%
+  filter(metric >= 0) %>%
+  summarise(m = mean(value))
+
 ```
 
 ## Stats!
 
 
-```{r, eval=FALSE}
+
+
+```{r}
 
 stats_df = data.frame()
 
@@ -333,8 +355,9 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
       for(i in -1:2) {
         
         temp_df = comb_clean_df %>% filter(metric == met, measure == mes, experiment == exp, sent_rg_id == i) %>%
-          mutate(item_id = as.factor(item_id), subj = as.factor(subj), condition = if_else(condition == "high", 1, 0)) %>%
-          mutate(item_id = as.factor(item_id))
+          mutate(item_id = as.factor(item_id), subj = as.factor(subj)) %>%
+          mutate(item_id = as.factor(item_id)) %>%
+          mutate(condition = if_else(condition == "high", 1, 0))
         
         if(nrow(temp_df) > 0) {
           
@@ -343,12 +366,29 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
           if (met == "FPReg") {
             model = glmer(value ~ condition + (condition || item_id), data = temp_df, family = "binomial")
             pval = coef(summary(model))[8]
+            
+            #model = brms::brm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, family = binomial(link = "logit"), chains = 2,
+                              #file = paste0(exp, met, mes, i, sep="_"), cores = 2, backend = "cmdstanr")
+            #est = fixef(model)[2]
+            #sd = fixef(model)[4]
+            #upper = fixef(model)[6]
+            #lower = fixef(model)[8]
+            
           } else {
             temp_df = temp_df %>% mutate(value = scale(value)) #scale real-valued numbers for lmer
             model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
             pval = coef(summary(model))[10]
+            
+            #model = brms::brm(value ~ condition + (condition | subj) + (condition | item_id), data = temp_df, chains = 2,
+                              #file = paste0(exp, met, mes, i, sep="_"), cores = 2, backend = "cmdstanr")
+            #est = fixef(model)[2]
+            #sd = fixef(model)[4]
+            #upper = fixef(model)[6]
+            #lower = fixef(model)[8]
+            
           }
-          result_df = data.frame(experiment = exp, sent_rg_id = i, metric = met, measure = mes, pval = pval)
+          #result_df = data.frame(experiment = exp, sent_rg_id = i, metric = met, measure = mes, estimate = est, std_error = sd, upper_95 = upper, lower_95 = lower)
+          result_df = data.frame(experiment = exp, sent_rg_id = i, metric = met, measure = mes, pval=pval)
           stats_df = rbind(stats_df, result_df)
         }
       }
@@ -356,7 +396,7 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
   }
 }
 
-#write.csv(stats_df, "./stats_df.csv")
+write.csv(stats_df, "./stats_df.csv")
 
 
 ```
@@ -388,13 +428,13 @@ plotting_df %>%
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.1) +
     geom_line() +
-    geom_text(aes(label = sig, y = if_else(metric == "Regression Prob", 0.08, 220)), color = "black", size = 2) +
-    geom_text(aes(x = 0, y = if_else(metric == "Regression Prob", 0.09, 240), label=""), show.legend = FALSE) +
+    geom_text(aes(label = sig, y = if_else(metric == "Regression Prob", 0.12, 250)), color = "black", size = 2) +
+    geom_text(aes(x = 0, y = if_else(metric == "Regression Prob", 0.13, 270), label=""), show.legend = FALSE) +
   scale_color_manual(values = c("#000000", "#2eccc1")) +
   coord_cartesian(xlim = c(-1.25, 2.25)) +
   ylab("Difference in RTs (ms) Between Conditions") +
   xlab("Sentence Region") +
-  scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c("Pre-Critical", "Critical +1", "Critical +2", "Critcal +3")) +
+  scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c ("Pre-Critical", "Critical", "Critical +1", "Critcal +2")) +
   labs(color = "", linetype = "") +
   facet_wrap(experiment~metric, scales="free_y", nrow = 3) +
   theme(
@@ -403,7 +443,7 @@ plotting_df %>%
     panel.grid.minor = element_blank()
   )
 
-#ggsave(paste0("../visualization/paper/target_results", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
+ggsave(paste0("../visualization/paper/target_results", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
 
 ```
 
@@ -428,7 +468,7 @@ plotting_df %>%
   coord_cartesian(xlim = c(-1.25, 2.25)) +
   ylab("Difference in RTs (ms) Between Conditions") +
   xlab("Sentence Region") +
-  scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c("Pre-Critical", "Critical +1", "Critical +2", "Critcal +3")) +
+  scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c("Pre-Critical", "Critical", "Critical +1", "Critcal +2")) +
   labs(color = "", linetype = "") +
   facet_grid(experiment~measure, scales = "free_y") +
   theme(
