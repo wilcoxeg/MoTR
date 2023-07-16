@@ -717,53 +717,5 @@ print("Recall of Motr FPReg:")
 print(recall)
 ```
 
-## Relationship between first duration and regression probabilities.  --> exploratory, not finished.
-
-```{r}
-# Motr --> fit a linear model for first_duration. finding: More FPReg, more first duration. 
-
-rlt_df = provo_df %>% filter(metric == "FPReg" | metric == "first_duration") %>% 
-  filter(surp > 10) %>%
-  spread(metric, value) %>%
-  drop_na()
-
-# View(rlt_df)
-
-motr_rlt = rlt_df %>% filter(measure == "motr_value") %>%
-  mutate(FPReg_bi = if_else(FPReg == 0, 0, 1),
-         fd_normalized = first_duration / len)
-
-motr_rlt$FPReg_bi <- factor(motr_rlt$FPReg_bi)
-
-# View(motr_rlt)
-
-# levels(motr_rlt$FPReg_bi)
-
-# motr_lm = lm(first_duration ~ freq + FPReg_bi, data = motr_rlt)
-motr_lm = lm(fd_normalized ~ FPReg, data = motr_rlt)
-
-summary(motr_lm)
-
-# write.csv(rlt_df, file = "/Users/cui/Desktop/MoTR/pipeline/ancillary_data/rlt.csv", row.names = FALSE)
-
-```
-
-
-```{r}
-# eyrtr -> same as motr, more FPReg, more first_duration
-
-eyetr_rlt = rlt_df %>% filter(measure == "eyetr_value") %>%
-  mutate(FPReg_bi = if_else(FPReg == 0, 0, 1),
-         fd_normalized = first_duration / len)
-
-eyetr_rlt$FPReg_bi <- factor(eyetr_rlt$FPReg_bi)
-
-# eyetr_lm = lm(first_duration ~ FPReg_bi, data = eyetr_rlt)
-eyetr_lm = lm(fd_normalized ~ FPReg, data = eyetr_rlt)
-
-summary(eyetr_lm)
-
-```
-
 
 
