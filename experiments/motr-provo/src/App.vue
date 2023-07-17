@@ -106,7 +106,7 @@
                 </span>
               </template>
             </div>
-            <div class="clear-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
+            <div class="blurry-layer" style="opacity: 0.3; filter: blur(3.5px); transition: all 0.3s linear 0s;"> 
               {{trial.text}}
             </div>
           </template>
@@ -134,7 +134,6 @@
       </Screen>
     </template>
     <SubmitResultsScreen />
-    <Screen :title="'Thanks'"> The study is now complete. Thank you for participating!</Screen>
   </Experiment>
 </template>
 
@@ -180,14 +179,12 @@ export default {
     },
   methods: {
     changeBack() {
-      // console.log('back!')
       this.$el.querySelector(".oval-cursor").classList.remove('grow');
       this.$el.querySelector(".oval-cursor").classList.remove('blank');
       this.currentIndex = null;
     },
     saveData() {
         if (this.currentIndex !== null) {
-          // console.log('saving!')
           const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
           if (currentElement) {
             $magpie.addTrialData({
@@ -204,7 +201,6 @@ export default {
               wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
           });
         } else {
-          // console.log('-1')
           $magpie.addTrialData({
               Experiment: this.$el.querySelector(".experiment_id").value,
               Condition: this.$el.querySelector(".condition_id").value,
@@ -217,7 +213,6 @@ export default {
         }
       }},
     moveCursor(e) {
-      // console.log('move!')
       this.$el.querySelector(".oval-cursor").classList.add('grow');
       let x = e.clientX;
       let y = e.clientY;
@@ -234,7 +229,6 @@ export default {
           this.currentIndex = -1;
         }
       }
-//       console.log(this.currentIndex);
       
       this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
       this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
@@ -305,7 +299,6 @@ export default {
   }
   .oval-cursor {
     position: fixed;
-    /* left: 10px; */
     z-index: 2;
     width: 1px;
     height: 1px;
@@ -324,8 +317,6 @@ export default {
     width: 102px;
     height: 38px;
     border-radius: 50%;
-    /* border: solid; */
-    /* border-color: red; */
     box-shadow: 30px 0 8px -4px rgba(255, 255, 255, 0.1), -30px 0 8px -4px rgba(255, 255, 255, 0.1);
     background-color: rgba(255, 255, 255, 0.3);
     background-blend-mode: screen;
@@ -345,7 +336,7 @@ export default {
     mix-blend-mode: normal;
     border-radius: 50%;
 }
-  .clear-layer {
+  .blurry-layer {
     position: absolute;
     pointer-events: none;
     color: black;

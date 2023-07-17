@@ -15,9 +15,7 @@ jobs:
           - experiments/motr-pilot
           - experiments/motr-localCoherence
           - experiments/motr-provo
-          - experiments/motr-provo-list1
-          - experiments/motr-provo-list2
-          - experiments/motr-provo-list3
+          - experiments/motr-SB-SAT
 
     runs-on: ubuntu-latest
     steps:
