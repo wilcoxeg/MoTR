@@ -48,23 +48,33 @@ By default, the resulting divided raw data, fixations, reading measures, and pre
 
  We provide some sample calls for you to follow.
 
- ```python3 postprocessing.py --in_file local_coherence_reading_data.csv --trial_file trials/localCoherence.tsv```
+ ```bash
+ python3 postprocessing.py --in_file local_coherence_reading_data.csv --trial_file trials/localCoherence.tsv
+ ```
 
  Please replace `local_coherence_reading_data.csv` with the path to your MoTR reading data file and replace `trials/localCoherence.tsv` with the path to your original trial data file.
 
- ```python3 postprocessing.py --in_file local_coherence_reading_data.csv --processed_trial_file trials/localCoherence_sent_region.csv```
+ ```bash
+ python3 postprocessing.py --in_file local_coherence_reading_data.csv --processed_trial_file trials/localCoherence_sent_region.csv
+ ```
 
 Please replace `local_coherence_reading_data.csv` with the path to your MoTR reading data file and replace `trials/localCoherence_sent_region.csv` with the path to your preprocessed trial data file.
 
-```python3 postprocessing.py --in_folder data --processed_trial_file trials/localCoherence_sent_region.csv```
+```bash
+python3 postprocessing.py --in_folder data --processed_trial_file trials/localCoherence_sent_region.csv
+```
 
 Please replace `data` with the path to the folder where your MoTR reading data files are stored and replace `trials/localCoherence_sent_region.csv` with the path to your preprocessed trial data file.
 
-```python3 postprocessing.py --in_file provo_reading_data.csv --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --processed_trial_dir ../stimuli --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000```
+```bash
+python3 postprocessing.py --in_file provo_reading_data.csv --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --processed_trial_dir ../stimuli --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
+```
 
 Read one single file, store the results to specific directories and define your own thresholds for fixations.
 
-```python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000```
+```bash
+python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
+```
 
 Process multiple files in one folder and have customized paths for storing results and for defining fixations.
 
