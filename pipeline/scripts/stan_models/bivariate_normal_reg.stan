@@ -20,13 +20,17 @@ model {
   // Likelihood
   // Bivariate Student's t-distribution instead of normal for robustness
   x ~ multi_student_t(nu, mu, cov);
-   for (i in 1:2) {
-    target += student_t_lpdf(x[:, i] | nu, mu[i], sigma[i]) - student_t_lccdf(rep_vector(0, N) | nu, mu[i], sigma[i]);
-  }
+  //  for (i in 1:2) {
+  //   target += student_t_lpdf(x[:, i] | nu, mu[i], sigma[i]) - student_t_lccdf(rep_vector(0, N) | nu, mu[i], sigma[i]);
+  // }
     
   // Noninformative priors on all parameters
-  sigma ~ normal(0, 100);
-  mu ~ normal(0.5, 0.2);
+  // sigma ~ normal(0, 100);
+  // mu ~ normal(0.5, 0.2); # for eyetr-eyetr
+  sigma ~ normal(0, 1);
+  mu ~ normal(0, 1);
+  // mu[1] ~ normal(0.4, 0.1);
+  // mu[2] ~ normal(0.25, 0.1); # for motr-eyetr FPReg < 0.3, maybe
   nu ~ gamma(2, 0.1);
   rho ~ uniform(-1, 1);
 }
