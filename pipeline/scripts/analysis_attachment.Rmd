@@ -66,14 +66,9 @@ raw_df = df %>%
   filter(! subj %in% c(filter_list)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
-<<<<<<< HEAD:pipeline/scripts/analysis_attachment.Rmd
-  # Filter out participants who were bots
-  #filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
-=======
   # Filter out participants who were bots & low accuracy: reader_26 0.76, reader_262 0.64, reader_276 0.56, reader_28 0.77, reader_294 0.74,
   # reader_334 0.65, reader_338 0.74, reader_353 0.66, reader_373 0.78, reader_385 0.57
-  filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19, 26, 262, 276, 28, 294, 334, 338, 353, 373, 385) ) %>%
->>>>>>> 6d551a95f197cb2ecb8d26837d651e58c06a7b16:pipeline/scripts/analysis_attachment_fullcomp.Rmd
+  filter(! subj %in% filter_list ) %>%
   # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj, sent_rg_id, sent_rg)
 
@@ -406,8 +401,6 @@ write.csv(stats_df, "./stats_df.csv")
 
 
 ```
-
-
 
 
 ```{r}
