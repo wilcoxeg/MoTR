@@ -69,6 +69,7 @@ filter_df = df %>%
 filter_df = filter_df %>% filter(p_correct < 0.8)
 filter_list = filter_df$subj
 subj_list = unique(df$subj)
+print(length(subj_list))
 
 raw_df = df %>%
   filter(! subj %in% c(filter_list)) %>%
@@ -386,7 +387,7 @@ ggplot(tibble(samples = sn), aes(samples)) +
 
 # set priors
 priors_rt_motr <- c(
-  prior(normal(6.4, 0.05), class = Intercept),
+  prior(normal(6.5, 0.1), class = Intercept),
   prior(normal(0, 0.1), class = b, coef = condition),
   prior(normal(0, 0.1), class = sd),
   prior(normal(0, 0.5), class = sigma),
@@ -394,8 +395,8 @@ priors_rt_motr <- c(
 )
 
 priors_rt_maze <- c(
-  prior(normal(6.9, 0.5), class = Intercept),
-  prior(normal(0, 1), class = b, coef = condition),
+  prior(normal(6.5, 0.5), class = Intercept),
+  prior(normal(0, 0.1), class = b, coef = condition),
   prior(normal(0, 0.1), class = sd),
   prior(normal(0, 0.5), class = sigma),
   prior(lkj(2), class = cor)
@@ -436,7 +437,7 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
                               data = temp_df, 
                               family = bernoulli(link = "logit"), 
                               chains = 4,
-                              file = paste0(exp, "_", met, "_", mes, "_", i), 
+                              file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i), 
                               cores = 4, 
                               backend = "cmdstanr", 
                               prior = priors_FPReg)
@@ -465,7 +466,7 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
                                 data = temp_df,
                                 chains = 4,
                                 family = lognormal(),
-                                file = paste0(exp, "_", met, "_", mes, "_", i),
+                                file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i),
                                 cores = 4,
                                 backend = "cmdstanr",
                                 prior = priors_rt_maze
@@ -475,7 +476,7 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
                                 data = temp_df,
                                 chains = 4,
                                 family = lognormal(),
-                                file = paste0(exp, "_", met, "_", mes, "_", i),
+                                file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i),
                                 cores = 4,
                                 backend = "cmdstanr",
                                 prior = priors_rt_motr
@@ -700,6 +701,7 @@ estimate_plotting_df %>%
 
 ggsave(paste0("../visualization/paper/model_estimates_regression", rate, ".pdf"), device="pdf", width = 8, height =1.2)
 
+
 ```
 
 
@@ -732,7 +734,8 @@ plotting_df %>%
     panel.grid.minor = element_blank()
   )
 
-ggsave(paste0("../visualization/paper/target_comp_cris", rate, ".pdf"), device="pdf", width = 8, height = 4.5)
+
+ggsave(paste0("../visualization/paper/target_comp_bayesian_all_data", rate, ".pdf"), device="pdf", width = 8, height = 4.5)
 
 ```
 
