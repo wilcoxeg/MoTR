@@ -20,3 +20,10 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# models
+bayesian_models_cor/
+bayesian_models_lc/
+bayesian_models_surp/
+provo_temp/
+reading_measures/
