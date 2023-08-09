@@ -586,6 +586,9 @@ stats_df_bayesian <- read.csv("../results_data/stats_bayesian.csv")%>%
   dplyr::select(-estimate, -lower_95, -upper_95, -std_error) %>%
   rename(estimate_mean = mean)
 
+# stats_df_bayesian <- read.csv("../results_data/lc_stats_bayesian_all_data.csv")
+
+
 plotting_df = merge(comb_agg_df, stats_df_bayesian, all=T, by = c("sent_rg_id", "metric", "experiment", "measure")) %>%
   mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), T, F)) %>%
   mutate(cris = if_else(measure != "Eye Tracking" & sig == T, paste0("[",round(lower_95_ms, 2), ",\n", round(upper_95_ms, 2),"]"), "")) %>%
