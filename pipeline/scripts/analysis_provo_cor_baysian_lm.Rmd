@@ -395,7 +395,7 @@ provo_cor_stat_brm_lm_df = data.frame()
 
 for (comp in c("motr_eyetr", "eyetr_eyetr")) {
   for (m in c("gaze_duration", "go_past_time", "total_duration", "FPReg")) {
-    for (drop0s in c(F, T)) {
+    for (drop0s in c(F)) {
       if (drop0s==F) {
         if (comp == "motr_eyetr") {
           dummy_df = provo_df %>% filter(metric == m) %>% spread(measure, value)
@@ -413,10 +413,10 @@ for (comp in c("motr_eyetr", "eyetr_eyetr")) {
             filter(value_1 > 0, value_2 > 0) %>% rename(eyetr_value = value_1, motr_value = value_2)
         }
       }
-      write.csv(dummy_df, paste0("./provo_temp/", comp, "_", m, "_", drop0s, ".csv"), row.names = FALSE)
+      # write.csv(dummy_df, paste0("./provo_temp/", comp, "_", m, "_", drop0s, ".csv"), row.names = FALSE)
       # View(dummy_df)
-      # comp_results = dummy_df %>% fit_cor(., drop_zero = drop0s, met = m, comparison = comp)
-      # provo_cor_stat_brm_lm_df = rbind(provo_cor_stat_brm_lm_df, comp_results)
+      comp_results = dummy_df %>% fit_cor(., drop_zero = drop0s, met = m, comparison = comp)
+      provo_cor_stat_brm_lm_df = rbind(provo_cor_stat_brm_lm_df, comp_results)
     }
   }
 }
@@ -430,17 +430,17 @@ for (comp in c("motr_stats", "eyetr_stats")) {
       dummy_df =  provo_df %>% filter(metric == "gaze_duration") %>% spread(measure, value) %>% dplyr::select(-motr_value) %>%
         rename(motr_value=eyetr_value) %>% mutate(stat = .data[[m]])
     }
-    write.csv(dummy_df, paste0("./provo_temp/", comp, "_", m, "_", drop0s, ".csv"), row.names = FALSE)
+    # write.csv(dummy_df, paste0("./provo_temp/", comp, "_", m, "_", drop0s, ".csv"), row.names = FALSE)
     # View(dummy_df)
-    # comp_results = dummy_df %>% fit_cor(., drop_zero = drop0s, met = m, comparison = comp)
-    # provo_cor_stat_brm_lm_df = rbind(provo_cor_stat_brm_lm_df, comp_results)
+    comp_results = dummy_df %>% fit_cor(., drop_zero = drop0s, met = m, comparison = comp)
+    provo_cor_stat_brm_lm_df = rbind(provo_cor_stat_brm_lm_df, comp_results)
 
   }
 }
 
-# write.csv(provo_cor_stat_brm_lm_df, "provo_cor_stats_all_3methods.csv", row.names = FALSE)
+write.csv(provo_cor_stat_brm_lm_df, "../results_data/provo_cor_stats_all_3methods.csv", row.names = FALSE)
 # 
-# View(provo_cor_stat_brm_lm_df)
+View(provo_cor_stat_brm_lm_df)
 
 ```
 

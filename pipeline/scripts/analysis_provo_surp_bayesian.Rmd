@@ -757,6 +757,25 @@ td2 = read_rds("./bayesian_models_surp/with0s/gamma_provo_total_duration_Bootstr
 ```
 
 ```{r}
+stancode <- stancode(gd)
+class(stancode)
+stancode
+
+fit_data <- standata(gd)
+
+
+writeLines(stancode, "./stan_models/provo_surp.stan")
+```
+
+```{r}
+print(fit_data$N)
+print(class(fit_data$knots_3))
+print(fit_data$prior_only)
+```
+
+
+
+```{r}
 summary(gd)
 summary(gd2)
 summary(td)

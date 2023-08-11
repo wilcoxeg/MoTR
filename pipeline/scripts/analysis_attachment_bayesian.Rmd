@@ -43,8 +43,8 @@ pipe_message = function(.data, status) {message(status); .data}
 
 rate = 160
 
-file_prefix = paste0("/Users/ethan/Desktop/motr_lc_", as.character(rate),"/")
-#file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")
+# file_prefix = paste0("/Users/ethan/Desktop/motr_lc_", as.character(rate),"/")
+file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")
 fnames = list.files(path=file_prefix)
 
 # Read in the data
@@ -147,6 +147,7 @@ motr_clean_df = motr_df %>%
       summarise(value = if_else(metric == "FPReg", as.double(any(value)), mean(value))) %>%
   ungroup() %>%
   mutate(measure = "MoTR")
+View(motr_clean_df)
 
 motr_agg_df = motr_clean_df %>%
   group_by(experiment, condition, item_id, sent_rg_id, metric, measure) %>%
