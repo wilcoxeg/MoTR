@@ -357,7 +357,7 @@ priors <- c(
 
 ## gamma distr
 priors_gamma <- c(
-  prior(normal(5.5, 1), class = Intercept),
+  prior(normal(5.5, 0.5), class = Intercept),
   prior(normal(0, 0.5), class = b),
   prior(cauchy(0, 0.5), class = sds),
   prior(exponential(3), class = shape)
@@ -380,7 +380,7 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, me
     seed = 444,
     chain = 4,
     iter = 4000,
-    file = paste0("./bayesian_models_surp/drop0s/gamma2_provo_", metric, "_", bootstrap_sample$id),
+    file = paste0("./bayesian_models_surp/with0s/gamma_provo_", metric, "_", bootstrap_sample$id),
     # file = paste0("./bayesian_models_surp/with0s/gamma_provo_", metric, "_", bootstrap_sample$id),
     backend = "cmdstanr",
     control = list(adapt_delta = 0.99)
@@ -415,7 +415,7 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, me
 fit_gam = function(df, mean_predictors, target_prev_word, metric, alpha=0.05) {
   # Bootstrap-resample data
 
-  boot_models = df %>% bootstraps(times=17) %>% 
+  boot_models = df %>% bootstraps(times=20) %>% 
    # Fit a GAM and get predictions for each sample
     mutate(smoothed=map(splits, fit_gam_inner, mean_predictors=mean_predictors, target_prev_word=target_prev_word, metric=metric))
   
@@ -499,7 +499,7 @@ for(m in c("gaze_duration", "total_duration", "go_past_time")) {
 
 plotting_df = smooths_df %>%
   mutate(target_word = if_else(prev_word == F, "wt", "wt-1"))
-# write.csv(plotting_df, "gamma_provo_surprisal_bayesian_drop0s.csv", row.names = FALSE)
+write.csv(plotting_df, "gamma_provo_surprisal_bayesian_with0s_2.csv", row.names = FALSE)
 
 vnames <-list(
   "gaze_duration" = "Gaze Duration",
@@ -539,7 +539,7 @@ vlabeller <- function(variable,value){
     panel.grid.minor = element_blank()
   )
   
-# ggsave("../visualization/paper/surp_rt_wt_gamma_drop0s.pdf", device = "pdf", width = 6, height = 2.5)
+# ggsave("../visualization/paper/surp_rt_wt_gamma_with0s.pdf", device = "pdf", width = 6, height = 2.5)
 
 
 ```
@@ -748,45 +748,45 @@ vlabeller <- function(variable,value){
 ```
 
 ```{r}
-gd = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_gaze_duration_Bootstrap12.rds")
-td = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_total_duration_Bootstrap12.rds")
-gpt = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_go_past_time_Bootstrap12.rds")
-
-# ## gamma distr
-# priors_gamma <- c(
-#   prior(normal(5.5, 1), class = Intercept),
-#   prior(normal(0, 0.5), class = b),
-#   prior(cauchy(0, 0.5), class = sds),
-#   prior(exponential(3), class = shape)
-# )
-# 
-# fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, metric) {
-#   df = analysis(bootstrap_sample)
-#   # df = bootstrap_sample$data
-# 
-#   # m = gam(psychometric ~ s(surp, bs = 'cr', k = 20) + s(prev_surp, bs = 'cr', k = 20) + te(freq, len, bs = 'cr') + te(prev_freq, prev_len, bs = 'cr'), data = df, method = 'REML')
-#   m <- brm(
-#     psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + t2(freq, len, bs = 'cr') + t2(prev_freq, prev_len, bs = 'cr'),
-#     data = df,
-#     # family = gaussian(),
-#     # family = lognormal(),
-#     # prior = priors,
-#     family = Gamma(link = "log"),
-#     prior = priors_gamma,
-#     cores = 8,
-#     seed = 444,
-#     chain = 4,
-#     iter = 4000,
-#     file = paste0("./bayesian_models_surp/drop0s/gamma2_provo_", metric, "_", bootstrap_sample$id),
-#     # file = paste0("./bayesian_models_surp/with0s/gamma_provo_", metric, "_", bootstrap_sample$id),
-#     backend = "cmdstanr",
-#     control = list(adapt_delta = 0.99)
-#     )
+# for check models & get priors
+gd = read_rds("./bayesian_models_surp/with0s/gamma_provo_gaze_duration_Bootstrap12.rds")
+gd2 = read_rds("./bayesian_models_surp/with0s/gamma_provo_gaze_duration_Bootstrap02.rds")
+td = read_rds("./bayesian_models_surp/with0s/gamma_provo_total_duration_Bootstrap02.rds")
+td2 = read_rds("./bayesian_models_surp/with0s/gamma_provo_total_duration_Bootstrap02.rds")
   
 ```
 
 ```{r}
+stancode <- stancode(gd)
+class(stancode)
+stancode
+
+fit_data <- standata(gd)
+
+
+writeLines(stancode, "./stan_models/provo_surp.stan")
+```
+
+```{r}
+print(fit_data$N)
+print(class(fit_data$knots_3))
+print(fit_data$prior_only)
+```
+
+
+
+```{r}
 summary(gd)
+summary(gd2)
+summary(td)
+summary(td2)
+```
+
+```{r}
+prior_summary(gd)
+prior_summary(gd2)
+prior_summary(td)
+prior_summary(td2)
 ```
 
 

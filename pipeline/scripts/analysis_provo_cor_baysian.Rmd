@@ -373,7 +373,7 @@ fit_gd = stan(
 
 # Save the model 
 fit_gd@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_gd, file = paste0("./bayesian_models_cor/motr_eyetr_gaze_duration_cor_drop0s.rds"))
+saveRDS(fit_gd, file = paste0("./bayesian_models_cor/cor_bivariate/motr_eyetr_gaze_duration_cor_drop0s.rds"))
 
 ```
 
@@ -431,7 +431,7 @@ fit_gpt = stan(
 
 # Save the model 
 fit_gpt@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_gpt, file = paste0("./bayesian_models_cor/motr_eyetr_go_past_time_cor_drop0s.rds"))
+saveRDS(fit_gpt, file = paste0("./bayesian_models_cor/cor_bivariate/motr_eyetr_go_past_time_cor_drop0s.rds"))
 ```
 
 
@@ -489,14 +489,14 @@ fit_td = stan(
 
 # Save the model 
 fit_td@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_td, file = paste0("./bayesian_models_cor/motr_eyetr_total_duration_cor.rds"))
+saveRDS(fit_td, file = paste0("./bayesian_models_cor/cor_bivariate/motr_eyetr_total_duration_cor_drop0s.rds"))
 ```
 
 ```{r}
 print("First Pass Regression Prob.")
 reg_df = provo_df %>% filter(metric == "FPReg") %>% 
   spread(measure, value) %>%
-  # filter(eyetr_value > 0, motr_value > 0)
+  filter(eyetr_value > 0, motr_value > 0) %>%
   mutate(eyetr_value =  pmax(eyetr_value, 1e-5),
          motr_value = pmax(motr_value, 1e-5))
 print(cor.test(reg_df$eyetr_value, reg_df$motr_value)$estimate)
@@ -523,7 +523,7 @@ plot(reg_temp, pch = 16, col = "blue",
 # -------fit model FPReg ----------
 reg_data = list(x=reg_temp, N=nrow(reg_temp))
 fit_reg = stan(
-  file="stan_models/bivariate_beta_correlation_reg.stan", 
+  file="stan_models/bivariate_normal_reg.stan", 
   data=reg_data, 
   iter=4000, 
   chains=4, 
@@ -535,23 +535,23 @@ fit_reg = stan(
 
 # Save the model 
 fit_reg@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_reg, file = paste0("./bayesian_models_cor/motr_eyetr_FPReg_cor_drop0s.rds"))
+saveRDS(fit_reg, file = paste0("./bayesian_models_cor/cor_bivariate/motr_eyetr_FPReg_cor.rds"))
 ```
 
 
 
 ```{r}
 # models with all 0s
-fit_gd = readRDS("./bayesian_models_cor/motr_eyetr_gaze_duration_cor.rds")
-fit_gpt = readRDS("./bayesian_models_cor/motr_eyetr_go_past_time_cor.rds")
-fit_td = readRDS("./bayesian_models_cor/motr_eyetr_total_duration_cor.rds")
-fit_reg = readRDS("./bayesian_models_cor/motr_eyetr_FPReg_cor.rds")
+# fit_gd = readRDS("./bayesian_models_cor/motr_eyetr_gaze_duration_cor.rds")
+# fit_gpt = readRDS("./bayesian_models_cor/motr_eyetr_go_past_time_cor.rds")
+# fit_td = readRDS("./bayesian_models_cor/motr_eyetr_total_duration_cor.rds")
+# fit_reg = readRDS("./bayesian_models_cor/motr_eyetr_FPReg_cor.rds")
 
 # models for drop 0s
-# fit_gd = readRDS("./motr_eyetr_gaze_duration_cor_drop0s.rds")
-# fit_gpt = readRDS("./motr_eyetr_go_past_time_cor_drop0s.rds")
-# fit_td = readRDS("./motr_eyetr_total_duration_cor_drop0s.rds")
-# fit_reg = readRDS("./motr_eyetr_FPReg_cor_drop0s.rds")
+fit_gd = readRDS("./bayesian_models_cor/motr_eyetr_gaze_duration_cor_drop0s.rds")
+fit_gpt = readRDS("./bayesian_models_cor/motr_eyetr_go_past_time_cor_drop0s.rds")
+fit_td = readRDS("./bayesian_models_cor/motr_eyetr_total_duration_cor_drop0s.rds")
+fit_reg = readRDS("./bayesian_models_cor/ranked_motr_eyetr_FPReg_cor.rds")
 
 print('---------------------------- Gaze Duration--------------------------------------------')
 print(fit_gd)
@@ -612,6 +612,7 @@ p12 <- stan_dens(fit_gd, pars = 'nu', separate_chains = TRUE)
 ```
 
 
+
 ```{r}
 print('---------------------------- Gaze Duration--------------------------------------------')
 rho_gd = as.numeric(extract(fit_gd, "rho")[[1]])
@@ -635,16 +636,16 @@ hpd99 = HPDinterval(as.mcmc(rho_td), prob=0.95)
 cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]\n")
 
 print('---------------------------- First Pass Regression --------------------------------------------')
-rho_reg = as.numeric(extract(fit_reg, "rho[1, 2]")[[1]])
+# rho_reg = as.numeric(extract(fit_reg, "rho[1, 2]")[[1]])
+rho_reg = as.numeric(extract(fit_reg, "rho")[[1]])
 mean = mean(rho_reg)
 crI = quantile(rho_reg, c(.025, .975))
 hpd99 = HPDinterval(as.mcmc(rho_reg), prob=0.95)
 cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]")
-
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 print('---------------------------- Gaze Duration--------------------------------------------')
 gd_rand <- extract(fit_gd, "x_rand")[[1]]
 # x_rand_filtered <- x_rand[apply(x_rand, 1, function(x) all(x > 0)),]
@@ -955,7 +956,7 @@ hpd99 = HPDinterval(as.mcmc(rho_mreg_high_drop0), prob=0.95)
 cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]\n")
 ```
 
-```{r}
+```{r, eval=FALSE}
 print('---------------------------- First Pass Regression all data --------------------------------------------')
 mallreg_rand <- extract(fit_mreg_all, "x_rand")[[1]]
 # create a blank plot first with appropriate limits
@@ -1110,7 +1111,7 @@ fit_egd = stan(
 
 # Save the model 
 fit_egd@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_egd, file = paste0("./bayesian_models_cor/eyetr_eyetr_gaze_duration_cor.rds"))
+saveRDS(fit_egd, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_eyetr_gaze_duration_cor.rds"))
 
 ```
 
@@ -1162,7 +1163,7 @@ fit_egpt = stan(
 
 # Save the model 
 fit_egpt@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_egpt, file = paste0("./bayesian_models_cor/eyetr_eyetr_go_past_time_cor.rds"))
+saveRDS(fit_egpt, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_eyetr_go_past_time_cor.rds"))
 
 ```
 
@@ -1199,6 +1200,7 @@ plot(etd_temp, pch = 16, col = "blue",
      main = "Total Duration Not Log-Transformed")
 ```
 
+
 ```{r, eval=FALSE}
 etd_data = list(x=etd_temp, N=nrow(etd_temp))
 
@@ -1215,7 +1217,7 @@ fit_etd = stan(
 
 # Save the model 
 fit_etd@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_etd, file = paste0("./bayesian_models_cor/eyetr_eyetr_total_duration_cor.rds"))
+saveRDS(fit_etd, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_eyetr_total_duration_cor.rds"))
 ```
 
 
@@ -1279,7 +1281,7 @@ saveRDS(fit_ereg, file = paste0("./bayesian_models_cor/eyetr_eyetr_FPReg_cor5.rd
 fit_egd = readRDS("./bayesian_models_cor/eyetr_eyetr_gaze_duration_cor.rds")
 fit_egpt = readRDS("./bayesian_models_cor/eyetr_eyetr_go_past_time_cor.rds")
 fit_etd = readRDS("./bayesian_models_cor/eyetr_eyetr_total_duration_cor.rds")
-fit_ereg = readRDS("./bayesian_models_cor/eyetr_eyetr_FPReg_cor.rds")
+fit_ereg = readRDS("./bayesian_models_cor/ranked_eyetr_eyetr_FPReg_cor.rds")
 print('---------------------------- Gaze Duration--------------------------------------------')
 print(fit_egd)
 print('---------------------------- Go Past Time--------------------------------------------')
@@ -1348,7 +1350,8 @@ hpd99 = HPDinterval(as.mcmc(rho_ereg), prob=0.95)
 cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]")
 ```
 
-```{r}
+
+```{r, eval=FALSE}
 print('---------------------------- Gaze Duration--------------------------------------------')
 egd_rand <- extract(fit_egd, "x_rand")[[1]]
 # x_rand_filtered <- x_rand[apply(x_rand, 1, function(x) all(x > 0)),]
@@ -1466,7 +1469,7 @@ fit_mfreq = stan(
 
 # Save the model 
 fit_mfreq@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_mfreq, file = paste0("./bayesian_models_cor/motr_freq_cor.rds"))
+saveRDS(fit_mfreq, file = paste0("./bayesian_models_cor/cor_bivariate/motr_freq_cor.rds"))
 ```
 
 # eyetr & frequency
@@ -1486,7 +1489,7 @@ fit_efreq = stan(
 
 # Save the model 
 fit_efreq@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_efreq, file = paste0("./bayesian_models_cor/eyetr_freq_cor.rds"))
+saveRDS(fit_efreq, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_freq_cor.rds"))
 ```
 
 ```{r}
@@ -1537,7 +1540,7 @@ fit_mlen = stan(
 
 # Save the model 
 fit_mlen@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_mlen, file = paste0("./bayesian_models_cor/motr_len_cor2.rds"))
+saveRDS(fit_mlen, file = paste0("./bayesian_models_cor/cor_bivariate/motr_len_cor.rds"))
 
 ```
 
@@ -1558,7 +1561,7 @@ fit_elen = stan(
 
 # Save the model 
 fit_elen@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_elen, file = paste0("./bayesian_models_cor/eyetr_len_cor.rds"))
+saveRDS(fit_elen, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_len_cor.rds"))
 ```
 
 
@@ -1609,7 +1612,7 @@ fit_msurp = stan(
 
 # Save the model 
 fit_msurp@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_msurp, file = paste0("./bayesian_models_cor/motr_surp_cor.rds"))
+saveRDS(fit_msurp, file = paste0("./bayesian_models_cor/cor_bivariate/motr_surp_cor.rds"))
 
 ```
 
@@ -1630,7 +1633,7 @@ fit_esurp = stan(
 
 # Save the model 
 fit_esurp@stanmodel@dso <- new("cxxdso")
-saveRDS(fit_esurp, file = paste0("./bayesian_models_cor/eyetr_surp_cor.rds"))
+saveRDS(fit_esurp, file = paste0("./bayesian_models_cor/cor_bivariate/eyetr_surp_cor.rds"))
 
 ```
 
@@ -1739,7 +1742,7 @@ cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep
 
 
 
-```{r}
+```{r,eval=FALSE}
 print('---------------------------- MoTR & Log Frequency--------------------------------------------')
 mfreq_rand <- extract(fit_mfreq, "x_rand")[[1]]
 
@@ -1932,6 +1935,8 @@ saveRDS(fit_reg, file = paste0("./bayesian_models_cor/eyetr_eyetr_FPReg_cor_all_
 ```
 
 
+
+# exploratory: divide eye tracking regression data into two parts.
 ```{r}
 # fit_ereg_all = readRDS("./eyetr_eyetr_FPReg_cor_all_data.rds")
 fit_ereg_all = readRDS("./bayesian_models_cor/eyetr_eyetr_FPReg_cor.rds")
