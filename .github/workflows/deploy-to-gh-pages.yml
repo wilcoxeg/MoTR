@@ -12,10 +12,8 @@ jobs:
     strategy:
       matrix:
         folder:
-          - experiments/motr-pilot
           - experiments/motr-localCoherence
           - experiments/motr-provo
-          - experiments/motr-SB-SAT
 
     runs-on: ubuntu-latest
     steps:

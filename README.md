@@ -1,46 +1,50 @@
 # Mouse Tracking for Reading (MoTR)
+This repository contains necessary materials for implementing a Mouse tracking for Reading (MoTR) experiment, and for post-processing MoTR data to derive word-by-word reading measures. Additionally, the repository contains materials and scripts used in the two experiments reported in "Mouse Tracking for Reading: A New Naturalistic Incremental Processing Measurement"
 
-Mouse Tracking for Reading is a new method for incremental processing measurement. In a MoTR study participants are presented with a text that is blurred, except for a small region around the tip of the mouse, which is in focus. The participant is instructed to move the mouse in order to reveal and read the text. Participant mouse location is recorded, and analyzed similarly to gaze coordinates obtained with eye tracking.
+The directory has the following structure:
 
-## Experiments Implementation
+* MoTR
+  * Running MoTR in Magpie
+    * Contains: Any files necessary to implement MoTR in Magpie
+  * Post Processing
+    * Contains: All of our post-processing scripts
+* Restructure/Experiments
+    * attachment
+      * Contains: Data necessary for running the attachment ambiguity experiments
+    * provo
+      * Contains: Data necessary for running the provo experiments
+    * scripts
+      * Contains: Scripts, images, etc.
 
-### Attachment Preference Study:
-#### https://wilcoxeg.github.io/MoTR/experiments/motr-localCoherence/
 
-We validated the MoTR paradigm in two suites of experiments. 
-In the first suite of experiments we assessed MoTR ’s ability to replicate previous findings in controlled psycholinguistics experiments, using the material for studying attachment preference in English that have been used to compare Maze, SPR and eye tracking [Witzel et al., 2012 ](https://www.infona.pl/resource/bwmeta1.element.springer-a0eade60-6d60-3340-ac43-051227e7c69a) as well as  Maze and SPR [Boyce et al., 2020](https://www.sciencedirect.com/science/article/pii/S0749596X19301147).
+## MoTR
+### Running MoTR in Magpie
+#### Contents
+- `provo` contains the  codes (in subdirectory `src`) and the trial data (in subdirectory `trials`) for running a MoTR experiment for Provo.
+- `attachment` contains the codes (in subdirectory `src`) and the trial data (in subdirectory `trials`) for running a MoTR experiment for attachment preference in English.
 
-### Provo Study:
-#### https://wilcoxeg.github.io/MoTR/experiments/motr-provo/
+#### Workflow for Running a Basic MoTR Trial
+- Download Node.js v16.20.2 (in this [link](https://nodejs.org/en/download/releases)) and install
+- Clone the repository
+- Open a local terminal or IDE, navigate to MoTR/experiments/provo/ (or MoTR/experiments/attachment/)
+- run ```npm install```
+- run ```npm run serve```
+- Click either of the links shown in the terminal starting with "-Local:" or "-Network:"
+- Enjoy!
 
-we collected MoTR data for a corpus of written English texts (the Provo Corpus; [Luke and Christianson, 2018](https://link.springer.com/article/10.3758/s13428-017-0908-4)) to test whether MoTR can be used to investigate naturalistic reading in
-English.
+### Post Processing
 
-### Pilot Study:
-#### https://wilcoxeg.github.io/MoTR/experiments/motr-pilot/
+#### Contents
+- `postprocessing.py` is the main script to run which will take the command line interface arguments and post process the MoTR data.
+- `utils` contains modules which will be used by `postprocessing.py`
+  - `divideCsv.py` can divide the large raw MoTR data file into separate files for different readers, each containing their respective reading data. We assume you will get a csv file containing the data for multiple participants by running a MoTR experiment. 
+  - `preprocessTrialData.py` preprocesses the trial data file by splitting sentences into words and extracting relevant information from these files. We assume that the items in your trial data are sentences, paragraphs or passages, rather than words. Otherwise, you don't need this step.
+  - `mergeFixations.py` takes the divided raw data files and merge the adjacent data points into fixations if they are on the same words, and filter noises.
+  - `extractLingusticFeatures.py` compute the common reading measures from fixations, such as Gaze Duration, Total Duration, Go Past Time, First-Pass Regression Probability etc.
+  - `tsv_csv_json_convert.py` is the script we used to convert the original trial data from Witzel et al., (2012) and Boyce et al., (2020) to a csv/tsv file which can then be used as input to magpie.
+  - `trial_splits.py` is the script for breaking the large number of items into three sub experiments for attachment preference study, ensuring that same item under different conditions will not appear in one sub experiment.
 
-We ran a pilot study which consisted of a subset of items from the two studies. 
-
-### SB-SAT Study (an example of a more flexible implementation):
-#### https://wilcoxeg.github.io/MoTR/experiments/motr-SB-SAT/
-
-Since the three implementations above present one paragraph per screen and ask one comprehension question after each paragraph, we also provide an implementation where multiple paragraphs are presented together on one screen. Participants read the passages across multiple screens and answer several comprehension questions afterward. We used the same items as in [Ahn et al.](https://dl.acm.org/doi/10.1145/3379156.3391335).
-
-### Running the Experiment
-1. Online link: By clicking the link provided alongside each experiment description, you can try them. 
-2. Offline: Clone the repository, navigate to the directory for the experiment, run `npm install` and `npm run serve`. For more detail, please check [Magpie manual](https://magpie-experiments.org/00_getting_started/01_installation/#creating-a-project).
-3. Save your results locally: If you want to see the results of the experiment, before running the experiment offline, please go to the directory and open the `magpie.config.js` under `src`, change the value of `mode` from `'prolific'` to `'debug'` or `'directLink'`.
-
-## Post Processing
-
-### Description
-The post-processing involves four steps:
-1. Divide the large raw MoTR data file into separate files for different readers, each containing their respective reading data. We assume you will get a csv file containing the data for multiple participants by running these experiments. 
-2. Preprocessing the trial data file by splitting sentences into words and extracting relevant information from these files. We assume that the items in your trial data are sentences, paragraphs or passages, rather than words. Otherwise, you don't need this step.
-3. For each divided raw data file in step 1, we merge the adjacent data points into fixations if they are on the same words, and filter noises.
-4. Compute the common reading measures from fixations, such as Gaze Duration, Total Duration, Go Past Time, First-Pass Regression Probability etc.
-
-### Running the Post Processing Pipeline
+#### Running the Post Processing Pipeline
 
 To run the post-processing pipeline, you will need to provide either a single MoTR reading data file or a folder containing multiple files. Additionally, you should have your trial data available, which can either be in its original form or preprocessed, with sentences already split into words. 
 
@@ -52,29 +56,29 @@ By default, the resulting divided raw data, fixations, reading measures, and pre
  python3 postprocessing.py --in_file local_coherence_reading_data.csv --trial_file trials/localCoherence.tsv
  ```
 
- Please replace `local_coherence_reading_data.csv` with the path to your MoTR reading data file and replace `trials/localCoherence.tsv` with the path to your original trial data file.
+ This call takes a raw MoTR data file called `local_coherence_reading_data.csv` and the trial item data `localCoherence.tsv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures and processed trial data file into `./divided`,`./fixations`, `./reading_measures`, `./processed_trial`, respectively.
 
  ```bash
  python3 postprocessing.py --in_file local_coherence_reading_data.csv --processed_trial_file trials/localCoherence_sent_region.csv
  ```
 
-Please replace `local_coherence_reading_data.csv` with the path to your MoTR reading data file and replace `trials/localCoherence_sent_region.csv` with the path to your preprocessed trial data file.
+This call takes a raw MoTR data file called `local_coherence_reading_data.csv` and the already processed trial data `localCoherence_sent_region.csv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures into `./divided`,`./fixations`, `./reading_measures`, respectively.
 
 ```bash
 python3 postprocessing.py --in_folder data --processed_trial_file trials/localCoherence_sent_region.csv
 ```
 
-Please replace `data` with the path to the folder where your MoTR reading data files are stored and replace `trials/localCoherence_sent_region.csv` with the path to your preprocessed trial data file.
+This call takes a folder which can contain multiple raw MoTR data files called `data` and the already processed trial data `localCoherence_sent_region.csv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures into `./divided`,`./fixations`, `./reading_measures`, respectively.
 
 ```bash
 python3 postprocessing.py --in_file provo_reading_data.csv --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --processed_trial_dir ../stimuli --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
 ```
 
-Read one single file, store the results to specific directories and define your own thresholds for fixations.
+This call takes a raw MoTR data file called `provo_reading_data.csv` and the trial item data `provo_items.tsv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures and processed trial data file into `./divide_by_reader`,`./fixations`, `./reading_metrics`, `../stimuli`, respectively. It will extract fixations ranging from 200 ms to 3000 ms.
 
 ```bash
 python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
 ```
 
-Process multiple files in one folder and have customized paths for storing results and for defining fixations.
+This call takes a folder which can contain multiple raw MoTR data files called `data2` and the trial data file `provo_items.tsv` in the folder `trials`, output the divided raw data files, files for fixation sequences, files for reading measures into `./divide_by_reader`,`./fixations`, `./reading_metrics`, `../stimuli`, respectively. It will extract fixations ranging from 200 ms to 3000 ms.
 

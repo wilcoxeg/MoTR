@@ -14,9 +14,9 @@
 
  - `provo_eyetracking.tsv` contains the raw eyetracking data for the provo corpus.
 
-- `/results_f160/` contains the output of the postprocessing script, with results for each participant in seperate files. For this file 160 milliseconds is the minimum threshold for a fixation duration.
+- `/results_f160/` contains the output of the postprocessing script, with results for each participant in separate files. For this file 160 milliseconds is the minimum threshold for a fixation duration.
 
-- To access the raw data from this experiment, please [click on this link](link-to-raw-data). __TODO: Create OSF repository with raw data__
+- To access the raw data from this experiment, please [click on this link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab). __TODO: need more info on OSF__
 
 #### Scripts
 
@@ -28,7 +28,15 @@
 
 ##### Bayesian Models
 
-- This folder contains fitted models from the various scripts in its parent directory. __TODO: Add in the necessary models here (can also add in Stan models if we like)__
+- This folder contains fitted models from the various scripts in its parent directory. 
+
+- `bayesian_models_correlation` contains the fitted models for correlations for MoTR and eye tracking, MoTR and word level statistical properties.
+
+- `bayesian_models_surprisal` contains the fitted models for reading time slow down due to surprisal effects analysis.
+
+##### Stan Models
+
+- This folder contains the stan scripts used in its parent directory to model the correlations.
 
 #### Visualizations
 
@@ -46,5 +54,10 @@
 
 - `witzel_eyetr_data` is a tabularized machine-readable version of the data presented in Tables 1-6 of Witzel et al., (2012), which reports eyetracking data for these same materials.
 
+#### Scripts
+
+##### Bayesian Models
+
+#### Visualizations
 
 
