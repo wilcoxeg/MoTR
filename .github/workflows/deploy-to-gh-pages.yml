@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         folder:
-          - experiments/motr-localCoherence
-          - experiments/motr-provo
+          - restructure/motr/run_motr_in_magpie/attachment
+          - restructure/motr/run_motr_in_magpie/provo
 
     runs-on: ubuntu-latest
     steps:
