@@ -4,17 +4,17 @@ This repository contains necessary materials for implementing a Mouse tracking f
 The directory has the following structure:
 
 ```
-└── **motr**
-      ├── **run_motr_in_magpie**
+└──motr
+      ├── run_motr_in_magpie
           contains files necessary to implement MoTR in Magpie
-      └── **post_processing**
+      └── post_processing
           Constains postprocessing scripts to turn raw MoTR data into reading time measurements
-└── **experiments**
-      ├── **attachment**
+└── experiments
+      ├── attachment
           contains data necessary to run our attachment ambiguity experiments
-      ├── **provo**
+      ├── provo
           contins data necessary to run our provo experiments
-      └── **scripts**
+      └── scripts
           contains analysis scripts and images
 ```
 
