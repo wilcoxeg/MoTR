@@ -1,4 +1,0 @@
-experiment	experiment_id	condition	condition_id	item_id	text	question	response_true	response_distractors
-local_coherence	1	practice	7	103	Maya played with the blocks and the balls, but she soon got bored with them.	Did Maya play with the blocks?	yes	no
-local_coherence	1	practice	7	102	The patient who the doctor treated became better after only a few treatments.	Did the patient get better without treatment?	no	yes
-local_coherence	1	practice	7	101	The husband of the beautiful woman bought her roses and candy for her birthday.	Did the woman buy roses?	no	yes
