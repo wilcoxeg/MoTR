@@ -4,7 +4,7 @@ This repository contains necessary materials for implementing a Mouse tracking f
 The directory has the following structure:
 
 ```
-└── **run_motr**
+└── **motr**
       ├── **run_motr_in_magpie**
           contains files necessary to implement MoTR in Magpie
       └── **post_processing**
