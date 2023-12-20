@@ -19,7 +19,7 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
-    "magpie-base": "^3.4.0",
+    "magpie-base": "git+https://github.com/cuierd/magpie-base-MoTR.git#main",
     "v-blur": "^1.0.4"
   },
   "engines": {

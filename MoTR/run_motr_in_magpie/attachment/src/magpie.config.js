@@ -6,6 +6,6 @@ export default {
   completionUrl: 'https://app.prolific.co/submissions/complete?cc=C1143PXS',
   contactEmail: 'cui.ding@uzh.ch',
   // Either 'debug', 'directLink' or 'prolific'
-  mode: 'prolific',
+  mode: 'debug',
   language: 'en'
 };
