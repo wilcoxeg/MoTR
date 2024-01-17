@@ -62,8 +62,9 @@
           <tr>
           <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
           </tr>
-          <!-- <tr>
-          </tr> -->
+          <tr>
+
+          </tr>
           </div>
           <div v-if="
             $magpie.measurements.SubjectID&&
@@ -133,6 +134,22 @@
         </Slide>
       </Screen>
     </template>
+<Screen>
+  <p>1. Which input device are you using for this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.device"
+        orientation="horizontal"
+        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
+  <br>
+  <br>
+  <p>2. Which hand are you using during this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.hand"
+        orientation="horizontal"
+        :options="['Left', 'Right', 'Both']" />
+  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
+</Screen>
+
     <SubmitResultsScreen />
   </Experiment>
 </template>
