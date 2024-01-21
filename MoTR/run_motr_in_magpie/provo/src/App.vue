@@ -156,9 +156,9 @@
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import provo_list1 from '../trials/provo_items_list1.tsv';
-import provo_list2 from '../trials/provo_items_list1.tsv';
-import provo_list3 from '../trials/provo_items_list1.tsv';
+import provo_list1 from '../trials/provo_items_list3.tsv';
+import provo_list2 from '../trials/provo_items_list3.tsv';
+import provo_list3 from '../trials/provo_items_list3.tsv';
 import provo_practice from '../trials/provo_items_practice.tsv';
 import _ from 'lodash';
 
