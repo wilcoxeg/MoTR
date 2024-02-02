@@ -21,7 +21,7 @@ module.exports = {
   },
   	publicPath:
     process.env.NODE_ENV === 'production'
-      ? '/MoTR/restructure/motr/run_motr_in_magpie/provo/'
+      ? '/MoTR/MoTR/run_motr_in_magpie/provo/'
       : '/'
 //   publicPath:
 //     process.env.NODE_ENV === 'production' && process.env.REPO_NAME

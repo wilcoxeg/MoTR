@@ -176,10 +176,14 @@ class FeatureExtractor:
     def get_binary(self):
         """
         Get binary variable FPFix: whether a word is fixed in the first-pass reading, 1, fixed, 0, otherwise;
-        FPReg: whether there is a regression initiated from a word, 1, yes, 0, no.
+        FPReg: First Pass Regression Out --> whether there is a regression initiated from a word, 1, yes, 0, no.
+        RegIn_incl: whether there is a regression landed on a word, 1, yes, 0, no, including all regressions
+        RegIn_excl: whether there is a regression landed on a word, 1, yes, 0, no, only including regressions on words that were fixed in the first pass
         """
         FPFix_dict = defaultdict(int)
         FPReg_dict = defaultdict(int)
+        RegIn_incl_dict = defaultdict(int)
+        RegIn_excl_dict = defaultdict(int)
         # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
         # input_df_ff_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr'])
         input_df_ff_grouped = self.input_df_ff.groupby(['cond_id', 'para_nr'])
@@ -193,6 +197,19 @@ class FeatureExtractor:
                             FPReg_dict[group.loc[i, 'word_nr']] = 1
                         else:
                             break
+
+            # Calculate RegIn_incl and RegIn_excl
+            for i in group.index:
+                current_word_nr = group.loc[i, 'word_nr']
+                for j in group.loc[:i-1].index:
+                    if group.loc[j, 'word_nr'] > current_word_nr:
+                        # RegIn_incl: Include all regressions
+                        RegIn_incl_dict[current_word_nr] = 1
+                        # RegIn_excl: Only include if the word was fixed in the first pass
+                        if int(FPFix_dict.get(current_word_nr, 0)) == 1:
+                            RegIn_excl_dict[current_word_nr] = 1
+                        break
+
             FPFix = pd.DataFrame(
                 {
                  # 'para_nr': name,
@@ -209,18 +226,34 @@ class FeatureExtractor:
                  'para_nr': name[1],
                  'word_nr': FPReg_dict.keys(),
                  'FPReg': FPReg_dict.values()}).sort_values(by='word_nr')
+            RegIn_incl = pd.DataFrame({
+                'cond_id': name[0],
+                'para_nr': name[1],
+                'word_nr': RegIn_incl_dict.keys(),
+                'RegIn_incl': RegIn_incl_dict.values()}).sort_values(by='word_nr')
+            RegIn_excl = pd.DataFrame({
+                'cond_id': name[0],
+                'para_nr': name[1],
+                'word_nr': RegIn_excl_dict.keys(),
+                'RegIn_excl': RegIn_excl_dict.values()}).sort_values(by='word_nr')
             # FPFix = FPFix.merge(FPReg, on=['para_nr', 'word_nr'], how='left')
             # FPFix = FPFix.merge(FPReg, on=['expr_id', 'para_nr', 'word_nr'], how='left')
             FPFix = FPFix.merge(FPReg, on=['cond_id', 'para_nr', 'word_nr'], how='left')
+            FPFix = FPFix.merge(RegIn_excl, on=['cond_id', 'para_nr', 'word_nr'], how='left')
+            FPFix = FPFix.merge(RegIn_incl, on=['cond_id', 'para_nr', 'word_nr'], how='outer')
             binary_df = pd.concat([binary_df, FPFix], ignore_index=True)
             # binary_df = pd.concat([binary_df, FPReg], ignore_index=True)
             FPFix_dict.clear()
             FPReg_dict.clear()
+            RegIn_incl_dict.clear()
+            RegIn_excl_dict.clear()
         # self.output_df = self.output_df.merge(binary_df, on=['para_nr', 'word_nr'], how='left')
         # self.output_df = self.output_df.merge(binary_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
         self.output_df = self.output_df.merge(binary_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['FPFix'] = self.output_df['FPFix'].fillna(0).astype(int)
         self.output_df['FPReg'] = self.output_df['FPReg'].fillna(0).astype(int)
+        self.output_df['RegIn_incl'] = self.output_df['RegIn_incl'].fillna(0).astype(int)
+        self.output_df['RegIn_excl'] = self.output_df['RegIn_excl'].fillna(0).astype(int)
 
     def write_out(self):
         """

@@ -53,7 +53,7 @@ pipe_message = function(.data, status) {message(status); .data}
 
 rate = 160
 
-file_prefix = "../reading_measures/provo/provo_f160/"
+file_prefix = "../data/provo_f160/"
 fnames = list.files(path=file_prefix)
 
 df = data.frame()
@@ -120,9 +120,6 @@ motr_agg_df = raw_df %>%
   arrange(para_nr, word_nr) %>%
   rename(text_id = para_nr, word_text_idx = word_nr, motr_value = value)
 
-# View(motr_agg_df)
-# write.csv(motr_agg_df, file = "/Users/cui/Desktop/MoTR/pipeline/ancillary_data/motr_agg_df.csv", row.names = FALSE)
-
 ```
 
 
@@ -133,19 +130,18 @@ motr_agg_df = raw_df %>%
 
 ```{r}
 # Read in Provo surprisal, frequency and length data
-provo_modeling_df = read.csv("../ancillary_data/provo_df.csv") %>%
+provo_modeling_df = read.csv("../data/provo_stats.csv") %>%
   dplyr::select(text_id, sent_id, trigger_idx, word, freq, surp, len) %>%
   rename(word_idx = trigger_idx)
 
 provo_modeling_df
-# View(provo_modeling_df)
 
 ```
 
 ```{r}
 # Read in Provo eyetracking data
 
-provo_raw_df = read.csv("../ancillary_data/provo_eyetracking.csv")
+provo_raw_df = read.csv("../data/provo_eyetracking.csv")
 
 ```
 
@@ -205,11 +201,6 @@ provo_eyetracking_agg_df = provo_eyetracking_df %>%
     summarise(value = mean(value),
               nsubj = length(unique(subj))) %>%
     ungroup()
-
-# View(provo_eyetracking_df)
-
-# View(provo_eyetracking_agg_df)
-# write.csv(provo_eyetracking_agg_df, file = "/Users/cui/Desktop/MoTR/pipeline/ancillary_data/provo_eyetracking_agg_df.csv", row.names = FALSE)
 
 provo_raw_df %>%
   dplyr::select(IA_REGRESSION_OUT) %>%
@@ -297,8 +288,6 @@ ungroup() %>%
 gather(measure, value, c("eyetr_value", "motr_value")) %>%
 dplyr::select(-motr_outlier, -eyetr_outlier)
   
-# View(provo_df)
-# provo_df
 ```
 
 
@@ -339,17 +328,10 @@ gam_modeling_df %>%
 
 ## Shape of surprisal / RT relationship
 ```{r}
-## normal distr
-# priors <- c(
-#   prior(normal(180, 50), class = Intercept),
-#   prior(normal(0, 20), class = b),
-#   prior(normal(0, 20), class = sds),
-#   prior(normal(0, 50), class = sigma)
-# )
 
 ## log normal distr
 priors <- c(
-  prior(normal(5, 0.1), class = Intercept),
+  prior(normal(6, 1), class = Intercept),
   prior(normal(0, 0.5), class = b),
   prior(normal(0, 2), class = sds),
   prior(normal(0, 1), class = sigma)
@@ -357,31 +339,27 @@ priors <- c(
 
 ## gamma distr
 priors_gamma <- c(
-  prior(normal(5.5, 0.5), class = Intercept),
+  prior(normal(6, 1), class = Intercept),
   prior(normal(0, 0.5), class = b),
   prior(cauchy(0, 0.5), class = sds),
-  prior(exponential(3), class = shape)
+  prior(exponential(2), class = shape)
 )
 
 fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, metric) {
   df = analysis(bootstrap_sample)
-  # df = bootstrap_sample$data
 
   # m = gam(psychometric ~ s(surp, bs = 'cr', k = 20) + s(prev_surp, bs = 'cr', k = 20) + te(freq, len, bs = 'cr') + te(prev_freq, prev_len, bs = 'cr'), data = df, method = 'REML')
   m <- brm(
     psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + t2(freq, len, bs = 'cr') + t2(prev_freq, prev_len, bs = 'cr'),
     data = df,
-    # family = gaussian(),
     # family = lognormal(),
-    # prior = priors,
     family = Gamma(link = "log"),
     prior = priors_gamma,
     cores = 8,
     seed = 444,
     chain = 4,
     iter = 4000,
-    file = paste0("./bayesian_models_surp/with0s/gamma_provo_", metric, "_", bootstrap_sample$id),
-    # file = paste0("./bayesian_models_surp/with0s/gamma_provo_", metric, "_", bootstrap_sample$id),
+    file = paste0("./bayesian_models/bayesian_models_surprisal/sep12_gamma_provo_", metric, "_", bootstrap_sample$id),
     backend = "cmdstanr",
     control = list(adapt_delta = 0.99)
     )
@@ -406,8 +384,6 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, me
 
     predictions = all_term_predictions[, "Estimate"] #- pred_mean[1, "Estimate"]
   
-  # print(class(predictions))
-  # print(dim(predictions))
   
   return( newdata %>% mutate(y = predictions))
 }
@@ -539,254 +515,7 @@ vlabeller <- function(variable,value){
     panel.grid.minor = element_blank()
   )
   
-# ggsave("../visualization/paper/surp_rt_wt_gamma_with0s.pdf", device = "pdf", width = 6, height = 2.5)
+# ggsave("../visualizations/surp_rt_wt.pdf", device = "pdf", width = 6, height = 2.5)
 
 
 ```
-
-# plotting for visualization -- exploratory
-```{r}
-custom_histogram_plot <- function(model, newdata) {
-  # Predict on the new data without summarizing
-  # View(newdata)
-  predictions <- predict(model, newdata = newdata, summary = FALSE)
-  
-  # Calculate the mean of the predictions for each data point
-  mean_predictions <- colMeans(as.matrix(predictions))
-  mean_predictions_df <- mean_predictions %>% as.data.frame()
-  View(mean_predictions_df)
-  
-  # Create a histogram plot
-  ggplot(data.frame(MeanPrediction = mean_predictions), aes(x = MeanPrediction)) +
-    geom_histogram(fill = "blue", alpha = 0.5, bins = 30) +
-    labs(title = "Histogram Distribution of Mean Predictions",
-         x = "Mean Prediction", y = "Frequency") +
-    theme_minimal()
-}
-
-custom_density_plot <- function(model, newdata) {
-  # Predict on the new data without summarizing
-  all_term_predictions = predict(model, newdata=newdata, summary = FALSE)
-  first_column_matrix <- matrix(all_term_predictions[, 1], nrow = nrow(all_term_predictions), ncol = ncol(all_term_predictions), byrow = FALSE)
-  # Subtract the first_column_matrix from the original array
-  predictions <- all_term_predictions - first_column_matrix
-  
-  # Calculate the mean of the predictions for each data point
-  mean_predictions <- colMeans(as.matrix(predictions))
-  mean_predictions_df <- mean_predictions %>% as.data.frame()
-  View(mean_predictions_df)
-  # Create a histogram plot
-  ggplot(data.frame(MeanPrediction = mean_predictions), aes(x = MeanPrediction)) +
-    geom_density(color = "red") +
-    labs(title = "Density Distribution of Mean Predictions",
-         x = "Mean Prediction", y = "Density") +
-    theme_minimal()
-}
-
-custom_density_plot_2 <- function(predictions) {
-  # Convert predictions to a matrix
-  predictions_matrix <- as.matrix(predictions)
-
-  # Create a list to store the individual plots
-  plots <- list()
-
-  # Create individual density plots for every 40th column
-  for (i in seq(40, 200, by = 40)) {
-    p <- ggplot(data.frame(Value = predictions_matrix[, i]), aes(x = Value)) +
-      geom_density(color = "red") +
-      labs(title = paste("Density Distribution of Column", i),
-           x = "Value", y = "Density") +
-      theme_minimal()
-    plots[[i / 40]] <- p
-  }
-
-  return(plots)
-}
-```
-
-# try to use a single model
-```{r}
-gd = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_gaze_duration_Bootstrap12.rds")
-td = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_total_duration_Bootstrap12.rds")
-gpt = read_rds("./bayesian_models_surp/drop0s/gamma2_provo_go_past_time_Bootstrap12.rds")
-
-# models <- list(gaze_duration = gd, total_duration = td, go_past_time = gpt)
-models <- list(gaze_duration = gd, total_duration = td, go_past_time = gpt)
-
-smooths_df = data.frame()
-for (model_name in names(models)){
-  m <- models[[model_name]]
-
-  for( target_prev_word in c(T,F)) {
-    if(target_prev_word == F) {
-        newdata = data.frame(surp=seq(0,20,by=0.1), prev_surp=mean_predictors$surp,
-                             freq=mean_predictors$freq, prev_freq=mean_predictors$freq,
-                             len=mean_predictors$len, prev_len=mean_predictors$len)
-      } else {
-        newdata = data.frame(surp=mean_predictors$surp, prev_surp=seq(0,20,by=0.1),
-                             freq=mean_predictors$freq, prev_freq=mean_predictors$freq,
-                             len=mean_predictors$len, prev_len=mean_predictors$len)
-      }
-    all_term_predictions = predict(m, newdata=newdata, summary = FALSE)
-    
-    # ============================================ bootstrap ==========================================
-    means <- numeric(201)
-    lower_crl<- numeric(201)
-    upper_crl <- numeric(201)
-
-    for (i in 1:201) {
-      samples <- all_term_predictions[,i]
-      bootstrap_means <- replicate(100, mean(sample(samples, replace=TRUE, size = 300)))
-      means[i] <- mean(bootstrap_means)
-      lower_crl[i] <- quantile(bootstrap_means, 0.025)
-      upper_crl[i] <- quantile(bootstrap_means, 0.975)
-    }
-    
-    # ==================================== divide posterior prediction into 20 folder ====================================
-    # # Divide the transformed_predictions into 20 parts, calculate colMeans, and store in result
-    # sub_mean_pred <- matrix(nrow = 20, ncol = 201)
-    # for (i in 1:20) {
-    #   subset_array <- all_term_predictions[((i - 1) * 400 + 1):(i * 400), ]
-    #   sub_mean_pred[i, ] <- colMeans(subset_array)
-    # }
-    # 
-    # # Convert result to a data frame
-    # mean_pred_df <- as.data.frame(sub_mean_pred)
-    # means <- colMeans(mean_pred_df)
-    # lower_crl <- apply(mean_pred_df, 2, function(x) quantile(x, 0.025))
-    # upper_crl <- apply(mean_pred_df, 2, function(x) quantile(x, 0.975))
-    
-    stat <- data.frame(
-      y = means,
-      y_lower = lower_crl,
-      y_upper = upper_crl,
-      prev_word = target_prev_word,
-      psychometric = model_name
-    )
-
-    result <- cbind(newdata, stat) %>% 
-      mutate(surp = if_else(prev_word == TRUE, prev_surp, surp)) %>%
-      dplyr::select(surp, y, y_lower, y_upper, prev_word, psychometric) %>% 
-      mutate(delta = 0 - y[1], y=y + delta, y_lower= y_lower + delta, y_upper=y_upper + delta) 
-    # View(result)
-    smooths_df = rbind(smooths_df, result)
-  }
-}
-# View(smooths_df)
-  
-  
-```
-
-
-### Get Density Data
-```{r}
-get_d_points = function(df) {
-    x = density(df$surp)$x
-    y = density(df$surp)$y
-    return(data.frame(x, y))
-  }
-
-density_data = data.frame()
-
-for(m in c("gaze_duration", "total_duration", "go_past_time")) {
-  dummy_df = provo_df %>% filter(metric == m) %>%
-      do({get_d_points(.)}) %>%
-      filter(x>0, x<20)
-  density_data = rbind(density_data, dummy_df %>% mutate(metric=m))
-}
-
-```
-
-
-```{r}
-
-plotting_df = smooths_df %>%
-  mutate(target_word = if_else(prev_word == F, "wt", "wt-1"))
-
-# write.csv(plotting_df, "gamma_provo_surprisal_bayesian_one_model_no_bootstrap.csv", row.names = FALSE)
-
-vnames <-list(
-  "gaze_duration" = "Gaze Duration",
-  "go_past_time" = "Go Past Time",
-  "total_duration" = "Total Duration",
-  'wt-1' = bquote(w[t-1]),
-  'wt' = bquote(w[t])
-)
-
-vlabeller <- function(variable,value){
-  return(vnames[value])
-}
-
-# Surprisal curves
-  ggplot() +
-      # Surrp / Rt data
-      # geom_line(data = smooths_df, aes(x=prev_surp, y=y, color = psychometric), size=0.7) +
-      geom_line(data = plotting_df, aes(x=surp, y=y, color = psychometric, linetype=target_word),  size=0.7) +
-      # geom_ribbon(data = smooths_df, aes(x=prev_surp, ymin=y_lower, ymax=y_upper, fill = psychometric), alpha=0.3, size=0.5) +
-      geom_ribbon(data = plotting_df, aes(x=surp, ymin=y_lower, ymax=y_upper, fill = psychometric), alpha=0.3, size=0.5) +
-      # Density Data
-      annotate("rect", xmin=-5, xmax=25, ymin=-25,ymax=-13, fill="white", color="grey", alpha=1, size = 0) +
-      geom_line(data = density_data, aes(x=x, y=y*100 - 25), size = 0.2, color="#aaaaaa") +
-
-      geom_ribbon(data = density_data, aes(x=x, ymin=-50, ymax=y*100 - 25), color="#dadeea", alpha = 0.1) +
-
-      geom_hline(yintercept = -13, color = "black", size = 0.1) +
-    
-      scale_x_continuous(labels=c(0, 10, 20), breaks=c(0, 10, 20), minor_breaks = NULL) +
-      facet_wrap(psychometric~target_word, nrow = 1, labeller = vlabeller) +
-      ylab("Slowdown due to Surprisal (ms)") +
-      xlab("Surprisal of Word") +
-      coord_cartesian(ylim = c(-20, 100), xlim = c(0, 20)) +
-      # ggtitle("MoTR Times and Previous Word Surprisal")
-  theme(
-    legend.position = "none",
-    panel.grid.minor = element_blank()
-  )
-  
-# ggsave("../visualization/paper/surp_rt_wt_gammaone_model_no_bootstrap.pdf", device = "pdf", width = 6, height = 2.5)
-
-```
-
-```{r}
-# for check models & get priors
-gd = read_rds("./bayesian_models_surp/with0s/gamma_provo_gaze_duration_Bootstrap12.rds")
-gd2 = read_rds("./bayesian_models_surp/with0s/gamma_provo_gaze_duration_Bootstrap02.rds")
-td = read_rds("./bayesian_models_surp/with0s/gamma_provo_total_duration_Bootstrap02.rds")
-td2 = read_rds("./bayesian_models_surp/with0s/gamma_provo_total_duration_Bootstrap02.rds")
-  
-```
-
-```{r}
-stancode <- stancode(gd)
-class(stancode)
-stancode
-
-fit_data <- standata(gd)
-
-
-writeLines(stancode, "./stan_models/provo_surp.stan")
-```
-
-```{r}
-print(fit_data$N)
-print(class(fit_data$knots_3))
-print(fit_data$prior_only)
-```
-
-
-
-```{r}
-summary(gd)
-summary(gd2)
-summary(td)
-summary(td2)
-```
-
-```{r}
-prior_summary(gd)
-prior_summary(gd2)
-prior_summary(td)
-prior_summary(td2)
-```
-
-

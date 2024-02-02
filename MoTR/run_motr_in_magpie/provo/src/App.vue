@@ -1,8 +1,8 @@
-<!-- Window is fixed, 102px, pointer cursor, more gradual blurry effect on surrounding words. -->
+<!-- Window is fixed, 102px, pointer cursor, gradual blurry effect on surrounding words. -->
 <!--  Comprehension questions appear afterwards in the same slide -->
 
 <template>
-  <Experiment title="Mouse tracking for Reading">
+  <Experiment title="Mouse tracking for Reading" translate="no">
 
     <Screen :title="'Welcome'" class="instructions" :validations="{
         SubjectID: {
@@ -60,10 +60,11 @@
         <br>
 
           <tr>
-          <td>Please enter your Worker ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
           </tr>
-          <!-- <tr>
-          </tr> -->
+          <tr>
+
+          </tr>
           </div>
           <div v-if="
             $magpie.measurements.SubjectID&&
@@ -110,7 +111,7 @@
               {{trial.text}}
             </div>
           </template>
-          <button v-if="showFirstDiv" style= "bottom:40%; transform: translate(-50%, -50%)" @click="toggleDivs">
+          <button v-if="showFirstDiv" style= "bottom:40%; transform: translate(-50%, -50%)" @click="toggleDivs" :disabled="!isCursorMoving">
           Done
           </button>
 
@@ -133,6 +134,22 @@
         </Slide>
       </Screen>
     </template>
+<Screen>
+  <p>1. Which input device are you using for this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.device"
+        orientation="horizontal"
+        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
+  <br>
+  <br>
+  <p>2. Which hand are you using during this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.hand"
+        orientation="horizontal"
+        :options="['Left', 'Right', 'Both']" />
+  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
+</Screen>
+
     <SubmitResultsScreen />
   </Experiment>
 </template>
@@ -144,9 +161,7 @@ import provo_list2 from '../trials/provo_items_list2.tsv';
 import provo_list3 from '../trials/provo_items_list3.tsv';
 import provo_practice from '../trials/provo_items_practice.tsv';
 import _ from 'lodash';
-import Vue from 'vue';
-import vBlur from 'v-blur';
-Vue.use(vBlur)
+
 export default {
   name: 'App',
   data() {
@@ -163,6 +178,7 @@ export default {
       }
     });
     return {
+      isCursorMoving: false,
       trials: updatedTrials,
       currentIndex: null,
       showFirstDiv: true,
@@ -213,6 +229,7 @@ export default {
         }
       }},
     moveCursor(e) {
+      this.isCursorMoving = true;
       this.$el.querySelector(".oval-cursor").classList.add('grow');
       let x = e.clientX;
       let y = e.clientY;
@@ -237,6 +254,7 @@ export default {
     },
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;
+    this.isCursorMoving = false;
     },
    //  async turnOnFullScreen() {
 //       if (!document.fullscreenElement) {
@@ -347,4 +365,11 @@ export default {
     padding-left: 11%;
     padding-right: 11%;
   }
+
+  * {
+    user-select: none; /* Standard syntax */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    }
 </style>

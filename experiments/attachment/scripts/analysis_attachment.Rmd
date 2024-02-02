@@ -43,16 +43,15 @@ pipe_message = function(.data, status) {message(status); .data}
 
 rate = 160
 
-# file_prefix = paste0("/Users/ethan/Desktop/motr_lc_", as.character(rate),"/")
-file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")
+# Please change this path accordingly
+file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")       
 fnames = list.files(path=file_prefix)
 
 # Read in the data
 df = data.frame()
 for (f in fnames) {
   temp = read.csv(paste0(file_prefix, "/", f)) %>%
-    mutate(subj = str_remove(f, "_reading_measures.csv")) #%>%
-    #rename(go_past_time = 15)   # sorry, I forgot to correct the names for some files. With the new data, all files in the folders have the correct name
+    mutate(subj = str_remove(f, "_reading_measures.csv"))
   df = rbind(df, temp)
 }
 
@@ -75,16 +74,7 @@ raw_df = df %>%
   filter(! subj %in% c(filter_list)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.integer(subj)) %>%
-# <<<<<<< HEAD:pipeline/scripts/analysis_attachment.Rmd
-  # Filter out participants who were bots
-  #filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19) ) %>%
-# =======
-  # Filter out participants who were bots & low accuracy: reader_26 0.76, reader_262 0.64, reader_276 0.56, reader_28 0.77, reader_294 0.74,
-  # reader_334 0.65, reader_338 0.74, reader_353 0.66, reader_373 0.78, reader_385 0.57
-  #filter( ! subj %in% filter_list) %>%
   filter(! subj %in% c(118, 119, 120, 107, 103, 130, 6, 19, 26, 262, 276, 28, 294, 334, 338, 353, 373, 385) ) %>%
-# >>>>>>> 6d551a95f197cb2ecb8d26837d651e58c06a7b16:pipeline/scripts/analysis_attachment_fullcomp.Rmd
-  # See below for filtering out reading measures that are super long
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj, sent_rg_id, sent_rg)
 
 raw_df
@@ -169,7 +159,7 @@ motr_agg_df = motr_clean_df %>%
 
 # Read in eye-tracking data
 
-eyetr_agg_df = read.csv("../ancillary_data/lc_eyetr_cleaned.csv") %>%
+eyetr_agg_df = read.csv("../data/witzel_eyetr_data.csv") %>%
   mutate(Region_Order = Region_Order - 1) %>%
   mutate(Condition = if_else(Condition == "Hight attachment", "High attachment", Condition)) %>%
   mutate(Condition = if_else(Condition == "Ambiguous", "High attachment", Condition),
@@ -188,9 +178,9 @@ eyetr_agg_df = read.csv("../ancillary_data/lc_eyetr_cleaned.csv") %>%
 
 ```{r}
 # Read in Maze and SPR Data
-amaze_df = read_rds("../ancillary_data/gulo_maze.rds")
-gmaze_df = read_rds("../ancillary_data/g_maze.rds")
-spr_df = read_rds("../ancillary_data/spr.rds")
+amaze_df = read_rds("../data/a_maze.rds")
+gmaze_df = read_rds("../data/g_maze.rds")
+spr_df = read_rds("../data/spr.rds")
 ```
 
 ```{r}
@@ -361,44 +351,14 @@ comb_clean_df %>%
 
 ## Stats!
 
-```{r, eval=FALSE}
-
-## To visualize the transformation from normal to log-normal distribution.
-
-mu <- 6.2
-sigma <- 0.5
-N <- 500000
-# Generate N random samples from a log-normal distribution
-sl <- rlnorm(N, mu, sigma)
-ggplot(tibble(samples = sl), aes(samples)) +
-  geom_histogram(aes(y = after_stat(density)), binwidth = 50) +
-  ggtitle("Log-normal distribution\n") +
-  coord_cartesian(xlim = c(0, 2000))
-# Generate N random samples from a normal distribution,and then exponentiate them
-sn <- exp(rnorm(N, mu, sigma))
-ggplot(tibble(samples = sn), aes(samples)) +
-  geom_histogram(aes(y = after_stat(density)), binwidth = 50) +
-  ggtitle("Exponentiated samples from\na normal distribution") +
-  coord_cartesian(xlim = c(0, 2000))
-```
-
-
 
 ```{r, eval=FALSE}
 
 # set priors
-priors_rt_motr <- c(
-  prior(normal(6.5, 0.1), class = Intercept),
+priors_rt <- c(
+  prior(normal(6, 1), class = Intercept),
   prior(normal(0, 0.1), class = b, coef = condition),
-  prior(normal(0, 0.1), class = sd),
-  prior(normal(0, 0.5), class = sigma),
-  prior(lkj(2), class = cor)
-)
-
-priors_rt_maze <- c(
-  prior(normal(6.5, 0.5), class = Intercept),
-  prior(normal(0, 0.1), class = b, coef = condition),
-  prior(normal(0, 0.1), class = sd),
+  prior(normal(0, 0.5), class = sd),
   prior(normal(0, 0.5), class = sigma),
   prior(lkj(2), class = cor)
 )
@@ -438,7 +398,7 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
                               data = temp_df, 
                               family = bernoulli(link = "logit"), 
                               chains = 4,
-                              file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i), 
+                              file = paste0("./bayesian_models_lc/", exp, "_", met, "_", mes, "_", i), 
                               cores = 4, 
                               backend = "cmdstanr", 
                               prior = priors_FPReg)
@@ -461,28 +421,14 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
             # temp_df = temp_df %>% mutate(value = scale(value)) #scale real-valued numbers for lmer
             # model = lmer(value ~ condition + (condition || subj) + (condition || item_id), data = temp_df)
             # pval = coef(summary(model))[10]
-            
-            if (mes == "A-Maze" | mes == "G-Maze"){
-              model = brms::brm(value ~ condition + (condition | subj) + (condition | item_id),
-                                data = temp_df,
-                                chains = 4,
-                                family = lognormal(),
-                                file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i),
-                                cores = 4,
-                                backend = "cmdstanr",
-                                prior = priors_rt_maze
-                                )
-            }else{
-              model = brms::brm(value ~ condition + (condition | subj) + (condition | item_id),
-                                data = temp_df,
-                                chains = 4,
-                                family = lognormal(),
-                                file = paste0("./bayesian_models_lc/model_all_data/", exp, "_", met, "_", mes, "_", i),
-                                cores = 4,
-                                backend = "cmdstanr",
-                                prior = priors_rt_motr
-                                )
-            }
+            model = brms::brm(value ~ condition + (condition | subj) + (condition | item_id),
+                              data = temp_df,
+                              chains = 4,
+                              family = lognormal(),
+                              file = paste0("./bayesian_models_lc/", exp, "_", met, "_", mes, "_", i),
+                              cores = 4,
+                              backend = "cmdstanr",
+                              prior = priors_rt)
               
             est = fixef(model)[2]
             sd = fixef(model)[4]
@@ -509,86 +455,16 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
   }
 }
 
-write.csv(stats_df, "./stats_bayesian.csv")
+write.csv(stats_df, "../visualizations/stats_bayesian.csv")
 
 ```
 
-posterior predictive check
-
-```{r, eval=FALSE}
-file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
-
-for (file in file_list) {
-  print(file)
-  model <- readRDS(file)
-  model_name <- basename(file)
-  print(pp_check(model, ndraws = 1000, title = model_name))
-}
- 
-```
-
-
-```{r, eval=FALSE}
-file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
-
-for (file in file_list) {
-  print(file)
-  model <- readRDS(file)
-  model_name <- basename(file)
-  # print(pp_check(model, ndraws = 1000, title = model_name))
-  print(fixef(model))
-}
-```
-
-
-
-```{r, eval=FALSE}
-file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
-
-for (file in file_list) {
-  print(file)
-  model <- readRDS(file)
-  sample_b_post <- as_draws_df(model)$b_Intercept
- # We generate samples from the prior as well:
-   N <- length(sample_b_post)
-   sample_b_prior <- rnorm(N, 6.3, 0.1)
-   samples <- tibble(
-     sample = c(sample_b_post, sample_b_prior),
-     distribution = c(rep("posterior", N), rep("prior", N))
-   )
-   print(
-   ggplot(samples, aes(x = sample, fill = distribution)) +
-     geom_density(alpha = .5))
-}
-```
-
-
-
-```{r, eval=FALSE}
-file_list <- list.files(path = ".", pattern = "\\_0.rds$", full.names = TRUE)
-
-for (file in file_list) {
-  print(file)
-  model <- readRDS(file)
-  print(pp_check(model, type = "stat", stat = "mean"))
-  # print(pp_check(model, type = "stat", stat = "min"))  # there are deviation for both Maze and MoTR 
-  # print(pp_check(model, type = "stat", stat = "max"))
-  # print(pp_check(model, type = "stat", stat = "sd"))   # there are deviation for MoTR(for go-past-time and td), predicted sds are too small
-  # print(pp_check(model, type = "stat", stat = "median"))
-  
-}
-```
-
-
-
+# plotting
 ```{r}
 
-stats_df_bayesian <- read.csv("../results_data/lc_stats_bayesian_all_data.csv")%>%
+stats_df_bayesian <- read.csv("../visualizations/stats_bayesian.csv")%>%
   dplyr::select(-estimate, -lower_95, -upper_95, -std_error) %>%
   rename(estimate_mean = mean)
-
-# stats_df_bayesian <- read.csv("../results_data/lc_stats_bayesian_all_data.csv")
-
 
 plotting_df = merge(comb_agg_df, stats_df_bayesian, all=T, by = c("sent_rg_id", "metric", "experiment", "measure")) %>%
   mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), T, F)) %>%
@@ -641,7 +517,7 @@ plotting_df %>%
     panel.grid.minor = element_blank()
   )
 
-ggsave(paste0("../visualization/paper/target_results_cris", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
+ggsave(paste0("../visualization/target_results_cris", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
 
 ```
 
@@ -680,7 +556,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualization/paper/model_estimates", rate, ".pdf"), device="pdf", width = 8, height =5)
+ggsave(paste0("../visualizations/model_estimates", rate, ".pdf"), device="pdf", width = 8, height =5)
 
 ```
 
@@ -708,7 +584,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualization/paper/model_estimates_regression", rate, ".pdf"), device="pdf", width = 8, height =1.2)
+ggsave(paste0("../visualizations/model_estimates_regression", rate, ".pdf"), device="pdf", width = 8, height =1.2)
 
 
 ```
@@ -744,24 +620,9 @@ plotting_df %>%
   )
 
 
-ggsave(paste0("../visualization/paper/target_comp_cris", rate, ".pdf"), device="pdf", width = 8, height = 4.5)
+ggsave(paste0("../visualizations/target_comp_cris", rate, ".pdf"), device="pdf", width = 8, height = 4.5)
 
 ```
 
-```{r}
-cor_df = plotting_df %>%
-  dplyr::select(-sd, -upper, -lower, -sig, -pval) %>%
-  spread(measure, m)
-
-cor_df
-
-cor.test(cor_df$MoTR, cor_df$`Eye Tracking`)
-
-cor.test(cor_df$`A-Maze`, cor_df$`Eye Tracking`)
-cor.test(cor_df$`G-Maze`, cor_df$`Eye Tracking`)
-cor.test(cor_df$`SPR`, cor_df$`Eye Tracking`)
-
-
-```
 
 
