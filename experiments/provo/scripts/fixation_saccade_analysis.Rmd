@@ -1,0 +1,328 @@
+---
+title: "Exploratory Analysis for MoTR Reading Data"
+output: html_notebook
+---
+
+```{r}
+shhh <- suppressPackageStartupMessages # It's a library, so shhh!
+
+shhh(library( mgcv ))
+shhh(library(dplyr))
+shhh(library(ggplot2))
+shhh(library(lme4))
+shhh(library(tidymv))
+shhh(library(gamlss))
+shhh(library(gsubfn))
+shhh(library(lmerTest))
+shhh(library(tidyverse))
+shhh(library(boot))
+shhh(library(rsample))
+shhh(library(plotrix))
+shhh(library(ggrepel))
+shhh(library(mgcv))
+shhh(library(brms))
+shhh(library(bayesplot))
+shhh(library(tidyr))
+shhh(library(car))
+shhh(library(coda))
+shhh(library(gridExtra))
+shhh(library(posterior))
+
+theme_set(theme_bw())
+options(digits=4)
+options(scipen=999)
+set.seed(444)
+
+```
+
+
+
+```{r}
+
+sample_path = "../data/provo_rawdata/Fixations_Saccades_Slidings"
+sample_names = list.files(sample_path)
+
+sample_df = data.frame()
+for(name in sample_names){
+  temp_df = read.csv(paste0(sample_path, "/", name))
+  sample_df = rbind(sample_df, temp_df)
+}
+
+```
+
+
+```{r}
+
+clean_df = sample_df %>%
+  mutate(fix_type = "movement") %>%
+  mutate(fix_type = if_else(velocities==0, "fixation", fix_type)) %>%
+  mutate(fix_type =  if_else(velocities > 0 & acceleration < 0, "deceleration", fix_type)) %>%
+  mutate(fix_type = if_else(word_nr == -1, "off", fix_type)) %>%
+  dplyr::rename(velocity = velocities) %>%
+  
+  dplyr::select(-wb, -wt, -wl, -wr, -response, -cond_id, -expr_id, -type) %>%
+  dplyr::rename(subj_id = sbm_id, item_id = para_nr) %>%
+  mutate(fix_type = factor(fix_type, levels = c("fixation", "deceleration", "movement", "off"), 
+                           labels = c("Fixation", "Deceleration", "Other \n Movement", "Offscreen")))
+
+clean_df
+
+```
+
+
+
+
+
+```{r}
+
+target_subj_id = 26
+target_item_id = 52
+fmin = 160
+
+assoc_df = clean_df %>% filter(subj_id == target_subj_id, item_id == target_item_id) %>%
+  mutate(consec = cumsum(c(1, diff(word_nr) != 0))) %>%
+  group_by(consec, word_nr) %>%
+    summarise(word=word, start_t = min(t), end_t = max(t)) %>%
+  ungroup() %>%
+  distinct() %>%
+  mutate(assoc_time = end_t - start_t) %>%
+  filter(assoc_time > 160 & assoc_time < 4000) %>%
+  mutate(mean_t = (end_t + start_t)/2) %>%
+  filter(word_nr != -1)
+
+movement_df = clean_df %>% filter(subj_id == target_subj_id, item_id == target_item_id) %>%
+  mutate(velocities = if_else(velocities > 1, 1, velocities)) %>%
+  mutate(acceleration = if_else(acceleration > 0.01, 0.01, acceleration),
+         acceleration = if_else(acceleration < -0.01, -0.01, acceleration)) %>%
+  dplyr::rename(velocity = velocities)
+
+movement_window_df = movement_df %>%
+  filter(t > 14000 & t < 18800)
+
+ggplot() +
+  geom_rect(aes(xmin=start_t, xmax=end_t, ymin = -1000, ymax=1000), fill = "#eaf6f7", data = assoc_df) +
+  geom_text(aes(x = mean_t, y = 400, label=word), angle = 90, size = 3, color="gray", data = assoc_df) +
+  #geom_line(aes(x=t, y=y), color = "orange", data = movement_window_df) +
+  geom_point(aes(x=t, y=x, color = fix_type), data = movement_window_df) +
+  geom_line(aes(x=t, y=x), color = "gray", data = movement_window_df) +
+  coord_cartesian(xlim=c(14000, 19000), ylim=c(0, 700)) +
+  xlab("Time (ms)") +
+  ylab("Mouse x-Axis Position") +
+  labs(color = "Movement Type") +
+  scale_color_manual( values = c("red", "orange", "green", "gray"))
+
+ggsave("../visualizations/reading_samples.pdf", device="pdf", width = 5.5, height = 4)
+
+
+```
+
+```{r}
+
+library(ggnewscale)
+
+ggplot() +
+  geom_rect(aes(xmin=start_t, xmax=end_t, ymin = -1000, ymax=1000), fill = "#eaf6f7", data = assoc_df) +
+  geom_text(aes(x = mean_t, y = 400, label=word), angle = 90, size = 3, color="gray", data = assoc_df) +
+  #geom_line(aes(x=t, y=y), color = "orange", data = movement_df) +
+  
+  geom_line(aes(x=t, y=x, color = velocity), size=1.5, data = movement_window_df) +
+  #scale_color_gradientn(values=c(0, 0.001, 0.5, 1), colors=c("#969495", "#ffbda8", "#ea3a00", "#ea3a00")) +
+  scale_color_gradient(low="#cccccc", high="red") +
+  
+  new_scale_color() +
+  geom_line(aes(x=t - 55, y=x + 9, color = acceleration), size = 1.5, data = movement_window_df) +
+  scale_color_gradient2(high="blue", mid="#cccccc", low="green") +
+
+  coord_cartesian(xlim=c(14000, 19000), ylim=c(0, 700)) +
+  xlab("Time (ms)") +
+  ylab("Mouse x-Axis Position") 
+
+ggsave("../visualizations/reading_accel.pdf", device="pdf", width = 5, height = 4)
+
+
+```
+
+Visualization #1 -- Participant by type of action
+
+```{r}
+
+participant_df = clean_df %>%
+  group_by(subj_id) %>%
+    mutate(total_samples = n()) %>%
+  ungroup() %>%
+  group_by(subj_id, fix_type, total_samples) %>%
+    summarise(n = n()) %>%
+    mutate(prop_n = n / total_samples) %>%
+  ungroup() %>%
+  dplyr::select(-total_samples)
+
+participant_df %>%
+  group_by(subj_id) %>%
+    mutate(prop_fix = prop_n[1]) %>%
+  ungroup() %>%
+  mutate(subj_id = as.character(subj_id)) %>%
+  ggplot(aes(x = reorder(subj_id, prop_fix), y=prop_n, fill=fix_type)) +
+    geom_bar(stat="identity") +
+  ylab("Proportion of Each Movement Type") +
+  xlab("Participant (Ordered by Fixation Rate)") +
+  labs(fill = "Movement Type") +
+  ggtitle("Movement Type by Participant") +
+  scale_fill_manual( values = c("red", "orange", "green", "gray")) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title = element_text(size = 16),
+    plot.title = element_text(size = 20)
+  )
+
+ggsave("../visualizations/movement_analysis/participant_movement.pdf", device="pdf", width = 8, height = 5)
+
+
+```
+
+Visualization #2 -- Item by type of action
+
+```{r}
+
+item_df = clean_df %>%
+  group_by(item_id) %>%
+    mutate(total_samples = n()) %>%
+  ungroup() %>%
+  group_by(item_id, fix_type, total_samples) %>%
+    summarise(n = n()) %>%
+    mutate(prop_n = n / total_samples) %>%
+  ungroup() %>%
+  dplyr::select(-total_samples)
+
+item_df %>%
+  group_by(item_id) %>%
+    mutate(prop_fix = prop_n[1]) %>%
+  ungroup() %>%
+  mutate(item_id = as.character(item_id)) %>%
+  ggplot(aes(x = reorder(item_id, prop_fix), y=prop_n, fill=fix_type)) +
+    geom_bar(stat="identity") +
+  ylab("Proportion of Each Movement Type") +
+  xlab("Item (Ordered by Proportion of Fixations)") +
+  labs(fill = "Movement Type") +
+  ggtitle("Movement Type by Item") +
+  scale_fill_manual( values = c("red", "orange", "green", "gray")) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title = element_text(size = 16),
+    plot.title = element_text(size = 20),
+    legend.position="none"
+  )
+
+ggsave("../visualizations/movement_analysis/item_movement.pdf", device="pdf", width = 5, height = 5)
+
+item_df %>%
+  filter(fix_type == "Fixation") %>%
+  arrange(prop_n)
+
+
+```
+
+
+Visualization #2 -- Trial by type of action
+
+```{r}
+
+trial_df = clean_df %>%
+  group_by(trial_id) %>%
+    mutate(total_samples = n()) %>%
+  ungroup() %>%
+  group_by(trial_id, fix_type, total_samples) %>%
+    summarise(n = n()) %>%
+    mutate(prop_n = n / total_samples) %>%
+  ungroup() %>%
+  dplyr::select(-total_samples)
+
+trial_df %>%
+  group_by(trial_id) %>%
+    mutate(prop_fix = prop_n[1]) %>%
+  ungroup() %>%
+  ggplot(aes(x = trial_id, y=prop_n, fill=fix_type)) +
+    geom_bar(stat="identity") +
+  ylab("Proportion of Each Movement Type") +
+  xlab("Trial ID") +
+  labs(fill = "Movement Type") +
+  ggtitle("Movement Type by Trial Number") +
+  scale_fill_manual( values = c("red", "orange", "green", "gray")) +
+  theme(
+    axis.title = element_text(size = 16),
+    plot.title = element_text(size = 20),
+    legend.position="none"
+  )
+
+ggsave("../visualizations/movement_analysis/trial_movement.pdf", device="pdf", width = 5, height = 5)
+
+
+```
+
+ Stats for trial analysis
+ 
+```{r}
+
+library(brms)
+
+trial_analysis_df = clean_df %>%
+  mutate(is_fixation = if_else(fix_type == "Fixation", 1, 0)) %>%
+  mutate(item_id = as.factor(item_id))
+
+trail_model = brm(formula = is_fixation ~ trial_id + (trial_id | item_id) + (trial_id | subj_id),
+                   data=trial_analysis_df, 
+                   family = bernoulli(link = "logit"),
+                   warmup = 500, 
+                   iter = 2000, 
+                   chains = 2, 
+                   inits= "0", 
+                   cores=2,
+                   seed = 444)
+
+summary(trial_m)
+
+```
+
+```{r}
+
+
+target_item_id = 10
+filter_clean_df = clean_df %>% filter(item_id == target_item_id)
+participant_list = unique(filter_clean_df$subj_id)
+participant_list = c(102, 32, 42, 11)
+
+for(target_subj_id in participant_list) {
+
+assoc_df = clean_df %>% filter(subj_id == target_subj_id, item_id == target_item_id) %>%
+  mutate(consec = cumsum(c(1, diff(word_nr) != 0))) %>%
+  group_by(consec, word_nr) %>%
+    summarise(word=word, start_t = min(t), end_t = max(t)) %>%
+  ungroup() %>%
+  distinct() %>%
+  mutate(assoc_time = end_t - start_t) %>%
+  filter(assoc_time > 160 & assoc_time < 4000) %>%
+  mutate(mean_t = (end_t + start_t)/2) %>%
+  filter(word_nr != -1)
+
+movement_df = clean_df %>% filter(subj_id == target_subj_id, item_id == target_item_id)
+
+ggplot() +
+  geom_rect(aes(xmin=start_t, xmax=end_t, ymin = -1000, ymax=1000), fill = "#eaf6f7", data = assoc_df) +
+  geom_text(aes(x = mean_t, y = 400, label=word), angle = 90, size = 3, color="gray", data = assoc_df) +
+  geom_line(aes(x=t, y=y), color = "orange", data = movement_df) +
+  geom_point(aes(x=t, y=x, color = fix_type), data = movement_df) +
+  geom_line(aes(x=t, y=x), color = "gray", data = movement_df) +
+  coord_cartesian(ylim=c(0, 800)) +
+  xlab("Time (ms)") +
+  ylab("Mouse x-Axis Position") +
+  labs(color = "Movement Type") +
+  scale_color_manual( values = c("red", "orange", "green", "gray")) +
+  theme(
+    legend.position = "none"
+  )
+
+ggsave(paste0("../visualizations/reading/reader_",target_subj_id,"_",target_item_id,".pdf"), device="pdf", width = 10, height = 3.2)
+
+}
+
+
+```
