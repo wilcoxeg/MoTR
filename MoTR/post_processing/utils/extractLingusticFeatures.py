@@ -6,19 +6,19 @@ from collections import defaultdict
 
 
 class FeatureExtractor:
-    def __init__(self, input_data_path_trial, input_data_path_fixations,
-                 output_data_path, fixation_threshold: int):
-        # It is not necessary to set attribute 'fixation_threshold' because we have set it in `mergeFixations`, but I'd
-        # like to keep it here for the flexibility of working with existing fixation files and for the convenience of testing.
+    def __init__(self, input_data_path_trial, input_data_path_associations,
+                 output_data_path, association_threshold: int):
+        # It is not necessary to set attribute 'association_threshold' because we have set it in `mergeassociations`, but I'd
+        # like to keep it here for the flexibility of working with existing association files and for the convenience of testing.
         self.input_path_trial = input_data_path_trial
-        self.input_path_fixations = input_data_path_fixations
-        self.input_df_f = pd.read_csv(self.input_path_fixations, na_values=['NA'])
+        self.input_path_associations = input_data_path_associations
+        self.input_df_f = pd.read_csv(self.input_path_associations, na_values=['NA'])
         self.input_df_f['index'] = range(len(self.input_df_f))
 
         self.output_path = output_data_path
         self.output_df = pd.read_csv(self.input_path_trial, na_values=['NA'])
-        self.output_name_stem = self.input_path_fixations.stem.split('_')[1]
-        self.threshold = fixation_threshold
+        self.output_name_stem = self.input_path_associations.stem.split('_')[1]
+        self.threshold = association_threshold
 
         self.input_df_ff = self.input_df_f.loc[self.input_df_f['duration'] > self.threshold]
 
@@ -28,22 +28,22 @@ class FeatureExtractor:
 
     def get_first_duration(self):
         """
-        Calculate the first fixation duration for each word and merge it into the output dataframe.
+        Calculate the first association duration for each word and merge it into the output dataframe.
         """
         # input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
         # input_df_f_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
         input_df_f_grouped = self.input_df_ff.groupby(['cond_id', 'para_nr', 'word_nr'])
-        first_fixation_values = input_df_f_grouped['duration'].first()
-        first_fixation_df = pd.DataFrame(first_fixation_values).reset_index()
-        first_fixation_df = first_fixation_df.rename(columns={'duration': 'first_duration'})
-        # self.output_df = self.output_df.merge(first_fixation_df, on=['para_nr', 'word_nr'], how='left')
-        # self.output_df = self.output_df.merge(first_fixation_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
-        self.output_df = self.output_df.merge(first_fixation_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
+        first_association_values = input_df_f_grouped['duration'].first()
+        first_association_df = pd.DataFrame(first_association_values).reset_index()
+        first_association_df = first_association_df.rename(columns={'duration': 'first_duration'})
+        # self.output_df = self.output_df.merge(first_association_df, on=['para_nr', 'word_nr'], how='left')
+        # self.output_df = self.output_df.merge(first_association_df, on=['expr_id', 'para_nr', 'word_nr'], how='left')
+        self.output_df = self.output_df.merge(first_association_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['first_duration'] = self.output_df['first_duration'].fillna(0)
 
     def get_total_duration(self):
         """
-        Calculate the total fixation duration for each word and merge it into the output dataframe
+        Calculate the total association duration for each word and merge it into the output dataframe
         """
         # input_df_f_grouped = self.input_df_ff.groupby(['para_nr', 'word_nr'])
         # input_df_f_grouped = self.input_df_ff.groupby(['expr_id', 'para_nr', 'word_nr'])
@@ -56,9 +56,9 @@ class FeatureExtractor:
         self.output_df = self.output_df.merge(total_duration_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['total_duration'] = self.output_df['total_duration'].fillna(0)
 
-    # gaze duration equals to first-pass reading time: sum of the durations of all first-pass fixations on a word
+    # gaze duration equals to first-pass reading time: sum of the durations of all first-pass associations on a word
     # (0 if the word was skipped in the first-pass)
-    # here our IA is a word, gaze duration also equals to first fixation
+    # here our IA is a word, gaze duration also equals to first association
     def get_gaze_duration(self):
         gaze_duration_dict = defaultdict(int)
         # input_df_ff_grouped = self.input_df_ff.groupby(['para_nr'])
@@ -85,7 +85,7 @@ class FeatureExtractor:
         self.output_df = self.output_df.merge(gaze_duration_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['gaze_duration'] = self.output_df['gaze_duration'].fillna(0)
 
-    # sum of all first pass fixation durations on a word until a word to the right of this word is fixated
+    # sum of all first pass association durations on a word until a word to the right of this word is fixated
     #  0 if the word was not fixated in the first-pass
     def get_right_bounded_rt(self):
         rrt_dict = defaultdict(int)
@@ -113,8 +113,8 @@ class FeatureExtractor:
         self.output_df = self.output_df.merge(rrt_df, on=['cond_id', 'para_nr', 'word_nr'], how='left')
         self.output_df['right_bounded_rt'] = self.output_df['right_bounded_rt'].fillna(0)
 
-    #  sum of all fixation durations starting from the first first-pass fixation on a word until fixation a word to the
-    #  right of this word (including all regressive fixations on previous words),
+    #  sum of all association durations starting from the first first-pass association on a word until association a word to the
+    #  right of this word (including all regressive associations on previous words),
     #  0 if the word was not fixated in the first-pass
     def get_go_past_time(self):
         gpt_dict = defaultdict(int)

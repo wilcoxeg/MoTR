@@ -6,8 +6,8 @@ sample call:
 python3 postprocessing.py --in_file local_coherence_1.csv --trial_file trials/localCoherence.tsv
 python3 postprocessing.py --in_file local_coherence_31.csv --processed_trial_file trials/localCoherence_sent_region.csv
 python3 postprocessing.py --in_folder data --processed_trial_file trials/localCoherence_sent_region.csv
-python3 postprocessing.py --in_file provo_full_1.csv --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --processed_trial_dir stimuli --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
-python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --fixation_dir fixations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
+python3 postprocessing.py --in_file provo_full_1.csv --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --processed_trial_dir stimuli --association_dir associations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
+python3 postprocessing.py --in_folder data2 --trial_file trials/provo_items.tsv --divided_dir divide_by_reader --association_dir associations --rt_dir reading_metrics --low_thres 200 --up_thres 3000
 
 Working directory has to be in the folder of `pipeline`
 """
@@ -17,7 +17,7 @@ from pathlib import Path
 from argparse import ArgumentParser, ArgumentTypeError
 
 from utils.divideCsv import FileDivider
-from utils.mergeFixations import FixationMerger
+from utils.mergeAssociations import associationMerger
 from utils.preprocessTrialData import TrialDataPreprocessor
 from utils.extractLingusticFeatures import FeatureExtractor
 
@@ -47,10 +47,10 @@ def get_cli() -> ArgumentParser:
                         type=str,
                         default="./processed_trial",
                         help="The path to store the processed trial file.")
-    parser.add_argument('--fixation_dir',
+    parser.add_argument('--association_dir',
                         type=str,
-                        default="./fixations",
-                        help="The path to store the fixations for each participants.")
+                        default="./associations",
+                        help="The path to store the associations for each participants.")
     parser.add_argument('--rt_dir',
                         type=str,
                         default="./reading_measures",
@@ -58,11 +58,11 @@ def get_cli() -> ArgumentParser:
     parser.add_argument('--low_thres',
                         type=int,
                         default=160,
-                        help="The lower threshold defining a fixation.")
+                        help="The lower threshold defining a association.")
     parser.add_argument('--up_thres',
                         type=int,
                         default=4000,
-                        help="The upper threshold defining a fixation.")
+                        help="The upper threshold defining a association.")
     return parser
 
 # Set up logging configuration
@@ -88,11 +88,13 @@ def main():
         for raw_file in input_files:
             file_divider = FileDivider(raw_file, Path(args.divided_dir))
             file_divider.divide_raw_file()
+            file_divider.correct_motr_data()
     else:
         # Process single input file if 'in_file' argument is provided
         raw_file = Path(args.in_file)
         file_divider = FileDivider(raw_file, Path(args.divided_dir))
         file_divider.divide_raw_file()
+        file_divider.correct_motr_data()
 
     # Step 2: preprocess the trial data file by splitting sentences into words and extract useful info from these files
 
@@ -108,25 +110,28 @@ def main():
         trial_preprocessor.filtered_new_df()
         input_trial_path = Path(f'{args.processed_trial_dir}/filtered_preprocessed_{Path(args.trial_file).stem}.csv')
 
-    # Step 3: for each divided raw data file, merge the fixations, filter noises
+    # Step 3: for each divided raw data file, merge the associations, filter noises
 
-    input_data_paths = Path(args.divided_dir).glob('*.csv')
-    output_fixation_path = Path(args.fixation_dir)
+    ## If we use the divided uncorrected files from the previous step
+    # input_data_paths = Path(args.divided_dir).glob('*.csv')
+    ## If we use the corrected divided files from the previous step
+    input_data_paths = Path(f'corrected_{Path(args.divided_dir).name}').glob('*.csv')
+    output_association_path = Path(args.association_dir)
     for input_path in input_data_paths:
-        print('I am identifying fixations for :', input_path)
-        obj_merger = FixationMerger(input_path, output_fixation_path, args.low_thres, args.up_thres)
-        obj_merger.sort_fixations_by_itemid()
-        # obj_merger.write_out_all_merged_fixations()
-        obj_merger.write_out_denoise_merged_fixations()
+        print('I am identifying associations for :', input_path)
+        obj_merger = associationMerger(input_path, output_association_path, args.low_thres, args.up_thres)
+        obj_merger.sort_associations_by_itemid()
+        # obj_merger.write_out_all_merged_associations()
+        obj_merger.write_out_denoise_merged_associations()
 
-    # Step 4: for each merged fixation file, combine fixations to get linguistic features.
+    # Step 4: for each merged association file, combine associations to get linguistic features.
 
-    input_fixation_paths = output_fixation_path.glob('*_clean.csv')
+    input_association_paths = output_association_path.glob('*_clean.csv')
     output_rt_path = Path(args.rt_dir)
-    for input_fixation_path in input_fixation_paths:
-        print("I am computing reading measures for : ", input_fixation_path)
+    for input_association_path in input_association_paths:
+        print("I am computing reading measures for : ", input_association_path)
         obj_feature_extractor = FeatureExtractor(input_trial_path,
-                                            input_fixation_path,
+                                            input_association_path,
                                             output_rt_path, args.low_thres)
         if not obj_feature_extractor.input_df_f.empty:
             obj_feature_extractor.check_comprehension_answer()

@@ -37,6 +37,7 @@ shhh(library(car))
 shhh(library(coda))
 shhh(library(gridExtra))
 shhh(library(posterior))
+shhs(library(loo))
 
 theme_set(theme_bw())
 options(digits=4)
@@ -63,7 +64,7 @@ for (f in fnames) {
   df = rbind(df, temp)
 }
 
-# Filter out readers who don't answer the comprehension questions correctly
+# Filter out readers whose accuracy to the comprehension questions were less than 80%.
 filter_df = df %>%
   group_by(para_nr, subj) %>% summarise(correct = if_else(unique(correctness) == 1, 1, 0)) %>% ungroup() %>%
   drop_na() %>%
@@ -72,28 +73,26 @@ filter_df = df %>%
 
 filter_df = filter_df %>% filter(p_correct < 0.8)
 filter_list = filter_df$subj
-## reader_3:0.70, reader_60:0.79, reader_76:0.72 , reader_256:0.71 , reader_262:0.57 
+pilot_exceptions <- c("reader_255", "reader_256", "reader_259", "reader_261", "reader_262", "reader_263")
 
 raw_df = df %>%
-  filter(! subj %in% c(filter_list)) %>%
+  filter(! subj %in% c(filter_list) | (subj %in% pilot_exceptions)) %>%
   mutate(word = str_trim(word)) %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.character(subj)) %>%
-  # filter(! subj %in% c("3", "60", "76", "256", "262")) %>% # Explanation for this filtering
   mutate(FPReg = if_else(total_duration == 0, -1, FPReg)) %>% #If the word is skipped we can't say that it wasn't regressed on the first pass. Set to a "NA"
   dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj)
-
 length(unique(raw_df$subj))
 
 df %>%
-  filter(! subj %in% c(filter_list)) %>%
+  filter(! subj %in% c(filter_list) | (subj %in% pilot_exceptions)) %>%
   filter(FPReg >= 0) %>%
   dplyr::select(FPReg) %>%
   drop_na() %>%
   summarise( m = mean(FPReg))
 
 df %>%
-  filter(! subj %in% c(filter_list)) %>%
+  filter(! subj %in% c(filter_list) | (subj %in% pilot_exceptions)) %>%
   dplyr::select(FPFix) %>%
   drop_na() %>%
   summarise( m = mean(FPFix))
@@ -109,12 +108,15 @@ motr_agg_df = raw_df %>%
     filter(value >= 0) %>% #Removes the "NA" values for FPReg
   
     # ==== Remove skipped words
-    # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-    # filter(zero == F) %>%
+    mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+    filter(zero == F) %>%
   
     drop_na() %>%
-    group_by(para_nr, word_nr, word, metric) %>% 
+    group_by(para_nr, word_nr, word, metric) %>%
+    
+    # === Remove outliers > 3SD
       mutate(outlier = if_else(metric != "FPReg" & value > (mean(value) + 3 * sd(value)), T, F)) %>% filter(outlier == F) %>%
+  
       summarise(value = mean(value), nsubj = length(unique(subj))) %>%
   ungroup() %>%
   arrange(para_nr, word_nr) %>%
@@ -176,13 +178,12 @@ provo_eyetracking_df = provo_raw_df %>%
       FPReg = if_else(total_duration == 0, -1, as.double(FPReg)),
       first_duration =  if_else(total_duration == 0, 0, as.double(first_duration)),
   ) %>%
-  
-  # drop_na() %>%     # will drop the whole row with all the metrics
   gather(metric, value, 7:12) %>%
   filter(value >= 0) %>%          # filter skipped word in eye tracking data for FPReg
+  
   # ==== Remove skipped words
-  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  # filter(zero == F) %>%
+  mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  filter(zero == F) %>%
   
   # mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   # mutate(value = if_else(metric != "FPReg" & is.na(value), as.integer(0), as.integer(value))) %>%
@@ -191,8 +192,11 @@ provo_eyetracking_df = provo_raw_df %>%
   mutate(subj = str_remove(subj, "Sub")) %>%
   mutate(subj = as.integer(subj)) %>%
     group_by(text_id, word_text_idx, sent_id, word_idx, word, metric) %>%
-    mutate(outlier = if_else(metric != "FPReg" & metric != "skip" & value > (mean(value) + 3 * sd(value) ), T, F)) %>%
+  
+  # === Remove outliers > 3SD
+    mutate(outlier = if_else(! metric %in% c("FPReg", "skip") & value > (mean(value) + 3 * sd(value) ), T, F)) %>%
     filter(outlier == F) %>%
+  
   ungroup() #%>%
 
 # Aggregate cross-participant data for all subjects
@@ -212,7 +216,6 @@ provo_raw_df %>%
   drop_na() %>%
   summarise( m = mean(IA_SKIP))
 
-
 ```
 
 ```{r}
@@ -227,14 +230,13 @@ provo_eyetracking_subj1_df_temp = provo_eyetracking_df %>%
   rename(value_1 = value) #%>%
   # dplyr::select(-sent_id, -word_idx)
 
-# View(provo_eyetracking_subj1_df_temp)
 
 provo_eyetracking_subj1_df = merge(provo_eyetracking_subj1_df_temp, motr_agg_df, by=c("text_id", "word_text_idx", "metric")) %>%
   arrange(text_id, sent_id, word_idx) %>%
   filter(!(text_id == 13 & word_text_idx >= 20 & word_text_idx <= 52)) %>%
   filter(!(text_id == 3 & word_text_idx >= 46 & word_text_idx <= 57)) %>%
   rename(word = word.y) %>%
-  dplyr::select(text_id, word_text_idx, metric, word, value_1)
+  dplyr::select(text_id, word_text_idx, metric, word, value_1) 
 
 # View(provo_eyetracking_subj1_df)
 
@@ -252,12 +254,14 @@ provo_eyetracking_subj2_df = provo_eyetracking_df %>%
 provo_eyetr_grouped_df = merge(provo_eyetracking_subj2_df, provo_eyetracking_subj1_df, by=c("text_id", "word_text_idx", "metric")) %>%
   # filter(word.x == word.y) %>%
   dplyr::select(-word.y) %>%
+  # === Remove outliers > 3SD
   group_by(metric) %>%
-    mutate(motr_outlier = if_else(metric != "FPReg" & metric != "skip" & value_1 > (mean(value_1) + 3 * sd(value_1) ), T, F)) %>%
+    mutate(motr_outlier = if_else(! metric %in% c("FPReg", "skip") & value_1 > (mean(value_1) + 3 * sd(value_1) ), T, F)) %>%
     filter(motr_outlier == F) %>%
-    mutate(eyetr_outlier = if_else(metric != "FPReg" & metric != "skip" & value_2 > (mean(value_2) + 3 * sd(value_2) ), T, F)) %>%
+    mutate(eyetr_outlier = if_else(! metric %in% c("FPReg", "skip") & value_2 > (mean(value_2) + 3 * sd(value_2) ), T, F)) %>%
     filter(eyetr_outlier == F) %>%
   ungroup() %>%
+  
   gather(measure, value, c("value_1", "value_2")) %>%
   dplyr::select(-motr_outlier, -eyetr_outlier)
 
@@ -279,14 +283,19 @@ filter(!(text_id == 13 & word_text_idx >= 20 & word_text_idx <= 52)) %>%
   filter(!(text_id == 3 & word_text_idx >= 46 & word_text_idx <= 57)) %>%
 # filter(word.x == word) #%>%
 dplyr::select(-word.x, -word.y) %>%
+  
+# === Remove outliers > 3SD
 group_by(metric) %>%
-  mutate(motr_outlier = if_else(metric != "FPReg" & motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
+  mutate(motr_outlier = if_else(! metric %in% c("FPReg", "skip") & motr_value > (mean(motr_value) + 3 * sd(motr_value) ), T, F)) %>%
   filter(motr_outlier == F) %>%
-  mutate(eyetr_outlier = if_else(metric != "FPReg" & eyetr_value > (mean(eyetr_value) + 3 * sd(eyetr_value) ), T, F)) %>%
+  mutate(eyetr_outlier = if_else(! metric %in% c("FPReg", "skip") & eyetr_value > (mean(eyetr_value) + 3 * sd(eyetr_value) ), T, F)) %>%
   filter(eyetr_outlier == F) %>%
 ungroup() %>%
+  
 gather(measure, value, c("eyetr_value", "motr_value")) %>%
 dplyr::select(-motr_outlier, -eyetr_outlier)
+  
+# provo_df
   
 ```
 
@@ -345,12 +354,17 @@ priors_gamma <- c(
   prior(exponential(2), class = shape)
 )
 
-fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, metric) {
-  df = analysis(bootstrap_sample)
+fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, metric, is_bootstrap) {
+  df = if (is_bootstrap) {
+    analysis(bootstrap_sample)  # Apply analysis for bootstrap samples
+  } else {
+    bootstrap_sample  
+  }
 
   # m = gam(psychometric ~ s(surp, bs = 'cr', k = 20) + s(prev_surp, bs = 'cr', k = 20) + te(freq, len, bs = 'cr') + te(prev_freq, prev_len, bs = 'cr'), data = df, method = 'REML')
   m <- brm(
-    psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + t2(freq, len, bs = 'cr') + t2(prev_freq, prev_len, bs = 'cr'),
+    # psychometric ~ s(surp, bs = 'cr', k = 6) + s(prev_surp, bs = 'cr', k = 6) + t2(freq, len, bs = 'cr') + t2(prev_freq, prev_len, bs = 'cr'),
+    psychometric ~ surp + prev_surp + t2(freq, len, bs = 'cr') + t2(prev_freq, prev_len, bs = 'cr'),
     data = df,
     # family = lognormal(),
     family = Gamma(link = "log"),
@@ -359,7 +373,11 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, me
     seed = 444,
     chain = 4,
     iter = 4000,
-    file = paste0("./bayesian_models/bayesian_models_surprisal/sep12_gamma_provo_", metric, "_", bootstrap_sample$id),
+    file = if (is_bootstrap) {
+    paste0("./bayesian_models/bayesian_models_surprisal/drop0s/feb6_gamma_provo_", metric, "_", bootstrap_sample$id)
+  } else {
+    paste0("./bayesian_models/bayesian_models_surprisal/drop0s/feb6_gamma_provo_", metric, "_linear_0")
+  },
     backend = "cmdstanr",
     control = list(adapt_delta = 0.99)
     )
@@ -389,11 +407,13 @@ fit_gam_inner = function(bootstrap_sample, mean_predictors, target_prev_word, me
 }
 
 fit_gam = function(df, mean_predictors, target_prev_word, metric, alpha=0.05) {
-  # Bootstrap-resample data
-
+   # Fit a GAM with original data
+  original_data_models = fit_gam_inner(df, mean_predictors, target_prev_word, metric, is_bootstrap = FALSE)
   boot_models = df %>% bootstraps(times=20) %>% 
-   # Fit a GAM and get predictions for each sample
-    mutate(smoothed=map(splits, fit_gam_inner, mean_predictors=mean_predictors, target_prev_word=target_prev_word, metric=metric))
+   # Fit a GAM and get predictions for each bootstrapped sample
+    mutate(smoothed=map(splits, fit_gam_inner, mean_predictors=mean_predictors, target_prev_word=target_prev_word, metric=metric, is_bootstrap = TRUE))
+   # Combine original data results with bootstrap results
+  boot_models = bind_rows(list(original_data = list(smoothed = list(original_data_models)), boot_models))
   
   # Extract mean and 5% and 95% percentile y-values for each surprisal value
   if(target_prev_word == F) {
@@ -431,7 +451,7 @@ fit_gam = function(df, mean_predictors, target_prev_word, metric, alpha=0.05) {
 smooths_df = data.frame()
 
 metrics = c("gaze_duration", "total_duration", "go_past_time")
-# metrics = c("total_duration")
+# metrics = c("go_past_time")
 for (m in metrics) {
   for( tval in c(T,F)) {
     print(paste0("Fitting model for ", m))
@@ -475,7 +495,7 @@ for(m in c("gaze_duration", "total_duration", "go_past_time")) {
 
 plotting_df = smooths_df %>%
   mutate(target_word = if_else(prev_word == F, "wt", "wt-1"))
-write.csv(plotting_df, "gamma_provo_surprisal_bayesian_with0s_2.csv", row.names = FALSE)
+write.csv(plotting_df, "gamma_provo_surprisal_bayesian_2024.csv", row.names = FALSE)
 
 vnames <-list(
   "gaze_duration" = "Gaze Duration",
@@ -515,7 +535,66 @@ vlabeller <- function(variable,value){
     panel.grid.minor = element_blank()
   )
   
-# ggsave("../visualizations/surp_rt_wt.pdf", device = "pdf", width = 6, height = 2.5)
+ggsave("../visualizations/surp_rt_wt.pdf", device = "pdf", width = 6, height = 2.5)
 
 
 ```
+
+# Surprisal link analysis -- linear & nonlinear model comparison
+
+```{r}
+model_gd_linear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_gaze_duration_linear_0.rds")
+
+model_gd_nonlinear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_gaze_duration_0.rds")
+
+model_gpt_linear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_go_past_time_linear_0.rds")
+
+model_gpt_nonlinear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_go_past_time_0.rds")
+
+model_td_linear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_total_duration_linear_0.rds")
+
+model_td_nonlinear <- readRDS("bayesian_models/bayesian_models_surprisal/with0s/feb6_gamma_provo_total_duration_0.rds")
+
+```
+
+# leave-one-out cross validation
+
+Results: The Pareto k estimates < 0.5 for all models suggesting the estimates are reliable.
+
+For all the three pairs of model fit, a linear model has higher elpd_loo, which is the sum of the pointwise predictive accuracy, indicating the model with a linear term for surp and prev_surp can explain the data better.
+
+p_loo shows the fitted model complexity. It is true that all the non-linear models have higher p_loo values. They are more complicated and flexible.
+
+looic is similar to elpd_loo
+
+```{r}
+loo_gd_linear <- loo(model_gd_linear)
+loo_gd_linear
+
+loo_gd_nonlinear <- loo(model_gd_nonlinear)
+loo_gd_nonlinear 
+
+loo_gpt_linear <- loo(model_gpt_linear)
+loo_gpt_linear
+
+loo_gpt_nonlinear <- loo(model_gpt_nonlinear)
+loo_gpt_nonlinear
+
+loo_td_linear <- loo(model_td_linear)
+loo_td_linear
+
+loo_td_nonlinear <- loo(model_td_nonlinear)
+loo_td_nonlinear
+
+```
+
+These comparisons tell the same messages as above, but more direct. 
+Using linear term for surp and prev_surp would have higher predictive accuracy, e.g. 1.7, 1.4, 1.4, respectively, but the difference is smaller than 4 (suggesting a very small difference) and is smaller than two SE for all the models. So, there is no significant difference between linear and non-linear model.
+* When the model fitting data drop 0s, the results are similar. The elpd_diffs are bigger than 4, but still within 2SE.
+
+```{r}
+loo_compare(loo_gd_linear, loo_gd_nonlinear)
+loo_compare(loo_gpt_linear, loo_gpt_nonlinear)
+loo_compare(loo_td_linear, loo_td_nonlinear)
+```
+

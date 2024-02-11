@@ -33,6 +33,17 @@ divided/
 preprocessed_trialData/
 metadata/
 processed_trial/
+preprocessed_trialData/
 fixations/
 reading_measures/
 raw_data/
+associations/
+corrected_divided/
+temp/
+review_response/
+provo_cleaned_raw_fixation_not_merged/
+BSPR_f150/
+provo_divided_by_reader_all/
+provo_f160/
+bayesian_models/
+
