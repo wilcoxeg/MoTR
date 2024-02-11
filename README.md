@@ -1,5 +1,5 @@
 # Mouse Tracking for Reading (MoTR)
-This repository contains necessary materials for implementing a Mouse tracking for Reading (MoTR) experiment, and for post-processing MoTR data to derive word-by-word reading measures. Additionally, the repository contains materials and scripts used in the two experiments reported in "Mouse Tracking for Reading: A New Naturalistic Incremental Processing Measurement".
+This repository contains necessary materials for implementing a Mouse tracking for Reading (MoTR) experiment, and for post-processing MoTR data to derive word-by-word reading measures. Additionally, the repository contains materials and scripts used in the two experiments reported in "Mouse Tracking for Reading (MoTR): A New Naturalistic Incremental Processing Measurement Tool".
 
 The directory has the following structure:
 
@@ -13,12 +13,18 @@ The directory has the following structure:
       ├── attachment
           contains data necessary to run our attachment ambiguity experiments
       ├── provo
-          contins data necessary to run our provo experiments
+          contains data necessary to run our provo experiments
       └── scripts
           contains analysis scripts and images
 ```
 
 ## MoTR
+
+### Demo
+
+We provide an interactive demonstration of MoTR and at the end of the experiment, you could download your personal reading data. Welcome to try it out by clicking on this link:
+
+https://wilcoxeg.github.io/MoTR/MoTR/run_motr_in_magpie/demo/
 
 ### Running MoTR in Magpie
 
