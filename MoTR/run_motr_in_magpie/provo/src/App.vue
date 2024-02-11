@@ -203,6 +203,7 @@ export default {
         if (this.currentIndex !== null) {
           const currentElement = this.$el.querySelector(`span[data-index="${this.currentIndex}"]`);
           if (currentElement) {
+            const currentElementRect = currentElement.getBoundingClientRect();
             $magpie.addTrialData({
               Experiment: this.$el.querySelector(".experiment_id").value,
               Condition: this.$el.querySelector(".condition_id").value,
@@ -211,10 +212,14 @@ export default {
               Word: currentElement.innerHTML,
               mousePositionX: this.mousePosition.x,
               mousePositionY: this.mousePosition.y,
-              wordPositionTop: currentElement.offsetTop,
-              wordPositionLeft: currentElement.offsetLeft,
-              wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
-              wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
+              wordPositionTop: currentElementRect.top,
+              wordPositionLeft: currentElementRect.left,
+              wordPositionBottom: currentElementRect.bottom,
+              wordPositionRight: currentElementRect.right
+              // wordPositionTop: currentElement.offsetTop,
+              // wordPositionLeft: currentElement.offsetLeft,
+              // wordPositionBottom: currentElement.offsetHeight + currentElement.offsetTop,
+              // wordPositionRight: currentElement.offsetWidth + currentElement.offsetLeft
           });
         } else {
           $magpie.addTrialData({
@@ -249,8 +254,10 @@ export default {
       
       this.$el.querySelector(".oval-cursor").style.left = `${x+12}px`;
       this.$el.querySelector(".oval-cursor").style.top = `${y-6}px`;
-      this.mousePosition.x = e.offsetX;
-      this.mousePosition.y = e.offsetY;
+      this.mousePosition.x = e.clientX;
+      this.mousePosition.y = e.clientY;
+      // this.mousePosition.x = e.offsetX;
+      // this.mousePosition.y = e.offsetY;
     },
     toggleDivs() {
     this.showFirstDiv = !this.showFirstDiv;

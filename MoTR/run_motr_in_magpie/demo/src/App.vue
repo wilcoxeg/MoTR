@@ -60,10 +60,11 @@
         <br>
 
           <tr>
-          <td>Please enter your Worker ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
+          <td>Please enter your Prolific ID to continue:&nbsp</td><td><input name="TurkID" type="text" class="obligatory" v-model="$magpie.measurements.SubjectID"/></td>
           </tr>
-          <!-- <tr>
-          </tr> -->
+          <tr>
+
+          </tr>
           </div>
           <div v-if="
             $magpie.measurements.SubjectID&&
@@ -133,26 +134,38 @@
         </Slide>
       </Screen>
     </template>
+<Screen>
+  <p>1. Which input device are you using for this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.device"
+        orientation="horizontal"
+        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
+  <br>
+  <br>
+  <p>2. Which hand are you using during this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.hand"
+        orientation="horizontal"
+        :options="['Left', 'Right', 'Both']" />
+  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
+</Screen>
+
     <SubmitResultsScreen />
   </Experiment>
 </template>
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import localCoherence_list1 from '../trials/localCoherence_list1.tsv';
-import localCoherence_list2 from '../trials/localCoherence_list2.tsv';
-import localCoherence_list3 from '../trials/localCoherence_list3.tsv';
-import localCoherence_practice from '../trials/localCoherence_practice.tsv';
-
+import provo_list1 from '../trials/provo_items_list1.tsv';
+import provo_practice from '../trials/provo_items_practice.tsv';
 import _ from 'lodash';
 
 export default {
   name: 'App',
   data() {
-    const lists = [localCoherence_list1, localCoherence_list2, localCoherence_list3];
-    const chosenItems = lists[Math.floor(Math.random() * lists.length)]; // randomly choose one of the lists
+    const chosenItems = provo_list1; 
     const shuffledItems = _.shuffle(chosenItems); 
-    const trials = _.concat(localCoherence_practice, shuffledItems);
+    const trials = _.concat(provo_practice, shuffledItems);
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
     const updatedTrials = trials.map(trial => {
@@ -228,7 +241,7 @@ export default {
         this.currentIndex = elementAtCursor.getAttribute('data-index');
       } else {
         this.$el.querySelector(".oval-cursor").classList.add('blank');
-        const elementAboveCursor = document.elementFromPoint(x, y-10).closest('span');
+        const elementAboveCursor = document.elementFromPoint(x, y-3).closest('span');
         if (elementAboveCursor){
           this.currentIndex = elementAboveCursor.getAttribute('data-index');
         } else {
@@ -247,7 +260,7 @@ export default {
     this.showFirstDiv = !this.showFirstDiv;
     this.isCursorMoving = false;
     },
-    // async turnOnFullScreen() {
+   //  async turnOnFullScreen() {
 //       if (!document.fullscreenElement) {
 //         try {
 //           await document.documentElement.requestFullscreen();
@@ -298,8 +311,8 @@ export default {
     cursor: pointer;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 11%;
+    padding-right: 11%;
   }
   button {
     position: absolute;
@@ -308,7 +321,6 @@ export default {
   }
   .oval-cursor {
     position: fixed;
-    /* left: 10px; */
     z-index: 2;
     width: 1px;
     height: 1px;
@@ -321,7 +333,7 @@ export default {
   } 
   .oval-cursor.grow.blank {
     width: 80px;
-    height: 38px;
+    height: 13px;
   }
   .oval-cursor.grow {
     width: 102px;
@@ -354,9 +366,10 @@ export default {
     font-weight: 450;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 11%;
+    padding-right: 11%;
   }
+
   * {
     user-select: none; /* Standard syntax */
     -webkit-user-select: none; /* Safari */

@@ -14,6 +14,7 @@ jobs:
         folder:
           - MoTR/run_motr_in_magpie/attachment
           - MoTR/run_motr_in_magpie/provo
+          - MoTR/run_motr_in_magpie/demo
 
     runs-on: ubuntu-latest
     steps:
