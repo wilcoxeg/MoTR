@@ -44,7 +44,8 @@ pipe_message = function(.data, status) {message(status); .data}
 rate = 160
 
 # Please change this path accordingly
-file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")       
+#file_prefix = paste0("/Users/cui/Desktop/motr_lc_", as.character(rate),"/")
+file_prefix = paste0("../data/results_f", as.character(rate),"/")       
 fnames = list.files(path=file_prefix)
 
 # Read in the data
@@ -467,8 +468,11 @@ stats_df_bayesian <- read.csv("../visualizations/stats_bayesian.csv")%>%
   rename(estimate_mean = mean)
 
 plotting_df = merge(comb_agg_df, stats_df_bayesian, all=T, by = c("sent_rg_id", "metric", "experiment", "measure")) %>%
+  mutate(lower_95_ms = if_else(metric != "FPReg", round(lower_95_ms, digits=0), round(lower_95_ms, digits=2))) %>%
+  mutate(upper_95_ms = if_else(metric != "FPReg", round(upper_95_ms, digits=0), round(upper_95_ms, digits=2))) %>%
+  
   mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), T, F)) %>%
-  mutate(cris = if_else(measure != "Eye Tracking" & sig == T, paste0("[",round(lower_95_ms, 2), ",\n", " ",round(upper_95_ms, 2),"]"), "")) %>%
+  mutate(cris = if_else(measure != "Eye Tracking" & sig == T, paste0("[",lower_95_ms,",",upper_95_ms,"]"), "")) %>%
   #mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), paste("X", sep = ""), F)) %>%
   mutate(measure = factor(measure, levels = c("MoTR", "Eye Tracking", "A-Maze", "G-Maze", "SPR"))) %>%
   mutate(metric = factor(metric, levels = c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg"),
@@ -502,10 +506,11 @@ plotting_df %>%
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.1) +
     geom_line() +
-    geom_text(aes(label = cris, y = if_else(metric == "Regression Prob", 0.13, 190) ), size = 1.8) +
+    #geom_text(aes(label = cris, y = if_else(metric == "Regression Prob", 0.13, 190) ), size = 2) +
+    geom_text(aes(label = cris, y = if_else(metric == "Regression Prob", m + 0.05, m + 80) ), size = 2) +
     geom_text(aes(x = 0, y = if_else(metric == "Regression Prob", 0.15, 220), label=""), show.legend = FALSE) +
   scale_color_manual(values = c("#000000", "#2eccc1")) +
-  coord_cartesian(xlim = c(-1.25, 2.25)) +
+  coord_cartesian(xlim = c(-1.25, 2.35)) +
   ylab("Difference in RTs (ms) Between Conditions") +
   xlab("Sentence Region") +
   scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c ("Pre-Critical", "Critical", "Critical +1", "Critcal +2")) +
@@ -517,7 +522,7 @@ plotting_df %>%
     panel.grid.minor = element_blank()
   )
 
-ggsave(paste0("../visualization/target_results_cris", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
+ggsave(paste0("../visualizations/target_results_cris", rate, ".pdf"), device="pdf", width = 8, height = 5.5)
 
 ```
 
