@@ -71,7 +71,8 @@ process_files <- function(file_prefix) {
   # Aggregate measures
   agg_df <- raw_df %>%
     gather(metric, value, 6:11) %>%
-    filter(value >= 0) %>%
+    #filter(value >= 0) %>%
+    filter(value > 0) %>%
     drop_na() %>%
     group_by(para_nr, word_nr, word, metric) %>%
     summarise(value = mean(value), nsubj = length(unique(subj)), .groups = 'drop') %>%
@@ -89,8 +90,8 @@ process_files <- function(file_prefix) {
 motr_agg_df <- process_files("../data/provo_f160/")
 bspr_agg_df <- process_files("../data/BSPR_f150/")
 
-View(motr_agg_df)
-View(bspr_agg_df)
+#View(motr_agg_df)
+#View(bspr_agg_df)
 ```
 
 
@@ -145,8 +146,8 @@ provo_eyetracking_df = provo_raw_df %>%
   filter(value >= 0) %>%          # filter skipped word in eye tracking data for FPReg
   
   # ==== Remove skipped words
-  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  # filter(zero == F) %>%
+  mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  filter(zero == F) %>%
   
   # mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   # mutate(value = if_else(metric != "FPReg" & is.na(value), as.integer(0), as.integer(value))) %>%
@@ -261,7 +262,7 @@ provo_df <- et_df %>%
   gather(measure, value, c("eyetr_value", "motr_value", "bspr_value")) %>%
   dplyr::select(-nsubj_eyetr, -nsubj_motr, -nsubj_bspr)
 
-View(provo_df)
+#View(provo_df)
 
 ```
 
@@ -352,19 +353,18 @@ provo_df_wide %>%
   mutate(row_facet = if_else(measure_type == "motr_value", "MoTR Value", "BSPR Value"),
          row_facet = factor(row_facet, levels = c("MoTR Value", "BSPR Value"))) %>%
   ggplot(., aes(x = measure_value, y = eyetr_value, color = metric)) +
-  geom_point(alpha = 0.05) +
-  geom_abline(slope = 1, intercept = 0, color = "black") +
-  facet_grid(row_facet ~ metric, scales = "free_x") +
-  # coord_cartesian(ylim = c(0, 1), xlim = c(0, 1)) +
-  coord_cartesian(ylim = c(0, 600), xlim = c(0, 800)) +
-  geom_smooth(method = "lm", size = 0.7, linetype = "dashed", color = "black") +
-  ylab("Eye Tracking Value") +
-  xlab("Value") +
-  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
-  theme(legend.position = "right", legend.title = element_blank())
+    geom_abline(slope = 1, intercept = 0, color = "black") +
+    geom_point(alpha = 0.05, size = 1) +
+    facet_grid(row_facet ~ metric, scales = "free_x") +
+    # coord_cartesian(ylim = c(0, 1), xlim = c(0, 1)) +
+    coord_cartesian(ylim = c(150, 800), xlim = c(150, 800)) +
+    geom_smooth(method = "lm", size = 0.7, linetype = "dashed", color="black" ) +
+    ylab("Eye Tracking Reading Times (ms)") +
+    xlab("MoTR/BSPR Reading Times (ms)") +
+    guides(colour = guide_legend(override.aes = list(alpha = 1))) +
+    theme(legend.position = "none", legend.title = element_blank())
 
-
-# ggsave("../review_response/metrics_cor2.pdf", device = "pdf", width = 6, height = 6)
+ggsave("../visualizations/metric_cor.pdf", device = "pdf", width = 6.5, height = 3.3)
 ```
 
 
@@ -460,19 +460,23 @@ provo_df %>%
   mutate(label = paste(measure, word_prop, sep="\n")) %>%
   mutate(label = factor(label, levels = unique(label[order(match(measure, c("Eyetracking", "MoTR", "BSPR")))]))) %>%
   ggplot(aes(x = value, y=word_prop_val, color = word_prop)) +
-    geom_point(alpha = 0.1) +
-    facet_wrap(label~., scales="free_y", switch = "y", strip.position = "right", ncol = 3) +
-    geom_smooth(method = "lm", color = "black", linetype = "dashed", size = 0.7) +
-    xlab("MoTR Average Gaze Duration") +
+    geom_point(alpha = 0.05, size = 1) +
+    geom_smooth(size = 0.7, method="lm", color="black", linetype="dashed" ) +
+  
+    #facet_wrap(label~., scales="free_y", switch = "y", strip.position = "right", ncol = 3) +
+    facet_grid(word_prop ~ measure, scales = "free_y" ) +
+    xlim(150, 800) +
+  
+    xlab("Reading Time (Gaze Duration)") +
     ylab("Word-Level Property") +
   theme(
     legend.position = "none",
     strip.placement = "outside",
-    strip.background = element_blank(),
+    #strip.background = element_blank(),
     strip.text = element_text(size = 8 )
   )
 
-ggsave("../review_response/word_prop_comps.pdf", device = "pdf", width = 6, height = 2.5)
+ggsave("../visualizations/word_prop_comps.pdf", device = "pdf", width = 6.5, height = 4)
 
 ```
 
@@ -706,5 +710,19 @@ print("Recall of Motr FPReg:")
 print(recall)
 ```
 
+```{r}
+
+library(MASS)
+set.seed(1)
+Sigma <- matrix(c(1, 0.4, 0.4, 1), 2, 2) * 40
+d <- mvrnorm(100, mu=c(100, 100), Sigma=Sigma, empirical=TRUE)
+colMeans(d) # Both means are the same, namely 100.
+plot(d, asp=1)
+m <- lm(d[,1] ~ d[,2])
+abline(m, col="red")
+abline(0, 1)
+
+
+```
 
 

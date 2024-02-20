@@ -561,7 +561,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualizations/model_estimates", rate, ".pdf"), device="pdf", width = 8, height =5)
+#ggsave(paste0("../visualizations/model_estimates", rate, ".pdf"), device="pdf", width = 8, height =5)
 
 ```
 
@@ -589,7 +589,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualizations/model_estimates_regression", rate, ".pdf"), device="pdf", width = 8, height =1.2)
+#ggsave(paste0("../visualizations/model_estimates_regression", rate, ".pdf"), device="pdf", width = 8, height =1.2)
 
 
 ```
@@ -610,7 +610,7 @@ plotting_df %>%
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.1) +
     geom_line() +
-    geom_text(aes(label = cris, y = pval_y + 60), color = "black", size = 1.8) +
+    geom_text(aes(label = cris, y = pval_y + 60), color = "black", size = 2.5) +
     geom_text(aes(x = 0, y = pval_y + 100, label=""), show.legend = FALSE) +
   coord_cartesian(xlim = c(-1.25, 2.25)) +
   ylab("Difference in RTs (ms) Between Conditions") +
