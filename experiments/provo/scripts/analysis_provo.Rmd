@@ -71,8 +71,9 @@ process_files <- function(file_prefix) {
   # Aggregate measures
   agg_df <- raw_df %>%
     gather(metric, value, 6:11) %>%
-    #filter(value >= 0) %>%
-    filter(value > 0) %>%
+    # Filter out zeros from the RT measures, but not fixation / regression measures
+    mutate(value = if_else(value == 0 & metric %in% c("go_past_time", "total_duration", "first_duration", "gaze_duration"), -1, value)) %>%
+    filter(value >= 0) %>%
     drop_na() %>%
     group_by(para_nr, word_nr, word, metric) %>%
     summarise(value = mean(value), nsubj = length(unique(subj)), .groups = 'drop') %>%
@@ -132,6 +133,7 @@ provo_eyetracking_df = provo_raw_df %>%
           skip = IA_SKIP,
           FPFix = IA_FIRST_FIX_PROGRESSIVE) %>%
   mutate(first_duration = gaze_duration) %>%
+  mutate(FPFix = if_else(FPFix == 1, 1, 0)) %>%
   mutate(gaze_duration = if_else(FPFix == 0, 0, as.double(gaze_duration)),
          go_past_time = if_else(FPFix == 0, 0, as.double(go_past_time))) %>%
   # dplyr::select(-ff_progressive) %>%
@@ -146,7 +148,8 @@ provo_eyetracking_df = provo_raw_df %>%
   filter(value >= 0) %>%          # filter skipped word in eye tracking data for FPReg
   
   # ==== Remove skipped words
-  mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
+  mutate(rt_measure = if_else(metric %in% c("FPFix", "FPReg"), 0, 1)) %>%
+  mutate(zero = if_else(rt_measure == 1 & value == 0,T, F)) %>%
   filter(zero == F) %>%
   
   # mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
@@ -344,11 +347,17 @@ print(cor.test(cor_df$value_1, cor_df$value_2)$estimate)
 provo_df_wide <- provo_df %>%
   mutate(metric = factor(metric, levels = c("gaze_duration", "go_past_time", "total_duration", "FPReg", "FPFix"),
                          labels = c("Gaze Duration", "Go Past Time", "Total Duration", "Regression Prob", "Fixation Prob"))) %>%
-  filter(metric != "First Duration" & metric != "Regression Prob" & metric != "Fixation Prob") %>%
+  #filter(metric != "First Duration" & metric != "Regression Prob" & metric != "Fixation Prob") %>%
+  filter(metric != "First Duration") %>%
   # filter(metric == "Regression Prob" | metric == "Fixation Prob" ) %>%
   spread(key = measure, value = value)
 
+```
+
+```{r}
+
 provo_df_wide %>%
+  filter(metric %in% c("Gaze Duration", "Go Past Time", "Total Duration")) %>%
   gather(key = "measure_type", value = "measure_value", motr_value, bspr_value) %>%
   mutate(row_facet = if_else(measure_type == "motr_value", "MoTR Value", "BSPR Value"),
          row_facet = factor(row_facet, levels = c("MoTR Value", "BSPR Value"))) %>%
@@ -364,7 +373,32 @@ provo_df_wide %>%
     guides(colour = guide_legend(override.aes = list(alpha = 1))) +
     theme(legend.position = "none", legend.title = element_blank())
 
-ggsave("../visualizations/metric_cor.pdf", device = "pdf", width = 6.5, height = 3.3)
+ggsave("../visualizations/metric_cor.pdf", device = "pdf", width = 4, height = 3.3)
+```
+
+
+```{r}
+
+provo_df_wide %>%
+  filter(metric %in% c("Regression Prob", "Fixation Prob")) %>%
+  gather(key = "measure_type", value = "measure_value", motr_value, bspr_value) %>%
+  mutate(row_facet = if_else(measure_type == "motr_value", "MoTR Value", "BSPR Value"),
+         row_facet = factor(row_facet, levels = c("MoTR Value", "BSPR Value"))) %>%
+  ggplot(., aes(x = measure_value, y = eyetr_value, color = metric)) +
+    geom_abline(slope = 1, intercept = 0, color = "black") +
+    geom_point(alpha = 0.05, size = 1) +
+    facet_grid(row_facet ~ metric) +
+    # coord_cartesian(ylim = c(0, 1), xlim = c(0, 1)) +
+    #coord_cartesian(ylim = c(150, 800), xlim = c(150, 800)) +
+    geom_smooth(method = "lm", size = 0.7, linetype = "dashed", color="black" ) +
+    ylab("Proportion in Eye Tracking") +
+    xlab("Proportion in MoTR/BSPR") +
+    guides(colour = guide_legend(override.aes = list(alpha = 1))) +
+    theme(legend.position = "none", legend.title = element_blank(),
+          axis.text = element_text(size = 8),
+          axis.text.y=element_text(angle = 90, hjust=0.5))
+
+ggsave("../visualizations/metric_cor_fix.pdf", device = "pdf", width = 2.8, height = 3.5)
 ```
 
 
