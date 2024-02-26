@@ -80,7 +80,21 @@ raw_df = df %>%
   mutate(subj = str_remove(subj, "reader_")) %>%
   mutate(subj = as.character(subj)) %>%
   mutate(FPReg = if_else(total_duration == 0, -1, FPReg)) %>% #If the word is skipped we can't say that it wasn't regressed on the first pass. Set to a "NA"
-  dplyr::select(expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, subj)
+  mutate(skip = if_else(FPFix == 1, 0, 1)) %>% # use the same defination as in provo paper
+  dplyr::select(subj, expr_id, cond_id, para_nr, word, word_nr, first_duration, total_duration, gaze_duration, go_past_time, FPReg, skip) %>%
+  gather(metric, value, 7:10) %>%
+  group_by(para_nr, subj, metric, cond_id, expr_id) %>%
+  mutate(fixed = if_else(value > 0, 1, 0),
+         n_fixed = sum(fixed),
+         n_words = n()) %>%
+    ungroup() %>%
+  mutate(fix_threshold = n_fixed > (n_words / 5)) %>%
+  mutate(skimming = if_else(fix_threshold == F,T, F)) %>%
+  filter(skimming == F) %>%
+  spread(metric, value) %>%
+  dplyr::select(-fixed, -n_fixed, -n_words, -fix_threshold, -skimming)
+length(unique(raw_df$subj))
+View(raw_df)
 
 length(unique(raw_df$subj))
 
@@ -108,12 +122,12 @@ df %>%
 ```{r}
 # Average across subjects
 bspr_agg_df = raw_df %>%
-  gather(metric, value, 6:10) %>%
+  gather(metric, value, 7:12) %>%
     filter(value >= 0) %>% #Removes the "NA" values for FPReg
   
     # ==== Remove skipped words
-    # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-    # filter(zero == F) %>%
+    mutate(zero = if_else(!metric %in% c("FPReg", "skip") & value == 0,T, F)) %>%
+    filter(zero == F) %>%
   
     drop_na() %>%
     group_by(para_nr, word_nr, word, metric) %>% 
@@ -186,8 +200,8 @@ provo_eyetracking_df = provo_raw_df %>%
   filter(value >= 0) %>%          # filter skipped word in eye tracking data for FPReg
   
   # ==== Remove skipped words
-  # mutate(zero = if_else(metric != "FPReg" & value == 0,T, F)) %>%
-  # filter(zero == F) %>%
+  mutate(zero = if_else(!metric %in% c("FPReg", "skip") & value == 0,T, F)) %>%
+  filter(zero == F) %>%
   
   # mutate(value = if_else(is.na(value), as.integer(0), as.integer(value))) %>%
   # mutate(value = if_else(metric != "FPReg" & is.na(value), as.integer(0), as.integer(value))) %>%
@@ -607,12 +621,59 @@ saveRDS(fit_reg, file = paste0("./bayesian_models/bayesian_models_correlation/bs
 
 
 ```{r}
+print("skip Prob.")
+skip_df = provo_df %>% filter(metric == "skip") %>% 
+  spread(measure, value) %>%
+  # filter(eyetr_value > 0, bspr_value > 0) %>%
+  mutate(eyetr_value =  pmax(eyetr_value, 1e-5),
+         bspr_value = pmax(bspr_value, 1e-5))
+print(cor.test(skip_df$eyetr_value, skip_df$bspr_value)$estimate)
+
+# View(reg_df)
+skip_df %>% 
+  gather(measure, value, 12:13) %>%
+  ggplot(aes(x = value)) +
+  geom_density() +
+  facet_wrap(~measure, scales = "free") +
+  theme_bw() +
+  scale_fill_brewer(palette = "Set1")
+
+skip_temp <- skip_df[c("eyetr_value", "bspr_value")] %>% data.matrix()
+
+# Set up the plotting area with two side-by-side plots
+par(mfrow = c(1, 2))
+# Plot the first data matrix td_temp
+plot(skip_temp, pch = 16, col = "blue",
+     main = "Not Log-Transformed")
+```
+
+```{r, eval=FALSE}
+# -------fit model skip ----------
+skip_data = list(x=skip_temp, N=nrow(skip_temp))
+fit_skip = stan(
+  file="stan_models/bivariate_normal_reg.stan", 
+  data=skip_data, 
+  iter=4000, 
+  chains=4, 
+  cores=8,
+  seed=444,
+  # control=list(adapt_delta=0.99), 
+  verbose = FALSE
+  )
+
+# Save the model 
+fit_skip@stanmodel@dso <- new("cxxdso")
+saveRDS(fit_skip, file = paste0("./bayesian_models/bayesian_models_correlation/bspr_eyetr_skip_cor_drop0s.rds"))
+```
+
+
+```{r}
 # models with all 0s
 fit_gd = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_gaze_duration_cor_drop0s.rds")
 fit_gpt = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_go_past_time_cor_drop0s.rds")
 fit_td = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_total_duration_cor_drop0s.rds")
 fit_reg = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_FPReg_cor.rds")
-
+fit_skip = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_skip_cor_drop0s.rds")
 # models for drop 0s
 # fit_gd = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_gaze_duration_cor_drop0s.rds")
 # fit_gpt = readRDS("./bayesian_models/bayesian_models_correlation/bspr_eyetr_go_past_time_cor_drop0s.rds")
@@ -627,6 +688,8 @@ print('---------------------------- Total Duration------------------------------
 print(fit_td)
 print('---------------------------- First Pass Regression Prob.--------------------------------------------')
 print(fit_reg)
+print('---------------------------- Skip Prob.--------------------------------------------')
+print(fit_skip)
 
 ```
 
@@ -654,6 +717,11 @@ stan_plot(fit_td)
 stan_trace(fit_reg)
 stan_dens(fit_reg, separate_chains = TRUE)
 stan_plot(fit_reg)
+
+# Skip
+stan_trace(fit_skip)
+stan_dens(fit_skip, separate_chains = TRUE)
+stan_plot(fit_skip)
 
 ```
 
@@ -707,6 +775,14 @@ rho_reg = as.numeric(extract(fit_reg, "rho")[[1]])
 mean = mean(rho_reg)
 crI = quantile(rho_reg, c(.025, .975))
 hpd99 = HPDinterval(as.mcmc(rho_reg), prob=0.95)
+cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]\n")
+
+print('---------------------------- Skip --------------------------------------------')
+# rho_reg = as.numeric(extract(fit_reg, "rho[1, 2]")[[1]])
+rho_skip = as.numeric(extract(fit_skip, "rho")[[1]])
+mean = mean(rho_skip)
+crI = quantile(rho_skip, c(.025, .975))
+hpd99 = HPDinterval(as.mcmc(rho_skip), prob=0.95)
 cat("Mean: ", mean, "\nHPD: [", hpd99[,"lower"], ", ", hpd99[,"upper"], "]", sep="", "\ncrI: [", crI[1], ", ", crI[2], "]")
 ```
 
