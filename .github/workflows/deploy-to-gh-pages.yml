@@ -15,6 +15,7 @@ jobs:
           - MoTR/run_motr_in_magpie/attachment
           - MoTR/run_motr_in_magpie/provo
           - MoTR/run_motr_in_magpie/demo
+          - MoTR/run_motr_in_magpie/demo-Clara
 
     runs-on: ubuntu-latest
     steps:

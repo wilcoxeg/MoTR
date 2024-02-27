@@ -348,9 +348,6 @@ comb_clean_df %>%
   filter(metric >= 0) %>%
   summarise(m = mean(value))
 
-View(comb_agg_df)
-View(comb_clean_df)
-
 ```
 
 ## Stats!
@@ -376,8 +373,7 @@ ggplot(tibble(samples = sn), aes(samples)) +
   coord_cartesian(xlim = c(0, 2000))
 ```
 
-
-
+# Bayesian hierachical model fitting -- warning: take quite some time to run
 ```{r, eval=FALSE}
 
 # set priors
@@ -521,8 +517,8 @@ write.csv(stats_df, "../visualizations/stats_bayesian_2024_feb22_expo.csv")
 
 ```
 
-posterior predictive check
-
+# posterior predictive check
+## to check the model fits -- warning: take time to run
 ```{r, eval=FALSE}
 file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
 
@@ -535,7 +531,6 @@ for (file in file_list) {
  
 ```
 
-
 ```{r, eval=FALSE}
 file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
 
@@ -547,8 +542,6 @@ for (file in file_list) {
   print(fixef(model))
 }
 ```
-
-
 
 ```{r, eval=FALSE}
 file_list <- list.files(path = ".", pattern = "\\.rds$", full.names = TRUE)
@@ -570,8 +563,6 @@ for (file in file_list) {
 }
 ```
 
-
-
 ```{r, eval=FALSE}
 file_list <- list.files(path = ".", pattern = "\\_0.rds$", full.names = TRUE)
 
@@ -587,8 +578,7 @@ for (file in file_list) {
 }
 ```
 
-
-
+# Read in model fitting data and prepare for plotting.
 ```{r}
 
 stats_df_bayesian <- read.csv("../visualizations/stats_bayesian_2024_feb22_expo.csv")%>%
@@ -619,9 +609,8 @@ stats_df_bayesian %>%
 
 ```
 
-
+# Ploting : MoTR and ET
 ```{r}
-
 # PLOTTING FOR ONLY MOTR AND EYE TRACKING
 
 plotting_df %>%
@@ -649,7 +638,7 @@ plotting_df %>%
 ggsave(paste0("../visualizations/target_results_cris", rate, "_2024_feb22.pdf"), device="pdf", width = 8, height = 5.5)
 
 ```
-
+# Ploting : MoTR parameters
 ```{r}
 
 library(viridis)
@@ -689,7 +678,6 @@ ggsave(paste0("../visualizations/model_estimates", rate, "_2024_feb22.pdf"), dev
 
 ```
 
-
 ```{r}
 
 estimate_plotting_df %>%
@@ -718,9 +706,8 @@ ggsave(paste0("../visualizations/model_estimates_regression", rate, "_2024_feb22
 
 ```
 
-
+# Ploting: MoTR, Maze and SPR
 ```{r}
-
 # COMPARISON BETWEEN ALL MEASURES
 
 plotting_df %>%
@@ -753,30 +740,15 @@ ggsave(paste0("../visualizations/target_comp_cris", rate, "_2024_feb22.pdf"), de
 
 ```
 
-```{r, eval=FALSE}
-cor_df = plotting_df %>%
-  dplyr::select(-sd, -upper, -lower, -sig, -pval) %>%
-  spread(measure, m)
-
-cor_df
-
-cor.test(cor_df$MoTR, cor_df$`Eye Tracking`)
-
-cor.test(cor_df$`A-Maze`, cor_df$`Eye Tracking`)
-cor.test(cor_df$`G-Maze`, cor_df$`Eye Tracking`)
-cor.test(cor_df$`SPR`, cor_df$`Eye Tracking`)
-
-
-```
 
 
 Power Analysis
 
 ```{r}
-library(SIN)
+shhh(library(SIN))
 ```
 
-
+# simulation function
 ```{r}
 ## assumes that no. of subjects and no. of items is divisible by 4.
 gen_fake_lnorm<-function(nitem=16,
@@ -831,8 +803,7 @@ gen_fake_lnorm<-function(nitem=16,
 
 ```
 
-
-
+# fit lmer and store parameters
 ```{r, eval=FALSE}
 # Power Analysis
 
@@ -891,100 +862,6 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
 }
 rownames(stats_df) <- NULL
 write.csv(stats_df, "../data/stats_df.csv")
-```
-
-
-```{r}
-stats_df_lm <- read.csv("./stats_df.csv")
-
-target_df <- stats_df_lm %>%
-  filter(experiment == "Adverb", 
-         metric == "total_duration", 
-         measure == "MoTR")
-q <- stats_df_bayes %>%
-    filter(experiment == "Adverb", 
-         metric == "total_duration", 
-         measure == "MoTR",
-         sent_rg_id == 0)
-beta_0 <- target_df$beta_0
-beta_1 <- target_df$beta_1
-beta <- c(beta_0, beta_1)
-cat("\nFixed effects Beta: \n")
-print(beta)
-subj_ranefsd <- c(target_df$reff_subj_0_sd, target_df$reff_subj_1_sd)
-subj_ranefcorr <- target_df$reff_subj_cor
-corr_matrix <- (diag(2) + matrix(rep(1, 4), ncol=2))/2
-Sigma_u <- SIN::sdcor2cov(stddev=subj_ranefsd, corr=corr_matrix)
-cat("\nVariance-covariance matrix for subjects (Sigma_u): \n")
-print(Sigma_u)
-
-item_ranefsd <- c(target_df$reff_item_0_sd, target_df$reff_item_1_sd)
-Sigma_w <- SIN::sdcor2cov(stddev=item_ranefsd, corr=corr_matrix)
-cat("\nVariance-covariance matrix for items (Sigma_w): \n")
-print(Sigma_w)
-
-sigma_e <- target_df$res_sd
-cat("\nResidual standard deviation (sigma_e): \n")
-print(sigma_e)
-
-q
-
-```
-
-```{r}
-set.seed(444)
-nsim<-100
-print(beta_0)
-## effect size ranging from 10 to 40 ms:
-(beta2 <- c(2 * asinh(q$Q1/(2*exp(beta_0 ))), 2 * asinh(q$median/(2*exp(beta_0 ))), 2 * asinh(q$Q3/(2*exp(beta_0)))))
-# (beta2<-c(0.045,0.06,0.077))
-print(beta2)
-pvalcond<-matrix(rep(NA,nsim*length(beta2)),ncol=nsim)
-failed<-matrix(rep(0,nsim*length(beta2)),ncol=nsim)
-for(j in 1:length(beta2)){
-for(i in 1:nsim){
-  beta[2]<-beta2[j]
-  dat<-gen_fake_lnorm(nitem=24,
-                      nsubj=50,
-                       beta=beta,
-                       Sigma_u=Sigma_u,
-                       Sigma_w=Sigma_w,
-                      sigma_e=sigma_e)
-## no correlations estimated to avoid convergence problems: 
-## analysis done after log-transforming:  
-m<-lmer(log(rt) ~ 1 + c1 + (c1 || subj) + (c1 || item), 
-        data=dat)
-summary(m)
-# estc1[j,i]<-round(summary(m)$coefficients[2,1],4)
-# 
-# 
-# ## ignore failed trials
-if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
-  failed[j,i]<-1
-} else{
-pvalcond[j,i]<-summary(m)$coefficients[2,5]
-}
-  }}
-## proportion of convergence failures:
-rowMeans(failed)
-
-```
-```{r}
-failed
-## percent of convergence failures:
-mean(failed)*100
-```
-```{r}
-# calculate power for different effect sizes.
-pvalcond[failed == 1] <- NA
-pvalcond
-# pvalcond
-pow<-rep(NA,length(beta2))
-for(k in 1:length(beta2)){
-  pow[k]<-mean(pvalcond[k,]<= 0.05,na.rm=TRUE)
-}
-cat("power: \n")
-print(pow)
 ```
 
 
@@ -1095,14 +972,11 @@ for(exp in c("Coordination", "Relative Clause", "Adverb")) {
 rownames(power_df) <- NULL
 write.csv(power_df, "../data/power_df.csv")
 
-# Note: later I ran this codes only for SPR sentence region 1 to account for the spillover effects and added the power to the power of region 0. So, in power_df.csv, the power for SPR is the sum of its power in region 0 (critical region) and region 1, following Boyce et al. 2020. --> Not sure whether we should follow them because we don't have exactly the same settings as them, since they wer using word region, we are using sentence region.
-
 ```
 
 
 ```{r}
-
-# Power analysis for simulated number of participants (10, 20, 40, 60), while the number of items is always 24.
+# Power analysis for simulated number of participants (10, 20, 40, 60...200), while the number of items is always 24.
 
 set.seed(444)
 stats_df_lm <- read.csv("../data/stats_df.csv")
@@ -1111,10 +985,11 @@ nsim <- 100
 nitem <- 24
 
 for(exp in c("Coordination", "Relative Clause", "Adverb")) {
-  for(met in c("gaze_duration", "go_past_time", "total_duration")){
+  # for(met in c("gaze_duration", "go_past_time", "total_duration")){
+  for(met in c("go_past_time")){
     for(mes in c("MoTR", "G-Maze", "A-Maze", "SPR")) {
     # for(mes in c("SPR")) {
-      for (nsubj in c(10, 20, 40, 60, 80)) {
+      for (nsubj in c(100, 120, 140, 160, 180, 200)) {
       # for (nsubj in c(60)) {
         target_df <- stats_df_lm %>%filter(experiment == exp, metric == met, measure == mes)
         if(nrow(target_df) > 0) {
@@ -1289,11 +1164,13 @@ rownames(power_df) <- NULL
 write.csv(power_df, "../data/power_df_simulation_num.csv")
 ```
 
+# Plotting: power analysis
 ```{r}
 # Plot power analysis
 
-all_power <- read.csv("../data/power_df_simulation_num.csv") %>%
+all_power <- read.csv("../data/power_df_simulation.csv") %>%
   filter(metric == 'go_past_time') %>%
+  filter(n_subj <= 200) %>%
   rename(power = power_median) %>%
   dplyr::select(experiment, metric, measure, n_subj, power)
   
@@ -1305,17 +1182,115 @@ ggplot(all_power)+
   geom_line(aes(x=n_subj, y=power, color=measure), size=1)+
   facet_grid(~experiment)+
   geom_hline(yintercept=.8)+
-  coord_cartesian(xlim=c(0,80))+
+  coord_cartesian(xlim=c(0,200))+
   labs(y="Power estimate", x="Simulated participant count")+
   theme_bw()+
   theme(
     legend.position="right", 
     legend.title=element_blank(), 
     text = element_text(size = 13, colour="black"))+  
-    scale_color_manual(values=c(rgb(139/255, 173/255, 51/255),rgb(172/255, 222/255, 225/255) , rgb(231/255, 125/255, 144/255), rgb(189/255, 127/255, 248/255)))
+    scale_color_manual(values=c(rgb(139/255, 173/255, 51/255),rgb(172/255, 222/255, 225/255) , rgb(231/255, 125/255, 144/255), rgb(189/255, 127/255, 248/255))) +
+  scale_x_continuous(breaks=seq(0, 200, by=40))
 
 ggsave(paste0("../visualizations/power_analysis_comp_cris", rate, ".pdf"), device="pdf", width = 8, height = 3)
 
 ```
 
+# testing with a single case
+```{r, eval=FALSE}
+# for testing a single case
+
+stats_df_lm <- read.csv("./stats_df.csv")
+
+target_df <- stats_df_lm %>%
+  filter(experiment == "Adverb", 
+         metric == "total_duration", 
+         measure == "MoTR")
+q <- stats_df_bayes %>%
+    filter(experiment == "Adverb", 
+         metric == "total_duration", 
+         measure == "MoTR",
+         sent_rg_id == 0)
+beta_0 <- target_df$beta_0
+beta_1 <- target_df$beta_1
+beta <- c(beta_0, beta_1)
+cat("\nFixed effects Beta: \n")
+print(beta)
+subj_ranefsd <- c(target_df$reff_subj_0_sd, target_df$reff_subj_1_sd)
+subj_ranefcorr <- target_df$reff_subj_cor
+corr_matrix <- (diag(2) + matrix(rep(1, 4), ncol=2))/2
+Sigma_u <- SIN::sdcor2cov(stddev=subj_ranefsd, corr=corr_matrix)
+cat("\nVariance-covariance matrix for subjects (Sigma_u): \n")
+print(Sigma_u)
+
+item_ranefsd <- c(target_df$reff_item_0_sd, target_df$reff_item_1_sd)
+Sigma_w <- SIN::sdcor2cov(stddev=item_ranefsd, corr=corr_matrix)
+cat("\nVariance-covariance matrix for items (Sigma_w): \n")
+print(Sigma_w)
+
+sigma_e <- target_df$res_sd
+cat("\nResidual standard deviation (sigma_e): \n")
+print(sigma_e)
+
+q
+
+```
+
+```{r, eval=False}
+# for testing a single case
+
+set.seed(444)
+nsim<-100
+print(beta_0)
+## effect size ranging from 10 to 40 ms:
+(beta2 <- c(2 * asinh(q$Q1/(2*exp(beta_0 ))), 2 * asinh(q$median/(2*exp(beta_0 ))), 2 * asinh(q$Q3/(2*exp(beta_0)))))
+# (beta2<-c(0.045,0.06,0.077))
+print(beta2)
+pvalcond<-matrix(rep(NA,nsim*length(beta2)),ncol=nsim)
+failed<-matrix(rep(0,nsim*length(beta2)),ncol=nsim)
+for(j in 1:length(beta2)){
+for(i in 1:nsim){
+  beta[2]<-beta2[j]
+  dat<-gen_fake_lnorm(nitem=24,
+                      nsubj=50,
+                       beta=beta,
+                       Sigma_u=Sigma_u,
+                       Sigma_w=Sigma_w,
+                      sigma_e=sigma_e)
+## no correlations estimated to avoid convergence problems: 
+## analysis done after log-transforming:  
+m<-lmer(log(rt) ~ 1 + c1 + (c1 || subj) + (c1 || item), 
+        data=dat)
+summary(m)
+# estc1[j,i]<-round(summary(m)$coefficients[2,1],4)
+# 
+# 
+# ## ignore failed trials
+if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
+  failed[j,i]<-1
+} else{
+pvalcond[j,i]<-summary(m)$coefficients[2,5]
+}
+  }}
+## proportion of convergence failures:
+rowMeans(failed)
+
+```
+```{r}
+failed
+## percent of convergence failures:
+mean(failed)*100
+```
+```{r}
+# calculate power for different effect sizes.
+pvalcond[failed == 1] <- NA
+pvalcond
+# pvalcond
+pow<-rep(NA,length(beta2))
+for(k in 1:length(beta2)){
+  pow[k]<-mean(pvalcond[k,]<= 0.05,na.rm=TRUE)
+}
+cat("power: \n")
+print(pow)
+```
 

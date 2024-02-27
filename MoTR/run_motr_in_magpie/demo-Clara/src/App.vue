@@ -51,22 +51,35 @@
         </Slide>
       </Screen>
     </template>
+<Screen>
+  <p>1. Which input device are you using for this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.device"
+        orientation="horizontal"
+        :options="['Computer Mouse', 'Computer Trackpad', 'Other']" />
+  <br>
+  <br>
+  <p>2. Which hand are you using during this experiment?</p>
+    <MultipleChoiceInput
+        :response.sync= "$magpie.measurements.hand"
+        orientation="horizontal"
+        :options="['Left', 'Right', 'Both']" />
+  <button style= "bottom:30%; transform: translate(-50%, -50%)" @click="$magpie.saveAndNextScreen();">Submit</button>
+</Screen>
+
     <SubmitResultsScreen />
   </Experiment>
 </template>
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import provo_list1 from '../trials/provo_items_list1.tsv';
-import provo_practice from '../trials/provo_items_practice.tsv';
+import list1 from '../trials/clara_items.tsv';
 import _ from 'lodash';
 
 export default {
   name: 'App',
   data() {
-    const chosenItems = provo_list1; 
-    const shuffledItems = _.shuffle(chosenItems); 
-    const trials = _.concat(provo_practice, shuffledItems);
+    const trials = list1; 
     // Create a new column in localCoherences called 'response_options'
     // that concatenates the word in response_true with the two words in response_distractors
     const updatedTrials = trials.map(trial => {
