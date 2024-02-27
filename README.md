@@ -110,7 +110,9 @@ This call takes a folder which can contain multiple raw MoTR data files called `
 
  - `provo_eyetracking.tsv` contains the raw eyetracking data for the provo corpus.
 
-- `/results_f160/` contains the output of the postprocessing script, with results for each participant in separate files. For this file 160 milliseconds is the minimum threshold for a fixation duration.
+- `/provo_f160/` contains the output of the postprocessing script, with results for each participant in separate files. For this file 160 milliseconds is the minimum threshold for a fixation duration.
+
+- `gamma_provo_surprisal_bayesian_feb25.csv` and `gamma_provo_surprisal_bayesian_feb25_linear.csv` contains the data for the replication of Smith and Levy (2013), generated from `surprial_motr_link_analysis.Rmd`. 
 
 - To access the raw data from this experiment, please [click on this OSF link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
 
