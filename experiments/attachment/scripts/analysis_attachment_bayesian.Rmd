@@ -1,5 +1,5 @@
 ---
-title: "Exploratory Analysis for MoTR Reading Data"
+title: "Analysis for MoTR Reading Data"
 output: html_notebook
 ---
 
@@ -207,8 +207,8 @@ gmaze_clean_df = gmaze_df %>%
   merge(region_reference_df, by = c("item_id", "word", "word_nr")) %>%
   filter(! condition %in% c("filler", "practice")) %>%
   drop_na() %>%
-  # mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
-  # filter(outlier == F) %>%
+  mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
+  filter(outlier == F) %>%
   mutate(experiment = case_when(
     condition %in% c("adverb_high", "adverb_low") ~ "Adverb",
     condition %in% c("and_comma", "and_no_comma") ~ "Coordination",
@@ -255,8 +255,8 @@ amaze_clean_df = amaze_df %>%
   merge(region_reference_df, by = c("item_id", "word", "word_nr")) %>%
   filter(! condition %in% c("filler", "practice")) %>%
   drop_na() %>%
-  # mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
-  # filter(outlier == F) %>%
+  mutate(outlier = value > (mean(value) + 3 * sd(value))) %>%
+  filter(outlier == F) %>%
   mutate(experiment = case_when(
     condition %in% c("adverb_high", "adverb_low") ~ "Adverb",
     condition %in% c("and_comma", "and_no_comma") ~ "Coordination",
@@ -348,8 +348,8 @@ comb_clean_df %>%
   filter(metric >= 0) %>%
   summarise(m = mean(value))
 
-View(comb_agg_df)
-View(comb_clean_df)
+#View(comb_agg_df)
+#View(comb_clean_df)
 
 ```
 
@@ -589,6 +589,7 @@ for (file in file_list) {
 
 
 
+
 ```{r}
 
 stats_df_bayesian <- read.csv("../visualizations/stats_bayesian_2024_feb22_expo.csv")%>%
@@ -597,12 +598,17 @@ stats_df_bayesian <- read.csv("../visualizations/stats_bayesian_2024_feb22_expo.
 
 plotting_df = merge(comb_agg_df, stats_df_bayesian, all=T, by = c("sent_rg_id", "metric", "experiment", "measure")) %>%
   mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), T, F)) %>%
-  mutate(cris = if_else(measure != "Eye Tracking" & sig == T, paste0("[",round(lower_95_ms, 2), ",\n", " ",round(upper_95_ms, 2),"]"), "")) %>%
-  #mutate(sig = if_else(measure != "Eye Tracking" & (upper_95_ms < 0 | lower_95_ms > 0), paste("X", sep = ""), F)) %>%
+  
+  
+  mutate(cris = if_else(measure != "Eye Tracking" & sig == T, paste0("[",round(lower_95_ms, 0), ", ",round(upper_95_ms, 0),"]"), "")) %>%
+  mutate(cris = if_else(measure != "Eye Tracking" & sig  == T & metric=="FPReg", paste0("[",round(lower_95_ms, 2), ",\n  ",round(upper_95_ms, 2),"]"), cris)) %>%
+  
   mutate(measure = factor(measure, levels = c("MoTR", "Eye Tracking", "A-Maze", "G-Maze", "SPR"))) %>%
   mutate(metric = factor(metric, levels = c("first_duration", "gaze_duration", "go_past_time", "total_duration", "FPReg"),
                          labels = c("First Duration", "Gaze Duration", "Go Past Time", "Total Duration", "Regression Prob"))) %>%
   filter(metric != "First Duration")
+
+plotting_df
 
 ```
 
@@ -616,6 +622,12 @@ stats_df_bayesian %>%
   filter(measure == "A-Maze") %>%
   filter(experiment == "Coordination") %>%
   filter(sent_rg_id == 0)
+
+stats_df_bayesian %>%
+  filter(experiment=="Relative Clause") %>%
+  filter(sent_rg_id == 1) %>%
+  filter(lower_95_ms > 0)
+  
 
 ```
 
@@ -631,8 +643,8 @@ plotting_df %>%
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.1) +
     geom_line() +
-    geom_text(aes(label = cris, y = if_else(metric == "Regression Prob", 0.13, 330) ), size = 1.8) +
-    geom_text(aes(x = 0, y = if_else(metric == "Regression Prob", 0.15, 380), label=""), show.legend = FALSE) +
+    geom_text(aes(label = cris, y = if_else(metric == "Regression Prob", m + 0.07, m + 130) ), size =2.2) +
+    geom_text(aes(x = 0, y = if_else(metric == "Regression Prob", 0.18, 380), label=""), show.legend = FALSE) +
   scale_color_manual(values = c("#000000", "#2eccc1")) +
   coord_cartesian(xlim = c(-1.25, 2.25)) +
   ylab("Difference in RTs (ms) Between Conditions") +
@@ -646,7 +658,7 @@ plotting_df %>%
     panel.grid.minor = element_blank()
   )
 
-ggsave(paste0("../visualizations/target_results_cris", rate, "_2024_feb22.pdf"), device="pdf", width = 8, height = 5.5)
+ggsave(paste0("../visualizations/target_results_cris.pdf"), device="pdf", width = 8, height = 5.5)
 
 ```
 
@@ -667,12 +679,14 @@ estimate_plotting_df = stats_df_bayesian %>%
 estimate_plotting_df %>%
   filter(mm_label != "MoTR (Regression Prob)") %>%
   ggplot(aes(y = sent_rg_id, x = estimate_mean, color = sent_rg_id)) +
-    geom_vline(xintercept = 0, color = "green") +
-    geom_point(position = position_dodge(width = 0.8)) +
+    geom_vline(xintercept = 0, color = "red", linetype="dashed") +
+    geom_point(position = position_dodge(width = 0.8), size = 2) +
     geom_errorbar(aes(xmin = lower_95_ms, xmax = upper_95_ms), width = 0, position = position_dodge(width = 0.8)) +
     facet_grid(mm_label ~ experiment, scales = "free_x") +
-    scale_colour_manual(values = c("#22455b", "#35698c", "#458ab7", "#59b0ea")) +
-    #scale_fill_gradient(low = "green", high="blue") +
+    #scale_colour_manual(values = c("#22455b", "#35698c", "#458ab7", "#59b0ea")) +
+    scale_colour_manual(values = c("#8e8e8e", "#0015fc", "#727eff", "#b3b9fc")) +
+
+    #scale_fill_gradient(low = "green", high="blue") + 
     labs(color = "Sentence Region") +
     xlab("Estimate Mean (of High Attachment / No-Comma)") +
   theme(
@@ -685,7 +699,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualizations/model_estimates", rate, "_2024_feb22.pdf"), device="pdf", width = 8, height =5)
+ggsave(paste0("../visualizations/model_estimates.pdf"), device="pdf", width = 8, height =5)
 
 ```
 
@@ -695,11 +709,12 @@ ggsave(paste0("../visualizations/model_estimates", rate, "_2024_feb22.pdf"), dev
 estimate_plotting_df %>%
   filter(mm_label == "MoTR (Regression Prob)") %>%
   ggplot(aes(y = sent_rg_id, x = estimate_mean, color = sent_rg_id)) +
-    geom_vline(xintercept = 0, color = "green") +
+    geom_vline(xintercept = 0, color = "red", linetype="dashed") +
     geom_point(position = position_dodge(width = 0.8)) +
     geom_errorbar(aes(xmin = lower_95_ms, xmax = upper_95_ms), width = 0, position = position_dodge(width = 0.8)) +
     facet_grid(mm_label ~ experiment, scales = "free_x") +
     scale_colour_manual(values = c("#22455b", "#35698c", "#458ab7", "#59b0ea")) +
+    scale_colour_manual(values = c("#8e8e8e", "#0015fc", "#727eff", "#b3b9fc")) +
     #scale_fill_gradient(low = "green", high="blue") +
     labs(color = "Sentence Region") +
     xlab("Estimate Mean (of High Attachment / No-Comma)") +
@@ -713,7 +728,7 @@ estimate_plotting_df %>%
     strip.background.y = element_rect(fill = "white")
   )
 
-ggsave(paste0("../visualizations/model_estimates_regression", rate, "_2024_feb22.pdf"), device="pdf", width = 8, height =1.2)
+ggsave(paste0("../visualizations/model_estimates_regression.pdf"), device="pdf", width = 8, height =1.2)
 
 
 ```
@@ -734,9 +749,9 @@ plotting_df %>%
     geom_point() +
     geom_errorbar(aes(ymax = upper, ymin = lower), width = 0.1) +
     geom_line() +
-    geom_text(aes(label = cris, y = pval_y + 60), color = "black", size = 1.8) +
+    geom_text(aes(label = cris, y = upper + 100), color = "black", size = 2.3) +
     geom_text(aes(x = 0, y = pval_y + 100, label=""), show.legend = FALSE) +
-  coord_cartesian(xlim = c(-1.25, 2.25), ylim = c(NA, 700)) +
+  coord_cartesian(xlim = c(-1.25, 2.4), ylim = c(NA, 700)) +
   ylab("Difference in RTs (ms) Between Conditions") +
   xlab("Sentence Region") +
   scale_x_continuous(breaks = c(-1, 0, 1, 2), labels= c("Pre-Critical", "Critical", "Critical +1", "Critcal +2")) +
@@ -749,7 +764,7 @@ plotting_df %>%
   )
 
 
-ggsave(paste0("../visualizations/target_comp_cris", rate, "_2024_feb22.pdf"), device="pdf", width = 8, height = 4.5)
+ggsave(paste0("../visualizations/target_comp_cris.pdf"), device="pdf", width = 8, height = 4.5)
 
 ```
 

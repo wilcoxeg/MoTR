@@ -346,7 +346,7 @@ print(cor.test(cor_df$value_1, cor_df$value_2)$estimate)
 # View(provo_df)
 provo_df_wide <- provo_df %>%
   mutate(metric = factor(metric, levels = c("gaze_duration", "go_past_time", "total_duration", "FPReg", "FPFix"),
-                         labels = c("Gaze Duration", "Go Past Time", "Total Duration", "Regression Prob", "Fixation Prob"))) %>%
+                         labels = c("Gaze Duration", "Go Past Time", "Total Duration", "Regression Prob.", "First Pass \n Association Prob."))) %>%
   #filter(metric != "First Duration" & metric != "Regression Prob" & metric != "Fixation Prob") %>%
   filter(metric != "First Duration") %>%
   # filter(metric == "Regression Prob" | metric == "Fixation Prob" ) %>%
@@ -373,14 +373,14 @@ provo_df_wide %>%
     guides(colour = guide_legend(override.aes = list(alpha = 1))) +
     theme(legend.position = "none", legend.title = element_blank())
 
-ggsave("../visualizations/metric_cor.pdf", device = "pdf", width = 4, height = 3.3)
+#ggsave("../visualizations/metric_cor.pdf", device = "pdf", width = 4, height = 3.3)
 ```
 
 
 ```{r}
 
 provo_df_wide %>%
-  filter(metric %in% c("Regression Prob", "Fixation Prob")) %>%
+  filter(metric %in% c("Regression Prob.", "First Pass \n Association Prob.")) %>%
   gather(key = "measure_type", value = "measure_value", motr_value, bspr_value) %>%
   mutate(row_facet = if_else(measure_type == "motr_value", "MoTR Value", "BSPR Value"),
          row_facet = factor(row_facet, levels = c("MoTR Value", "BSPR Value"))) %>%

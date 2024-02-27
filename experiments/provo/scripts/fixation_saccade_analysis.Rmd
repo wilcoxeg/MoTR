@@ -50,16 +50,6 @@ for(name in sample_names){
 
 ```
 
-```{r}
-sample_df %>%
-  filter(acceleration == 0 & velocities > 0)
-  
-  filter(acceleration > -0.001 & acceleration < 0.001) %>%
-  ggplot(aes(x=acceleration)) +
-    geom_density() +
-  coord_cartesian(xlim=c(-0.001, 0.001))
-
-```
 
 
 ```{r}
@@ -131,7 +121,7 @@ ggplot() +
   scale_color_manual( values = c("red", "orange", "#36c427", "#0c7c00", "gray"))
 
 
-ggsave("../visualizations/reading_samples.pdf", device="pdf", width = 5.5, height = 4)
+#ggsave("../visualizations/reading_samples.pdf", device="pdf", width = 5.5, height = 4)
 
 
 ```
