@@ -38,9 +38,9 @@ The following workflow should enable you to run a MoTR experiment, locally, in y
 
 - Download Node.js v16.20.2 (in this [link](https://nodejs.org/en/download/releases)) and install.
 - Clone this repository.
-- Open a local terminal or IDE, navigate to MoTR/restructure/motr/run_motr_in_magpie/provo/ (or MoTR/restructure/motr/run_motr_in_magpie/attachment/).
-- run ```npm install```.
-- run ```npm run serve```.
+- Open a local terminal or IDE, navigate to MoTR/MoTR/run_motr_in_magpie/provo/ (or MoTR/MoTR/run_motr_in_magpie/attachment/).
+- Run ```sh update_modules.sh```. This will use our lightened version of Magpie-base.
+- If you want to use the default Magpie-base, instead of the last step, run ```npm install```  and then ```npm run serve```.
 - Click either of the links shown in the terminal starting with "-Local:" or "-Network:".
 - Enjoy!
 
@@ -112,23 +112,28 @@ This call takes a folder which can contain multiple raw MoTR data files called `
 
 - `/results_f160/` contains the output of the postprocessing script, with results for each participant in separate files. For this file 160 milliseconds is the minimum threshold for a fixation duration.
 
-- To access the raw data from this experiment, please [click on this link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
+- To access the raw data from this experiment, please [click on this OSF link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
 
 #### Scripts
 
-- `correlation_analysis.Rmd` is R code to run the Bayesian correlation analysis, both to correlate eye tracking data with MoTR data, as well as to correlate each with various word-level properties (length, frequency, surprisal).
+- `correlation_analysis.Rmd` and `correlation_analysis_BSPR.Rmd` are R codes to run the Bayesian correlation analysis, both to correlate eye tracking data with MoTR data/BSPR data, as well as to correlate each with various word-level properties (length, frequency, surprisal).
 
-- `ranked_correlation_fpr_analysis.Rmd` is R code to run the ranked correlation analysis we use to compare MoTR first pass regression data with eye tracking first pass regression data.
+- `ranked_correlation_fpr_analysis.Rmd` is R code to run the ranked correlation analysis we use to compare MoTR and BSPR first pass regression data with eye tracking first pass regression data.
 
-- `surprial_motr_link_analysis.Rmd` is R code to run the cross methodological replication of Smith and Levy (2013), looking at the functional relationship between by-word MoTR reading times and by-word surprisal values.
+- `surprial_motr_link_analysis.Rmd` is R code to run the cross methodological replication of Smith and Levy (2013), and the linear vs. non-linear model comparison, looking at the functional relationship between by-word MoTR reading times and by-word surprisal values.
+
+- `fixation_saccade_analysis.Rmd` is R code to analyze the reading strategies people have when using MoTR. 
+
+- `analysis_provo.Rmd` is R code for basic data exploration and visualization of the MoTR provo data.
+
 
 ##### Bayesian Models
 
 - This folder contains fitted models from the various scripts in its parent directory. 
 
-- `bayesian_models_correlation` contains the fitted models for correlations for MoTR and eye tracking, MoTR and word level statistical properties.
+- `bayesian_models_correlation` contains the fitted models for correlations for MoTR and eye tracking, MoTR and word level statistical properties. Since the models' size is big, we have moved it to [OSF](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
 
-- `bayesian_models_surprisal` contains the fitted models for reading time slow down due to surprisal effects analysis.
+- `bayesian_models_surprisal` contains the fitted models for reading time slow down due to surprisal effects analysis, which has been moved to [OSF](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
 
 ##### Stan Models
 
@@ -150,11 +155,14 @@ This call takes a folder which can contain multiple raw MoTR data files called `
 
 - `witzel_eyetr_data` is a tabularized machine-readable version of the data presented in Tables 1-6 of Witzel et al., (2012), which reports eyetracking data for these same materials.
 
+- `stats_df.csv` stores the parameters from running lmer models and are used for power analysis. `power_df.csv` contains statistical powers of models and settings used in our experiment; `power_df_simulation.csv` is the file of statistical powers of varying participants numbers for different methods. They are all generated from `analysis_attachment_bayesian.Rmd` power analysis chunks.
+
+
 #### Scripts
 
-- `analysis_attachment.Rmd` is R code to run Bayesian hierarchical models to study the by-item differences between high attachment and low attachment conditions.
+- `analysis_attachment_bayesian.Rmd` is R code to run Bayesian hierarchical models to study the by-item differences between high attachment and low attachment conditions.
 
-- To access the Bayesian models from this experiment, please [click on this link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
+- To access the Bayesian models from this experiment, please [click on this OSF link](https://osf.io/4g7pr/?view_only=d628c9fda891434bb9ad4aa13b5d21ab).
 
 
 #### Visualizations
