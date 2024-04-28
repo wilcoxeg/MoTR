@@ -1,0 +1,409 @@
+---
+title: "Power analysis 2nd"
+output: html_document
+date: "2024-04-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, echo=TRUE, results='hide', warning=FALSE, message=FALSE, eval=TRUE}
+shhh <- suppressPackageStartupMessages # It's a library, so shhh!
+
+shhh(library( mgcv ))
+shhh(library(dplyr))
+shhh(library(ggplot2))
+shhh(library(lme4))
+shhh(library(tidymv))
+shhh(library(gamlss))
+shhh(library(gsubfn))
+shhh(library(lmerTest))
+shhh(library(tidyverse))
+shhh(library(boot))
+shhh(library(rsample))
+shhh(library(plotrix))
+shhh(library(ggrepel))
+shhh(library(mgcv))
+
+shhh(library(brms))
+shhh(library(bayesplot))
+shhh(library(MASS))
+shhh(library(tidyr))
+shhh(library(purrr))
+
+
+theme_set(theme_bw())
+options(digits=4)
+options(scipen=999)
+set.seed(444)
+pipe_message = function(.data, status) {message(status); .data}
+
+```
+
+```{r Data, echo=TRUE, warning=FALSE, eval=TRUE}
+stats_df_bayesian <- read.csv("../visualizations/stats_bayesian_2024_feb22_expo.csv")%>%
+  dplyr::select(-estimate, -lower_95, -upper_95, -std_error) %>%
+  rename(estimate_mean = mean)
+```
+
+
+# Procuedure 1: Varying Effect Size
+
+## simulation function
+```{r Simulation_Func, echo=TRUE, eval=TRUE}
+## assumes that no. of subjects and no. of items is divisible by 4.
+gen_fake_lnorm<-function(nitem=16,
+                         nsubj=186,
+                         beta=NULL,
+                         Sigma_u=NULL, # subject vcov matrix
+                         Sigma_w=NULL, # item vcov matrix
+                         sigma_e=NULL){
+  ## prepare data frame for four condition latin square:
+  g1<-data.frame(item=1:nitem,
+                 cond=rep(letters[1:2],nitem/2))
+  g2<-data.frame(item=1:nitem,
+                 cond=rep(letters[c(2,1)],nitem/2))
+  
+  ## assemble data frame:
+  gp1<-g1[rep(seq_len(nrow(g1)), 
+              nsubj/2),]
+  gp2<-g2[rep(seq_len(nrow(g2)), 
+              nsubj/2),]
+  fakedat<-rbind(gp1,gp2)
+  
+  ## add subjects:
+  fakedat$subj<-rep(1:nsubj,each=nitem)
+  
+  ## add contrast coding:
+  ## main effect 1:
+  fakedat$c1<-ifelse(fakedat$cond%in%c("a"),1/2,-1/2)
+  
+  ## subject random effects:
+  u<-mvrnorm(n=length(unique(fakedat$subj)),
+             mu=c(0,0),Sigma=Sigma_u)
+  
+  ## item random effects
+  w<-mvrnorm(n=length(unique(fakedat$item)),
+             mu=c(0,0),Sigma=Sigma_w)
+
+  ## generate data row by row:  
+  N<-dim(fakedat)[1]
+  rt<-rep(NA,N)
+  for(i in 1:N){
+    rt[i] <- rlnorm(1,beta[1] + 
+                      u[fakedat[i,]$subj,1] +
+                      w[fakedat[i,]$item,1] + 
+                      (beta[2]+u[fakedat[i,]$subj,2]+
+                         w[fakedat[i,]$item,2])*fakedat$c1[i],
+                   sigma_e) 
+  }   
+  fakedat$rt<-rt
+  fakedat$subj<-factor(fakedat$subj)
+  fakedat$item<-factor(fakedat$item)
+  fakedat}
+
+```
+
+
+```{r, Run_procedure1, eval=FALSE}
+# Get power for the real number of items and number of subjects for MoTR method
+set.seed(123)
+power_df = data.frame()
+nsim<-100
+nsubj <- 186
+nitem <- 16
+
+for(exp in c("Coordination", "Relative Clause", "Adverb")) {
+  for(met in c("go_past_time")){
+    for(mes in c("MoTR")) {
+      # Set nsubj and nitem based on the value of mes
+      if(exp == "Adverb") {
+        model <- read_rds("./bayesian_models_lc/model_2024_feb22_expo/Adverb_go_past_time_MoTR_0.rds")
+
+      } else if(exp == "Coordination") {
+        model <- read_rds("./bayesian_models_lc/model_2024_feb22_expo/Coordination_go_past_time_MoTR_0.rds")
+        
+      } else if(exp == "Relative Clause") {
+        model <- read_rds("./bayesian_models_lc/model_2024_feb22_expo/Relative Clause_go_past_time_MoTR_0.rds")
+      }
+       
+      model_summary <- summary(model)
+      beta_0 <- model_summary$fixed["Intercept", "Estimate"]
+      beta_1 <- model_summary$fixed["condition", "Estimate"]
+      beta <- c(beta_0, beta_1)
+      subj_ranefsd <- c(model_summary$random$subj["sd(Intercept)", "Estimate"], 
+                        model_summary$random$subj["sd(condition)", "Estimate"])
+      subj_ranefcorr <- model_summary$random$subj["cor(Intercept,condition)", "Estimate"]
+      corr_matrix <- (diag(2) + matrix(rep(1, 4), ncol=2))/2
+      Sigma_u <- SIN::sdcor2cov(stddev=subj_ranefsd, corr=corr_matrix)
+      
+      item_ranefsd <- c(model_summary$random$item_id["sd(Intercept)", "Estimate"],
+                        model_summary$random$item_id["sd(condition)", "Estimate"])
+      item_ranefcorr <- model_summary$random$item_id["cor(Intercept,condition)", "Estimate"]
+      Sigma_w <- SIN::sdcor2cov(stddev=item_ranefsd, corr=corr_matrix)
+      sigma_e <- model_summary$spec_pars["sigma", "Estimate"]
+  
+      ## get quantiles q1, median, q3 for effect sizes in log space --> I am using the quantile calculated from posterior_param_samples and stored before, but one can also use them from posterior_param_samples and do the calculation again. 
+        q <- stats_df_bayesian %>% filter(experiment == exp, metric == met, measure == mes,sent_rg_id == 0)
+        (beta2 <- c(2 * asinh(q$Q1/(2*exp(beta_0 ))), 2 * asinh(q$median/(2*exp(beta_0 ))), 2 * asinh(q$Q3/(2*exp(beta_0)))))
+        
+        pvalcond<-matrix(rep(NA,nsim*length(beta2)),ncol=nsim)
+        failed<-matrix(rep(0,nsim*length(beta2)),ncol=nsim)
+        for(j in 1:length(beta2)){
+        for(i in 1:nsim){
+          beta[2]<-beta2[j]
+          dat<-gen_fake_lnorm(nitem=nitem,
+                              nsubj=nsubj,
+                              beta=beta,
+                              Sigma_u=Sigma_u,
+                              Sigma_w=Sigma_w,
+                              sigma_e=sigma_e)
+        ## no correlations estimated to avoid convergence problems: 
+        ## analysis done after log-transforming:  
+        m<-lmer(log(rt) ~ 1 + c1 + (c1 || subj) + (c1 || item), 
+                data=dat)
+        summary(m)
+  
+        # ## ignore failed trials
+        if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
+          failed[j,i]<-1
+        } else{
+        pvalcond[j,i]<-summary(m)$coefficients[2,5]
+        }}}
+        ## proportion of convergence failures:
+        rowMeans(failed)
+        
+        pvalcond[failed == 1] <- NA
+        pow<-rep(NA,length(beta2))
+        for(k in 1:length(beta2)){
+          pow[k]<-mean(pvalcond[k,]<= 0.05,na.rm=TRUE)
+        }
+        
+        power_results <- data.frame(
+          experiment = exp,
+          metric = met,
+          measure = mes,
+          # lm_fit = target_df$fit,
+          n_subj = nsubj,
+          n_item = nitem,
+          Q1 = q$Q1,
+          median = q$median,
+          Q3 = q$Q3,
+          failed_mean = mean(failed),
+          power_Q1 = pow[1],
+          power_median = pow[2],
+          power_Q3 = pow[3]
+      )
+     
+      power_df <- rbind(power_df, power_results)
+      }
+    }
+  }
+rownames(power_df) <- NULL
+write.csv(power_df, "../data/power_bayesian_df.csv")
+
+```
+
+# Procedure 2: Varying Participant Number
+
+## simulation function --> don't need rlnorm()
+```{r df_func, eval=TRUE, echo=TRUE}
+## assumes that no. of subjects and no. of items is divisible by 4.
+gen_fake_df<-function(nitem=16,
+                         nsubj=186){
+  ## prepare data frame for four condition latin square:
+  g1<-data.frame(item_id=1:nitem,
+                 cond=rep(letters[1:2],nitem/2))
+  g2<-data.frame(item_id=1:nitem,
+                 cond=rep(letters[c(2,1)],nitem/2))
+  
+  ## assemble data frame:
+  gp1<-g1[rep(seq_len(nrow(g1)), 
+              nsubj/2),]
+  gp2<-g2[rep(seq_len(nrow(g2)), 
+              nsubj/2),]
+  fakedat<-rbind(gp1,gp2)
+  
+  ## add subjects:
+  fakedat$subj<-rep(1:nsubj,each=nitem)
+  
+  ## add contrast coding:
+  ## main effect 1:
+  fakedat$condition<-ifelse(fakedat$cond%in%c("a"),1/2,-1/2)
+
+  ## generate data row by row:  
+  N<-dim(fakedat)[1]
+  fakedat$subj<-factor(fakedat$subj)
+  fakedat$item_id<-factor(fakedat$item_id)
+  fakedat
+  }
+
+```
+
+```{r}
+fake_data <- gen_fake_df(nitem=16, nsubj=186)
+fake_data
+```
+
+```{r Run_procedure2, eval=FALSE}
+# Power analysis for simulated number of participants (10, 20, 40, 60...200), while the number of items is always 24.
+
+set.seed(234)
+power_df = data.frame()
+nsim <- 100
+nitem <- 24
+
+for(exp in c("Coordination", "Relative Clause", "Adverb")) {
+# for(exp in c("Relative Clause")) {
+  # for(met in c("gaze_duration", "go_past_time", "total_duration")){
+  for(met in c("go_past_time")){
+    for(mes in c("MoTR", "G-Maze", "A-Maze", "SPR")) {
+    # for(mes in c("MoTR")) {
+      for (nsubj in c(10, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200)) {
+      # for (nsubj in c(10)) {
+        crit <- paste0("./bayesian_models_lc/model_2024_feb22_expo/", exp, "_",  met, "_", mes, "_0.rds")
+        crit_1 <- paste0("./bayesian_models_lc/model_2024_feb22_expo/", exp, "_",  met, "_", mes, "_1.rds")
+        pvalcond<-matrix(rep(NA,nsim),ncol=nsim)
+        failed<-matrix(rep(0,nsim),ncol=nsim)
+          if (mes != "SPR") {
+              model <- read_rds(crit) 
+              model_summary <- summary(model)
+              effect_size <- model_summary$fixed["condition", "Estimate"]
+              
+              for(i in 1:nsim){
+                fake_data <- gen_fake_df(nitem=nitem, nsubj=nsubj)
+                posterior_pred <- posterior_predict(model, newdata=fake_data, ndraws=1, allow_new_levels=T)
+                fake_data$rt <- t(posterior_pred)
+                ## no correlations estimated to avoid convergence problems: 
+                ## analysis done after log-transforming:  
+                m<-lmer(log(rt) ~ 1 + condition + (condition || subj) + (condition || item_id), 
+                        data=fake_data)
+                summary(m)
+        
+                # ## ignore failed trials
+                if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
+                  failed[i]<-1
+                } else{
+                pvalcond[i]<-summary(m)$coefficients[2,5]
+                      }
+              }
+              # print(pvalcond)
+
+              ## proportion of convergence failures:
+              rowMeans(failed)
+              pvalcond[failed == 1] <- NA
+              # print(pvalcond)
+              pow<-mean(pvalcond<= 0.05,na.rm=TRUE)
+              print(pow)
+              
+              power_results <- data.frame(
+                experiment = exp,
+                metric = met,
+                measure = mes,
+                n_subj = nsubj,
+                n_item = nitem,
+                effect_size = effect_size,
+                failed_mean = mean(failed),
+                power = pow
+            )
+              
+          } else {
+              pvalcond_1<-matrix(rep(NA,nsim),ncol=nsim)
+              failed_1<-matrix(rep(0,nsim),ncol=nsim)
+              
+              model <- read_rds(crit) 
+              model_1 <- read_rds(crit_1)
+              model_summary <- summary(model)
+              effect_size <- model_summary$fixed["condition", "Estimate"]
+              
+              for(i in 1:nsim){
+                fake_data <- gen_fake_df(nitem=nitem, nsubj=nsubj)
+                posterior_pred <- posterior_predict(model, newdata=fake_data, ndraws=1, allow_new_levels=T)
+                posterior_pred_1 <- posterior_predict(model_1, newdata=fake_data, ndraws=1, allow_new_levels=T)
+                fake_data$rt <- t(posterior_pred)
+                fake_data$rt_1 <- t(posterior_pred_1)
+                ## no correlations estimated to avoid convergence problems: 
+                ## analysis done after log-transforming:  
+                m<-lmer(log(rt) ~ 1 + condition + (condition || subj) + (condition || item_id), 
+                        data=fake_data)
+                # summary(m)
+                m_1<-lmer(log(rt_1) ~ 1 + condition + (condition || subj) + (condition || item_id), 
+                        data=fake_data)
+        
+              # ignore failed trials
+                if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
+                  failed[i]<-1
+                } else{
+                pvalcond[i]<-summary(m)$coefficients[2,5]
+                      }
+                # for spillover region: 
+                if(any( grepl("failed to converge", m_1@optinfo$conv$lme4$messages) )){
+                  failed_1[i]<-1
+                } else{
+                pvalcond_1[i]<-summary(m_1)$coefficients[2,5]
+                      }
+              }
+              ## proportion of convergence failures:
+              rowMeans(failed)
+              pvalcond[failed == 1] <- NA
+              pow<-mean(pvalcond<= 0.05,na.rm=TRUE)
+              print(pow)
+              
+              ## proportion of convergence failures
+              rowMeans(failed_1)
+              pvalcond_1[failed_1 == 1] <- NA
+              pow_1<-mean(pvalcond_1<= 0.05,na.rm=TRUE)
+              print(pow_1)
+    
+              power_results <- data.frame(
+                experiment = exp,
+                metric = met,
+                measure = mes,
+                n_subj = nsubj,
+                n_item = nitem,
+                effect_size = effect_size,
+                failed_mean = (mean(failed) + mean(failed_1))/2,
+                power = ifelse(pow_1==0, pow, (pow + pow_1)/2)
+
+            )
+          }
+            power_df <- rbind(power_df, power_results)
+        }
+      }
+    }
+  }
+rownames(power_df) <- NULL
+write.csv(power_df, "../data/power_df_procedure2.csv")
+```
+
+```{r Data_visualization, echo=TRUE, eval=TRUE}
+# Plot power analysis
+
+all_power <- read.csv("../data/power_df_procedure2.csv") %>%
+  filter(metric == 'go_past_time') %>%
+  filter(n_subj <= 200) %>%
+  dplyr::select(experiment, metric, measure, n_subj, power)
+  
+
+all_power
+
+ggplot(all_power)+
+  geom_point(aes(x=n_subj, y=power, color=measure), size=1.8)+
+  geom_line(aes(x=n_subj, y=power, color=measure), size=1)+
+  facet_grid(~experiment)+
+  geom_hline(yintercept=.8)+
+  coord_cartesian(xlim=c(0,200))+
+  labs(y="Power estimate", x="Simulated participant count")+
+  theme_bw()+
+  theme(
+    legend.position="right", 
+    legend.title=element_blank(), 
+    text = element_text(size = 13, colour="black"))+  
+    scale_color_manual(values=c(rgb(139/255, 173/255, 51/255),rgb(172/255, 222/255, 225/255) , rgb(231/255, 125/255, 144/255), rgb(189/255, 127/255, 248/255))) +
+  scale_x_continuous(breaks=seq(0, 200, by=40))
+
+ggsave(paste0("../visualizations/power_analysis_procedure2", ".pdf"), device="pdf", width = 8, height = 3)
+
+```
+
